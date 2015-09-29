@@ -2,17 +2,19 @@
 
 	<div class="col-md-2"></div>
 
-	<div class="col-md-8"><h4>{{vm.userLoggedIn.username}}</h4>
-		<h3>{{vm.userLoggedIn.name}}</h3>
+	<div class="col-md-8">
+		<h5>Your Profile</h5>
+		<h4>{{vm.userLoggedIn.username}}</h4>
+		
 		<img class="img  img-circle" src="{{vm.userLoggedIn.image}}" height="190px" width="179px">
 
 		<div>
 			<br/>
-			<button ng-show="vm.userLoggedIn" ng-click="vm.logoutUser()">Logout</button>
+			<a ui-sref="updateProfile"><button>Edit Profile</button></a>
 		</div>
-		<p>{{vm.userLoggedIn.about}}</p></div>
 	</div>
+</div>
 
-	<div class="col-md-2"></div>
+<div class="col-md-2"></div>
 
 </div>
