@@ -4,7 +4,8 @@ var jwt = require("jsonwebtoken")
 
 var MessageSchema = new mongoose.Schema({
 	createdDate: Date,
-	sentBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+	sentBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+	body: String
 });
 
 

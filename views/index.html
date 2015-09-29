@@ -15,7 +15,7 @@
 
 	<div class="container-fluid" ng-controller="NavBarController as nav">
 
-		
+
 
 		<div class="row">
 
@@ -26,7 +26,7 @@
 				<md-content flex layout-padding>
 				<div layout="column" layout-fill layout-align="top center">
 
-					
+
 					<i ng-click="nav.toggleLeft()" class="fa fa-bars" style="font-size: 2em;"></i>
 
 				</div>
@@ -36,8 +36,8 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
 			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
 
-			
-			<a><md-divider>Username: {{nav.status.username}}</md-divider>
+
+			<md-divider>Username: {{nav.status.username}}</md-divider>
 				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
 
