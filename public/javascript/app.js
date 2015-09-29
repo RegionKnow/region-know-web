@@ -20,7 +20,12 @@
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
 			templateUrl: 'views/questionsFeed.html'
-		});
+		}).state('CreateQuestion',{
+			url: '/createQ',
+			templateUrl: 'views/CreateQuestion.html',
+			controller: 'CreateQuestionController',
+			controllerAs: 'vm'
+		})
 		$urlRouterProvider.otherwise('/');
 	}
 })();

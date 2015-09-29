@@ -9,6 +9,10 @@ var QuestionSchema = new mongoose.Schema({
 	generalPoints: Number,
 	dateDeleted: Date,
 	questionLocation: Number,
+	homeLocation: {
+		lat: Number, 
+		lng: Number
+	},
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answers"}],
 	comments: [{
