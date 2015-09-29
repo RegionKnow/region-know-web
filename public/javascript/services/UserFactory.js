@@ -54,6 +54,8 @@
 			return q.promise;
 		};
 
+		o.logoutUser = function()
+
 		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
 		function urlBase64Decoder(str) {
 			var output = str.replace(/-/g, '+').replace(/_/g, '/');
