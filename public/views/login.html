@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<div class="row">
+		
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div>Please Login</div>
+			<form ng-submit="nav.loginUser()">
+
+				<div class="form-group">
+					<label>User Name</label>
+					<input type="text" class="form-control" ng-model="nav.user.username"/>
+				</div>
+
+				<div class="form-group">
+					<label >Password</label>
+					<input type="password" class="form-control" ng-model="nav.user.password"/>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="btn btn-default btn-success">
+						Submit
+					</button>
+				</div>
+				<br/>
+
+			</form>
+		</div>
+		<div class="col-md-4"></div>
+
+	</div>
+</div>

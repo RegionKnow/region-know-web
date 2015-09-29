@@ -4,15 +4,17 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 var port = process.env.PORT || 3000;
-//Basic require for mongodb
+var passport = require('passport');
+
+//----------------------------Basic require for mongodb---------------------------------------------
 require('./Models/AnswerModel.js');
 require('./Models/ConversationModel.js');
 require('./Models/QuestionModel.js');
 require('./Models/MessageModel.js');
 require('./Models/UserModel.js');
+require('./config/passport.js');
 
-
-//Adds error handling to mongoose.connect
+//-----------------------Adds error handling to mongoose.connect--------------------------------------
 mongoose.connect("mongodb://localhost/FinalApp", function(err) {
 	console.log(arguments);
 	if (err) return console.log("Error connecting to database");
@@ -39,11 +41,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+//DEFINE/REQUIRE ROUTES BEFORE SETTING UP PATHS---------------------------------------------------
+var userRoutes = require('./routes/UserRoutes');
+
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
 });
 
+//----------SETTING UP THE PATHS--------------------------------------------------------------------
+app.use('/api/user', userRoutes);
 
 //----------------APP IS LISTENING-----------------------------------------------------------
 var server = app.listen(port, function() {

@@ -43,6 +43,16 @@
 			return q.promise;
 		};
 
+		o.loginUser = function(user) {
+			var q = $q.defer();
+			user.username = user.username.toLowerCase();
+			$http.post('/api/user/login', user).success(function(res) {
+				setToken(res.token);
+				$rootScope._user = isLoggedIn();
+				q.resolve();
+			});
+			return q.promise;
+		};
 
 		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
 		function urlBase64Decoder(str) {
@@ -58,7 +68,7 @@
 		}
 
 		
-		
+		$rootScope._user = isLoggedIn();
 		return o;
 	}
 })();
