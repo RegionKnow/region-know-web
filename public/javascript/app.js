@@ -12,6 +12,14 @@
 			templateUrl: 'views/register.html',
 			controller: 'NavBarController',
 			controllerAs: 'nav'
+		}).state('Login',{
+			url: '/login',
+			templateUrl: 'views/login.html',
+			controller: 'NavBarController',
+			controllerAs: 'nav'
+		}).state('QuestionsFeed',{
+			url: '/questionsFeed',
+			templateUrl: 'views/questionsFeed.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

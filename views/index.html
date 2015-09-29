@@ -12,35 +12,41 @@
 
 <body>
 
-	<div ng-controller="NavBarController as nav">
+	<div class="container-fluid" ng-controller="NavBarController as nav">
 
-		<section layout="row" flex>
-			
-			<md-content flex layout-padding>
-			<div layout="column" layout-fill layout-align="top center">
+		<a>{{nav.status.username}}</a>
 
-				<div>
-					<md-button ng-click="nav.toggleLeft()"
-					class="md-primary" hide-gt-md>
-					Toggle left
-				</md-button>
-			</div>
-			
-		</div>
-		<div flex></div>
-	</md-content>
-	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-	<md-toolbar class="md-theme-light">
-	<h1 class="md-toolbar-tools">RegionKnow</h1></md-toolbar>
+		<div class="row">
 
-	<md-divider><a ui-sref="Login">Login</a><md-divider>
-	<md-divider><a ui-sref="Register">Register</a><md-divider>
-	<md-button ng-click="nav.close()" class="md-primary">Close Sidenav left</md-button>
+			<div class="col-md-4"></div>
+
+			<section layout="row" flex>
+
+				<md-content flex layout-padding>
+				<div layout="column" layout-fill layout-align="top center">
+
+					<div>
+						<md-button ng-click="nav.toggleLeft()"class="md-primary" hide-gt-md>Toggle left</md-button>
+					</div>
+
+				</div>
+				<div flex></div>
+			</md-content>
+			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+			<md-toolbar class="md-theme-light">
+			<h1 class="md-toolbar-tools">RegionKnow</h1></md-toolbar>
+
+			<md-divider><a ui-sref="Login" ng-click="nav.close()">Login</a><md-divider>
+			<md-divider><a ui-sref="Register" ng-click="nav.close()">Register</a><md-divider>
 
 
+		</md-sidenav>
+	</section>
 
-</md-sidenav>
-</section>
+	<div class="col-md-4"></div>
+
+
+</div>
 
 </div>
 
@@ -55,6 +61,7 @@
 <script src="/javascript/app.js"></script>
 <!-- Factories -->
 <script src="/javascript/services/HomeFactory.js"></script>
+<script src="/javascript/services/UserFactory.js"></script>
 <!-- Controllers -->
 <script src="/javascript/controllers/HomeController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
