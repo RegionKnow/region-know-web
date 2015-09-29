@@ -23,7 +23,7 @@
 			QuestionFactory.createQuestion(vm.question).then(function(res){
 				delete vm.question // deleting question object
 				delete vm.desc // deleting question in html
-				$state.go('CreateQuestion')
+				$state.go('QuestionsFeed')
 			})
 		}
 	}

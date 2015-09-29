@@ -14,7 +14,7 @@ var QuestionSchema = new mongoose.Schema({
 		lng: Number
 	},
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answers"}],
+	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
 	comments: [{
 		commentBody: String,
 		createdDate: Date,

@@ -6,10 +6,16 @@ var jwt = require("express-jwt");
 var User = mongoose.model('User');
 
 
+
+
 router.param('id', function(req, res, next){
 	// console.log(req.params.id)
-	req.questionId = req.params.id;
-	next();
+	
+	Questions.findOne({_id: req.params.id}).populate('answers').exec(function(err, response){
+		req.question = response
+		next();
+	})
+	
 
 })
 
@@ -24,6 +30,15 @@ router.post('/create', function(req, res){
 
 })
 
+router.post('/:id', function(req, res){
+	console.log(req.body)
+	Questions.update({_id: req.question._id},
+		{$push: { answers: { _id: req.body.id } } }, function(err, response){
+		console.log(response);
+		res.send();
+	})
+})
+
 router.get('/', function(req, res){
 	Questions.find({}, function(err, response){
 		res.send(response);
@@ -31,10 +46,8 @@ router.get('/', function(req, res){
 })
 
 router.get('/:id', function(req, res){
-	console.log('this is the id ' + req.questionId)
-	Questions.findOne({_id: req.questionId}, function(err, response){
-		res.send(response);
-	})
+	// console.log('this is the id ' + req.question)
+	res.send(req.question)
 })
 
 module.exports = router;

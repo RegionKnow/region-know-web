@@ -31,6 +31,13 @@
 			})
 			return q.promise;
 		}
+		o.addIdRef = function(Answer_id, id){
+			var q = $q.defer();
+			$http.post('api/question/' + id, Answer_id).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
 	
 		return o;
 	}
