@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+	<title>RegionKnow</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/site.css">
+</head>
+
+<body>
+
+	<div class="container-fluid" ng-controller="NavBarController as nav">
+
+
+
+		<div class="row">
+
+			<div class="col-md-2"></div>
+
+			<section layout="row" flex>
+
+				<md-content flex layout-padding>
+				<div layout="column" layout-fill layout-align="top center">
+
+
+					<i ng-click="nav.toggleLeft()" class="fa fa-bars" style="font-size: 2em;"></i>
+
+				</div>
+				<div flex></div>
+			</md-content>
+
+			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
+
+
+			<a><md-divider>Username: {{nav.status.username}}</md-divider>
+				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
+				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
+				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updatrProfile</md-divider></a>
+
+			</md-sidenav>
+		</section>
+
+		<div class="col-md-2"></div>
+
+
+	</div>
+
+</div>
+
+<ui-view></ui-view>
+<!-- Ext Libs -->
+<script src="angular/angular.min.js"></script>
+<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="angular-material/angular-material.js"></script>
+<script src="angular-aria/angular-aria.js"></script>
+<script src="angular-animate/angular-animate.js"></script>
+<!-- Global Src -->
+<script src="/javascript/app.js"></script>
+<!-- Factories -->
+<script src="/javascript/services/HomeFactory.js"></script>
+<script src="/javascript/services/UserFactory.js"></script>
+<!-- Controllers -->
+<script src="/javascript/controllers/HomeController.js"></script>
+<script src="/javascript/controllers/NavBarController.js"></script>
+</body>
+
+</html>
