@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 </head>
@@ -14,39 +15,39 @@
 
 	<div class="container-fluid" ng-controller="NavBarController as nav">
 
-		<a>{{nav.status.username}}</a>
+		
 
 		<div class="row">
 
-			<div class="col-md-4"></div>
+			<div class="col-md-2"></div>
 
 			<section layout="row" flex>
 
 				<md-content flex layout-padding>
 				<div layout="column" layout-fill layout-align="top center">
 
-					<div>
-						<md-button ng-click="nav.toggleLeft()"class="md-primary" hide-gt-md>Toggle left</md-button>
-					</div>
+					
+					<i ng-click="nav.toggleLeft()" class="fa fa-bars" style="font-size: 2em;"></i>
 
 				</div>
 				<div flex></div>
 			</md-content>
+
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-			<md-toolbar class="md-theme-light">
-			<h1 class="md-toolbar-tools">RegionKnow</h1></md-toolbar>
+			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
 
-			<md-divider><a ui-sref="Login" ng-click="nav.close()">Login</a><md-divider>
-			<md-divider><a ui-sref="Register" ng-click="nav.close()">Register</a><md-divider>
+			
+			<a><md-divider>Username: {{nav.status.username}}</md-divider>
+				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
+				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
+
+			</md-sidenav>
+		</section>
+
+		<div class="col-md-2"></div>
 
 
-		</md-sidenav>
-	</section>
-
-	<div class="col-md-4"></div>
-
-
-</div>
+	</div>
 
 </div>
 
