@@ -14,6 +14,7 @@ var UserSchema = new mongoose.Schema({
 		latitude: Number, 
 		longitude: Number
 	},
+	// tags: [{type: String}],
 	radius: Number,
 	generalPoints: Number,
 	knowledgePoints: Number,
