@@ -4,8 +4,8 @@ var jwt = require("jsonwebtoken")
 
 var ConversationSchema = new mongoose.Schema({
 	createdDate: Date,
-	receivedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-	sentBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+	participantOne: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+	participantTwo: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	messages: [{type: mongoose.Schema.Types.ObjectId, ref: "Message"}],
 });
 
