@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 3000;
 
+//-------------------REQUIRING MODELS & PASSPORT HERE----------------------------------------------
+require('./models/User');
+//-------------------------------------------------------------------------------------------------
 
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
@@ -26,6 +29,8 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
+
+//----------------APP IS LISTENING-----------------------------------------------------------
 var server = app.listen(port, function() {
 	var host = server.address().address;
 	console.log('Example app listening at http://localhost:' + port);

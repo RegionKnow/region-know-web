@@ -2,7 +2,7 @@
 <html ng-app="app">
 
 <head>
-	<title>My App</title>
+	<title>RegionKnow</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
@@ -31,12 +31,14 @@
 	</md-content>
 	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
 	<md-toolbar class="md-theme-light">
-	<h1 class="md-toolbar-tools">Sidenav left</h1>
-</md-toolbar>
+	<h1 class="md-toolbar-tools">RegionKnow</h1></md-toolbar>
 
-<md-button ng-click="nav.close()" class="md-primary">
-Close Sidenav left
-</md-button>
+	<md-divider><a ui-sref="Login">Login</a><md-divider>
+	<md-divider><a ui-sref="Register">Register</a><md-divider>
+	<md-button ng-click="nav.close()" class="md-primary">Close Sidenav left</md-button>
+
+
+
 </md-sidenav>
 </section>
 

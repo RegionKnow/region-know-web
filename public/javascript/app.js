@@ -7,6 +7,11 @@
 		$stateProvider.state('Home',{
 			url: '/',
 			templateUrl: 'views/home.html'
+		}).state('Register',{
+			url: '/register',
+			templateUrl: 'views/register.html',
+			controller: 'NavBarController',
+			controllerAs: 'nav'
 		});
 		$urlRouterProvider.otherwise('/');
 	}
