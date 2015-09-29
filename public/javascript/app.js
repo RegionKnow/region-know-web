@@ -21,13 +21,13 @@
 			url: '/questionsFeed',
 			templateUrl: 'views/questionsFeed.html'
 
-		}).
-		state('updateProfile',{
+		})
+		.state('updateProfile',{
 			url: '/updateProfile',
 			templateUrl: 'views/updateProfile.html'
-		});
+		})
 
-		}).state('CreateQuestion',{
+	.state('CreateQuestion',{
 			url: '/createQ',
 			templateUrl: 'views/CreateQuestion.html',
 			controller: 'CreateQuestionController',

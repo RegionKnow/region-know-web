@@ -55,9 +55,16 @@
 		};
 
 
-		o.logoutUser = function()
+		o.logoutUser = function(){
+			var q = $q.defer()
+		removeToken();
+		$rootScope._user = isLoggedIn();
+		q.resolve();
+		return q.promise;
 
-		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
+	}
+
+
 		function urlBase64Decoder(str) {
 			var output = str.replace(/-/g, '+').replace(/_/g, '/');
 			switch(output.length % 4) {
