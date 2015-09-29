@@ -5,6 +5,13 @@
 	<div class="col-md-8 well">
 		<input placeholder="Search questions here..." />
 		<a ui-sref="CreateQuestion"><button class="btn btn-warning">New Question</button></a>
+		<div ng-repeat="q in vm.allquestions">
+			<a ui-sref="ViewQuesiton({id: q._id})">
+				<div class="well">
+			{{q.questionBody}}
+			</div></a>
+			
+		</div>
 	</div>
 
 	<div class="col-md-2"></div>

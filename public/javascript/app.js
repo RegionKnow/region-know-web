@@ -19,11 +19,18 @@
 			controllerAs: 'nav'
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
+			controller: 'CreateQuestionController',
+			controllerAs: 'vm',
 			templateUrl: 'views/questionsFeed.html'
 		}).state('CreateQuestion',{
 			url: '/createQ',
 			templateUrl: 'views/CreateQuestion.html',
 			controller: 'CreateQuestionController',
+			controllerAs: 'vm'
+		}).state('ViewQuesiton', {
+			url: '/Quesiton/:id',
+			templateUrl: 'views/ViewQuesiton.html',
+			controller: 'QuestionAnwserController',
 			controllerAs: 'vm'
 		})
 		$urlRouterProvider.otherwise('/');
