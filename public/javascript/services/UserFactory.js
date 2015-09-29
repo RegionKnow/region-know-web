@@ -49,12 +49,24 @@
 			$http.post('/api/user/login', user).success(function(res) {
 				setToken(res.token);
 				$rootScope._user = isLoggedIn();
+				console.log($rootScope._user)
 				q.resolve();
 			});
 			return q.promise;
 		};
 
-		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
+
+
+		o.logoutUser = function(){
+			var q = $q.defer()
+			removeToken();
+			$rootScope._user = isLoggedIn();
+			q.resolve();
+			return q.promise;
+
+		}
+
+
 		function urlBase64Decoder(str) {
 			var output = str.replace(/-/g, '+').replace(/_/g, '/');
 			switch(output.length % 4) {
@@ -67,7 +79,7 @@
 			return decodeURIComponent(escape($window.atob(output)));
 		}
 
-		
+
 		$rootScope._user = isLoggedIn();
 		return o;
 	}

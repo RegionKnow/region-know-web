@@ -15,7 +15,10 @@
 
 	<div class="container-fluid" ng-controller="NavBarController as nav">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7bc3ec9290ab735ee53f56c6e31d8b21354a2512
 
 		<div class="row">
 
@@ -37,9 +40,14 @@
 			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
 
 
-			<md-divider>Username: {{nav.status.username}}</md-divider>
+
+			<a><md-divider>Username: {{nav.status.username}}</md-divider>
 				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
+				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a>
+				<a ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
+
+
 
 			</md-sidenav>
 		</section>
@@ -56,14 +64,21 @@
 <script src="angular/angular.min.js"></script>
 <script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="angular-material/angular-material.js"></script>
+
 <script src="angular-aria/angular-aria.js"></script>
 <script src="angular-animate/angular-animate.js"></script>
+
+<script src="angular-animate/angular-animate.js"></script>
+<script src="angular-aria/angular-aria.js"></script>
 <!-- Global Src -->
 <script src="/javascript/app.js"></script>
 <!-- Factories -->
 <script src="/javascript/services/HomeFactory.js"></script>
 <script src="/javascript/services/UserFactory.js"></script>
 <!-- Controllers -->
+
+<script src="/javascript/controllers/CreateQuestionController.js"></script>
+
 <script src="/javascript/controllers/HomeController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
 </body>

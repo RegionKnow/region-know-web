@@ -44,6 +44,8 @@ app.use(bodyParser.json());
 var userRoutes = require('./routes/UserRoutes');
 var conversationRoutes = require('./routes/ConversationRoutes');
 
+
+var questionRoutes = require('./routes/QuestionsRoutes')
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
@@ -52,6 +54,8 @@ app.get('/', function(req, res) {
 //----------SETTING UP THE PATHS--------------------------------------------------------------------
 app.use('/api/user', userRoutes);
 app.use('/api/convo', conversationRoutes);
+
+app.use('/api/question', questionRoutes);
 
 //----------------APP IS LISTENING-----------------------------------------------------------
 var server = app.listen(port, function() {
