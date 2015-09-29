@@ -20,19 +20,22 @@
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
 			templateUrl: 'views/questionsFeed.html'
-
 		})
 		.state('updateProfile',{
 			url: '/updateProfile',
 			templateUrl: 'views/updateProfile.html'
 		})
-
-	.state('CreateQuestion',{
+		.state('CreateQuestion',{
 			url: '/createQ',
 			templateUrl: 'views/CreateQuestion.html',
 			controller: 'CreateQuestionController',
 			controllerAs: 'vm'
-		})
+		}).state('UserProfile',{
+			url: '/UserProfile',
+			templateUrl: 'views/userProfile.html',
+			controller: 'UserProfileController',
+			controllerAs: 'vm'
+		});
 		$urlRouterProvider.otherwise('/');
 	}
 })();

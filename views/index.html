@@ -40,6 +40,7 @@
 			<a><md-divider>Username: {{nav.status.username}}</md-divider>
 				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
+				<a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a>
 				<a ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
 
@@ -77,6 +78,7 @@
 
 <script src="/javascript/controllers/HomeController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
+<script src="/javascript/controllers/UserProfileController.js"></script>
 </body>
 
 </html>

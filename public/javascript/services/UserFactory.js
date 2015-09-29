@@ -55,15 +55,23 @@
 			return q.promise;
 		};
 
-
-
 		o.logoutUser = function(){
 			var q = $q.defer()
 			removeToken();
 			$rootScope._user = isLoggedIn();
 			q.resolve();
 			return q.promise;
+		};
 
+		//-----------GET USER LOGGED IN-----------------------------------------------------------
+
+		o.getUserLoggedIn = function(userId){
+			console.log(userId);
+			var q = $q.defer();
+			$http.get('/api/user/' + userId).success(function(res){
+				q.resolve(res);
+			});
+			return q.promise;
 		}
 
 

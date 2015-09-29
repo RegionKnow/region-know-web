@@ -25,13 +25,7 @@
 		$mdSidenav('left').close()
 	};
 
-	//-------------GET LOGGED IN USER-------------------------
-
-	if($rootScope._user) {
-		UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res) {
-			vm.userLoggedIn = res;
-		});
-	};
+	
 
 	//---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
