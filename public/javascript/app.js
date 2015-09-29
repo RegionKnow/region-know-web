@@ -20,11 +20,19 @@
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
 			templateUrl: 'views/questionsFeed.html'
+
 		}).
 		state('updateProfile',{
 			url: '/updateProfile',
 			templateUrl: 'views/updateProfile.html'
 		});
+
+		}).state('CreateQuestion',{
+			url: '/createQ',
+			templateUrl: 'views/CreateQuestion.html',
+			controller: 'CreateQuestionController',
+			controllerAs: 'vm'
+		})
 		$urlRouterProvider.otherwise('/');
 	}
 })();

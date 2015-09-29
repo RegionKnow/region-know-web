@@ -54,6 +54,9 @@
 			return q.promise;
 		};
 
+
+		o.logoutUser = function()
+
 		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
 		function urlBase64Decoder(str) {
 			var output = str.replace(/-/g, '+').replace(/_/g, '/');
@@ -67,7 +70,7 @@
 			return decodeURIComponent(escape($window.atob(output)));
 		}
 
-		
+
 		$rootScope._user = isLoggedIn();
 		return o;
 	}
