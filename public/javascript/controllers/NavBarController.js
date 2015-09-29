@@ -8,7 +8,7 @@
 	function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
 		var vm = this;
 		vm.status = $rootScope._user;
-		
+
 
 	//---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
 	vm.toggleLeft = buildToggler('left');
@@ -24,26 +24,34 @@
 	vm.close = function () {
 		$mdSidenav('left').close()
 	};
+
+	
+
 	//---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
 	vm.registerUser = function() {
 		UserFactory.registerUser(vm.user).then(function(){
 			vm.user = {};
 			delete vm.user;
-			console.log("User created!")
 			$state.go("Login");
 		});
 	};
 
 	vm.loginUser = function() {
 		UserFactory.loginUser(vm.user).then(function(){
-			console.log(vm.user);
+
 			vm.status = $rootScope._user;
+			console.log(vm.status);
 			$state.go("QuestionsFeed");
+		});
+	};
+
+
+	vm.logoutUser = function() {
+		UserFactory.logoutUser().then(function(){
+			delete vm.status;
 		});
 	};
 
 }
 })();
-
-

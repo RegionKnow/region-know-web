@@ -4,6 +4,22 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var passport = require('passport'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
 
+
+
+//---------GETTING ID OF USER AND FINDING THAT SPECIFIC USER-------------------------
+
+router.param('userId', function(req, res, next, userId){
+	req.userId = req.params.userId;
+	User.findOne({_id:req.userId})
+	.exec(function (err, user) {
+		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(!user) return res.status(400).send({err: "That user does not exist"});
+		req.user = user;
+		next();
+	});
+
+});
+
 //---------REGISTRATION AND LOGIN---------------------------------------------------------------
 
 router.post('/register', function(req, res) {
@@ -25,8 +41,11 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 });
 
 
-//REQUIRED FOR GETTING ONE USER-------------------------------------------------------
+//-----------GETTING ONE USER THAT WE DEFINED ABOVE-------------------------------------------------------
 
+router.get("/:userId", function(req, res){
+	res.send(req.user);
+});
 
 //----------GETTING USER AND USERS-----------------------------------------------
 

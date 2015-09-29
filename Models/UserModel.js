@@ -11,9 +11,10 @@ var UserSchema = new mongoose.Schema({
 	createdDate: Date,
 	deactivatedDate: Date,
 	homeLocation: {
-		latitude: Number, 
+		latitude: Number,
 		longitude: Number
 	},
+
 	// tags: [{type: String}],
 	radius: Number,
 	generalPoints: Number,

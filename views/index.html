@@ -15,7 +15,6 @@
 
 	<div class="container-fluid" ng-controller="NavBarController as nav">
 
-		
 
 		<div class="row">
 
@@ -26,7 +25,7 @@
 				<md-content flex layout-padding>
 				<div layout="column" layout-fill layout-align="top center">
 
-					
+
 					<i ng-click="nav.toggleLeft()" class="fa fa-bars" style="font-size: 2em;"></i>
 
 				</div>
@@ -36,10 +35,15 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
 			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
 
-			
+
+
 			<a><md-divider>Username: {{nav.status.username}}</md-divider>
 				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
+				<a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
+				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a>
+				<a ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
+
 
 
 			</md-sidenav>
@@ -57,8 +61,12 @@
 <script src="angular/angular.min.js"></script>
 <script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="angular-material/angular-material.js"></script>
+
 <script src="angular-aria/angular-aria.js"></script>
 <script src="angular-animate/angular-animate.js"></script>
+
+<script src="angular-animate/angular-animate.js"></script>
+<script src="angular-aria/angular-aria.js"></script>
 <!-- Global Src -->
 <script src="/javascript/app.js"></script>
 <!-- Factories -->
@@ -69,10 +77,12 @@
 
 
 <!-- Controllers -->
+
 <script src="/javascript/controllers/CreateQuestionController.js"></script>
 <script src="/javascript/controllers/QuestionAnswerController.js"></script>
 <script src="/javascript/controllers/HomeController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
+<script src="/javascript/controllers/UserProfileController.js"></script>
 </body>
 
 </html>

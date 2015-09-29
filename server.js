@@ -16,7 +16,7 @@ require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
 mongoose.connect("mongodb://localhost/FinalApp", function(err) {
-	if (err) return console.log("Error connecting to database");
+	if (err) console.log("Error connecting to database. Make sure you ran mongod :)");
 	var x = new Date();
 	console.log("Connected to mongo at %s", x.toLocaleString());
 });
@@ -42,6 +42,9 @@ app.use(bodyParser.json());
 
 //DEFINE/REQUIRE ROUTES BEFORE SETTING UP PATHS---------------------------------------------------
 var userRoutes = require('./routes/UserRoutes');
+var conversationRoutes = require('./routes/ConversationRoutes');
+
+
 var questionRoutes = require('./routes/QuestionsRoutes')
 var answerRoutes = require('./routes/AnswerRoutes')
 //on homepage load, render the index page
@@ -51,6 +54,8 @@ app.get('/', function(req, res) {
 
 //----------SETTING UP THE PATHS--------------------------------------------------------------------
 app.use('/api/user', userRoutes);
+app.use('/api/convo', conversationRoutes);
+
 app.use('/api/question', questionRoutes);
 app.use('/api/answer', answerRoutes)
 

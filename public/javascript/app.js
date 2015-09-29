@@ -22,7 +22,12 @@
 			controller: 'CreateQuestionController',
 			controllerAs: 'vm',
 			templateUrl: 'views/questionsFeed.html'
-		}).state('CreateQuestion',{
+		})
+		.state('updateProfile',{
+			url: '/updateProfile',
+			templateUrl: 'views/updateProfile.html'
+		})
+		.state('CreateQuestion',{
 			url: '/createQ',
 			templateUrl: 'views/CreateQuestion.html',
 			controller: 'CreateQuestionController',
@@ -32,7 +37,13 @@
 			templateUrl: 'views/ViewQuesiton.html',
 			controller: 'QuestionAnwserController',
 			controllerAs: 'vm'
-		})
+		}).state('UserProfile',{
+			url: '/UserProfile',
+			templateUrl: 'views/userProfile.html',
+			controller: 'UserProfileController',
+			controllerAs: 'vm'
+		});
+
 		$urlRouterProvider.otherwise('/');
 	}
 })();

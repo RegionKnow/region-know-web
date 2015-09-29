@@ -7,6 +7,7 @@
 
 	function HomeFactory($http, $q) {
 		var o = {};
+
 		o.createQuestion = function(question){
 			var q = $q.defer();
 			console.log('this is the question in factory' + question)
