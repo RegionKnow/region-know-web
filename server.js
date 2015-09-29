@@ -14,7 +14,6 @@ require('./Models/UserModel.js');
 
 //Adds error handling to mongoose.connect
 mongoose.connect("mongodb://localhost/FinalApp", function(err) {
-	console.log(arguments);
 	if (err) return console.log("Error connecting to database");
 	var x = new Date();
 	console.log("Connected to mongo at %s", x.toLocaleString());
