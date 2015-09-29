@@ -24,13 +24,21 @@
 	vm.close = function () {
 		$mdSidenav('left').close()
 	};
+
+	//-------------GET LOGGED IN USER-------------------------
+
+	if($rootScope._user) {
+		UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res) {
+			vm.userLoggedIn = res;
+		});
+	};
+
 	//---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
 	vm.registerUser = function() {
 		UserFactory.registerUser(vm.user).then(function(){
 			vm.user = {};
 			delete vm.user;
-			console.log("User created!")
 			$state.go("Login");
 		});
 	};
@@ -38,13 +46,16 @@
 	vm.loginUser = function() {
 		UserFactory.loginUser(vm.user).then(function(){
 			vm.status = $rootScope._user;
+			console.log(vm.status);
 			$state.go("QuestionsFeed");
 		});
 	};
 
+	vm.userLoggedIn = $rootScope._user;
+
 	vm.logoutUser = function() {
 		UserFactory.logoutUser().then(function(){
-			vm.status = $rootScope._user;
+			delete vm.status;
 		});
 	};
 

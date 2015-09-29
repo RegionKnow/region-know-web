@@ -49,12 +49,18 @@
 			$http.post('/api/user/login', user).success(function(res) {
 				setToken(res.token);
 				$rootScope._user = isLoggedIn();
+				console.log($rootScope._user)
 				q.resolve();
 			});
 			return q.promise;
 		};
 
-		o.logoutUser = function()
+		o.logoutUser = function() {
+			var q = $q.defer();
+			removeToken();
+			q.resolve();
+			return q.promise;
+		}
 
 		//---------------------DECODER FUNCTIONALITY----------------------------------------------------
 		function urlBase64Decoder(str) {
