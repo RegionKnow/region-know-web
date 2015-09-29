@@ -7,7 +7,6 @@ var ConversationSchema = new mongoose.Schema({
 	receivedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	sentBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	messages: [{type: mongoose.Schema.Types.ObjectId, ref: "Message"}],
-	
 });
 
 
