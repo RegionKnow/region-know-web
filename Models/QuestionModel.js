@@ -7,9 +7,8 @@ var QuestionSchema = new mongoose.Schema({
 	createdDate: Date,
 	answered: Boolean,
 	generalPoints: Number,
-	dateDeleted: Date,
+	isDeleted: Boolean,
 	questionLocation: Number,
-
 	homeLocation: {
 		lat: Number,
 		lng: Number

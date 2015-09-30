@@ -3,12 +3,14 @@
 	<div class="col-md-2"></div>
 
 	<div class="col-md-8 well">
-		<input placeholder="Search questions here..." />
+		<input placeholder="Search questions here..." ng-model="vm.search" />
 
-		<input placeholder="Post your question here..." />
+		<br><br>
 
+		<div ng-show="vm.status">
 		<a ui-sref="CreateQuestion"><button class="btn btn-warning">New Question</button></a>
-		<div ng-repeat="q in vm.allquestions">
+		</div>
+		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
 				<div class="well">
 			{{q.questionBody}}

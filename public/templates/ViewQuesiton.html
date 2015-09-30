@@ -1,17 +1,66 @@
 <div class="row text-center introFeatures">
 
-	<div class="col-md-2"></div>
+	<div class="col-md-2 col-lg-1"></div>
 
-	<div class="col-md-8 well">
-		{{vm.question.questionBody}}
+	<div class="col-md-8 col-lg-10">
+		<div>
+
+			<h1>{{vm.question.questionBody}}</h1>
+
+			<br>
+
+			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Options</button>
+
+			<span ng-if="vm.options">
+					<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
+					<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
+					<button class="btn btn-default btn-xs" ng-click="vm.hideOptions()" >close</button>
+			</span>
+
+			<br>
+			<br>
+
+			<div ng-if="vm.showEdit">
+					<input class="form-control" placeholder="{{vm.question.questionBody}}" ng-model="vm.editQ">
+					<br>
+					<button class="btn btn-primary btn-sm" ng-click="vm.submitEdit(vm.editQ)">Submit</button>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div>
+			<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.answer"></textarea>
+
+			<br>
+			<br>
+
+			<button class="btn btn-defualt" ng-click="vm.addAnswer()">
+				Submit Answer
+			</button>
+
+			<br>
+			<br>
+
+			<div>
+				<img ng-if="vm.loading" id="loadingGif" src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
+			</div>
+
+		</div>
+		{{vm.question.answers}}
+		<div class="well" ng-repeat="a in vm.question.answers">
+			{{a.answerBody}}
+			<span ng-if="vm.status.id === vm.question.postedBy">
+				<button class="btn btn-warning btn-xs">Edit</button>
+				<button class="btn btn-danger btn-xs" ng-click="deleteAnswer()">Delete</button>
+			</span>
+		</div>
+	
 	</div>
-	<div>
-		<input class="form-contorl" ng-model="vm.answer">
-		<button class="btn btn-defualt" ng-click="vm.addAnswer()">Submit Answer</button>
-	</div>
-	<div class="well" ng-repeat="a in vm.question.answers">
-		{{a.answerBody}}
-	</div>
-	<div class="col-md-2"></div>
+
+	<br>
+
+	<div class="col-md-2 col-lg-1"></div>
 
 </div>

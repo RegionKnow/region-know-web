@@ -38,7 +38,23 @@
 			})
 			return q.promise;
 		}
-	
+		o.deleteQuestion = function(question_id){
+			var q = $q.defer();
+			console.log('hitting delete in factory')
+			$http.post('api/question/delete/' + question_id, null).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
+		o.editQuestion = function(id, edit){
+			var q = $q.defer();
+			console.log('tis is id ' + id )
+			console.log('tis is edit ' + edit)
+			$http.post('api/question/edit/' +  id, edit).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
 		return o;
 	}
 })();
