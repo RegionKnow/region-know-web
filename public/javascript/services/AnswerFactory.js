@@ -10,6 +10,7 @@
 			var q = $q.defer();
 			$http.post('/api/answer/', answer).success(function(res){
 				q.resolve(res);
+
 			})
 			return q.promise;
 
