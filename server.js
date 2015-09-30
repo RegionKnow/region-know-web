@@ -15,8 +15,11 @@ require('./Models/UserModel.js');
 require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
-mongoose.connect("mongodb://localhost/FinalApp", function(err) {
-	if (err) return console.log("Error connecting to database. Make sure you ran mongod :)");
+
+var db = process.env.MONGOLAB_URI || "mongodb://localhost/FinalApp"; 
+mongoose.connect(db , function(err) {
+	if (err) console.log("Error connecting to database. Make sure you ran mongod :)");
+	
 	var x = new Date();
 	console.log("Connected to mongo at %s", x.toLocaleString());
 });
