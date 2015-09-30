@@ -47,6 +47,11 @@
 			templateUrl: 'templates/messaging.html',
 			controller: 'MessageController',
 			controllerAs: 'msg'
+		}).state('Settings', {
+			url: '/settings/:id',
+			templateUrl: 'templates/Settings.html',
+			controller: 'UserSettingsController',
+			controllerAs: 'vm'
 		});
 
 		$urlRouterProvider.otherwise('/');
