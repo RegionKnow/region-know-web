@@ -8,7 +8,7 @@ var Conversation = mongoose.model('Conversation');
 var Message = mongoose.model('Message');
 var User = mongoose.model('User');
 
-
+//Queries mongo for conversation between two people
 router.post("/convo-finder", function (req, res) {
   Conversation.findOne({participantOne: req.body.receiver, participantTwo: req.body.sender}, function (err, firstConvoFound) {
     if(err) return res.status(500).send({err: "There was an error querying the database"});
@@ -24,7 +24,7 @@ router.post("/convo-finder", function (req, res) {
           })
         }
         else {
-          res.send(result);
+          res.send(secondConvoFound);
         }
       })
     }
@@ -37,16 +37,26 @@ router.post("/convo-finder", function (req, res) {
 });
 
 
-// router.post('/new-message', function (req, res) {
-//   var newmessage = new Message({body: req.body.body, sentBy: req.body.user});
-//   newmessage.createdDate = new Date();
-//   newmessage.save(function (err, result) {
-//
-//
-//   })
-// })
+router.post('/new-message', function (req, res) {
+  var newmessage = new Message({body: req.body.body, sentBy: req.body.user});
+  newmessage.createdDate = new Date();
+  newmessage.save(function (err, newMessage) {
+      if(err) return res.status(500).send({err: "Error saving the Message"})
 
+    Conversation.update({_id: req.body.convo}, {$push: {messages: newMessage._id}}, function (err, convoUpdated) {
+      if(err) return res.status(500).send({err: "Error finding convo to save"});
+      if(!convoUpdated) return res.status(500).send({err: "Error finding convo to save"});
+      res.send(newMessage);
+    });
 
+  })
+})
+
+router.get('/', function (req, res) {
+  var number = Math.floor((Math.random() * 256)) ;
+  res.send({body: "You got it " + number});
+
+})
 
 
 
