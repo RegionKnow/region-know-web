@@ -37,12 +37,13 @@
 
 
 
-			<a><md-divider>Username: {{nav.status.username}}</md-divider>
+				<md-divider ng-show="nav.status">Username: {{nav.status.username}}</md-divider>
 				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
 				<a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a>
 				<a ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
+				<a ui-sref="Message" ng-click="nav.close();"><md-divider>Messaging</md-divider></a>
 
 
 
@@ -62,8 +63,8 @@
 <script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="angular-material/angular-material.js"></script>
 
-<script src="angular-aria/angular-aria.js"></script>
 <script src="angular-animate/angular-animate.js"></script>
+<script src="angular-aria/angular-aria.js"></script>
 
 <script src="angular-animate/angular-animate.js"></script>
 <script src="angular-aria/angular-aria.js"></script>
@@ -80,9 +81,9 @@
 
 <script src="/javascript/controllers/CreateQuestionController.js"></script>
 <script src="/javascript/controllers/QuestionAnswerController.js"></script>
-<script src="/javascript/controllers/HomeController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
 <script src="/javascript/controllers/UserProfileController.js"></script>
+<script src="/javascript/controllers/MessagingController.js"></script>
 </body>
 
 </html>

@@ -42,6 +42,11 @@
 			templateUrl: 'templates/userProfile.html',
 			controller: 'UserProfileController',
 			controllerAs: 'vm'
+		}).state('Message', {
+			url: '/Messaging',
+			templateUrl: 'templates/messaging.html',
+			controller: 'MessageController',
+			controllerAs: 'msg'
 		});
 
 		$urlRouterProvider.otherwise('/');

@@ -15,9 +15,14 @@ require('./Models/UserModel.js');
 require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
+<<<<<<< HEAD
 var db = process.env.MONGOLAB_URI || "mongodb://localhost/FinalApp"; 
 mongoose.connect(db , function(err) {
 	if (err) console.log("Error connecting to database. Make sure you ran mongod :)");
+=======
+mongoose.connect("mongodb://localhost/FinalApp", function(err) {
+	if (err) return console.log("Error connecting to database. Make sure you ran mongod :)");
+>>>>>>> fae3083ae9b7b430f0e2eab827be1f3eb549f9f8
 	var x = new Date();
 	console.log("Connected to mongo at %s", x.toLocaleString());
 });
@@ -51,6 +56,13 @@ var answerRoutes = require('./routes/AnswerRoutes')
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
+});
+//-------to allow remote access--------------------------------------------------------
+app.use(function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	// res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
 //----------SETTING UP THE PATHS--------------------------------------------------------------------
