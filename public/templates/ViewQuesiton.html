@@ -21,9 +21,12 @@
 			<br>
 
 			<div ng-if="vm.showEdit">
-					<input class="form-control" placeholder="{{vm.question.questionBody}}" ng-model="vm.editQ">
+				<form ng-submit="vm.submitEdit()">
+					<input class="form-control" placeholder="{{vm.question.questionBody}}" ng-model="vm.edit.questionBody" required>
 					<br>
-					<button class="btn btn-primary btn-sm" ng-click="vm.submitEdit(vm.editQ)">Submit</button>
+					<button class="btn btn-primary btn-sm" ng-disabled="!vm.edit.questionBody" type="submit">Submit</button>
+
+				</form>
 			</div>
 		</div>
 
@@ -31,14 +34,16 @@
 		<br>
 
 		<div>
-			<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.answer"></textarea>
+			<form ng-submit="vm.addAnswer()">
+				<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
 
-			<br>
-			<br>
-
-			<button class="btn btn-defualt" ng-click="vm.addAnswer()">
-				Submit Answer
-			</button>
+				<br>
+				
+				<!-- <h5 ng-show="vm.errorMessage" style="color: red;">Sorry! You can not submit an empty answer.</h5> -->
+				<button class="btn btn-defualt" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
+					Submit Answer
+				</button>
+			</form>
 
 			<br>
 			<br>
@@ -48,7 +53,7 @@
 			</div>
 
 		</div>
-		{{vm.question.answers}}
+		<!-- {{vm.question.answers}} -->
 		<div class="well" ng-repeat="a in vm.question.answers">
 			{{a.answerBody}}
 			<span ng-if="vm.status.id === vm.question.postedBy">
