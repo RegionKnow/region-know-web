@@ -51,6 +51,13 @@ var answerRoutes = require('./routes/AnswerRoutes')
 app.get('/', function(req, res) {
 	res.render('index');
 });
+//-------to allow remote access--------------------------------------------------------
+app.use(function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	// res.header("Access-Control-Allow-Origin", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 //----------SETTING UP THE PATHS--------------------------------------------------------------------
 app.use('/api/user', userRoutes);
