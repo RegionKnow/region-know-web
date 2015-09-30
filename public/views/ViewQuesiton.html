@@ -4,11 +4,16 @@
 
 	<div class="col-md-8 well">
 		{{vm.question.questionBody}}
+		<span ng-if="vm.status.id === vm.question.postedBy">
+				<button class="btn btn-warning" ng-click="">Edit</button>
+				<button class="btn btn-danger" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
+		</span>
 	</div>
 	<div>
 		<input class="form-contorl" ng-model="vm.answer">
 		<button class="btn btn-defualt" ng-click="vm.addAnswer()">Submit Answer</button>
 	</div>
+	<br>
 	<div class="well" ng-repeat="a in vm.question.answers">
 		{{a.answerBody}}
 	</div>

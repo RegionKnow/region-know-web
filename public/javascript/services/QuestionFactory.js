@@ -38,6 +38,14 @@
 			})
 			return q.promise;
 		}
+		o.deleteQuestion = function(question_id){
+			var q = $q.defer();
+			console.log('hitting delete in factory')
+			$http.post('api/question/delete/' + question_id, null).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
 	
 		return o;
 	}
