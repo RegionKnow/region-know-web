@@ -15,8 +15,6 @@ router.param('id', function(req, res, next){
 		req.question = response
 		next();
 	})
-	
-
 })
 
 router.post('/create', function(req, res){
@@ -59,6 +57,14 @@ router.get('/:id', function(req, res){
 router.post('/delete/:id', function(req, res){
 	Questions.update({_id: req.question._id}, {isDeleted: true}, function(err, response){
 		console.log('hitting delete in routes')
+		res.send(response)
+	})
+	
+})
+
+router.post('/edit/:id', function(req, res){
+	console.log(req.body)
+	Questions.update({_id: req.question._id}, {questionBody: req.body.questionBody}, function(err, response){
 		res.send(response)
 	})
 	

@@ -46,7 +46,15 @@
 			})
 			return q.promise;
 		}
-	
+		o.editQuestion = function(id, edit){
+			var q = $q.defer();
+			console.log('tis is id ' + id )
+			console.log('tis is edit ' + edit)
+			$http.post('api/question/edit/' +  id, edit).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
 		return o;
 	}
 })();
