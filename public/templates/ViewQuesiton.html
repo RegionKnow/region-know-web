@@ -48,12 +48,12 @@
 			</div>
 
 		</div>
-
+		{{vm.question.answers}}
 		<div class="well" ng-repeat="a in vm.question.answers">
 			{{a.answerBody}}
 			<span ng-if="vm.status.id === vm.question.postedBy">
-				<md-button class="md-raised md-primary md-sm">Edit</md-button>
-				<md-button class="md-raised md-primary">Delete</md-button>
+				<button class="btn btn-warning btn-xs">Edit</button>
+				<button class="btn btn-danger btn-xs" ng-click="deleteAnswer()">Delete</button>
 			</span>
 		</div>
 	
