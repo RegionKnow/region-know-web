@@ -1,0 +1,71 @@
+<div class="row text-center introFeatures">
+
+	<div class="col-md-2 col-lg-1"></div>
+
+	<div class="col-md-8 col-lg-10">
+		<div>
+
+			<h1>{{vm.question.questionBody}}</h1>
+
+			<br>
+
+			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Options</button>
+
+			<span ng-if="vm.options">
+					<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
+					<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
+					<button class="btn btn-default btn-xs" ng-click="vm.hideOptions()" >close</button>
+			</span>
+
+			<br>
+			<br>
+
+			<div ng-if="vm.showEdit">
+				<form ng-submit="vm.submitEdit()">
+					<input class="form-control" placeholder="{{vm.question.questionBody}}" ng-model="vm.edit.questionBody" required>
+					<br>
+					<button class="btn btn-primary btn-sm" ng-disabled="!vm.edit.questionBody" type="submit">Submit</button>
+
+				</form>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div>
+			<form ng-submit="vm.addAnswer()">
+				<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
+
+				<br>
+				
+				<!-- <h5 ng-show="vm.errorMessage" style="color: red;">Sorry! You can not submit an empty answer.</h5> -->
+				<button class="btn btn-defualt" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
+					Submit Answer
+				</button>
+			</form>
+
+			<br>
+			<br>
+
+			<div>
+				<img ng-if="vm.loading" id="loadingGif" src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
+			</div>
+
+		</div>
+		<!-- {{vm.question.answers}} -->
+		<div class="well" ng-repeat="a in vm.question.answers">
+			{{a.answerBody}}
+			<span ng-if="vm.status.id === vm.question.postedBy">
+				<button class="btn btn-warning btn-xs">Edit</button>
+				<button class="btn btn-danger btn-xs" ng-click="deleteAnswer()">Delete</button>
+			</span>
+		</div>
+	
+	</div>
+
+	<br>
+
+	<div class="col-md-2 col-lg-1"></div>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="well">
+				<h3>Your home location is the place you know best and love.<h3>
+				<span>
+					<button class="btn btn-primary" ng-click="vm.openMap()">Set Home Location</button> 
+					<select class="form-control" ng-model='vm.distance' id="settingsRadius">
+					      <option ng-selected="true">Select Radius</option>	
+						  <option value='1'>1 Mile</option>
+						  <option value='2'>2 Miles</option>
+						  <option value='3'>3 Miles</option>
+						  <option value='4'>4 Miles</option>
+						  <option value='5'>5 Miles</option>
+						  <option value='6'>6 Miles</option>
+						  <option value='7'>7 Miles</option>
+						  <option value='8'>8 Miles</option>
+						  <option value='9'>9 Miles</option>
+						  <option value='10'>10 Miles</option>
+					</select>	
+				</span><br>
+				<button ng-show="!vm.mapStatus" class="btn btn-default btn-sm">Current Home Location</button>
+				<div ng-show="vm.mapStatus" id="map"></div><br>
+				<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()">Submit Home Location</button>
+			</div>
+		</div>
+<div class="col-md-2"></div>
