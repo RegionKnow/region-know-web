@@ -44,12 +44,12 @@
 				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
 				<a ng-show="!nav.status" ui-sref="Login" ng-click="!nav.close()"><md-divider>Login</md-divider></a>
 				<a ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()"><md-divider>Register</md-divider></a>
-				
+
 
 				<a ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()"><md-divider>Settings</md-divider></a>
 				<a ng-show="nav.status" ui-sref="Message" ng-click="nav.close();"><md-divider>Messaging</md-divider></a>
 				<a ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
-				
+
 
 
 
@@ -77,7 +77,6 @@
 <!-- Global Src -->
 <script src="/javascript/app.js"></script>
 <!-- Factories -->
-<script src="/javascript/services/HomeFactory.js"></script>
 <script src="/javascript/services/UserFactory.js"></script>
 <script src="/javascript/services/QuestionFactory.js"></script>
 <script src="/javascript/services/AnswerFactory.js"></script>

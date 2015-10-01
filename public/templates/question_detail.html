@@ -57,9 +57,14 @@
 		<div class="well" ng-repeat="a in vm.question.answers">
 			<p>{{a.answerBody}}</p>
 			<p>{{a.postedBy}}</p>
+			<div ng-if="vm.status.id === vm.question.postedBy">
+				<div ng-controller="MessageController as message">
+						<md-button class="md-primary md-raised">Message</md-button>
+				</div>
+			</div>
 			<span ng-if="vm.status.id === vm.question.postedBy">
-				<button class="btn btn-warning btn-xs">Edit</button>
-				<button class="btn btn-danger btn-xs" ng-click="deleteAnswer()">Delete</button>
+				<button class="btn btn-warning btn-sm">Edit</button>
+				<button class="btn btn-danger btn-sm" ng-click="deleteAnswer()">Delete</button>
 			</span>
 		</div>
 

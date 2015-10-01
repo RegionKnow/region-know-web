@@ -25,7 +25,7 @@
 		$mdSidenav('left').close()
 	};
 
-	
+
 
 	//---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
@@ -45,7 +45,6 @@
 			$state.go("QuestionsFeed");
 		});
 	};
-	console.log(vm.status)
 
 	vm.logoutUser = function() {
 		UserFactory.logoutUser().then(function(){
