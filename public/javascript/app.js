@@ -19,27 +19,27 @@
 			controllerAs: 'nav'
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
-			templateUrl: 'templates/questionsFeed.html',
+			templateUrl: 'templates/questions_feed.html',
 			controller: 'CreateQuestionController',
 			controllerAs: 'vm'
 		}).state('updateProfile',{
 			url: '/updateProfile',
+			templateUrl: 'templates/update_profile.html',
 			controller: 'UserProfileController',
-			templateUrl: 'templates/updateProfile.html',
 			controllerAs: 'vm'
 		}).state('CreateQuestion',{
 			url: '/createQ',
-			templateUrl: 'templates/CreateQuestion.html',
+			templateUrl: 'templates/create_question.html',
 			controller: 'CreateQuestionController',
 			controllerAs: 'vm'
 		}).state('ViewQuesiton', {
 			url: '/Quesiton/:id',
-			templateUrl: 'templates/ViewQuesiton.html',
+			templateUrl: 'templates/question_detail.html',
 			controller: 'QuestionAnwserController',
 			controllerAs: 'vm'
 		}).state('UserProfile',{
 			url: '/UserProfile',
-			templateUrl: 'templates/userProfile.html',
+			templateUrl: 'templates/user_profile.html',
 			controller: 'UserProfileController',
 			controllerAs: 'vm'
 		}).state('Message', {
@@ -49,7 +49,7 @@
 			controllerAs: 'msg'
 		}).state('Settings', {
 			url: '/settings/:id',
-			templateUrl: 'templates/Settings.html',
+			templateUrl: 'templates/user_settings.html',
 			controller: 'UserSettingsController',
 			controllerAs: 'vm'
 		});
