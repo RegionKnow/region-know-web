@@ -38,7 +38,7 @@ router.param('Profile', function(req, res, next, Profile){
 
 router.param('updateProfile', function(req, res, next, updateProfile){
 	req.updateProfile = updateProfile;
-	
+
 	User.update({ _id: req.updateProfile},  req.body)
 	//console.log(req);
 	.exec(function (err, user) {
@@ -84,18 +84,17 @@ router.delete("/:Profile", function(req, res){
 	res.send();
 });
 router.post("/:updateProfile", function(req, res){
-	console.log("inside userroutes updateProfile");
 	res.send();
 });
 
 router.post('/location/:userId', function(req, res){
-	console.log(req.body)
+	console.log(req.body);
 	User.update({_id: req.user._id}, req.body, function(err, response){
 
 		console.log(response)
 		res.send()
 	})
-	
+
 })
 //----------GETTING USER AND USERS-----------------------------------------------
 
