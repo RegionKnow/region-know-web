@@ -4,9 +4,12 @@
 }
 #questionInput{
 /*	width: 60%*/
-	
 }
 #settingsRadius{
-	width: 15%;
+	width: 30%;
 	display: inline;
+}
+#map{
+	width: 100%;
+	height: 200px;
 }
