@@ -20,6 +20,39 @@ router.param('userId', function(req, res, next, userId){
 
 });
 
+//---------Deleteng USER-------------------------
+
+router.param('Profile', function(req, res, next, Profile){
+	req.Profile = Profile;
+	console.log("Hey line 27");
+	User.update({ _id : req.Profile}, {deactivated: true})
+	.exec(function (err, user) {
+		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(!Profile) return res.status(400).send({err: "That user does not exist"});
+		console.log("deleted");
+		next();
+	});
+
+});
+//---------Update USER-------------------------
+
+router.param('updateProfile', function(req, res, next, updateProfile){
+	req.updateProfile = updateProfile;
+	
+	User.update({ _id: req.updateProfile},  req.body)
+	//console.log(req);
+	.exec(function (err, user) {
+		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(!updateProfile) return res.status(400).send({err: "That user does not exist"});
+		// console.log("updated");
+		next();
+		// res.send();
+	});
+
+});
+
+
+
 //---------REGISTRATION AND LOGIN---------------------------------------------------------------
 
 router.post('/register', function(req, res) {
@@ -41,10 +74,18 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 });
 
 
+
 //-----------GETTING ONE USER THAT WE DEFINED ABOVE-------------------------------------------------------
 
 router.get("/:userId", function(req, res){
 	res.send(req.user);
+});
+router.delete("/:Profile", function(req, res){
+	res.send();
+});
+router.post("/:updateProfile", function(req, res){
+	console.log("inside userroutes updateProfile");
+	res.send();
 });
 
 //----------GETTING USER AND USERS-----------------------------------------------

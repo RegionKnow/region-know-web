@@ -20,12 +20,12 @@
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
 			templateUrl: 'views/questionsFeed.html'
-		})
-		.state('updateProfile',{
+		}).state('updateProfile',{
 			url: '/updateProfile',
-			templateUrl: 'views/updateProfile.html'
-		})
-		.state('CreateQuestion',{
+			controller: 'UserProfileController',
+			templateUrl: 'views/updateProfile.html',
+			controllerAs: 'vm'
+		}).state('CreateQuestion',{
 			url: '/createQ',
 			templateUrl: 'views/CreateQuestion.html',
 			controller: 'CreateQuestionController',

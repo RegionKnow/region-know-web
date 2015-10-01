@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
 	passwordHash: String,
 	salt: String,
 	createdDate: Date,
-	deactivatedDate: Date,
+	deactivated: Boolean,
 	homeLocation: {
 		latitude: Number,
 		longitude: Number

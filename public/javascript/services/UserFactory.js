@@ -62,11 +62,35 @@
 			q.resolve();
 			return q.promise;
 		};
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//DELETE Profile
+		o.deleteUserProfile = function(Profile){
+			// alert("Are you sure you want to remove your Profile?");
+			var q = $q.defer();
+			$http.delete('/api/user/' + Profile).success(function(res){
+				// console.log(res);
+				q.resolve();
+			});
+			return q.promise;
+		};
+//=============================================================================================
+///////Update Profile
+		o.updateProfile = function(userId, user){
+			console.log(user);
+
+			// alert("Are you sure you want to remove your Profile?");
+			var q = $q.defer();
+			$http.post('/api/user/' + userId, user).success(function(res){
+				//  console.log(res);
+				q.resolve(res);
+			});
+			return q.promise;
+		};
 
 		//-----------GET USER LOGGED IN-----------------------------------------------------------
 
 		o.getUserLoggedIn = function(userId){
-			console.log(userId);
+			// console.log(userId);
 			var q = $q.defer();
 			$http.get('/api/user/' + userId).success(function(res){
 				q.resolve(res);

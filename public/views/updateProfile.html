@@ -2,7 +2,7 @@
 	<div class="row">
 
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<form ng-submit="vm.updateProfile(nav.user)" class="col-md-8">
 			<h1>Update</h1>
 
 
@@ -24,16 +24,17 @@
 
 
 			<div class="text-center">
-				<md-button class="md-raised md-primary">
+			<md-button  type="submit" class="md-raised md-primary">
 				Submit Updates
 			</md-button>
-			<md-button class="md-raised md-primary">
+			<!-- <md-button class="md-raised md-primary">
 			Delete Profile
-		</md-button>
+		</md-button> -->
+		</form>
 	</div>
 	<br/>
 
-
+<!-- <button ng-click="vm.test()">test</button> -->
 </div>
 <div class="col-md-2"></div>
 
