@@ -11,9 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 </head>
 
-<body>
+<body class="container-fluid">
 
-	<div class="container-fluid" ng-controller="NavBarController as nav">
+	<div ng-controller="NavBarController as nav">
 
 
 		<div class="row">
@@ -37,12 +37,19 @@
 
 
 
-			<a><md-divider>Username: {{nav.status.username}}</md-divider>
-				<a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a>
-				<a ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Questions Feed</md-divider></a>
-				<a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
-				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a>
-				<a ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
+				<a><md-divider ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</md-divider></a>
+				<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
+				<a ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Home</md-divider></a>
+				<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
+				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
+				<a ng-show="!nav.status" ui-sref="Login" ng-click="!nav.close()"><md-divider>Login</md-divider></a>
+				<a ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()"><md-divider>Register</md-divider></a>
+				
+
+				<a ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()"><md-divider>Settings</md-divider></a>
+				<a ng-show="nav.status" ui-sref="Message" ng-click="nav.close();"><md-divider>Messaging</md-divider></a>
+				<a ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
+				
 
 
 
@@ -61,9 +68,9 @@
 <script src="angular/angular.min.js"></script>
 <script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="angular-material/angular-material.js"></script>
-
-<script src="angular-aria/angular-aria.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR4uInfVhGOVQPhgf8wkvxHpiEEYerVq8"></script>
 <script src="angular-animate/angular-animate.js"></script>
+<script src="angular-aria/angular-aria.js"></script>
 
 <script src="angular-animate/angular-animate.js"></script>
 <script src="angular-aria/angular-aria.js"></script>
@@ -72,13 +79,20 @@
 <!-- Factories -->
 <script src="/javascript/services/HomeFactory.js"></script>
 <script src="/javascript/services/UserFactory.js"></script>
+<script src="/javascript/services/QuestionFactory.js"></script>
+<script src="/javascript/services/AnswerFactory.js"></script>
+<script src="/javascript/services/MapFactory.js"></script>
+
+
+
 <!-- Controllers -->
 
 <script src="/javascript/controllers/CreateQuestionController.js"></script>
-
-<script src="/javascript/controllers/HomeController.js"></script>
+<script src="/javascript/controllers/QuestionAnswerController.js"></script>
 <script src="/javascript/controllers/NavBarController.js"></script>
 <script src="/javascript/controllers/UserProfileController.js"></script>
+<script src="/javascript/controllers/MessagingController.js"></script>
+<script src="/javascript/controllers/UserSettingsController.js"></script>
 </body>
 
 </html>

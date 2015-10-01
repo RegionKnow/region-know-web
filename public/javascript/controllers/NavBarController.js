@@ -45,7 +45,7 @@
 			$state.go("QuestionsFeed");
 		});
 	};
-
+	console.log(vm.status)
 
 	vm.logoutUser = function() {
 		UserFactory.logoutUser().then(function(){

@@ -7,15 +7,14 @@ var QuestionSchema = new mongoose.Schema({
 	createdDate: Date,
 	answered: Boolean,
 	generalPoints: Number,
-	dateDeleted: Date,
+	isDeleted: Boolean,
 	questionLocation: Number,
-
 	homeLocation: {
 		lat: Number,
 		lng: Number
 	},
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answers"}],
+	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
 	comments: [{
 		commentBody: String,
 		createdDate: Date,
