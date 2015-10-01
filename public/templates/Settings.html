@@ -3,7 +3,7 @@
 			<div class="well">
 				<h3>Your home location is the place you know best and love.<h3>
 				<span>
-					<button class="btn btn-primary" ng-click="vm.openMap()">Set Home Location</button> 
+					<button class="btn btn-primary btn-sm" ng-click="vm.openMap()">Set Home Location</button> 
 					<select class="form-control" ng-model='vm.distance' id="settingsRadius">
 					      <option ng-selected="true">Select Radius</option>	
 						  <option value='1'>1 Mile</option>
@@ -19,6 +19,7 @@
 					</select>	
 				</span><br>
 				<button ng-show="!vm.mapStatus" class="btn btn-default btn-sm">Current Home Location</button>
+				<br>
 				<div ng-show="vm.mapStatus" id="map"></div><br>
 				<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()">Submit Home Location</button>
 			</div>

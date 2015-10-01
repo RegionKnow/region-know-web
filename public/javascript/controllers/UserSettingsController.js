@@ -71,7 +71,7 @@
 			    	});
 		}
 
-		vm.submitHomeLocation = function(){
+		vm.submitHomeLocation = function(){ // submits location user selects
 			vm.mapStatus = false;
 			 //makes sure there is a lat and lng
 			if(!vm.homeLocation.lat) return;
