@@ -13,3 +13,19 @@
 	width: 100%;
 	height: 200px;
 }
+/*#tagSave{
+	margin-left: 100%;
+}*/
+.tagDiv{
+	border-radius: 10px;
+	box-shadow: 50px; 
+	/*height: 30px;*/
+}
+.indvTag {
+	border-width: 3px;
+	border-color: #000000;
+	padding-left: 15px;
+	color:#2F5D92; 
+	background-color:#E0EDF5; 
+	display: inline; 
+}

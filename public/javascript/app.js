@@ -49,7 +49,7 @@
 			controllerAs: 'msg'
 		}).state('Settings', {
 			url: '/settings/:id',
-			templateUrl: 'templates/Settings.html',
+			templateUrl: 'templates/user_settings.html',
 			controller: 'UserSettingsController',
 			controllerAs: 'vm'
 		});

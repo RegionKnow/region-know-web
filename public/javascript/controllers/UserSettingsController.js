@@ -3,13 +3,17 @@
 	angular.module('app')
 	.controller('UserSettingsController', UserSettingsController);
 
-	UserSettingsController.$inject = ['$http', '$stateParams', 'MapFactory'];
+	UserSettingsController.$inject = ['$http', '$stateParams', 'UserSettingsFactory'];
 
-	function UserSettingsController($http, $stateParams, MapFactory) {
+	function UserSettingsController($http, $stateParams, UserSettingsFactory) {
 		var vm = this;
 		console.log($stateParams)
+		vm.tag = ""
+		// vm.tags = [];
+		getTags(); // gets all tags when user loads settings
 		vm.homeLocation = {};
 		vm.currentLocation = {};
+		var counter = 0
 		// vm.distance = 0;
 		vm.infoWindow = new google.maps.InfoWindow();
 		//funciton to get miles
@@ -17,12 +21,49 @@
 		     return miles*1609.344;
 		}
 
-		//map function
+		//////FUNCTIONS to deal with Tags
+		function getTags(){
+			UserSettingsFactory.getTags($stateParams.id).then(function(res){
+				vm.tags = res
+				console.log(vm.tags)
+			})
+		}
+		vm.showTagInput = function(){
+			counter += 1
+			vm.showInput = true;
+			if(counter % 2 === 0){
+				vm.showInput = false;
+			}
+			console.log(vm.showInput)
+		}
+		vm.addTag = function(tag){
+			if(tag == ""){
+				return 
+			}
+			vm.tags.push(tag)
+			vm.tag = ""
+		}
+		vm.deleteTag = function(index){
+			vm.tags.splice(index, 1)
+		}
+
+		vm.saveTags = function(){
+			if(vm.tags.length === 0){
+				return
+			}
+			UserSettingsFactory.removeTags($stateParams.id).then(function(res){
+				UserSettingsFactory.addTags(vm.tags, $stateParams.id).then(function(res){
+					console.log('saved tags')
+				})
+			})
+			
+		}
+		//////////// MAP functions
 		vm.openMap = function(){
 			vm.distanceSet = angular.copy(vm.distance)
-			// MapFactory.getMap()
+			// UserSettingsFactory.getMap()
 			vm.mapStatus = true;
-			MapFactory.getLocation().then(function(res){ // gets current location
+			UserSettingsFactory.getLocation().then(function(res){ // gets current location
 				console.log(res)
 				vm.currentLocation.lat = res.location.lat
 				vm.currentLocation.lng = res.location.lng
@@ -82,7 +123,7 @@
 			console.log(vm.homeLocation)
 			var id = $stateParams.id
 
-			MapFactory.addHomeLocation(vm.homeLocation, id).then(function(res){
+			UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res){
 				vm.hlAdded = true;
 				console.log('added homeLocation to UserModel')
 			})
