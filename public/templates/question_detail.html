@@ -38,9 +38,9 @@
 				<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
 
 				<br>
-				
+
 				<!-- <h5 ng-show="vm.errorMessage" style="color: red;">Sorry! You can not submit an empty answer.</h5> -->
-				<button class="btn btn-defualt" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
+				<button class="btn btn-primary" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
 					Submit Answer
 				</button>
 			</form>
@@ -55,13 +55,19 @@
 		</div>
 		<!-- {{vm.question.answers}} -->
 		<div class="well" ng-repeat="a in vm.question.answers">
-			{{a.answerBody}}
+			<p>{{a.answerBody}}</p>
+			<p>{{a.postedBy}}</p>
+			<div ng-if="vm.status.id === vm.question.postedBy">
+				<div ng-controller="MessageController as message">
+						<md-button class="md-primary md-raised">Message</md-button>
+				</div>
+			</div>
 			<span ng-if="vm.status.id === vm.question.postedBy">
-				<button class="btn btn-warning btn-xs">Edit</button>
-				<button class="btn btn-danger btn-xs" ng-click="deleteAnswer()">Delete</button>
+				<button class="btn btn-warning btn-sm">Edit</button>
+				<button class="btn btn-danger btn-sm" ng-click="deleteAnswer()">Delete</button>
 			</span>
 		</div>
-	
+
 	</div>
 
 	<br>
