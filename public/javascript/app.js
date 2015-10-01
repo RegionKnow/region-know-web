@@ -19,7 +19,9 @@
 			controllerAs: 'nav'
 		}).state('QuestionsFeed',{
 			url: '/questionsFeed',
-			templateUrl: 'templates/questionsFeed.html'
+			templateUrl: 'templates/questionsFeed.html',
+			controller: 'CreateQuestionController',
+			controllerAs: 'vm'
 		}).state('updateProfile',{
 			url: '/updateProfile',
 			controller: 'UserProfileController',
