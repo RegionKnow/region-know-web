@@ -47,6 +47,15 @@ router.get("/:userId", function(req, res){
 	res.send(req.user);
 });
 
+router.post('/location/:userId', function(req, res){
+	console.log(req.body)
+	User.update({_id: req.user._id}, req.body, function(err, response){
+
+		console.log(response)
+		res.send()
+	})
+	
+})
 //----------GETTING USER AND USERS-----------------------------------------------
 
 
