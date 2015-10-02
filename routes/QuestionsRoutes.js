@@ -14,6 +14,14 @@ router.param('id', function(req, res, next){
 		if(err) return res.status(500).send({err: "Error finding question"});
 		if(!response) return res.status(400).send({err: "Error getting from the mongodb"});
 		req.question = response
+		console.log(req.question)
+		next();
+	})
+})
+
+router.param('user_id', function(req, res, next){
+	User.findOne({_id: req.params.user_id}, function(err, response){
+		req.user = response;
 		next();
 	})
 })
@@ -30,7 +38,8 @@ router.post('/create', function(req, res){
 		User.update({_id: user_id }, {$push: { questions: {_id: response._id} } }, function(err, user){
 			console.log('saved question reference in user Model')
 		})
-		res.send()
+		console.log(response._id)
+		res.send(response._id)
 	})
 
 })
@@ -44,14 +53,16 @@ router.post('/:id', function(req, res){
 	})
 })
 
-router.get('/', function(req, res){
+ // funciton to get all questions by tag filters and Location!
+router.get('/allquestions/:user_id', function(req, res){
+	console.log(req.user)
 	Questions.find({}, function(err, response){
 		res.send(response);
 	})
 })
 
 router.get('/:id', function(req, res){
-	// console.log('this is the id ' + req.question)
+	console.log('this is the id ' + req.question)
 	res.send(req.question)
 })
 
@@ -69,6 +80,15 @@ router.post('/edit/:id', function(req, res){
 		res.send(response)
 	})
 
+})
+
+router.post('/tags/:id', function(req, res){
+	for(var i =0; i < req.body.length; i++){
+		Questions.update({_id: req.question._id}, {$push: {tags: req.body[i]}}, function(err, response){
+			res.send();
+		})
+	}
+	
 })
 
 module.exports = router;

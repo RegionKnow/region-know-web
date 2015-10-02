@@ -37,10 +37,19 @@
 			console.log(vm.showInput)
 		}
 		vm.addTag = function(tag){
+			vm.tagError = false;
 			if(tag == ""){
 				return 
 			}
-			vm.tags.push(tag)
+			var split_tag = tag.split('')
+			console.log(split_tag)
+			for(var k= 0; k< split_tag.length; k++){
+				if(split_tag[k] == ' '){
+					vm.tagError = true;
+					return
+				}
+			}
+			vm.tags.push(tag.toLowerCase());
 			vm.tag = ""
 		}
 		vm.deleteTag = function(index){
@@ -48,9 +57,9 @@
 		}
 
 		vm.saveTags = function(){
-			if(vm.tags.length === 0){
-				return
-			}
+			// if(vm.tags.length === 0){
+			// 	return
+			// }
 			UserSettingsFactory.removeTags($stateParams.id).then(function(res){
 				UserSettingsFactory.addTags(vm.tags, $stateParams.id).then(function(res){
 					console.log('saved tags')
