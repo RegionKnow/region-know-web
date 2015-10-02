@@ -21,10 +21,11 @@
 
 			alert('no question found')
 		}else{
-
+			console.log($stateParams.id)
 			QuestionFactory.findQuestion($stateParams.id).then(function(res){
 
 				vm.question = res
+				console.log(vm.question)
 
 			})
 		}

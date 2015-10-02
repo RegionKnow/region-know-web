@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
 	deactivatedDate: Date,
 	lat: Number,
 	lng: Number,
-	// tags: [{type: String}],
+	tags: [{type: String}],
 	radius: Number,
 	generalPoints: Number,
 	knowledgePoints: Number,
