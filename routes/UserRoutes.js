@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var passport = require('passport'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
-
+var uuid = require('uuid');
 
 
 //---------GETTING ID OF USER AND FINDING THAT SPECIFIC USER-------------------------
@@ -12,7 +12,7 @@ router.param('userId', function(req, res, next, userId){
 	req.userId = req.params.userId;
 	User.findOne({_id:req.userId})
 	.exec(function (err, user) {
-		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(err) return res.status(500).send({err: "Error inside the server. UserId"});
 		if(!user) return res.status(400).send({err: "That user does not exist"});
 		req.user = user;
 		next();
@@ -27,7 +27,7 @@ router.param('Profile', function(req, res, next, Profile){
 	console.log("Hey line 27");
 	User.update({ _id : req.Profile}, {deactivated: true})
 	.exec(function (err, user) {
-		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(err) return res.status(500).send({err: "Error inside the server. Profile"});
 		if(!Profile) return res.status(400).send({err: "That user does not exist"});
 		console.log("deleted");
 		next();
@@ -42,7 +42,7 @@ router.param('updateProfile', function(req, res, next, updateProfile){
 	User.update({ _id: req.updateProfile},  req.body)
 	//console.log(req);
 	.exec(function (err, user) {
-		if(err) return res.status(500).send({err: "Error inside the server."});
+		if(err) return res.status(500).send({err: "Error inside the server. UpdateProfile"});
 		if(!updateProfile) return res.status(400).send({err: "That user does not exist"});
 		// console.log("updated");
 		next();
@@ -72,6 +72,27 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 		res.send({token: user.generateJWT()}); //generating a token when there is a user in the collection.
 	})(req, res, next);
 });
+
+router.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+router.get('/auth/google',
+  passport.authenticate('google'));
+
+router.get('/auth/google/return',
+  passport.authenticate('google', { failureRedirect: '/kdcjcskdnckdsckds' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 
 
