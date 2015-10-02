@@ -1,9 +1,11 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; //It's requiring the passport for our local database authentication.
 var FacebookStrategy = require('passport-facebook').Strategy; //It's requiring the passport for our local database authentication.
-var GoogleStrategy = require('passport-google').Strategy; //It's requiring the passport for our local database authentication.
+var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;; //It's requiring the passport for our local database authentication.
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+
+
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -30,24 +32,46 @@ passport.use(new LocalStrategy(function(username, password, done) { //This passw
 }));
 
 passport.use(new FacebookStrategy({
-    clientID: 755751737864267,
+    clientID: '755751737864267',
     clientSecret: '52a091ce024ba14be912204cf3dd17bc',
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
-    enableProof: false
+    callbackURL: "http://localhost:3000/api/user/auth/facebook/callback",
+    passReqToCallback: true,
+    profileFields: ['id', 'name', 'emails', 'photos']
   },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return done(err, user);
+  function(req, accessToken, refreshToken, profile, done) {
+    User.findOne({ facebookId: profile.id }, function (err, user) {
+      if(err) return done(err, null);
+      if(user) {
+          console.log("Current User, Logging In");
+          return done(null, user);
+      } else {
+          console.log("New User, Registering and Logging In");
+          var userModel = new User();
+          if(profile.emails) {
+              userModel.email = profile.emails[0].value;
+          } else {
+              userModel.email = profile.username + "@facebook.com";
+          }
+          userModel.facebookId = profile.id;
+          userModel.displayName = profile.name.givenName + " " + profile.name.familyName;
+          userModel.save(function(err, userSaved) {
+              if(err) {
+                  return err;
+              }
+              return done(err, userSaved);
+          })
+      }
     });
   }
 ));
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/auth/google/return',
-    realm: 'http://localhost:3000/'
+    consumerKey: '484030355290-9jal1apd50jqrvla3hdi8ml4r25h8n48.apps.googleusercontent.com',
+    consumerSecret: 'jC0gn7QTj2gdEVaKMuHHR3ot',
+    callbackURL: "http://localhost:3000/api/user/auth/google/callback"
   },
-  function(identifier, done) {
-    User.findByOpenID({ openId: identifier }, function (err, user) {
+  function(token, tokenSecret, profile, done) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
   }
