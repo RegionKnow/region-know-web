@@ -1,24 +1,49 @@
-<div class="row text-center introFeatures">
+<div class="row introFeatures">
 
 	<div class="col-md-2"></div>
 
-	<div class="col-md-8 well">
-		<input placeholder="Search questions here..." ng-model="vm.search" />
+	<div class="col-md-8">
+
+		
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+			
+			<label class="mdl-button mdl-js-button mdl-button--icon" for="expando1">
+				<i class="material-icons">search</i>
+			</label>
+
+			<div class="mdl-textfield__expandable-holder">
+				<input type="text" class="mdl-textfield__input" id="expando1" ng-model="vm.search"/>
+				<label class="mdl-textfield__label" for="expando1">Search questions here...</label>
+			</div>
+			
+		</div>
+
+
+		<br>
 		Questions Auto Filterd By tags In settings
-		<br><br>
+		<br>
 
 		<div ng-show="vm.status">
-		<a ui-sref="CreateQuestion"><button class="btn btn-warning">New Question</button></a>
+			<a ui-sref="CreateQuestion"><button class="btn btn-warning">New Question</button></a>
 		</div>
 		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
-				<div class="well">
-			{{q.questionBody}}
-			</div></a>
-			
+				
+				<div class="mdl-card mdl-shadow--4dp qCards">
+
+					<div class="mdl-card__supporting-text">
+						<i class="material-icons qIcon">help_outline</i>&nbsp;{{q.questionBody}}
+
+					</div>
+				</div>
+
+			</a>
+
 		</div>
 	</div>
 
 	<div class="col-md-2"></div>
 
 </div>
+
+
