@@ -1,9 +1,17 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
+	<span class="well">
+		Filter Questions Feed By Tags
+		<button ng-click="vm.filterOff()"><span style="color:red;">Off</span></button>
+		<button ng-click="vm.filterOn()"><span style="color:green;">On</span></button>
+		<span></span>
+	</span>
+	<br><br>
+
 	<div class="well">
 		<span>Your Current Tags
 			<button ng-click="vm.saveTags()" class="btn btn-success btn-md" id="tagSave">Save</button>
-			<br>
+			<br><br>
 			<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
 
 				<span class="" ng-repeat="tag in vm.tags track by $index">
