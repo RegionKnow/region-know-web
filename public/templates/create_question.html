@@ -2,42 +2,48 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
 	<div class="well">
+
 		<span><center><h3>Add Tags to your Question</h3></center>
 			<br>
-			<div class="tagDiv" style="background-color: #FFFFFF;" ng-click="vm.showTagInput()">
-				<br>
-				<span class="" ng-repeat="t in vm.tags track by $index">
+			<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
+
+				<span class="" ng-repeat="tag in vm.tags track by $index">
 
 					<div class="indvTag">
-						{{t}}   
+						{{tag}}
 						<div ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
 						</div>
 					</div>
+					&nbsp;
 				</span>
 
 			</div>
 
+
 		</span>
-		<br>
-		<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
-			<input class="form-control" ng-model="vm.tag">
-		</form>
-		<span ng-show="vm.tagError">Cannot Submit tag with Spaces</span>
 
 	</div>
-	<form ng-submit="vm.createQ()">
 
-		<input class="form-control" placeholder="desc of question" ng-model="vm.desc">
+</span>
+<br>
+<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
+	<input class="form-control" ng-model="vm.tag">
+</form>
+<span ng-show="vm.tagError">Cannot Submit tag with Spaces</span>
 
-		<br>
+</div>
+<form ng-submit="vm.createQ()">
 
-		<br>
-		<center>
-			<button class="btn btn-lg" type="submit">Submit</button>
-		</center>
+	<input class="form-control" placeholder="desc of question" ng-model="vm.desc">
 
-	</form>
-	
+	<br>
+
+	<br>
+	<center>
+		<button class="btn btn-lg" type="submit">Submit</button>
+	</center>
+
+</form>
+
 </div>
 <div class="col-md-2"></div>
-
