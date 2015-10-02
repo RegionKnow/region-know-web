@@ -1,15 +1,22 @@
 <div class="container-fluid">
 	<div class="row">
-		
+
 		<div class="col-md-2"></div>
 		<div class="col-md-8 row text-center well">
 
 			<div>
 				<h3>RegionKnow</h3>
-				<a ui-sref="Login"><md-button class="md-raised md-primary" ng-click="">Login</md-button></a>
-				<a ui-sref="Register"><md-button class="md-raised md-primary" ng-click="">Register</md-button></a>
+				<a ui-sref="Login">
+					<md-button class="md-raised md-primary" ng-click="">Login</md-button>
+				</a>
+				<a ui-sref="Register">
+					<md-button class="md-raised md-primary" ng-click="">Register</md-button>
+				</a>
 			</div>
-
+			<div class="col-md-offset-5 col-md-2">
+				<md-button href="api/user/auth/facebook" style="background-color: #46629E" class="md-primary md-raised btn-block">Login with FB</md-button>
+			<md-button href="api/user/auth/google" style="background-color: #DC4B3E" class="md-primary md-raised btn-block">Login with Google</md-button>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 
