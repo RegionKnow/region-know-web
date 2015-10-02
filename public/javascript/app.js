@@ -52,6 +52,15 @@
 			templateUrl: 'templates/user_settings.html',
 			controller: 'UserSettingsController',
 			controllerAs: 'vm'
+		}).state("FBAuth", {
+			url: '/auth/token/:token',
+			template: "<h1>Authenticating</h1>",
+			controller: ['$rootScope', "$stateParams", '$state','UserFactory', function ($rootScope, $stateParams, $state, UF) {
+				var vm = this;
+				localStorage.setItem("token", $stateParams.token);
+				UF.setLoggedinUserToRootScope();
+				$state.go("QuestionsFeed");
+			}]
 		});
 
 		$urlRouterProvider.otherwise('/');

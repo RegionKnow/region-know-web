@@ -1,10 +1,12 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 var port = process.env.PORT || 3000;
 var passport = require('passport');
+var uuid = require('uuid');
 
 //----------------------------Basic require for mongodb---------------------------------------------
 require('./Models/AnswerModel.js');
@@ -35,6 +37,19 @@ app.set('view engine', 'html');
 app.set('view options', {
 	layout: false
 });
+var newSessionID = uuid();
+
+app.use(session({
+  genid: function(req) {
+    return newSessionID; // use UUIDs for session IDs
+  },
+  secret: 'regionknow_secret'
+}))
+ // Initialize Passport!  Also use passport.session() middleware, to support
+ // persistent login sessions (recommended).
+ app.use(passport.initialize());
+ app.use(passport.session());
+
 
 //middleware that allows for us to parse JSON and UTF-8 from the body of an HTTP request
 app.use(bodyParser.urlencoded({
