@@ -8,6 +8,22 @@
 	function UserSettingsFactory($http, $q) {
 		var o = {};
 
+		o.filterOn = function(id){
+			var q = $q.defer();
+			$http.post('/api/user/filterOn/' + id).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
+
+		o.filterOff = function(id){
+			var q = $q.defer();
+			$http.post('/api/user/filterOff/' + id).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
+
 		o.addTags = function(tags, id){
 			console.log(tags, id)
 			var q = $q.defer();
@@ -16,6 +32,7 @@
 			})
 			return q.promise;
 		}
+
 		o.removeTags = function(id){
 			var q = $q.defer();
 			$http.delete('/api/user/tags/' + id).success(function(res){
@@ -23,6 +40,7 @@
 			})
 			return q.promise;
 		}
+
 		o.getTags = function(id){
 			var q = $q.defer();
 			$http.get('/api/user/tags/' + id).success(function(res){
@@ -41,6 +59,7 @@
 			})
 			return q.promise;
 		}
+
 		o.addHomeLocation = function(hl, id){
 			var q = $q.defer();
 			console.log(hl, id)
@@ -49,6 +68,7 @@
 			})
 			return q.promise;
 		}
+
 		return o;
 	}
 })();
