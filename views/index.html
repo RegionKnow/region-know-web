@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="app">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <head>
 	<title>RegionKnow</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
@@ -37,9 +42,9 @@
 
 
 
-				<a><md-divider ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</md-divider></a>
-				<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
-				<a ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Home</md-divider></a>
+			<a><md-divider ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</md-divider></a>
+			<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
+			<a ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Home</md-divider></a>
 				<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
 				<a ng-show="!nav.status" ui-sref="Login" ng-click="!nav.close()"><md-divider>Login</md-divider></a>
