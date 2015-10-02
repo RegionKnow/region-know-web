@@ -4,19 +4,20 @@
 	<div class="well">
 				<span><center><h3>Add Tags to your Question</h3></center>
 					<br>
-					<div class="tagDiv" style="background-color: #FFFFFF;" ng-click="vm.showTagInput()">
-						<br>
-						<span class="" ng-repeat="t in vm.tags track by $index">
+					<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
+
+						<span class="" ng-repeat="tag in vm.tags track by $index">
 
 							<div class="indvTag">
-								{{t}}   
+								{{tag}}
 								<div ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
 								</div>
 							</div>
+							&nbsp;
 						</span>
-						 
+
 					</div>
-					
+
 				</span>
 				<br>
 				<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
@@ -37,7 +38,6 @@
 		</center>
 
 	</form>
-	
+
 </div>
 <div class="col-md-2"></div>
-
