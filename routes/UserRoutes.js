@@ -24,12 +24,12 @@ router.param('userId', function(req, res, next, userId){
 
 router.param('Profile', function(req, res, next, Profile){
 	req.Profile = Profile;
-	console.log("Hey line 27");
+	// console.log("Hey line 27");
 	User.update({ _id : req.Profile}, {deactivated: true})
 	.exec(function (err, user) {
 		if(err) return res.status(500).send({err: "Error inside the server."});
 		if(!Profile) return res.status(400).send({err: "That user does not exist"});
-		console.log("deleted");
+		// console.log("deleted");
 		next();
 	});
 
@@ -88,10 +88,10 @@ router.post("/:updateProfile", function(req, res){
 });
 
 router.post('/location/:userId', function(req, res){
-	console.log(req.body);
+	// console.log(req.body);
 	User.update({_id: req.user._id}, req.body, function(err, response){
 
-		console.log(response)
+		// console.log(response)
 		res.send()
 	})
 
@@ -117,15 +117,29 @@ router.get('/tags/:userId', function(req, res){
 	})
 })
 
+
 router.delete('/tags/:userId', function(req, res){
 	User.update({_id: req.user._id}, {tags: []}, function(err, response){
-		console.log(response)
+		// console.log(response)
 		res.send(response.tags)
 	})
 
 })
-//----------GETTING USER AND USERS-----------------------------------------------
+//----------TURNING USER SETTINGS FILTERS ON/OFF-----------------------------------------------
 
+router.post('/filterOn/:userId', function(req, res){
+	User.update({_id: req.user._id}, {filter: true}, function(err, response){
+		console.log('truned filter on')
+		res.send(response)
+	})
+})
+
+router.post('/filterOff/:userId', function(req, res){
+	User.update({_id: req.user._id}, {filter: false}, function(err, response){
+		console.log('truned filter off')
+		res.send(response)
+	})
+})
 
 
 module.exports = router;
