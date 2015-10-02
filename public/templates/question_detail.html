@@ -9,12 +9,12 @@
 
 			<br>
 
-			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Options</button>
+			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
 
 			<span ng-if="vm.options">
-					<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
-					<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
-					<button class="btn btn-default btn-xs" ng-click="vm.hideOptions()" >close</button>
+				<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
+				<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
+				<button class="btn btn-default btn-xs" ng-click="vm.hideOptions()" >close</button>
 			</span>
 
 			<br>
@@ -53,20 +53,28 @@
 			</div>
 
 		</div>
-		<!-- {{vm.question.answers}} -->
-		<div class="well" ng-repeat="a in vm.question.answers">
+
+		
+		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers">
+
 			<p>{{a.answerBody}}</p>
 			<p>{{a.postedBy}}</p>
-			<div ng-if="vm.status.id === vm.question.postedBy">
-				<div ng-controller="MessageController as message">
-						<md-button class="md-primary md-raised">Message</md-button>
+			<div class="text-right">
+				<div ng-if="vm.status.id === vm.question.postedBy">
+					<div ng-controller="MessageController as message">
+						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
+					</div>
+				</div>
+				<div ng-if="vm.status.id === vm.question.postedBy">
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">edit</i></md-button>
+
+				</div>
+				<div ng-if="vm.status.id === vm.question.postedBy">	
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
 				</div>
 			</div>
-			<span ng-if="vm.status.id === vm.question.postedBy">
-				<button class="btn btn-warning btn-sm">Edit</button>
-				<button class="btn btn-danger btn-sm" ng-click="deleteAnswer()">Delete</button>
-			</span>
 		</div>
+
 
 	</div>
 
