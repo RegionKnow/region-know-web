@@ -1,9 +1,9 @@
 (function() {
-	'use strict';
-	angular.module('app')
-	.controller('CreateQuestionController', CreateQuestionController);
+  'use strict';
+  angular.module('app')
+    .controller('CreateQuestionController', CreateQuestionController);
 
-	CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope'];
+  CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope'];
 
 	function CreateQuestionController($state, QuestionFactory, $rootScope) {
 		var vm = this;

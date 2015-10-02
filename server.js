@@ -66,10 +66,16 @@ app.use('/api/user', userRoutes);
 app.use('/api/convo', conversationRoutes);
 
 app.use('/api/question', questionRoutes);
-app.use('/api/answer', answerRoutes)
+app.use('/api/answer', answerRoutes);
+
+
+app.use('/', function (req, res) {
+	res.render('404');
+})
 
 //----------------APP IS LISTENING-----------------------------------------------------------
 var server = app.listen(port, function() {
 	var host = server.address().address;
-	console.log('Example app listening at http://localhost:' + port);
+	var x = new Date();
+	console.log('Example app listening at http://localhost: %s.\nStarted at %s', port, x.toLocaleString());
 });
