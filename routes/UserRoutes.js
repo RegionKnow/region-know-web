@@ -28,23 +28,18 @@ router.param('userId', function(req, res, next, userId) {
 
 //---------Deleteng USER-------------------------
 
-router.param('Profile', function(req, res, next, Profile) {
-  req.Profile = Profile;
 
-  User.update({
-      _id: req.Profile
-    }, {
-      deactivated: true
-    })
-    .exec(function(err, user) {
-      if (err) return res.status(500).send({
-        err: "Error inside the server. Profile"
-      });
-      if (!Profile) return res.status(400).send({
-        err: "That user does not exist"
-      });;
-      next();
-    });
+router.param('Profile', function(req, res, next, Profile){
+	req.Profile = Profile;
+	// console.log("Hey line 27");
+	User.update({ _id : req.Profile}, {deactivated: true})
+	.exec(function (err, user) {
+		if(err) return res.status(500).send({err: "Error inside the server. Profile"});
+		if(!Profile) return res.status(400).send({err: "That user does not exist"});
+		// console.log("deleted");
+		next();
+	});
+
 
 });
 //---------Update USER-------------------------
@@ -146,6 +141,7 @@ router.post("/:updateProfile", function(req, res) {
   res.send();
 });
 
+
 router.post('/location/:userId', function(req, res) {
 
   User.update({
@@ -177,6 +173,7 @@ router.post('/tags/:userId', function(req, res) {
   res.send()
 })
 
+
 router.get('/tags/:userId', function(req, res) {
   User.findOne({
     _id: req.user._id
@@ -198,6 +195,24 @@ router.delete('/tags/:userId', function(req, res) {
   })
   //----------GETTING USER AND USERS-----------------------------------------------
 
+
+
+//----------TURNING USER SETTINGS FILTERS ON/OFF-----------------------------------------------
+
+
+router.post('/filterOn/:userId', function(req, res){
+	User.update({_id: req.user._id}, {filter: true}, function(err, response){
+		console.log('truned filter on')
+		res.send(response)
+	})
+})
+
+router.post('/filterOff/:userId', function(req, res){
+	User.update({_id: req.user._id}, {filter: false}, function(err, response){
+		console.log('truned filter off')
+		res.send(response)
+	})
+})
 
 
 module.exports = router;

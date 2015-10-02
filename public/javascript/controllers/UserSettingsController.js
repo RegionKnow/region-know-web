@@ -7,23 +7,31 @@
 
 	function UserSettingsController($http, $stateParams, UserSettingsFactory) {
 		var vm = this;
-		console.log($stateParams)
-		vm.tag = ""
-		// vm.tags = [];
-		getTags(); // gets all tags when user loads settings
-		vm.homeLocation = {};
-		vm.currentLocation = {};
-		var counter = 0
-		// vm.distance = 0;
-		vm.infoWindow = new google.maps.InfoWindow();
-		//funciton to get miles
-		function getMeters(miles) {
-		     return miles*1609.344;
+
+		vm.userId = $stateParams.id // current user Id
+		//FUNCTIONS to change Filter Question Settings
+		
+		vm.filterOn = function(){
+			UserSettingsFactory.filterOn(vm.userId).then(function(res){
+				console.log('filter Question is On');
+			})
+		}
+		vm.filterOff = function(){
+			UserSettingsFactory.filterOff(vm.userId).then(function(res){
+				console.log('filter Question is Off');
+			})
 		}
 
+
+
 		//////FUNCTIONS to deal with Tags
+
+		getTags(); // gets all tags when user loads settings
+		vm.tag = ""
+		var counter = 0
+
 		function getTags(){
-			UserSettingsFactory.getTags($stateParams.id).then(function(res){
+			UserSettingsFactory.getTags(vm.userId).then(function(res){
 				vm.tags = res
 				console.log(vm.tags)
 			})
@@ -60,14 +68,24 @@
 			// if(vm.tags.length === 0){
 			// 	return
 			// }
-			UserSettingsFactory.removeTags($stateParams.id).then(function(res){
-				UserSettingsFactory.addTags(vm.tags, $stateParams.id).then(function(res){
+			UserSettingsFactory.removeTags(vm.userId).then(function(res){
+				UserSettingsFactory.addTags(vm.tags, vm.userId).then(function(res){
 					console.log('saved tags')
 				})
 			})
 			
 		}
 		//////////// MAP functions
+		vm.homeLocation = {};
+
+		vm.currentLocation = {};
+
+		vm.infoWindow = new google.maps.InfoWindow();
+
+		function getMeters(miles) {
+		     return miles*1609.344;
+		}
+		
 		vm.openMap = function(){
 			vm.distanceSet = angular.copy(vm.distance)
 			// UserSettingsFactory.getMap()
@@ -130,7 +148,7 @@
 			getCircle(); 
 			vm.homeLocation.radius = vm.distance
 			console.log(vm.homeLocation)
-			var id = $stateParams.id
+			var id = vm.userId
 
 			UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res){
 				vm.hlAdded = true;

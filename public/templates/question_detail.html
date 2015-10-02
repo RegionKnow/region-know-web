@@ -6,7 +6,7 @@
 		<div>
 			
 			<h1>{{vm.question.questionBody}}</h1>
-
+			<h6>{{vm.question.tags}}</h6>
 			<br>
 
 			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
