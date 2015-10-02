@@ -11,6 +11,7 @@ var User = mongoose.model('User');
 router.post('/', function(req, res) {
   var newAnswer = new Answers(req.body)
   var user_id = req.body.user_id;
+  console.log(newAnswer, user_id)
   newAnswer.postedBy = user_id;
   newAnswer.save(function(err, resultOfAnswerSave) { // saves the new answer to AnswerModel
     if (err) {

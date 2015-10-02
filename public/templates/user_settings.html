@@ -1,6 +1,35 @@
 <div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="well">
+				<span>Your Current Tags  <button ng-click="vm.saveTags()"class="btn btn-success btn-md" id="tagSave">      Save       </button>
+					<br>
+					<div class="tagDiv" style="background-color: #FFFFFF;" ng-click="vm.showTagInput()">
+						<br>
+						<span class="" ng-repeat="t in vm.tags track by $index">
+
+							<div class="indvTag">
+								{{t}}   
+								<div ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+								</div>
+							</div>
+						</span>
+						 
+					</div>
+					
+				</span>
+				<br>
+				<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
+					<input class="form-control" ng-model="vm.tag">
+				</form>
+				<span ng-show="vm.tagError">Cannot Submit tag with Spaces</span>
+
+			</div>
+
+			<br>
+
+			<br>
+
+			<div class="well">
 				<h3>Your home location is the place you know best and love.<h3>
 				<span>
 					<button class="btn btn-primary btn-sm" ng-click="vm.openMap()">Set Home Location</button> 
@@ -23,5 +52,6 @@
 				<div ng-show="vm.mapStatus" id="map"></div><br>
 				<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()">Submit Home Location</button>
 			</div>
+		
 		</div>
 <div class="col-md-2"></div>

@@ -96,6 +96,34 @@ router.post('/location/:userId', function(req, res){
 	})
 
 })
+
+router.post('/tags/:userId', function(req, res){
+	console.log(req.body);
+	var tags = req.body
+	// for(var k = 0; k < req.body.length; k ++){
+	// 	console.log(req.body[k])
+	// }
+	for(var i=0 ; i < req.body.length; i++){
+		User.update({_id: req.user._id}, {$push: {tags : req.body[i]}}, function(err, response){
+			// console.log(response);
+		})
+	}
+	res.send()
+})
+
+router.get('/tags/:userId', function(req, res){
+	User.findOne({_id: req.user._id}, function(err, response){
+		res.send(response.tags);
+	})
+})
+
+router.delete('/tags/:userId', function(req, res){
+	User.update({_id: req.user._id}, {tags: []}, function(err, response){
+		console.log(response)
+		res.send(response.tags)
+	})
+
+})
 //----------GETTING USER AND USERS-----------------------------------------------
 
 

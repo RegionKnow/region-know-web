@@ -13,6 +13,7 @@ var QuestionSchema = new mongoose.Schema({
 		lat: Number,
 		lng: Number
 	},
+	tags: [{type: String}],
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
 	comments: [{
