@@ -17,14 +17,46 @@ body {
   height: 200px;
 }
 
-/*#tagSave{
-	margin-left: 100%;
+.md-primary {
+  color: white;
+  background-color: #26a69a;
+}
 
-	}*/
+/*================NAVIGATION STYLES==========================================*/
+#navBar {
+  font-size: 1.3em;
+  height: 100%;
+  margin: auto;
+}
+
+#navBar a {
+  width: 100%;
+  display: inline-block;
+  height: 
+}
+
+
+#userInfo{
+  height: 36%;
+  text-align: center;
+  margin: auto;
+  background-color: #26a69a;
+}
+
+.topNav {
+  height: 60px;
+  box-shadow: 1px 1px 9px #333;
+  margin-bottom: 3em;
+}
+
+#naviBars {
+  color: #26a69a;
+  margin-top: .3em;
+}
+/*================TAG STYLES==========================================*/
 
 .tagDiv {
   border-radius: 10px;
-  /*height: 30px;*/
 }
 .indvTag {
   border-width: 3px;
