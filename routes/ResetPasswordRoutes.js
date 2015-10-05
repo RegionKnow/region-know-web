@@ -8,12 +8,13 @@ var nodemailer = require('nodemailer');
 // var env = require('../env');
 
 var transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  service: 'gmail',
   auth: {
     user: 'regionknow@gmail.com',
     pass: 'codercamps'
   }
 });
+
 
 //Send email function
 function SendEmail(email, resObj) {
@@ -54,13 +55,13 @@ router.post("/", function(req, res) {
     if (error) return res.status(500).send({
       err: "Something happened on the server,"
     });
-    if (!user) return res.status(404).send({
-      err: "That user doesn't exist"
-    });
-    else {
-      SendEmail(user.email, res);
-    }
-  })
+      if (!user) return res.status(404).send({
+        err: "That user doesn't exist"
+      });
+        else {
+          SendEmail(user.email, res);
+        }
+      })
 })
 
 
