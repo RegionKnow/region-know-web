@@ -108,21 +108,21 @@
       var output = str.replace(/-/g, '+').replace(/_/g, '/');
       switch (output.length % 4) {
         case 0:
-          {
-            break;
-          }
+        {
+          break;
+        }
         case 2:
-          {
-            output += '==';
-            break;
-          }
+        {
+          output += '==';
+          break;
+        }
         case 3:
-          {
-            output += '=';
-            break;
-          }
+        {
+          output += '=';
+          break;
+        }
         default:
-          throw 'Illegal base64url string'
+        throw 'Illegal base64url string'
       }
       return decodeURIComponent(escape($window.atob(output)));
     }

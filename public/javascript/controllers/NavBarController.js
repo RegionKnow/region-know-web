@@ -38,7 +38,7 @@
 	};
 
 	vm.loginUser = function() {
-		UserFactory.loginUser(vm.user).then(function(){
+		UserFactory.loginUser(vm.user).then(function(res){
 
 			vm.status = $rootScope._user;
 			console.log(vm.status);
