@@ -2,9 +2,10 @@
   'use strict';
   angular.module('app', ['ui.router', 'ngMaterial'])
     .config(Config);
-  Config.$inject = ['$stateProvider', '$urlRouterProvider'];
+  Config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
-  function Config($stateProvider, $urlRouterProvider) {
+  function Config($stateProvider, $urlRouterProvider, $httpProvider) {
+
     $stateProvider.state('Home', {
         url: '/',
         templateUrl: 'templates/home.html'

@@ -1,12 +1,14 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
+
 	<span class="well">
 		Filter Questions Feed By Tags
 		<button ng-click="vm.filterOff()"><span style="color:red;">Off</span></button>
 		<button ng-click="vm.filterOn()"><span style="color:green;">On</span></button>
-		<span></span>
+		<span ng-show="vm.CUI.filter">Filter is On!</span>
+		<span ng-show="!vm.CUI.filter">Filter is Off!</span>
 	</span>
-	<br><br>
+	<br><br><br>
 
 	<div class="well">
 		<span>Your Current Tags
@@ -35,18 +37,18 @@
 
 	</div>
 
-	<br>
 
-	<br>
 
 	<div class="well">
 		<h3>Your home location is the place you know best and love.
 			<h3>
 				<span>
-					<button class="btn btn-primary btn-sm" ng-click="vm.openMap()">Set Home Location</button>
-					<select class="form-control" ng-model='vm.distance' id="settingsRadius">
+					<center>
+						<button type="submit" ng-show="!vm.mapStatus" class="btn btn-primary btn-lg" ng-click="vm.openMap()" >Set Home Location</button>
+					</center>
+					<select ng-show="vm.mapStatus" class="form-control" ng-model='vm.distance' id="settingsRadius" >
 						<option ng-selected="true">Select Radius</option>
-						<option value='1'>1 Mile</option>
+						<option value='1' >1 Mile</option>
 						<option value='2'>2 Miles</option>
 						<option value='3'>3 Miles</option>
 						<option value='4'>4 Miles</option>
@@ -57,13 +59,16 @@
 						<option value='9'>9 Miles</option>
 						<option value='10'>10 Miles</option>
 					</select>
+					<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()" ng-disabled="!vm.distance">Submit Home Location</button>
+					
+					<input ng-show="vm.mapStatus" class="form-control" id="searchLoc" placeholder="search Location" ng-model="vm.searchLoc"> <button ng-show="vm.mapStatus" ng-click="vm.searchLocation()" class="btn btn-primary btn-sm">Search</button>
 				</span>
-				<br>
-				<button ng-show="!vm.mapStatus" class="btn btn-default btn-sm">Current Home Location</button>
-				<br>
+				<br><br>
+
 				<div ng-show="vm.mapStatus" id="map"></div>
-				<br>
-				<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()">Submit Home Location</button>
+				<br><center>
+				<button ng-show="vm.mapStatus" class="btn btn-warning btn-sm" ng-click="vm.closeMap()">Cancle</button></center>
+			
 	</div>
 
 </div>

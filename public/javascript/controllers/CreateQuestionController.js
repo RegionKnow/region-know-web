@@ -9,23 +9,12 @@
 		var vm = this;
 		
 		vm.status = $rootScope._user
-		// console.log(vm.status)
-		
-
-		console.log(vm.filter)
 
 		vm.getQuestions = function(){
 
 			QuestionFactory.findQuestions(vm.status.id).then(function(res){
 				console.log(res)
-				// if(res.user.filter){
-				// 	// var usertags = res.user.tags
-				// 	// var questiontags = res.questions.tags
-				// 	// for()
-				// 	//filter by tags and locaiton
-				// }else{
-				// 	//filter by location
-				// }
+
 				vm.allquestions = res
 			})
 		}
@@ -46,20 +35,31 @@
 				QuestionFactory.getLocation().then(function(res){
 					console.log(res)
 					//setting lng and lat if user has not selected it
-					vm.question.lat = res.location.lat; 
-					vm.question.lng = res.location.lng;
-
-					console.log(vm.question)
-					console.log('creating quesiton');
+					console.log('getting location')
+					
+						vm.question.lat = res.location.lat; 
+						vm.question.lng = res.location.lng;
+					
+					// console.log(vm.question)
+					// console.log('creating quesiton');
 					QuestionFactory.createQuestion(vm.question).then(function(res){
 						console.log(res)
 						vm.saveTags(res);
-						
-						delete vm.question // deleting question object
-						delete vm.desc // deleting question in html
-						$state.go('QuestionsFeed')
+							delete vm.question // deleting question object
+							delete vm.desc // deleting question in html
+							$state.go('QuestionsFeed')
 					})
 				})
+			}else{ //skips api call to find location
+				console.log('skipped getting locaiton')
+					QuestionFactory.createQuestion(vm.question).then(function(res){
+							console.log(res)
+							vm.saveTags(res);
+								delete vm.question // deleting question object
+								delete vm.desc // deleting question in html
+								$state.go('QuestionsFeed')
+						})
+
 			}
 			
 		}
@@ -102,7 +102,46 @@
 		vm.saveTags = function(question_id){
 				QuestionFactory.addTags(vm.tags, question_id).then(function(res){
 					console.log('saved tags')
+					QuestionFactory.sendAlerts(question_id).then(function(res){
+						console.log('lookng to send alerts')
+					})
 				})		
+		}
+		////Map Search
+		vm.addQlocaiton = function(){
+				vm.mapStatus = true;
+				var geocoder = new google.maps.Geocoder();
+				var geocoderRequest = { address: vm.quesitonLoction };
+				geocoder.geocode(geocoderRequest, function(results, status){
+					console.log(results)
+					var loc = results[0].geometry.location;
+					console.log(loc)
+					vm.question.lat = loc.H;
+					vm.question.lng = loc.L;
+				vm.map = new google.maps.Map(document.getElementById('map'), {
+						    center: {lat: loc.H, lng: loc.L},
+						    scrollwheel: true,
+						    zoom: 11,
+		 		})
+		 		var marker = new google.maps.Marker({
+						            map: vm.map,
+						            position: new google.maps.LatLng(loc.H, loc.L),
+						            title: 'Your Current Location',
+						            draggable: true
+				});
+				google.maps.event.addListener(marker, 'dragend', function(){
+								if(vm.cityCircle){
+									vm.cityCircle.setMap(null); 
+								}
+							
+					        	vm.question.lat = marker.internalPosition.H
+					        	vm.question.lng = marker.internalPosition.L
+					        	console.log(vm.question)
+
+					           	
+				});
+			});
+			
 		}
 	}
 
