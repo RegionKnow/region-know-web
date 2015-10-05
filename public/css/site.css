@@ -16,7 +16,10 @@ body {
   width: 100%;
   height: 200px;
 }
-
+#searchLoc {
+  width: 30%;
+  display: inline;
+}
 /*#tagSave{
 	margin-left: 100%;
 

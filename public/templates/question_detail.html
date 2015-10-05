@@ -56,23 +56,31 @@
 
 		
 		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers">
-
-			<p>{{a.answerBody}}</p>
-			<p>{{a.postedBy}}</p>
-			<div class="text-right">
-				<div ng-if="vm.status.id === vm.question.postedBy">
-					<div ng-controller="MessageController as message">
+			<span>
+				<span class="text-left">{{a.name}}</span> -  
+				<i style="font-size:25px;">{{a.answerBody}}</i>	
+			</span>
+			
+			<span ng-if="vm.status.id">
+					<span class="text-left" ng-controller="MessageController as message">
 						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
-					</div>
-				</div>
-				<div ng-if="vm.status.id === vm.question.postedBy">
-					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">edit</i></md-button>
+					</span>
 
-				</div>
-				<div ng-if="vm.status.id === vm.question.postedBy">	
-					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
-				</div>
-			</div>
+					<span class="text-right" ng-if="vm.status.id === a.postedBy">
+						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+							<i class="material-icons">edit</i>
+						</md-button>
+					</span>
+
+					<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
+						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
+					</span>
+			</span>
+
+
+				
+				
+		
 		</div>
 
 

@@ -6,6 +6,14 @@
 	function QuestionFactory($q, $http, $window, $rootScope) {
 		var o = {};
 
+		o.sendAlerts = function(id){
+			var q = $q.defer();
+			$http.post('api/question/alert/' + id, null).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
+
 		o.addTags = function(tags, question_id){
 			var q = $q.defer();
 			$http.post('api/question/tags/' + question_id, tags).success(function(res){

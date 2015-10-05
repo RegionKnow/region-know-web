@@ -7,22 +7,29 @@
 
 	function UserSettingsController($http, $stateParams, UserSettingsFactory) {
 		var vm = this;
-
+		vm.CUI; //Current User Informaton 
 		vm.userId = $stateParams.id // current user Id
 		//FUNCTIONS to change Filter Question Settings
 		
 		vm.filterOn = function(){
 			UserSettingsFactory.filterOn(vm.userId).then(function(res){
 				console.log('filter Question is On');
+				vm.getUser(vm.userId)
 			})
 		}
 		vm.filterOff = function(){
 			UserSettingsFactory.filterOff(vm.userId).then(function(res){
 				console.log('filter Question is Off');
+				vm.getUser(vm.userId)
 			})
 		}
-
-
+		vm.getUser = function(userId){
+			UserSettingsFactory.getUserInfo(userId).then(function(res){
+				console.log('user Information grabbed!')
+				vm.CUI = res;
+			})
+		}
+		vm.getUser(vm.userId)
 
 		//////FUNCTIONS to deal with Tags
 
@@ -76,6 +83,7 @@
 			
 		}
 		//////////// MAP functions
+
 		vm.homeLocation = {};
 
 		vm.currentLocation = {};
@@ -145,7 +153,9 @@
 			if(!vm.homeLocation.lat) return;
 			if(!vm.homeLocation.lng) return;
 			if(vm.distance == "Select Radius") return;
-			getCircle(); 
+
+			getCircle(); // gets circle around radius 
+
 			vm.homeLocation.radius = vm.distance
 			console.log(vm.homeLocation)
 			var id = vm.userId
@@ -154,6 +164,47 @@
 				vm.hlAdded = true;
 				console.log('added homeLocation to UserModel')
 			})
+		}
+
+		vm.closeMap = function(){
+			vm.mapStatus = false;
+			vm.distance = null;
+		}
+
+		vm.searchLocation = function(){
+				var geocoder = new google.maps.Geocoder();
+				var geocoderRequest = { address: vm.searchLoc };
+				geocoder.geocode(geocoderRequest, function(results, status){
+					console.log(results)
+					var loc = results[0].geometry.location 
+					console.log(loc)
+				vm.map = new google.maps.Map(document.getElementById('map'), {
+						    center: {lat: loc.H, lng: loc.L},
+						    scrollwheel: true,
+						    zoom: 11,
+		 		})
+		 		var marker = new google.maps.Marker({
+						            map: vm.map,
+						            position: new google.maps.LatLng(loc.H, loc.L),
+						            title: 'Your Current Location',
+						            draggable: true
+				});
+				google.maps.event.addListener(marker, 'dragend', function(){
+								if(vm.cityCircle){
+									vm.cityCircle.setMap(null); 
+								}
+								// resets circle
+					        	console.log(marker)
+					        	vm.homeLocation.lat = this.position.H
+					        	vm.homeLocation.lng = this.position.L
+					        	console.log(vm.homeLocation)
+					            // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
+					            // vm.infoWindow.open(vm.map, marker);
+					            getCircle(vm.homeLocation.lat, vm.homeLocation.lng);
+					           	
+				});
+			});
+			
 		}
 
 
