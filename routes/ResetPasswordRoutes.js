@@ -4,9 +4,36 @@ var uuid = require('uuid');
 var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
+var nodemailer = require('nodemailer');
+var env = require('../env');
 
+var transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'regionknow@gmail.com',
+    pass: env.EMAIL_PASS
+  }
+});
 
-
+function SendEmail(email, resObj) {
+  var mailOptions = {
+    from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
+    to: email, // list of receivers
+    subject: 'Hello', // Subject line
+    // text: 'Hello world', // plaintext body
+    html: '<b>Hello world </b>' // html body
+  }
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+      return resObj.status(500).send({
+        Err: "Error sending email"
+      })
+    }
+    console.log('Message sent: ' + info.response);
+    return resObj.send()
+  });
+}
 
 
 router.get("/", function(req, res) {
@@ -17,6 +44,7 @@ router.post("/", function(req, res) {
   User.findOne({
     username: req.body.username
   }, {
+    //Selecting for these fields
     username: 1,
     email: 1
   }, function(error, user) {
@@ -27,15 +55,7 @@ router.post("/", function(req, res) {
       err: "That user doesn't exist"
     });
     else {
-      console.log(user.email, "reset routes 30");
-      request({
-        url: "http://localhost:3000/reset-password-email",
-        method: "POST",
-        body: 'user.email',
-      }, function(err, success) {
-        if (err) res.redirect("/404.html");
-        res.redirect("/#/login");
-      })
+      SendEmail(user.email, res);
     }
   })
 })
