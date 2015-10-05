@@ -29,16 +29,24 @@ router.param('userId', function(req, res, next, userId) {
 //---------Deleteng USER-------------------------
 
 
-router.param('Profile', function(req, res, next, Profile){
-	req.Profile = Profile;
-	// console.log("Hey line 27");
-	User.update({ _id : req.Profile}, {deactivated: true})
-	.exec(function (err, user) {
-		if(err) return res.status(500).send({err: "Error inside the server. Profile"});
-		if(!Profile) return res.status(400).send({err: "That user does not exist"});
-		// console.log("deleted");
-		next();
-	});
+router.param('Profile', function(req, res, next, Profile) {
+  req.Profile = Profile;
+  // console.log("Hey line 27");
+  User.update({
+      _id: req.Profile
+    }, {
+      deactivated: true
+    })
+    .exec(function(err, user) {
+      if (err) return res.status(500).send({
+        err: "Error inside the server. Profile"
+      });
+      if (!Profile) return res.status(400).send({
+        err: "That user does not exist"
+      });
+      // console.log("deleted");
+      next();
+    });
 
 
 });
@@ -74,7 +82,7 @@ router.post('/register', function(req, res) {
   user.save(function(err, result) { //we are saving that user to our collection
     if (err) console.log(err); //if err console.log err, either 400-500
     if (err) return res.status(500).send({
-      err: "Issues with the server"
+      err: "Error registering",
     }); //server error
     if (!result) return res.status(400).send({
       err: "You messed up."
@@ -94,7 +102,9 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 
 
 //THIRD PARTY LOGIN OR REGISTRATION =============================================================
-router.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+router.get('/auth/facebook', passport.authenticate('facebook', {
+  scope: ['email']
+}));
 
 
 
@@ -104,12 +114,14 @@ router.get('/auth/facebook/callback',
   }),
   function(req, res) {
     // Successful authentication, redirect home.
-		if(req.user) {
-	        var token = { token : req.user.generateJWT()}
-	        res.redirect("/#/auth/token/" + token.token);
-	    } else {
-	        res.send("You are not authenticated");
-	    }
+    if (req.user) {
+      var token = {
+        token: req.user.generateJWT()
+      }
+      res.redirect("/#/auth/token/" + token.token);
+    } else {
+      res.send("You are not authenticated");
+    }
   });
 
 
@@ -200,18 +212,26 @@ router.delete('/tags/:userId', function(req, res) {
 //----------TURNING USER SETTINGS FILTERS ON/OFF-----------------------------------------------
 
 
-router.post('/filterOn/:userId', function(req, res){
-	User.update({_id: req.user._id}, {filter: true}, function(err, response){
-		console.log('truned filter on')
-		res.send(response)
-	})
+router.post('/filterOn/:userId', function(req, res) {
+  User.update({
+    _id: req.user._id
+  }, {
+    filter: true
+  }, function(err, response) {
+    console.log('truned filter on')
+    res.send(response)
+  })
 })
 
-router.post('/filterOff/:userId', function(req, res){
-	User.update({_id: req.user._id}, {filter: false}, function(err, response){
-		console.log('truned filter off')
-		res.send(response)
-	})
+router.post('/filterOff/:userId', function(req, res) {
+  User.update({
+    _id: req.user._id
+  }, {
+    filter: false
+  }, function(err, response) {
+    console.log('truned filter off')
+    res.send(response)
+  })
 })
 
 

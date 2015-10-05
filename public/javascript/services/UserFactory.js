@@ -38,10 +38,12 @@
 
     o.registerUser = function(user) {
       var q = $q.defer();
-      $http.post('/api/user/register', user).success(function(res) {
+      $http.post('/api/user/register', user).then(function(res) {
         // o.status.isLoggedIn = true;
         // o.status.username = user.username;
         q.resolve();
+      }, function(res) {
+        q.reject();
       });
       return q.promise;
     };
