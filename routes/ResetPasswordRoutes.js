@@ -5,13 +5,13 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
-var env = require('../env');
+// var env = require('../env');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'regionknow@gmail.com',
-    pass: env.EMAIL_PASS
+    pass: 'codercamps'
   }
 });
 

@@ -7,7 +7,24 @@
 
 	function UserSettingsFactory($http, $q) {
 		var o = {};
+		var key = 'AIzaSyDEQ3oCFj1hp7uqTeb8YLmXYrgtmQk-KmM'
 
+		o.searchLocation = function(){
+			console.log('trying to get location')
+			var q = $q.defer();
+			$http.post('https://maps.googleapis.com/maps/api/geocode/?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=' + key, null).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
+
+		o.getUserInfo = function(id){
+			var q = $q.defer();
+			$http.get('/api/user/' + id).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
 		o.filterOn = function(id){
 			var q = $q.defer();
 			$http.post('/api/user/filterOn/' + id).success(function(res){
@@ -50,7 +67,7 @@
 		}
 
 		o.getLocation = function(){
-			var key = 'AIzaSyDEQ3oCFj1hp7uqTeb8YLmXYrgtmQk-KmM'
+
 			var q = $q.defer();
 			console.log('in location homefactory')
 			$http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=' + key).success(function(res){

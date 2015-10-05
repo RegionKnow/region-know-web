@@ -8,6 +8,7 @@ var AnswerSchema = new mongoose.Schema({
 	generalPoints: Number,
 	knowledgePoint: Number,
 	dateDeleted: Date,
+	name: String,
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	comments: [{
 		commentBody: String,
