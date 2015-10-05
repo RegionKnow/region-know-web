@@ -20,7 +20,7 @@ require('./config/passport.js');
 
 var db = process.env.MONGOLAB_URI || "mongodb://localhost/FinalApp";
 mongoose.connect(db, function(err) {
-  if (err) return console.log("Error connecting to database. Make sure you ran mongod :)");
+  if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
 
   var x = new Date();
   console.log("Connected to %s at %s", db, x.toLocaleString());
