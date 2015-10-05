@@ -15,6 +15,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+//Send email function
 function SendEmail(email, resObj) {
   var mailOptions = {
     from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
@@ -34,6 +35,8 @@ function SendEmail(email, resObj) {
     return resObj.send()
   });
 }
+
+//============================================
 
 
 router.get("/", function(req, res) {
