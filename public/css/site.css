@@ -29,15 +29,18 @@ body {
   margin: auto;
 }
 
+.sideNav {
+  box-shadow: 1px 1px 13px 1px #333;
+}
+
 #navBar a {
   width: 100%;
   display: inline-block;
-  height: 
 }
 
 
 #userInfo{
-  height: 36%;
+  height: 15em;
   text-align: center;
   margin: auto;
   background-color: #26a69a;
@@ -47,11 +50,30 @@ body {
   height: 60px;
   box-shadow: 1px 1px 9px #333;
   margin-bottom: 3em;
+  z-index: 1;
+  color: #26a69a;
 }
+
+#tradeName {
+  font-size: 1.6em;
+  padding-top: -.7em;
+  padding-left: .3em;
+}
+
+.topRight {
+  padding-right: 1em;
+  padding-top: 1em;
+  font-size: 1.3em;
+}
+
 
 #naviBars {
   color: #26a69a;
   margin-top: .3em;
+}
+
+md-backdrop.md-opaque {
+  background-color: rgba(33,33,33,0) !important; 
 }
 /*================TAG STYLES==========================================*/
 

@@ -21,7 +21,16 @@
 	<div ng-controller="NavBarController as nav">
 
 		<div class="row topNav">
-			<div class="col-md-12"><i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i></div>
+			<div class="col-md-12">
+				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i>
+				<span id="tradeName">&nbsp;RegionKnow</span>
+				<img class="topRight img  img-circle navbar-right" src="{{vm.userLoggedIn.image}}" height="30px" width="33px">
+
+				<i class="topRight material-icons navbar-right">help_outline</i>
+				<i class="topRight material-icons navbar-right">insert_comment</i>
+				<p class="topRight navbar-right">{{nav.status.username}}</p>
+
+			</div>
 		</div>
 
 
@@ -42,9 +51,9 @@
 					
 
 				</div>
-				<div flex></div>
+				<div flex></div> 
 			</md-content>
-			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+			<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
 			<md-toolbar id="userInfo" class="md-theme-light">
 			
 			<a ng-show="nav.status" ui-sref="UserProfile" ng-click="nav.close()">
