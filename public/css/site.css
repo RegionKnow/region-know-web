@@ -17,6 +17,14 @@ body {
   height: 200px;
 }
 
+#searchLoc {
+  width: 30%;
+  display: inline;
+}
+/*#tagSave{
+	margin-left: 100%;
+=======
+
 .md-primary {
   color: white;
   background-color: #26a69a;
@@ -37,6 +45,7 @@ body {
   width: 100%;
   display: inline-block;
 }
+
 
 
 #userInfo{

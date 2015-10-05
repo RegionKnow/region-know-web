@@ -107,7 +107,7 @@ router.get('/allquestions/:user_id', function(req, res){
 				var temp_lng = questionsRes[p].lng
 				if(getSpaceDiffernece(user_location.lat, temp_lat, user_location.lng, temp_lng) < (user.radius * 1000)){
 					if(userFilter){ // if userFilter is true
-						console.log('inside check for Tags')
+						// console.log('inside check for Tags')
 						for(var k = 0; k < user_tags.length; k++){ // loop through each tag in userTags
 							var result = findTag(questionsRes[p], user_tags[k]);
 							if(result) break;
@@ -118,7 +118,7 @@ router.get('/allquestions/:user_id', function(req, res){
 				// console.log(questionsRes[p])
 				}
 			}
-			console.log(filtered_questions)
+			// console.log(filtered_questions)
 			res.send(filtered_questions);
 		})
 
@@ -127,7 +127,7 @@ router.get('/allquestions/:user_id', function(req, res){
 		for(var i = 0; i < questionsRes.tags.length ; i++){
 		// console.log(user_tags[k], temp_tags[i])
 			if(tags == questionsRes.tags[i]){
-				console.log('we pushed')
+				// console.log('we pushed')
 				filtered_questions.push(questionsRes)
 				return true;
 			}
@@ -164,6 +164,14 @@ router.post('/tags/:id', function(req, res){
 		})
 	}
 
+})
+router.post('/alert/:id', function(req, res){
+	var allusers;
+	var thisquestion;
+	User.find({}, function(err, users){
+		allusers = users
+		// Questions.findOne({_id: req})
+	})
 })
 
 module.exports = router;
