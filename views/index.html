@@ -20,51 +20,64 @@
 
 	<div ng-controller="NavBarController as nav">
 
+		<div class="row topNav">
+			<div class="col-md-12"><i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i></div>
+		</div>
+
+
+
+
+
 
 		<div class="row">
 
 			<div class="col-md-2"></div>
 
-			<section layout="row" flex>
+			<section id="navBar" layout="row" flex>
 
 				<md-content flex layout-padding>
 				<div layout="column" layout-fill layout-align="top center">
 
 
-					<i ng-click="nav.toggleLeft()" class="fa fa-bars" style="font-size: 2em;"></i>
+					
 
 				</div>
 				<div flex></div>
 			</md-content>
-
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-			<md-toolbar class="md-theme-light">RegionKnow</md-toolbar>
+			<md-toolbar id="userInfo" class="md-theme-light">
+			
+			<a ng-show="nav.status" ui-sref="UserProfile" ng-click="nav.close()">
+				<br>{{nav.status.username}}<br>
+				<img class="img  img-circle" src="{{vm.userLoggedIn.image}}" height="190px" width="179px">
+
+			</a>
+
+		</md-toolbar>
 
 
 
-			<a><md-divider ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</md-divider></a>
-			<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
-			<a ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><md-divider>Home</md-divider></a>
-				<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
-				<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
-				<a ng-show="!nav.status" ui-sref="Login" ng-click="!nav.close()"><md-divider>Login</md-divider></a>
-				<a ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()"><md-divider>Register</md-divider></a>
+		<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
+		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">Home</a>
+			<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
+			<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
+			<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">Login</a>
+			<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register</a>
 
 
-				<a ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()"><md-divider>Settings</md-divider></a>
-				<a ng-show="nav.status" ui-sref="Message" ng-click="nav.close();"><md-divider>Messaging</md-divider></a>
-				<a ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><md-divider>Log Out</md-divider></a>
-
+			<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()">Settings</a>
+			<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();">Messaging</a>
+			<a class="md-button" ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">Log Out</a>
 
 
 
-			</md-sidenav>
-		</section>
+		</md-sidenav>
+	</section>
 
-		<div class="col-md-2"></div>
+	<div class="col-md-2"></div>
 
 
-	</div>
+</div>
 
 </div>
 
@@ -80,28 +93,28 @@
 <!-- REPEATED -->
 
 <!-- <script src="angular-animate/angular-animate.js"></script>
-<script src="angular-aria/angular-aria.js"></script> -->
+	<script src="angular-aria/angular-aria.js"></script> -->
 
-<!-- END OF REPEATED SCRIPTS -->
+	<!-- END OF REPEATED SCRIPTS -->
 
-<!-- Global Src -->
-<script src="/javascript/app.js"></script>
-<!-- Factories -->
-<script src="/javascript/services/UserFactory.js"></script>
-<script src="/javascript/services/QuestionFactory.js"></script>
-<script src="/javascript/services/AnswerFactory.js"></script>
-<script src="/javascript/services/UserSettingsFactory.js"></script>
+	<!-- Global Src -->
+	<script src="/javascript/app.js"></script>
+	<!-- Factories -->
+	<script src="/javascript/services/UserFactory.js"></script>
+	<script src="/javascript/services/QuestionFactory.js"></script>
+	<script src="/javascript/services/AnswerFactory.js"></script>
+	<script src="/javascript/services/UserSettingsFactory.js"></script>
 
 
 
-<!-- Controllers -->
+	<!-- Controllers -->
 
-<script src="/javascript/controllers/CreateQuestionController.js"></script>
-<script src="/javascript/controllers/QuestionAnswerController.js"></script>
-<script src="/javascript/controllers/NavBarController.js"></script>
-<script src="/javascript/controllers/UserProfileController.js"></script>
-<script src="/javascript/controllers/MessagingController.js"></script>
-<script src="/javascript/controllers/UserSettingsController.js"></script>
+	<script src="/javascript/controllers/CreateQuestionController.js"></script>
+	<script src="/javascript/controllers/QuestionAnswerController.js"></script>
+	<script src="/javascript/controllers/NavBarController.js"></script>
+	<script src="/javascript/controllers/UserProfileController.js"></script>
+	<script src="/javascript/controllers/MessagingController.js"></script>
+	<script src="/javascript/controllers/UserSettingsController.js"></script>
 </body>
 
 </html>
