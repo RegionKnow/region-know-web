@@ -22,13 +22,21 @@ passport.deserializeUser(function(id, done) {
 
 
 passport.use(new LocalStrategy(function(username, password, done) { //This password is called from password.authenticate, from user routes.
-  User.findOne({username: username}) //find the username in the model from where it's being called.
-  .exec(function(err, user) {
-  	if(err) return done({err: "Server has issues."});
-  	if(!user) return done({err: "User does not exist"});
-  	if(!user.checkPassword(password)) return done({err: "Invalid username and password combination."});
-  	return done(null, user);
-  });
+  User.findOne({
+      username: username
+    }) //find the username in the model from where it's being called.
+    .exec(function(err, user) {
+      if (err) return done({
+        err: "Server has issues."
+      });
+      if (!user) return done({
+        err: "User does not exist"
+      });
+      if (!user.checkPassword(password)) return done({
+        err: "Invalid username and password combination."
+      });
+      return done(null, user);
+    });
 }));
 
 passport.use(new FacebookStrategy({
@@ -39,27 +47,29 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'name', 'emails', 'photos']
   },
   function(req, accessToken, refreshToken, profile, done) {
-    User.findOne({ facebookId: profile.id }, function (err, user) {
-      if(err) return done(err, null);
-      if(user) {
-          console.log("Current User, Logging In");
-          return done(null, user);
+    User.findOne({
+      facebookId: profile.id
+    }, function(err, user) {
+      if (err) return done(err, null);
+      if (user) {
+        console.log("Current User, Logging In");
+        return done(null, user);
       } else {
-          console.log("New User, Registering and Logging In");
-          var userModel = new User();
-          if(profile.emails) {
-              userModel.email = profile.emails[0].value;
-          } else {
-              userModel.email = profile.username + "@facebook.com";
+        console.log("New User, Registering and Logging In");
+        var userModel = new User();
+        if (profile.emails) {
+          userModel.email = profile.emails[0].value;
+        } else {
+          userModel.email = profile.username + "@facebook.com";
+        }
+        userModel.facebookId = profile.id;
+        userModel.displayName = profile.name.givenName + " " + profile.name.familyName;
+        userModel.save(function(err, userSaved) {
+          if (err) {
+            return err;
           }
-          userModel.facebookId = profile.id;
-          userModel.displayName = profile.name.givenName + " " + profile.name.familyName;
-          userModel.save(function(err, userSaved) {
-              if(err) {
-                  return err;
-              }
-              return done(err, userSaved);
-          })
+          return done(err, userSaved);
+        })
       }
     });
   }
@@ -71,7 +81,9 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/api/user/auth/google/callback"
   },
   function(token, tokenSecret, profile, done) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    User.findOrCreate({
+      googleId: profile.id
+    }, function(err, user) {
       return done(err, user);
     });
   }

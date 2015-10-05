@@ -89,10 +89,13 @@
             $http.post("/api/password-reset", {
                 username: vm.username
               })
-              .then(function(res) {
-                console.log(res);
-              }, function(res) {
-                vm.errorMessage = res.data.err;
+              .then(function(responseSuccess) {
+                vm.errorMessage = "Success! Email Sent!!!.....Bringing you back to login page...."
+                $timeout(function() {
+                  $state.go("Login");
+                }, 3000)
+              }, function(responseError) {
+                vm.errorMessage = responseError.data.err;
                 $timeout(function() {
                   vm.errorMessage = '';
                 }, 2000);

@@ -6,7 +6,6 @@ var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 var passport = require('passport');
 var uuid = require('uuid');
-var mailer = require('express-mailer');
 var app = express();
 
 
@@ -37,36 +36,6 @@ app.use(express.static(__dirname + '/bower_components'));
 //we want to render html files
 app.set('view engine', 'html');
 
-
-mailer.extend(app, {
-  from: 'no-reply@example.com',
-  host: 'smtp.aim.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: 'kareemmarch@aim.com',
-    pass: ''
-  }
-});
-
-app.post('/reset-password-email', function(req, res, next) {
-  console.log(req.body, "Server.jss");
-  res.send();
-  // app.mailer.send('email', {
-  //   to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-  //   subject: 'Test Email', // REQUIRED.
-  //   otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
-  // }, function(err) {
-  //   if (err) {
-  //     // handle error
-  //     console.log(err);
-  //     res.send('There was an error sending the email');
-  //     return;
-  //   }
-  //   res.send('Email Sent');
-  // });
-});
 
 
 
