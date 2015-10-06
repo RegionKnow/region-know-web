@@ -5,41 +5,34 @@
 	<div class="col-md-8">
 
 		
-		<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-			
-			<label class="mdl-button mdl-js-button mdl-button--icon" for="expando1">
-				<i class="material-icons">search</i>
-			</label>
+		
+		<md-input-container flex>
+		<label>Search questions here...</label>
+		<input ng-model="vm.search">
+	</md-input-container>
 
-			<div class="mdl-textfield__expandable-holder">
-				<input type="text" class="mdl-textfield__input" id="expando1" ng-model="vm.search"/>
-				<label class="mdl-textfield__label" for="expando1">Search questions here...</label>
+	<br>
+	Questions Auto Filterd By HomeLocation In settings!
+	<br>
+
+
+	<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
+		<a ui-sref="ViewQuesiton({id: q._id})">
+
+			<div class="mdl-card mdl-shadow--4dp qCards">
+
+				<div class="mdl-card__supporting-text">
+					<i class="material-icons qIcon">help_outline</i>&nbsp;{{q.questionBody}}
+
+				</div>
 			</div>
 
-		</div>
-		
-		<br>
-		Questions Auto Filterd By HomeLocation In settings!
-		<br>
+		</a>
 
-
-		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
-			<a ui-sref="ViewQuesiton({id: q._id})">
-				
-				<div class="mdl-card mdl-shadow--4dp qCards">
-
-					<div class="mdl-card__supporting-text">
-						<i class="material-icons qIcon">help_outline</i>&nbsp;{{q.questionBody}}
-
-					</div>
-				</div>
-
-			</a>
-
-		</div>
 	</div>
+</div>
 
-	<div class="col-md-2"></div>
+<div class="col-md-2"></div>
 
 </div>
 
