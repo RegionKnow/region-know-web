@@ -40,6 +40,21 @@
 			})
 			return q.promise;
 		}
+		o.filterAlertOn = function(id){
+			var q = $q.defer();
+			$http.post('/api/user/filterAlertOn/' + id).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
+
+		o.filterAlertOff = function(id){
+			var q = $q.defer();
+			$http.post('/api/user/filterAlertOff/' + id).success(function(res){
+				q.resolve();
+			})
+			return q.promise;
+		}
 
 		o.addTags = function(tags, id){
 			console.log(tags, id)

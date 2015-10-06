@@ -29,6 +29,9 @@
               })
               .then(function(res) {
                 vm.errorMessage = res.data.success;
+                $timeout(function() {
+                  $state.go('Home')
+                }, 500);
               }, function(res) {
                 console.log(res.data);
               })

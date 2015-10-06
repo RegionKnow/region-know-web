@@ -23,6 +23,18 @@
 				vm.getUser(vm.userId)
 			})
 		}
+		vm.filterAlertOn = function(){
+			UserSettingsFactory.filterAlertOn(vm.userId).then(function(res){
+				console.log('filter Question is On');
+				vm.getUser(vm.userId)
+			})
+		}
+		vm.filterAlertOff = function(){
+			UserSettingsFactory.filterAlertOff(vm.userId).then(function(res){
+				console.log('filter Question is Off');
+				vm.getUser(vm.userId)
+			})
+		}
 		vm.getUser = function(userId){
 			UserSettingsFactory.getUserInfo(userId).then(function(res){
 				console.log('user Information grabbed!')

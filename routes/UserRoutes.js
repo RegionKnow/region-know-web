@@ -242,6 +242,28 @@ router.post('/filterOff/:userId', function(req, res) {
     res.send(response)
   })
 })
+//Alert Filters
+router.post('/filterAlertOn/:userId', function(req, res) {
+  User.update({
+    _id: req.user._id
+  }, {
+    filterAlert: true
+  }, function(err, response) {
+    console.log('truned Alertfilter on')
+    res.send(response)
+  })
+})
+
+router.post('/filterAlertOff/:userId', function(req, res) {
+  User.update({
+    _id: req.user._id
+  }, {
+    filterAlert: false
+  }, function(err, response) {
+    console.log('truned Alertfilter off')
+    res.send(response)
+  })
+})
 
 router.get('/alert/:userId', function(req, res){
   User.findOne({_id: req.user._id }).populate('alerts').exec(function(err, response){
