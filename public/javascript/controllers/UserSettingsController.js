@@ -93,13 +93,43 @@
 		function getMeters(miles) {
 		     return miles*1609.344;
 		}
+		vm.openhomeMap = function(){
+			UserSettingsFactory.getUserInfo(vm.userId).then(function(res){
+				console.log(res);
+				vm.currentRadius = res.radius
+				vm.map = new google.maps.Map(document.getElementById('map'), {
+						    center: {lat: res.lat, lng: res.lng},
+						    scrollwheel: true,
+						    zoom: 11,
+		 		})
+		 		getCircle(res.lat, res.lng);
+		 		var marker = new google.maps.Marker({
+						            map: vm.map,
+						            position: new google.maps.LatLng(res.lat, res.lng),
+						            title: 'Your Current Location',
+						            draggable: false
+				});
+				
+				
+			})
+
+			vm.mapHomeStatus = true;
+		}
 		
 		vm.openMap = function(){
+			vm.hlError = null;
+			vm.successMes = null;
+			vm.mapHomeStatus = false;
 			vm.distanceSet = angular.copy(vm.distance)
 			// UserSettingsFactory.getMap()
+			// gets current location
 			vm.mapStatus = true;
-			UserSettingsFactory.getLocation().then(function(res){ // gets current location
+			UserSettingsFactory.getLocation().then(function(res){ 
+				
+				
+
 				console.log(res)
+
 				vm.currentLocation.lat = res.location.lat
 				vm.currentLocation.lng = res.location.lng
 				//building map with current location
@@ -150,9 +180,19 @@
 		vm.submitHomeLocation = function(){ // submits location user selects
 			vm.mapStatus = false;
 			 //makes sure there is a lat and lng
-			if(!vm.homeLocation.lat) return;
-			if(!vm.homeLocation.lng) return;
-			if(vm.distance == "Select Radius") return;
+			if(!vm.homeLocation.lat){
+				vm.hlError = true;
+				 return;
+			}
+			if(!vm.homeLocation.lng){
+				vm.hlError = true;
+				 return;
+			}
+			if(vm.distance == "Select Radius"){
+				vm.hlError = true;
+				 return;
+			}
+			
 
 			getCircle(); // gets circle around radius 
 
@@ -163,6 +203,7 @@
 			UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res){
 				vm.hlAdded = true;
 				console.log('added homeLocation to UserModel')
+				vm.successMes = res;
 			})
 		}
 
