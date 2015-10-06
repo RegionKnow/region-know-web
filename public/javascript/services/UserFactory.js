@@ -34,13 +34,26 @@
         return false;
       }
     }
+
+    //-------------------------------CLOUDINARY FUNCTIONALITY------------------------------------------
+
+// o.cloudinary.uploader.upload("my_picture.jpg", function(result) { 
+//       console.log(result) 
+//     });
+
+
+    // o.postImage()= function(image) {
+    //   return JSON.parse(urlBase64Decode(getToken().split('.')[1])).image;
+    // }
+
+    // o.getImage()= function(image) {
+    //   return JSON.parse(urlBase64Decode(getToken().split('.')[1])).image;
+    // }
     //---------------------LOGIN, REGISTER, LOGOUT----------------------------------------------------
 
     o.registerUser = function(user) {
       var q = $q.defer();
       $http.post('/api/user/register', user).then(function(res) {
-        // o.status.isLoggedIn = true;
-        // o.status.username = user.username;
         q.resolve();
       }, function(res) {
         q.reject();
@@ -78,8 +91,18 @@
       });
       return q.promise;
     };
-    //=============================================================================================
-    ///////Update Profile
+    //===================ADDING PROFILE IMAGE==========================================================================
+
+    o.addProfileImage = function(image) {
+      var q = $q.defer();
+      $http.post("", image).success(function(res) {
+        q.resolve(res);
+      });
+      return q.promise;
+    }
+
+
+    //===================Update Profile===============================
     o.updateProfile = function(userId, user) {
       console.log(user);
 

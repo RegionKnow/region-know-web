@@ -18,7 +18,7 @@
 
 <body class="container-fluid">
 
-	<div ng-controller="NavBarController as nav">
+	<div ng-controller="NavBarController as nav" id="navParent">
 
 		<div class="row topNav">
 			<div class="col-md-12">
@@ -56,9 +56,9 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
 			<md-toolbar id="userInfo" class="md-theme-light">
 			
-			<a ng-show="nav.status" ui-sref="UserProfile" ng-click="nav.close()">
+			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" ng-click="nav.close()">
 				<br>{{nav.status.username}}<br>
-				<img class="img  img-circle" src="{{vm.userLoggedIn.image}}" height="190px" width="179px">
+				<img class="img  img-circle navImage" src="{{vm.userLoggedIn.image}}">
 
 			</a>
 
@@ -67,16 +67,17 @@
 
 
 		<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
-		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">Home</a>
+		<br>
+		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><i class="material-icons">home</i>Home</a>
 			<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 			<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
-			<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">Login</a>
+			<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()"><i class="material-icons">vpn_key</i>Login</a>
 			<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register</a>
 
 
-			<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()">Settings</a>
-			<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();">Messaging</a>
-			<a class="md-button" ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">Log Out</a>
+			<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()"><i class="material-icons">settings</i>Settings</a>
+			<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();"><i class="material-icons">question_answer</i>Messaging</a>
+			<a class="md-button" ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><i class="material-icons">lock</i>Log Out</a>
 
 
 
@@ -98,6 +99,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR4uInfVhGOVQPhgf8wkvxHpiEEYerVq8"></script>
 <script src="angular-animate/angular-animate.js"></script>
 <script src="angular-aria/angular-aria.js"></script>
+<script src="ng-file-upload/ng-file-upload.js"></script>
 
 <!-- REPEATED -->
 
