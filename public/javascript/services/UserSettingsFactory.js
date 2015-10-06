@@ -81,7 +81,7 @@
 			var q = $q.defer();
 			console.log(hl, id)
 			$http.post('/api/user/location/' + id, hl).success(function(res){
-				q.resolve();
+				q.resolve('HomeLocation Saved!');
 			})
 			return q.promise;
 		}
