@@ -5,25 +5,29 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
-// var env = require('../env');
+var env = require('../env');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'regionknow@gmail.com',
-    pass: 'codercamps'
+    pass: env.EMAIL_PASS
   }
 });
 
 
 //Send email function
-function SendEmail(email, resObj) {
+function SendEmail(user, resObj) {
+  var date = new Date().getTime();
+  var name = user.displayName || user.username;
+  var link = "http://localhost:3000/#/password-reset/" + user._id + "/" + date;
+  var text = "Hello, " + name + "!\n\nYou recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have fifteen minutes. Let the games begin."
   var mailOptions = {
     from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
-    to: email, // list of receivers
-    subject: 'Hello', // Subject line
+    to: user.email, // list of receivers
+    subject: 'Password Reset', // Subject line
     // text: 'Hello world', // plaintext body
-    html: '<b>Hello world </b>' // html body
+    html: text // html body
   }
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
@@ -55,13 +59,13 @@ router.post("/", function(req, res) {
     if (error) return res.status(500).send({
       err: "Something happened on the server,"
     });
-      if (!user) return res.status(404).send({
-        err: "That user doesn't exist"
-      });
-        else {
-          SendEmail(user.email, res);
-        }
-      })
+    if (!user) return res.status(404).send({
+      err: "That user doesn't exist"
+    });
+    else {
+      SendEmail(user, res);
+    }
+  })
 })
 
 
