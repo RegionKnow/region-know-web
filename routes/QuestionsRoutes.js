@@ -170,8 +170,38 @@ router.post('/alert/:id', function(req, res){
 	var thisquestion;
 	User.find({}, function(err, users){
 		allusers = users
-		// Questions.findOne({_id: req})
+		Questions.findOne({_id: req.question._id}, function(err, quest){
+			thisquestion = quest
+			console.log('trying to alert users')
+			alertUser(allusers, thisquestion);
+		})
 	})
+	function alertUser(users, question){
+		console.log(users, question)
+		var q_lat = question.lat
+		var q_lng = question.lng
+
+		for(var i =0; i < users.length; i++){
+			//pushes quesiton reference into user alerts, if distance matchs , and user ids are not the same
+			
+			if(getSpaceDiffernece(users[i].lat, q_lat, users[i].lng, q_lng) < (users[i].radius * 1000)){
+				
+				if(users[i]._id.toString() !== question.postedBy.toString()){
+					console.log(users[i]._id, question.postedBy)
+					User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
+						console.log('pushed to some users')
+					})
+				}
+			}
+		}
+
+
+		// for(var k=0; k < question.tags.length; k++){
+		// 	for(var j=0; j < users.length ; j ++){
+
+		// 	}
+		// }
+	}
 })
 
 module.exports = router;

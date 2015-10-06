@@ -20,7 +20,7 @@ var UserSchema = new mongoose.Schema({
 	radius: Number,
 	generalPoints: Number,
 	knowledgePoints: Number,
-	alerts: [{type: mongoose.Schema.Types.ObjectId, ref: "Questions"}],
+	alerts: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
 	questions: [{type: mongoose.Schema.Types.ObjectId, ref: "Questions"}],
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answers"}]
 	//commentsMade?

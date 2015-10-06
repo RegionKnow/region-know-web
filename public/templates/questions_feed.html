@@ -22,9 +22,7 @@
 		Questions Auto Filterd By HomeLocation In settings!
 		<br>
 
-		<div ng-show="vm.status">
-			<a ui-sref="CreateQuestion"><button class="btn btn-warning">New Question</button></a>
-		</div>
+
 		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
 				

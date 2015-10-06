@@ -149,7 +149,21 @@
       }
       return decodeURIComponent(escape($window.atob(output)));
     }
-
+    //alerts
+    o.grabAlert = function(user_id){
+      var q = $q.defer();
+      $http.get('/api/user/alert/' + user_id).success(function(res){
+        q.resolve(res);
+      })
+      return q.promise;
+    }
+    o.deleteAlerts = function(id){
+      var q = $q.defer();
+      $http.post('/api/user/delete/alert/' + id).success(function(res){
+        q.resolve(res);
+      })
+      return q.promise;
+    }
 
     $rootScope._user = isLoggedIn();
     return o;
