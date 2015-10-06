@@ -24,7 +24,7 @@
 
 
 			<div class="col-md-11">
-				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i>
+				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars md-button-ripple" style="font-size: 2.6em;"></i>
 				<span id="tradeName">&nbsp;RegionKnow</span>
 				<img class="topRight img  img-circle navbar-right" src="{{vm.userLoggedIn.image}}" height="30px" width="33px">
 
@@ -33,7 +33,7 @@
 				</i>
 				<i class="topRight material-icons navbar-right">insert_comment
 				</i>
-				<p class="topRight navbar-right">{{nav.status.username}}</p>
+				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</a>
 
 				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
 					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
@@ -69,7 +69,7 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
 			<md-toolbar id="userInfo" class="md-theme-light">
 			
-			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" ng-click="nav.close()">
+			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile"  style="color: white;" ng-click="nav.close()">
 				<br>{{nav.status.username}}<br>
 				<img class="img  img-circle navImage" src="{{vm.userLoggedIn.image}}">
 
@@ -81,8 +81,8 @@
 
 		<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
 
-		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">Home</a>
-		<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()">New Question</a>
+		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><i class="material-icons">home</i>Home</a>
+		<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()"><i class="material-icons">help_outline</i>New Question</a>
 		
 
 			<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>

@@ -64,7 +64,7 @@ body {
   #navBar a, #userInfo {
     width: 93%;
     display: inline-block;
-    height: 9%;
+    height: 7.9%;
     text-align: left;
     vertical-align: middle;
     padding-top: .9em;
@@ -78,8 +78,13 @@ body {
     background-color: #26a69a;
   }
 
-  #userInfo img {
-    padding: auto;
+  a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: #26a69a;
+  }
+
+  .loggedInUser {
+    color: #26a69a;
   }
 
   .topNav {
@@ -132,8 +137,11 @@ md-backdrop {
     display: inline;
   }
 
-  /*================QUESTION CARD STYLES==========================================*/
+  /*================QUESTIONs &  CARD STYLES==========================================*/
 
+  .md-input-container.flex.md-default-theme.md-input-focused {
+    color: #26a69a; 
+  }
   .qCards {
     width: 100%;
     height: 100px;
