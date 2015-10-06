@@ -81,34 +81,18 @@
           $state.go("QuestionsFeed");
         }]
       })
-      .state("PasswordReset", {
-        url: "/:uuid/reset",
+      .state("PasswordResetStart", {
+        url: "/reset",
         template: "<div id='reset-password'><md-input-container class='col-md-3'><label>Username</label><input type='text' ng-model='vm.username'></md-input-container><br><md-button class='md-raised md-primary' ng-click='vm.sendEmail()'>Send Email</md-button></div><h1>{{vm.errorMessage}}</h1>",
-        controller: ["$state", '$http', "$timeout", function($state, $http, $timeout) {
-          var vm = this;
-          vm.sendEmail = sendEmail;
-
-          function sendEmail() {
-            if (!vm.username) return vm.errorMessage = "No input";
-            $http.post("/api/password-reset", {
-                username: vm.username
-              })
-              .then(function(responseSuccess) {
-                vm.errorMessage = "Success! Email Sent!!! Check your email, please"
-                $timeout(function() {
-                  $state.go("Login");
-                }, 3000)
-              }, function(responseError) {
-                vm.errorMessage = responseError.data.err;
-                $timeout(function() {
-                  vm.errorMessage = '';
-                }, 2000);
-              })
-          }
-
-
-        }],
+        controller: "PasswordResetController",
         controllerAs: "vm"
+      })
+      .state("PasswordResetFinish", {
+        url: "/resetEnd/:info",
+        template: "<div>" +
+          "<md-input-container class='col-md-3'><label>New Password</label><input type='password' ng-model='vm.newPassword'></md-input-container><md-input-container class='col-md-3'><label>Confirm Password</label><input type='password' ng-model='vm.confirmPassword'></md-input-container><br><md-button class='md-raised md-primary' ng-click='vm.changePassword()'>Change Password</md-button></div><h1>{{vm.errorMessage}}</h1>",
+        controller: "PasswordResetController",
+        controllerAs: "vm",
       });
 
     $urlRouterProvider.otherwise('/');
