@@ -22,28 +22,29 @@
 
 		<div class="row topNav">
 
-			<div class="col-md-11"><i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i></div>
-			<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
-			<!-- 	ng-if="nav.status && vm.alertObj.status" -->
-				<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
 
-				<div ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
-					<a class="well" ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
-				</div>
-			</div>
-
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i>
 				<span id="tradeName">&nbsp;RegionKnow</span>
 				<img class="topRight img  img-circle navbar-right" src="{{vm.userLoggedIn.image}}" height="30px" width="33px">
 
-				<i class="topRight material-icons navbar-right">help_outline</i>
-				<i class="topRight material-icons navbar-right">insert_comment</i>
+				<i class="topRight material-icons navbar-right">
+					help_outline
+				</i>
+				<i class="topRight material-icons navbar-right">insert_comment
+				</i>
 				<p class="topRight navbar-right">{{nav.status.username}}</p>
 
-			</div>
+				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
+					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
 
+					<div class="well" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
+						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
+				</div>
+			</div>
 		</div>
+
+	</div>
 
 
 

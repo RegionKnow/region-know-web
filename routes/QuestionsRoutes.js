@@ -183,10 +183,15 @@ router.post('/alert/:id', function(req, res){
 
 		for(var i =0; i < users.length; i++){
 			//pushes quesiton reference into user alerts, if distance matchs , and user ids are not the same
-			if(getSpaceDiffernece(users[i].lat, q_lat, users[i].lng, q_lng) < (users[i].radius * 1000) && (users[i]._id != question._id)){
-				User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
-					console.log('pushed to some users')
-				})
+			
+			if(getSpaceDiffernece(users[i].lat, q_lat, users[i].lng, q_lng) < (users[i].radius * 1000)){
+				
+				if(users[i]._id.toString() !== question.postedBy.toString()){
+					console.log(users[i]._id, question.postedBy)
+					User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
+						console.log('pushed to some users')
+					})
+				}
 			}
 		}
 
