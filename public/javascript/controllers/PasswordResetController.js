@@ -13,11 +13,28 @@
 
     function changePassword() {
       var token = JSON.parse(urlBase64Decoder(stateParams.info.split(".")[1]));
-      date = new Date(token.expirationDate);
-      if (token.expirationDate > Date.now()) {
-        vm.errorMessage = "Link still valid! Expires: " + date.toLocaleTimeString();
+      if (token.expirationDate < Date.now()) {
+        vm.errorMessage = "Link expired...Sorry";
       } else {
-        vm.errorMessage = "Link expired...Sorry Expired: " + date.toLocaleTimeString();
+        vm.errorMessage = "Link still valid!";
+        if (!vm.newPassword || !vm.confirmPassword) {
+          vm.errorMessage = " Password fields are empty!"
+        } else {
+          if (vm.newPassword !== vm.confirmPassword) {
+            vm.errorMessage = "Your Passwords don't match!"
+          } else {
+            $http.post("/api/password-reset/finish", {
+                userId: token.user.id,
+                newPassword: vm.newPassword
+              })
+              .then(function(res) {
+                vm.errorMessage = res.data.success;
+              }, function(res) {
+                console.log(res.data);
+              })
+          }
+        }
+
       }
     }
 
