@@ -6,6 +6,7 @@ var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
 var env = require('../env');
+var jwt = require("jsonwebtoken");
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -18,10 +19,20 @@ var transporter = nodemailer.createTransport({
 
 //Send email function
 function SendEmail(user, resObj) {
+  console.log("Line 22ish, Password Reset Route. Secret: %s", env.PASSWORD_RESET_SECRET);
   var date = new Date().getTime();
+  var fiveMinutesInMilliseconds = 1000 * 30;
+  date += fiveMinutesInMilliseconds;
+  resetPassToken = jwt.sign({
+    expirationDate: date,
+    user: {
+      id: user._id,
+      name: user.username
+    }
+  }, env.PASSWORD_RESET_SECRET);
   var name = user.displayName || user.username;
-  var link = "http://localhost:3000/#/password-reset/" + user._id + "/" + date;
-  var text = "Hello, " + name + "!\n\nYou recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have fifteen minutes. Let the games begin."
+  var link = "http://localhost:3000/#/resetEnd/" + resetPassToken;
+  var text = "Hello, " + name + "!\n\nYou recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have 30 seconds. Let the games begin."
   var mailOptions = {
     from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
     to: user.email, // list of receivers
@@ -44,9 +55,6 @@ function SendEmail(user, resObj) {
 //============================================
 
 
-router.get("/", function(req, res) {
-  res.redirect("/#/" + uuid() + "/reset")
-})
 
 router.post("/", function(req, res) {
   User.findOne({
