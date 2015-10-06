@@ -1,5 +1,6 @@
 body {
-  font-family: 'RobotoDraft'
+  font-family: 'RobotoDraft';
+  height: 100%;
 }
 #loadingGif {
   height: 40px;
@@ -21,16 +22,11 @@ body {
   width: 30%;
   display: inline;
 }
-/*#tagSave{
-	margin-left: 100%;
-=======
 
-.md-primary {
-  color: white;
-  background-color: #26a69a;
-}
 
 /*================NAVIGATION STYLES==========================================*/
+
+
 #navBar {
   font-size: 1.3em;
   height: 100%;
@@ -39,27 +35,47 @@ body {
 
 .sideNav {
   box-shadow: 1px 1px 13px 1px #333;
+  height: 100%;
+  position: fixed;
+}
+.sideNav .material-icons {
+  color: #26a69a;
+  padding-right: 1em;
+  padding-left: 1em;
+  vertical-align: middle;
+  font-size: 2em;
 }
 
-#navBar a {
-  width: 100%;
+.navImage {
+  height: 100%;
+  width: 50%;
+}
+
+#navBar a, #userInfo {
+  width: 93%;
   display: inline-block;
+  height: 9%;
+  text-align: left;
+  vertical-align: middle;
+  padding-top: .9em;
 }
 
 
-
-#userInfo{
-  height: 15em;
-  text-align: center;
-  margin: auto;
+#userInfo {
+  height: 40%;
+  width: 100%;
+  top: 0;
   background-color: #26a69a;
+}
+
+#userInfo img {
+  padding: auto;
 }
 
 .topNav {
   height: 60px;
   box-shadow: 1px 1px 9px #333;
   margin-bottom: 3em;
-  z-index: 1;
   color: #26a69a;
 }
 
@@ -83,31 +99,38 @@ body {
 
 md-backdrop.md-opaque {
   background-color: rgba(33,33,33,0) !important; 
-}
-/*================TAG STYLES==========================================*/
+  top: 0;
 
-.tagDiv {
-  border-radius: 10px;
 }
-.indvTag {
-  border-width: 3px;
-  box-shadow: 2px 2px 2px black;
-  border-color: #000000;
-  padding-left: 15px;
-  color: #2F5D92;
-  background-color: #E0EDF5;
-  display: inline;
-}
+/*
+md-backdrop {
+  top: 0;
+  } */ 
 
-/*================QUESTION CARD STYLES==========================================*/
+  /*================TAG STYLES==========================================*/
 
-.qCards {
-  width: 100%;
-  height: 100px;
-  margin-top: 1em;
-}
-.qIcon {
-  font-size: 6em;
-  padding-top: 5%;
-  opacity: .3;
-}
+  .tagDiv {
+    border-radius: 10px;
+  }
+  .indvTag {
+    border-width: 3px;
+    box-shadow: 2px 2px 2px black;
+    border-color: #000000;
+    padding-left: 15px;
+    color: #2F5D92;
+    background-color: #E0EDF5;
+    display: inline;
+  }
+
+  /*================QUESTION CARD STYLES==========================================*/
+
+  .qCards {
+    width: 100%;
+    height: 100px;
+    margin-top: 1em;
+  }
+  .qIcon {
+    font-size: 6em;
+    padding-top: 5%;
+    opacity: .3;
+  }

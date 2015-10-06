@@ -62,32 +62,32 @@
 			</span>
 			
 			<span ng-if="vm.status.id">
-					<span class="text-left" ng-controller="MessageController as message">
-						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
-					</span>
+				<span class="text-left" ng-controller="MessageController as message">
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
+				</span>
 
-					<span class="text-right" ng-if="vm.status.id === a.postedBy">
-						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect">
-							<i class="material-icons">edit</i>
-						</md-button>
-					</span>
-
-					<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
-						<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
-					</span>
+				<span class="text-right" ng-if="vm.status.id === a.postedBy">
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+					<i class="material-icons">edit</i>
+				</md-button>
 			</span>
 
+			<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
+				<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
+			</span>
+		</span>
 
-				
-				
+
 		
-		</div>
-
-
+		
+		
 	</div>
 
-	<br>
 
-	<div class="col-md-2 col-lg-1"></div>
+</div>
+
+<br>
+
+<div class="col-md-2 col-lg-1"></div>
 
 </div>
