@@ -7,6 +7,7 @@
 		var o = {};
 
 		o.sendAlerts = function(id){
+			console.log('alerting in routes')
 			var q = $q.defer();
 			$http.post('api/question/alert/' + id, null).success(function(res){
 				q.resolve();

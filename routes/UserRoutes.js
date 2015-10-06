@@ -243,5 +243,18 @@ router.post('/filterOff/:userId', function(req, res) {
   })
 })
 
+router.get('/alert/:userId', function(req, res){
+  User.findOne({_id: req.user._id }).populate('alerts').exec(function(err, response){
+    // console.log('populated')
+    res.send(response)
+  })
+})
+
+router.post('/delete/alert/:userId', function(req, res){
+  User.update({_id: req.user._id}, {alerts: [] }, function(err, response){
+    res.send('deleted alerts');
+  })
+})
+
 
 module.exports = router;
