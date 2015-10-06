@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid" ng-cloak>
 
 	<div ng-controller="NavBarController as nav" id="navParent">
 
@@ -58,68 +58,75 @@
 			<section id="navBar" layout="row" flex>
 
 				<md-content flex layout-padding>
-				<div layout="column" layout-fill layout-align="top center">
-
-
-					
-
-				</div>
-				<div flex></div> 
-			</md-content>
-			<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
-			<md-toolbar id="userInfo" class="md-theme-light">
-			
-			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile"  style="color: white;" ng-click="nav.close()">
-				<br>{{nav.status.username}}<br>
-				<img class="img  img-circle navImage" src="{{vm.userLoggedIn.image}}">
-
-			</a>
-
-		</md-toolbar>
+					<div layout="column" layout-fill layout-align="top center">
 
 
 
-		<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
 
-		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()"><i class="material-icons">home</i>Home</a>
-		<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()"><i class="material-icons">help_outline</i>New Question</a>
-		
+					</div>
+					<div flex></div>
+				</md-content>
+				<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
+					<md-toolbar id="userInfo" class="md-theme-light">
 
-			<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
+						<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
+							<br>{{nav.status.username}}
+							<br>
+							<img class="img  img-circle navImage" src="{{vm.userLoggedIn.image}}">
+
+						</a>
+
+					</md-toolbar>
+
+
+
+					<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
+
+					<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">
+						<i class="material-icons">home</i>Home</a>
+					<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()">
+						<i class="material-icons">help_outline</i>New Question</a>
+
+
+					<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 			<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
-			<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()"><i class="material-icons">vpn_key</i>Login</a>
-			<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register</a>
+					<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">
+						<i class="material-icons">vpn_key</i>Login</a>
+					<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register</a>
 
 
-			<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()"><i class="material-icons">settings</i>Settings</a>
-			<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();"><i class="material-icons">question_answer</i>Messaging</a>
-			<a class="md-button" ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()"><i class="material-icons">lock</i>Log Out</a>
+					<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()">
+						<i class="material-icons">settings</i>Settings</a>
+					<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();">
+						<i class="material-icons">question_answer</i>Messaging</a>
+					<a class="md-button" ng-show="nav.status" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
+						<i class="material-icons">lock</i>Log Out</a>
 
 
 
-		</md-sidenav>
-	</section>
+				</md-sidenav>
+			</section>
 
-	<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 
 
-</div>
+		</div>
+		<ui-view></ui-view>
 
-</div>
+	</div>
 
-<ui-view></ui-view>
-<!-- Ext Libs -->
-<script src="angular/angular.min.js"></script>
-<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="angular-material/angular-material.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR4uInfVhGOVQPhgf8wkvxHpiEEYerVq8"></script>
-<script src="angular-animate/angular-animate.js"></script>
-<script src="angular-aria/angular-aria.js"></script>
-<script src="ng-file-upload/ng-file-upload.js"></script>
+	<!-- Ext Libs -->
+	<script src="angular/angular.min.js"></script>
+	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="angular-material/angular-material.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR4uInfVhGOVQPhgf8wkvxHpiEEYerVq8"></script>
+	<script src="angular-animate/angular-animate.js"></script>
+	<script src="angular-aria/angular-aria.js"></script>
+	<script src="ng-file-upload/ng-file-upload.js"></script>
 
-<!-- REPEATED -->
+	<!-- REPEATED -->
 
-<!-- <script src="angular-animate/angular-animate.js"></script>
+	<!-- <script src="angular-animate/angular-animate.js"></script>
 	<script src="angular-aria/angular-aria.js"></script> -->
 
 	<!-- END OF REPEATED SCRIPTS -->
