@@ -21,7 +21,16 @@
 	<div ng-controller="NavBarController as nav">
 
 		<div class="row topNav">
-			<div class="col-md-12"><i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i></div>
+			<div class="col-md-11"><i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars" style="font-size: 2.6em;"></i></div>
+			<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
+			<!-- 	ng-if="nav.status && vm.alertObj.status" -->
+				<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
+
+				<div ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
+					<a class="well" ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
+				</div>
+			</div>
+
 		</div>
 
 
@@ -59,6 +68,8 @@
 
 		<!-- <a ui-sref="Home" ng-click="nav.close()"><md-divider>Home</md-divider></a> -->
 		<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">Home</a>
+		<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()">New Question</a>
+		
 			<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
 			<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
 			<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">Login</a>

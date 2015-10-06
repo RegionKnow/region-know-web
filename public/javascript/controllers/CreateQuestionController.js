@@ -100,8 +100,10 @@
 		}
 
 		vm.saveTags = function(question_id){
+			console.log('in save tags' + question_id)
 				QuestionFactory.addTags(vm.tags, question_id).then(function(res){
 					console.log('saved tags')
+					//alerts all users!
 					QuestionFactory.sendAlerts(question_id).then(function(res){
 						console.log('lookng to send alerts')
 					})
