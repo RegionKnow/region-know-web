@@ -78,6 +78,7 @@
           var vm = this;
           localStorage.setItem("token", $stateParams.token);
           UF.setLoggedinUserToRootScope();
+          NavBarController.status = $rootScope._user;
           $state.go("QuestionsFeed");
         }]
       })
