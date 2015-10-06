@@ -2,11 +2,14 @@
 
 	<div class="col-md-2 col-lg-1"></div>
 
-	<div class="col-md-8 col-lg-10">
+	<div class="col-md-8 col-lg-10 animated rubberBand">
 		<div>
 			
 			<h1>{{vm.question.questionBody}}</h1>
-			<h6>{{vm.question.tags}}</h6>
+			<span ng-repeat="tag in vm.question.tags">
+				{{tag}}
+			</span>
+			
 			<br>
 
 			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
@@ -56,7 +59,7 @@
 
 		
 		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers">
-			<span>
+			<span class="">
 				<span class="text-left">{{a.name}}</span> -  
 				<i style="font-size:25px;">{{a.answerBody}}</i>	
 			</span>
