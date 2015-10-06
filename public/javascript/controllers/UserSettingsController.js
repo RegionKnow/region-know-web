@@ -163,6 +163,7 @@
 			UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res){
 				vm.hlAdded = true;
 				console.log('added homeLocation to UserModel')
+				vm.successMes = res;
 			})
 		}
 

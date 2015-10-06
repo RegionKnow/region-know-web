@@ -28,16 +28,17 @@
 	vm.alertObj = {}
 	alertWatch();
 	function alertWatch(){
-		console.log('watching for alerts')
+		// console.log('watching for alerts')
 		$timeout(function() {
 			UserFactory.grabAlert(vm.status.id).then(function(res){
 				// console.log(res.alerts[0])
+				// console.log(res)
 				if(res.alerts.length > 0){
 					// console.log('grabbing alerts')
 					vm.alertObj.status = true;
 					vm.alertObj.alertNum = res.alerts.length;
 					vm.alertObj.alerts = res.alerts;
-					console.log(vm.alertObj)
+					// console.log(vm.alertObj)
 				}else{
 					// console.log('hiding alerts')
 					vm.alertStatus = false;
