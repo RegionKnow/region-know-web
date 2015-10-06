@@ -174,6 +174,7 @@ router.post('/alert/:id', function(req, res){
 			thisquestion = quest
 			console.log('trying to alert users')
 			alertUser(allusers, thisquestion);
+			res.send('sent Alerts to Users');
 		})
 	})
 	function alertUser(users, question){
