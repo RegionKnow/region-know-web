@@ -12,6 +12,9 @@ var QuestionSchema = new mongoose.Schema({
 	lat: Number,
 	lng: Number,
 	tags: [{type: String}],
+	upvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	downvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	voteNum: Number,
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
 	comments: [{

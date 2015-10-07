@@ -7,13 +7,13 @@
 			<tr id="questionVote" class="">
 					<td>
 						<div ng-controller="VoteController as vm">
-							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.upVote(vm.quesiton._id)">
+							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.upVote()">
 							  <div class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div>
 							</button>
 							<div style="font-size:25px;" id="voteNum">
 							9
 							</div>
-							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.downVote(vm.quesiton._id)">
+							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.downVote()">
 							  <div class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div>
 							</button>
 						</div>
