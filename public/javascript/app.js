@@ -65,6 +65,12 @@
         controller: 'UserSettingsController',
         controllerAs: 'vm'
       })
+      .state("EditAnswer", {
+        url: '/edit/:ans_id/:ques_id',
+        templateUrl: 'templates/edit_answer.html',
+        controller: 'EditAnswerController',
+        controllerAs: 'vm'
+      })
 
 
 
