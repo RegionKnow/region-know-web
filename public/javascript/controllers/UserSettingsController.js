@@ -82,6 +82,7 @@
 		}
 		vm.deleteTag = function(index){
 			vm.tags.splice(index, 1)
+			vm.saveTags();
 		}
 
 		vm.saveTags = function(){
