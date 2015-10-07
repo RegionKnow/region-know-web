@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
 	displayName: String,
 	username: {type: String, lowercase: true, unique: true},
 	email: {type: String, lowercase: true, unique: true},
-	image: { type: String, 'default': 'Default Image here' },
+	image: { type: String},
 	passwordHash: String,
 	salt: String,
 	createdDate: Date,
