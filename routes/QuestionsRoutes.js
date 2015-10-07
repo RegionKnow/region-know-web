@@ -70,12 +70,12 @@ function getSpaceDiffernece(lat1, lat2, lon1, lon2){
 
 				var d = R * c;
 				return d
-				
+
 }
 Math.radians = function(degrees) {
 		  return degrees * Math.PI / 180;
 		};
- 
+
 // Converts from radians to degrees.
 Math.degrees = function(radians) {
 		  return radians * 180 / Math.PI;
@@ -84,6 +84,7 @@ Math.degrees = function(radians) {
 router.get('/allquestions/:user_id', function(req, res){
 
 	// console.log(req.user)
+	if(!req.user) return;
 	var currentUser;
 	var questionsRes;
 	var user_location = {};
@@ -197,7 +198,7 @@ router.post('/alert/:id', function(req, res){
 					if(users[i]._id.toString() !== question.postedBy.toString()){
 						var checkObj = {}
 						for(var j=0; j< users[i].tags.length; j++){
-							
+
 							var result = checkAlertTag(users[i].tags[j], question, users[i]._id, checkObj)
 							if(result) return;
 						}
@@ -208,7 +209,7 @@ router.post('/alert/:id', function(req, res){
 							})
 						}
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -218,12 +219,12 @@ router.post('/alert/:id', function(req, res){
 				if(checkObj[user_id]){
 					checkObj[user_id] += 1;
 				}else{
-					checkObj[user_id] = 1; 
+					checkObj[user_id] = 1;
 				}
-				
+
 				console.log(checkObj)
-				// var idPop = true; 
-						
+				// var idPop = true;
+
 			}
 		}
 

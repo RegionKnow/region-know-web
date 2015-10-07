@@ -8,9 +8,7 @@
   function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
     var vm = this;
     vm.status = UserFactory.status;
-    setInterval(function () {
-      console.log(vm.status);
-    }, 3000 )
+
 
 
 
@@ -33,12 +31,10 @@
     alertWatch();
 
     function alertWatch() {
-      // console.log('watching for alerts')
       $timeout(function() {
         UserFactory.grabAlert(vm.status.id).then(function(res) {
-          // console.log(res.alerts[0])
+          if(!res.alerts) return;
           if (res.alerts.length > 0) {
-            // console.log('grabbing alerts')
             vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
             vm.alertObj.alerts = res.alerts;
