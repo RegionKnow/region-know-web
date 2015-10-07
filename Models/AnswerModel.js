@@ -9,6 +9,9 @@ var AnswerSchema = new mongoose.Schema({
 	knowledgePoint: Number,
 	dateDeleted: Date,
 	name: String,
+	upvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	downvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	voteNum: {type: Number, default: 0}, 
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	comments: [{
 		commentBody: String,

@@ -33,6 +33,7 @@
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status.id).then(function(res) {
+          console.log('watching for alerts')
           if(!res.alerts) return;
           if (res.alerts.length > 0) {
             vm.alertObj.status = true;
