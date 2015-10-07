@@ -16,8 +16,7 @@ router.post('/', function(req, res) {
     }else{
       userName = response.displayName
     }
-    
-    console.log(userName)
+
     var newAnswer = new Answers(req.body)
     var user_id = req.body.user_id;
     // console.log(newAnswer, user_id)
@@ -57,9 +56,39 @@ router.post('/', function(req, res) {
 
       res.send(resultOfAnswerSave); // sending resultOfAnswerSave to back to client to be parsed and displayed
     })
-  })  
-   
+  })
+
 })
+
+
+
+router.post('/delete', function(req, res){
+  Answers.update({_id: req.body.answerId}, {dateDeleted: new Date()}, function(err, response){
+    console.log('hitting delete in routes line 56');
+    console.log(response);
+    res.send(response);
+  })
+})
+
+router.post('/edit/:id', function(req, res){
+  console.log(req.body,"line 62")
+  Answers.update({_id: req.params.id}, {answerBody: req.body.answerBody}, function(err, response){
+    if(err) return res.status(500).send({err: "Error finding answer"});
+    if(!response) return res.status(400).send({err: "Error getting from the mongodb error finding answer"});
+    res.send(response)
+  })
+})
+
+  router.param('id', function(req, res, next, id){
+    console.log(id, "laaaaa");
+    req.answerId = id;
+    Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
+      if(err) return res.status(500).send({err: "Error finding answer"});
+      if(!response) return res.status(400).send({err: "Error getting from the mongodb Kaareeeee"});
+      req.answer = response;
+      next();
+    })
+  });
 
 
 

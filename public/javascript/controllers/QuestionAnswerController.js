@@ -77,6 +77,15 @@
       })
     }
 
+
+    vm.deleteAnswer = function(answer_id) {
+      console.log("hi");
+      AnswerFactory.deleteAnswer(answer_id).then(function(res) {
+
+        $state.go('QuestionsFeed')
+      })
+    }
+
     vm.editQuestion = function() {
       vm.showEdit = true;
 
