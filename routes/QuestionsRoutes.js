@@ -231,4 +231,14 @@ router.post('/alert/:id', function(req, res){
 	}
 })
 
+router.post('/upvote/:id', function(req, res){
+	console.log('trying to upvote routes')
+	// Questions.update({_id: req.question._id}, )
+	res.send('upvoted')
+})
+
+router.post('/downvote/:id', function(req, res){
+	
+})
+
 module.exports = router;
