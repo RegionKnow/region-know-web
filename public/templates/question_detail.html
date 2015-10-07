@@ -2,15 +2,38 @@
 
 	<div class="col-md-2 col-lg-1"></div>
 
-	<div class="col-md-8 col-lg-10 animated rubberBand">
-		<div>
-			
-			<h1>{{vm.question.questionBody}}</h1>
-			<span ng-repeat="tag in vm.question.tags">
-				{{tag}}
-			</span>
-			
-			<br>
+	<div class="col-md-8 col-lg-10 animated rubberBand" ng-cloack>
+		<table style='margin-left: auto; margin-right: auto'  ng-cloack>
+			<tr id="questionVote" class="">
+					<td>
+						<div ng-controller="VoteController as vm">
+							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.upVote(vm.quesiton._id)">
+							  <div class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div>
+							</button>
+							<div style="font-size:25px;" id="voteNum">
+							9
+							</div>
+							<button type="button" class="btn btn-default btn" aria-label="Left Align" ng-click="vm.downVote(vm.quesiton._id)">
+							  <div class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div>
+							</button>
+						</div>
+					</td>	
+					<td>
+						<div id="questionFace">
+							{{vm.question.questionBody}}
+						</div>
+					</td>
+			</tr>
+			<!-- <br>
+			<tr>
+				<td>
+					<span ng-repeat="tag in vm.question.tags">
+						{{tag}}
+					</span>
+				</td>
+			</tr>
+				 -->
+		</table>
 
 			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
 
@@ -31,7 +54,7 @@
 
 				</form>
 			</div>
-		</div>
+
 
 		<br>
 		<br>
@@ -73,24 +96,19 @@
 					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect">
 					<i class="material-icons">edit</i>
 				</md-button>
+				</span>
+
+				<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
+				</span>
 			</span>
-
-			<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
-				<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
-			</span>
-		</span>
-
-
-		
-		
-		
+		</div>	
 	</div>
 
-
+	<div class="col-md-2 col-lg-1"></div>
 </div>
 
-<br>
 
-<div class="col-md-2 col-lg-1"></div>
 
-</div>
+
+
