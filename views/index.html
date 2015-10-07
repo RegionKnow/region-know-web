@@ -33,7 +33,7 @@
 					help_outline
 				</i>
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">insert_comment</i></a> &nbsp;
-				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</a>
+				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}</a>
 
 
 				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
@@ -71,10 +71,10 @@
 			<md-toolbar id="userInfo" class="md-theme-light">
 
 			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
-				<br>{{nav.status.username}}
+				<br>{{nav.status._user.username}}
 				<br>
 
-				<img class="img  img-circle navImage" src="{{nav.status.image}}">
+				<img class="img  img-circle navImage" src="{{nav.status._user.image}}">
 
 
 			</a>
@@ -98,7 +98,7 @@
 						<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register</a>
 
 
-						<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status.id})" ng-click="nav.close()">
+						<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
 							<i class="material-icons">settings</i>Settings</a>
 							<a class="md-button" ng-show="nav.status" ui-sref="Message" ng-click="nav.close();">
 								<i class="material-icons">question_answer</i>Messaging</a>

@@ -7,8 +7,10 @@
 
   function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
     var vm = this;
-    vm.status = $rootScope._user;
-    console.log(vm.status);
+    vm.status = UserFactory.status;
+    setInterval(function () {
+      console.log(vm.status);
+    }, 3000 )
 
 
 
@@ -75,7 +77,7 @@
 
     vm.loginUser = function() {
       UserFactory.loginUser(vm.user).then(function(res) {
-        vm.status = $rootScope._user;
+        vm.status = UserFactory.status;
         vm.user = null;
         $state.go("QuestionsFeed");
       });
