@@ -27,13 +27,14 @@
 			<div class="col-md-11">
 				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars md-button-ripple" style="font-size: 2.6em;"></i>
 				<span id="tradeName">&nbsp;RegionKnow</span>
-				<img class="topRight img  img-circle navbar-right" ng-src="{{nav.status.image}}" height="30px" width="33px">
+
 
 				<i class="topRight material-icons navbar-right">
 					help_outline
 				</i>
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">insert_comment</i></a> &nbsp;
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</a>
+
 
 				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
 					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
@@ -72,7 +73,9 @@
 			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
 				<br>{{nav.status.username}}
 				<br>
+
 				<img class="img  img-circle navImage" src="{{nav.status.image}}">
+
 
 			</a>
 
@@ -150,6 +153,8 @@
 	<script src="/javascript/controllers/MessagingController.js"></script>
 	<script src="/javascript/controllers/UserSettingsController.js"></script>
 	<script src="/javascript/controllers/PasswordResetController.js"></script>
+	<script src="/javascript/controllers/VoteController.js"></script>
+
 </body>
 
 </html>
