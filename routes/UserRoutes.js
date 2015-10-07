@@ -19,19 +19,22 @@ cloudinary.config({
 
 router.param('userId', function(req, res, next, userId) {
   req.userId = req.params.userId;
+  if(req.userId === 'undefined') return res.send();
   User.findOne({
-    _id: req.userId
-  })
-  .exec(function(err, user) {
-    if (err) return res.status(500).send({
-      err: "Error inside the server. UserId"
-    });
+      _id: req.userId
+    })
+    .exec(function(err, user) {
+      if (err) {
+        return res.status(500).send({
+          err: "Error inside the server. UserId"
+        });
+      }
       if (!user) return res.status(400).send({
         err: "That user does not exist"
       });
-        req.user = user;
-        next();
-      });
+      req.user = user;
+      next();
+    });
 
 });
 
@@ -42,14 +45,14 @@ router.param('Profile', function(req, res, next, Profile) {
   req.Profile = Profile;
   // console.log("Hey line 27");
   User.update({
-    _id: req.Profile
-  }, {
-    deactivated: true
-  })
-  .exec(function(err, user) {
-    if (err) return res.status(500).send({
-      err: "Error inside the server. Profile"
-    });
+      _id: req.Profile
+    }, {
+      deactivated: true
+    })
+    .exec(function(err, user) {
+      if (err) return res.status(500).send({
+        err: "Error inside the server. Profile"
+      });
       if (!Profile) return res.status(400).send({
         err: "That user does not exist"
       });
@@ -72,10 +75,10 @@ router.param('updateProfile', function(req, res, next, updateProfile) {
     if (err) return res.status(500).send({
       err: "Error inside the server. UpdateProfile"
     });
-      if (!updateProfile) return res.status(400).send({
-        err: "That user does not exist"
-      });
-        next();
+    if (!updateProfile) return res.status(400).send({
+      err: "That user does not exist"
+    });
+    next();
     // res.send();
   });
 
@@ -93,8 +96,8 @@ router.post('/register', function(req, res) {
     if (err) return res.status(500).send({
       err: "Error registering",
     }); //server error
-      if (!result) return res.status(400).send({
-        err: "You messed up."
+    if (!result) return res.status(400).send({
+      err: "You messed up."
     }); //error in saving
     res.send(); //completing the post.
   })
@@ -180,19 +183,19 @@ router.post('/tags/:userId', function(req, res) {
     // for(var k = 0; k < req.body.length; k ++){
     // 	console.log(req.body[k])
     // }
-    for (var i = 0; i < req.body.length; i++) {
-      User.update({
-        _id: req.user._id
-      }, {
-        $push: {
-          tags: req.body[i]
-        }
-      }, function(err, response) {
+  for (var i = 0; i < req.body.length; i++) {
+    User.update({
+      _id: req.user._id
+    }, {
+      $push: {
+        tags: req.body[i]
+      }
+    }, function(err, response) {
 
-      })
-    }
-    res.send()
-  })
+    })
+  }
+  res.send()
+})
 
 
 router.get('/tags/:userId', function(req, res) {
@@ -204,16 +207,16 @@ router.get('/tags/:userId', function(req, res) {
 })
 
 router.delete('/tags/:userId', function(req, res) {
-  User.update({
-    _id: req.user._id
-  }, {
-    tags: []
-  }, function(err, response) {
-    console.log(response)
-    res.send(response.tags)
-  })
+    User.update({
+      _id: req.user._id
+    }, {
+      tags: []
+    }, function(err, response) {
+      console.log(response)
+      res.send(response.tags)
+    })
 
-})
+  })
   //----------GETTING USER AND USERS-----------------------------------------------
 
 
@@ -233,16 +236,16 @@ router.post('/filterOn/:userId', function(req, res) {
 })
 
 router.post('/filterOff/:userId', function(req, res) {
-  User.update({
-    _id: req.user._id
-  }, {
-    filter: false
-  }, function(err, response) {
-    console.log('truned filter off')
-    res.send(response)
+    User.update({
+      _id: req.user._id
+    }, {
+      filter: false
+    }, function(err, response) {
+      console.log('truned filter off')
+      res.send(response)
+    })
   })
-})
-//Alert Filters
+  //Alert Filters
 router.post('/filterAlertOn/:userId', function(req, res) {
   User.update({
     _id: req.user._id
@@ -265,15 +268,21 @@ router.post('/filterAlertOff/:userId', function(req, res) {
   })
 })
 
-router.get('/alert/:userId', function(req, res){
-  User.findOne({_id: req.user._id }).populate('alerts').exec(function(err, response){
+router.get('/alert/:userId', function(req, res) {
+  User.findOne({
+    _id: req.user._id
+  }).populate('alerts').exec(function(err, response) {
     // console.log('populated')
     res.send(response)
   })
 })
 
-router.post('/delete/alert/:userId', function(req, res){
-  User.update({_id: req.user._id}, {alerts: [] }, function(err, response){
+router.post('/delete/alert/:userId', function(req, res) {
+  User.update({
+    _id: req.user._id
+  }, {
+    alerts: []
+  }, function(err, response) {
     res.send('deleted alerts');
   })
 })
