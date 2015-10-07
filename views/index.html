@@ -28,11 +28,7 @@
 				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars md-button-ripple" style="font-size: 2.6em;"></i>
 				<span id="tradeName">&nbsp;RegionKnow</span>
 
-
-				<i class="topRight material-icons navbar-right">
-					help_outline
-				</i>
-				<a ui-sref="Message"><i class="topRight material-icons navbar-right">insert_comment</i></a> &nbsp;
+				<a ui-sref="Message"><i class="material-icons topRight navbar-right">question_answer</i></a> &nbsp;
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}</a>
 
 
