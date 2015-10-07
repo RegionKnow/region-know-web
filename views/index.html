@@ -32,8 +32,7 @@
 				<i class="topRight material-icons navbar-right">
 					help_outline
 				</i>
-				<i class="topRight material-icons navbar-right">insert_comment
-				</i>
+				<a ui-sref="Message"><i class="topRight material-icons navbar-right">insert_comment</i></a> &nbsp;
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status.username}}</a>
 
 				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
@@ -73,7 +72,7 @@
 			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
 				<br>{{nav.status.username}}
 				<br>
-				<img class="img  img-circle navImage" src="{{vm.userLoggedIn.image}}">
+				<img class="img  img-circle navImage" src="{{nav.status.image}}">
 
 			</a>
 

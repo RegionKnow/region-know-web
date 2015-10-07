@@ -8,6 +8,10 @@
   function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
     var vm = this;
     vm.status = $rootScope._user;
+    console.log(vm.status);
+
+    $state.go("QuestionsFeed");
+
 
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
@@ -29,7 +33,7 @@
     alertWatch();
 
     function alertWatch() {
-      console.log('watching for alerts')
+      // console.log('watching for alerts')
       $timeout(function() {
         UserFactory.grabAlert(vm.status.id).then(function(res) {
           // console.log(res.alerts[0])
@@ -88,4 +92,3 @@
 
   }
 })();
-
