@@ -1,13 +1,14 @@
 (function() {
   'use strict';
   angular.module('app')
-    .controller('NavBarController', NavBarController);
+  .controller('NavBarController', NavBarController);
 
   NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope'];
 
   function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
     var vm = this;
     vm.status = $rootScope._user;
+    console.log(vm.status);
 
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
@@ -16,7 +17,7 @@
     function buildToggler(navID) {
       var debounceFn = $mdUtil.debounce(function() {
         $mdSidenav(navID)
-          .toggle()
+        .toggle()
       }, 200);
       return debounceFn;
     }
@@ -73,7 +74,6 @@
 
     vm.loginUser = function() {
       UserFactory.loginUser(vm.user).then(function(res) {
-
         vm.status = $rootScope._user;
         vm.user = null;
         $state.go("QuestionsFeed");
