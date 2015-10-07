@@ -78,6 +78,7 @@
 			}
 			vm.tags.push(tag.toLowerCase());
 			vm.tag = ""
+			vm.saveTags();
 		}
 		vm.deleteTag = function(index){
 			vm.tags.splice(index, 1)
