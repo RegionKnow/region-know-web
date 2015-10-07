@@ -54,7 +54,7 @@
         controllerAs: 'vm'
       })
       .state('Message', {
-        url: '/Messaging',
+        url: '/Messaging/:recipient',
         templateUrl: 'templates/messaging.html',
         controller: 'MessageController',
         controllerAs: 'msg'
@@ -83,7 +83,7 @@
       })
       .state("PasswordResetStart", {
         url: "/reset",
-        template: "<div id='reset-password'><md-input-container class='col-md-3'><label>Username</label><input type='text' ng-model='vm.username'></md-input-container><br><md-button class='md-raised md-primary' ng-click='vm.sendEmail()'>Send Email</md-button></div><h1>{{vm.errorMessage}}</h1>",
+        template: "<div id='reset-password'><md-input-container class='col-md-3'><label>Username</label><input type='text' ng-model='vm.username'></md-input-container><br><md-button class='md-raised md-primary' ng-click='vm.sendEmail()'>Send Email</md-button></div><h1>{{vm.errorMessage}}</h1><div ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'><md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular> </div>",
         controller: "PasswordResetController",
         controllerAs: "vm"
       })

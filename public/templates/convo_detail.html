@@ -1,0 +1,21 @@
+<md-dialog aria-label="Converstion" ng-cloak>
+  <md-dialog-content>
+    <div ng-show="msg.inConversation">
+      <div ng-repeat="message in msg.convoInFocus.messages">
+        <p>{{message.body}}</p>
+      </div>
+      <ul>
+        <li>{{msg.convoInFocus.participantOne.username}}</li>
+        <li>{{msg.convoInFocus.participantTwo.username}}</li>
+      </ul>
+      <div flex="50">
+        <md-input-container>
+          <label>Enter Message</label>
+          <textarea name="" id="" cols="20" rows="4"></textarea>
+        </md-input-container>
+      </div>
+      <md-button class='md-raised md-primary' ng-click="msg.sendMessage();">Send Message</md-button>
+      <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
+    </div>
+  </md-dialog-content>
+</md-dialog>
