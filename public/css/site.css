@@ -25,11 +25,14 @@ body {
   }
   #map {
     width: 100%;
+    height: 400px;
+  }
+  #settingsMap{
+    width: 100%;
     height: 200px;
   }
-
   #searchLoc {
-    width: 30%;
+    width: 50%;
     display: inline;
   }
 

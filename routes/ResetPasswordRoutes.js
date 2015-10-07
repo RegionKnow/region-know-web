@@ -5,25 +5,42 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
-// var env = require('../env');
+var env = require('../env');
+var jwt = require("jsonwebtoken");
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'regionknow@gmail.com',
-    pass: 'codercamps'
+    pass: env.EMAIL_PASS
   }
 });
 
 
 //Send email function
-function SendEmail(email, resObj) {
+function SendEmail(user, resObj) {
+  console.log("Line 22ish, Password Reset Route. Secret: %s", env.PASSWORD_RESET_SECRET);
+  var date = new Date().getTime();
+  var fiveMinutesInMilliseconds = 1000 * 600;
+  date += fiveMinutesInMilliseconds;
+  resetPassToken = jwt.sign({
+    expirationDate: date,
+    user: {
+      id: user._id,
+      name: user.username
+    }
+  }, env.PASSWORD_RESET_SECRET);
+  var name = user.displayName || user.username;
+  var link = "http://localhost:3000/#/resetEnd/" + resetPassToken;
+  var text = "<h2>Hello, " + name + "!<br><br>You recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have 10 minutes. Let the games begin.</h2>" +
+    "<br><br>" +
+    "<p>Sincerely,</p>" + "<p>RegionKnow Team</p>";
   var mailOptions = {
     from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
-    to: email, // list of receivers
-    subject: 'Hello', // Subject line
+    to: user.email, // list of receivers
+    subject: 'Password Reset', // Subject line
     // text: 'Hello world', // plaintext body
-    html: '<b>Hello world </b>' // html body
+    html: text // html body
   }
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
@@ -40,9 +57,6 @@ function SendEmail(email, resObj) {
 //============================================
 
 
-router.get("/", function(req, res) {
-  res.redirect("/#/" + uuid() + "/reset")
-})
 
 router.post("/", function(req, res) {
   User.findOne({
@@ -55,13 +69,44 @@ router.post("/", function(req, res) {
     if (error) return res.status(500).send({
       err: "Something happened on the server,"
     });
-      if (!user) return res.status(404).send({
-        err: "That user doesn't exist"
-      });
+    if (!user) return res.status(404).send({
+      err: "That user doesn't exist"
+    });
+    else {
+      SendEmail(user, res);
+    }
+  })
+});
+
+
+router.post('/finish', function(req, res) {
+  User.findOne({
+    _id: req.body.userId
+  }, function(error, user) {
+    if (error) return res.status(500).send({
+      err: "Error on the server finding user for password change"
+    });
+    if (!user) return res.status(400).send({
+      err: "For some reason we couldn't find you on the server"
+    });
+    else {
+      user.setPassword(req.body.newPassword);
+      user.save(function(error, result) {
+        if (error) return res.status(500).send({
+          err: "Error on the server saving user for password change"
+        });
+        if (!result) return res.status(400).send({
+          err: "For some reason we couldn't find you on the server"
+        });
         else {
-          SendEmail(user.email, res);
+          res.send({
+            success: "Password succesfully changed"
+          });
         }
       })
+    }
+
+  })
 })
 
 

@@ -8,12 +8,12 @@
 
 				<div class="form-group">
 					<label>User Name</label>
-					<input type="text" class="form-control" ng-model="nav.user.username"/>
+					<input required type="text" class="form-control" ng-model="nav.user.username"/>
 				</div>
 
 				<div class="form-group">
 					<label >Password</label>
-					<input type="password" class="form-control" ng-model="nav.user.password"/>
+					<input required type="password" class="form-control" ng-model="nav.user.password"/>
 				</div>
 
 				<div class="text-center">
@@ -21,11 +21,11 @@
 					<md-button type="submit" class="md-raised md-primary">
 					Submit
 				</md-button>
-				<a href="api/password-reset/"><md-button class="md-raised md-accent">Forgot Password?</md-button></a>
 			</div>
 			<br/>
 
 		</form>
+				<a ui-sref="PasswordResetStart"><md-button class="md-raised md-accent">Forgot Password?</md-button></a>
 	</div>
 	<div class="col-md-2"></div>
 
