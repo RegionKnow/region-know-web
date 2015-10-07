@@ -68,6 +68,24 @@
         // }
       )
     }
+    function findAnswerVote(question_id){
+      QuestionFactory.findQuestion(question_id).then(function(res){
+        vm.voteNum = res.voteNum;
+      })
+    }
+    vm.upVoteAnswer = function(answer_id){ 
+      $http.post('/api/answer/upvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res){
+        console.log(res)
+        findAnswerVote(answer_id);
+      })
+    }
+
+    vm.downVoteAnswer = function(answer_id){
+      $http.post('/api/answer/downvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res, callback){
+        console.log(res)
+        findAnswerVote(answer_id);
+      })
+    }
 
     vm.deleteQuestion = function(quesiton_id) {
 

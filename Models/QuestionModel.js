@@ -14,7 +14,7 @@ var QuestionSchema = new mongoose.Schema({
 	tags: [{type: String}],
 	upvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
 	downvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-	voteNum: Number,
+	voteNum: {type: Number, default: 0}, 
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
 	comments: [{
