@@ -63,7 +63,7 @@ router.post('/', function(req, res) {
 
 
 router.post('/delete', function(req, res){
-  Answers.update({_id: req.body.answerId}, {dateDeleted: new Date()}, function(err, response){
+  Answers.update({_id: req.body.answerId}, {isDeleted: true}, function(err, response){
     console.log('hitting delete in routes line 56');
     console.log(response);
     res.send(response);
@@ -89,6 +89,8 @@ router.post('/edit/:id', function(req, res){
       next();
     })
   });
+
+
 
 
 
