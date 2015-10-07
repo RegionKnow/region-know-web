@@ -3,22 +3,23 @@
 	angular.module('app')
 	.controller('UserProfileController', UserProfileController);
 
-	UserProfileController.$inject = ['UserFactory', '$state', '$rootScope', '$scope', 'Upload'];
+	UserProfileController.$inject = ['UserFactory', '$state', '$scope', 'Upload'];
 
-	function UserProfileController(UserFactory, $state, $rootScope, $scope, Upload) {
+	function UserProfileController(UserFactory, $state,  $scope, Upload) {
 		var vm = this;
-		
+		vm.status = UserFactory.status;
+
 	//-------------GET LOGGED IN USER-------------------------
 
-	if($rootScope._user) {
-		UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res) {
+	if(vm.status) {
+		UserFactory.getUserLoggedIn(vm.status._user.id).then(function(res) {
 			vm.userLoggedIn = res;
 		});
 	};
 	//----------------------------------------------------------------------------------------------------------------------------------------------------//
 	//PROFILE>DELETE
 	vm.deleteUserProfile = function() {
-		UserFactory.deleteUserProfile($rootScope._user.id).then(function(res){
+		UserFactory.deleteUserProfile(vm.status._user.id).then(function(res){
 			// console.log("res");
 			vm.deleteUserProfile = res;
 		});
@@ -59,9 +60,9 @@
 
 		vm.updateProfile = function(user){
 
-			UserFactory.updateProfile($rootScope._user.id, user).then(function (res){
+			UserFactory.updateProfile(vm.status._user.id, user).then(function (res){
 
-				  // UserFactory.post($rootScope._user.id, vm.updateProfile).then(function (res){
+				  // UserFactory.post(vm.status._user.id, vm.updateProfile).then(function (res){
 					// 	vm.updateProfile = res;
 				  // console.log(vm.updateProfile);
 			  // });

@@ -2,6 +2,7 @@
 
 	<div class="col-md-2 col-lg-1"></div>
 
+
 	<div class="col-md-8 col-lg-10 animated rubberBand" ng-cloack>
 		<table style='margin-left: auto; margin-right: auto'  ng-cloack>
 			<tr id="questionVote" class="">
@@ -17,7 +18,7 @@
 							  <div class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div>
 							</button>
 						</div>
-					</td>	
+					</td>
 					<td>
 						<div id="questionFace">
 							{{vm.question.questionBody}}
@@ -35,7 +36,7 @@
 				 -->
 		</table>
 
-			<button ng-if="vm.status.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
+			<button ng-if="vm.status._user.id === vm.question.postedBy && !vm.options" class="btn btn-primary btn-xs" ng-click="vm.showOptions()">Question Options</button>
 
 			<span ng-if="vm.options">
 				<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
@@ -80,35 +81,29 @@
 
 		</div>
 
-		
-		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers">
-			<span class="">
-				<span class="text-left">{{a.name}}</span> -  
-				<i style="font-size:25px;">{{a.answerBody}}</i>	
-			</span>
-			
-			<span ng-if="vm.status.id">
-				<span class="text-left" ng-controller="MessageController as message">
-					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
-				</span>
 
-				<span class="text-right" ng-if="vm.status.id === a.postedBy">
+		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers">
+			<span>
+				<p style="font-size:25px;">{{a.answerBody}}</p>
+				<span class="text-left">{{a.name}}</span><a ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i></a>
+			</span>
+
+			<span ng-if="vm.status._user.id">
+					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
+
+				<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
 					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect">
 					<i class="material-icons">edit</i>
 				</md-button>
 				</span>
 
-				<span  class="text-right" ng-if="vm.status.id === a.postedBy">	
+
+				<span  class="text-right" ng-if="vm.status._user.id === a.postedBy">
 					<md-button class="mdl-button mdl-js-button mdl-js-ripple-effect"><i ng-click="deleteAnswer()" class="material-icons">delete</i></md-button>
 				</span>
 			</span>
-		</div>	
+		</div>
 	</div>
 
 	<div class="col-md-2 col-lg-1"></div>
 </div>
-
-
-
-
-

@@ -1,3 +1,39 @@
-<h1>{{msg.title}}</h1>
-<md-button ng-click="msg.testRequest()" class="md-accent md-raised">{{msg.button}}</md-button>
-<h1 ng-show="msg.testMessage">{{msg.testMessage}}</h1>
+<div ng-hide="msg.inConversation">
+  <h1>{{msg.title}}</h1>
+  <md-button ng-click="msg.testRequest()" class="md-accent md-raised">{{msg.button}}</md-button>
+  <h1 ng-show="msg.testMessage">{{msg.testMessage}}</h1>
+  <md-card ng-repeat='convo in msg.conversations track by $index'>
+    <md-card-content>
+      <h2 class="md-title">Last Message:
+        <p>
+          {{convo.messages[convos.messages.length - 1].body || "Empty"}}
+      </h2>
+      <h3>Participants</h3>
+      <ul>
+        <li>{{convo.participantOne.username}}</li>
+        <li>{{convo.participantTwo.username}}</li>
+      </ul>
+    </md-card-content>
+    <div class="md-actions" layout="row" layout-align="end center">
+      <md-button class='md-raised md-primary' ng-click="msg.openConvo($event, $index);">Open Convo</md-button>
+      <md-button class='md-raised md-accent'>Delete</md-button>
+    </div>
+  </md-card>
+</div>
+<div ng-show="msg.inConversation">
+  <div ng-repeat="message in msg.convoInFocus.messages">
+    <p>{{message.body}}</p>
+  </div>
+  <ul>
+    <li>{{msg.convoInFocus.participantOne.username}}</li>
+    <li>{{msg.convoInFocus.participantTwo.username}}</li>
+  </ul>
+  <div flex="50">
+    <md-input-container>
+      <label>Enter Message</label>
+      <textarea name="" id="" cols="20" rows="4"></textarea>
+    </md-input-container>
+  </div>
+  <md-button class='md-raised md-primary' ng-click="msg.sendMessage();">Send Message</md-button>
+  <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
+</div>

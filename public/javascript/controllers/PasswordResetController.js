@@ -9,6 +9,7 @@
     vm.newPassword;
     vm.confirmPassword;
     vm.errorMessage = "";
+    vm.loading;
 
 
     function changePassword() {
@@ -23,11 +24,13 @@
           if (vm.newPassword !== vm.confirmPassword) {
             vm.errorMessage = "Your Passwords don't match!"
           } else {
+            vm.loading = true;
             $http.post("/api/password-reset/finish", {
                 userId: token.user.id,
                 newPassword: vm.newPassword
               })
               .then(function(res) {
+                vm.loading = false;
                 vm.errorMessage = res.data.success;
                 $timeout(function() {
                   $state.go('Home')
@@ -44,15 +47,18 @@
 
     function sendEmail() {
       if (!vm.username) return vm.errorMessage = "No input";
+      vm.loading = true;
       $http.post("/api/password-reset", {
           username: vm.username
         })
         .then(function(responseSuccess) {
+          vm.loading = false;
           vm.errorMessage = "Success! Email Sent!!! Check your email, please.\nRedirecting to login page.."
           $timeout(function() {
             $state.go("Login");
           }, 3000)
         }, function(responseError) {
+          vm.loading = false;
           vm.errorMessage = responseError.data.err;
           $timeout(function() {
             vm.errorMessage = '';

@@ -5,10 +5,10 @@
 
   function UserFactory($q, $http, $window, $rootScope) {
     var o = {};
-
+    o.status = {};
     //---------------------TOKENS----------------------------------------------------
     o.setLoggedinUserToRootScope = function() {
-      $rootScope._user = isLoggedIn();
+      o.status._user = isLoggedIn();
     }
 
     function setToken(token) {
@@ -37,9 +37,9 @@
 
     //-------------------------------CLOUDINARY FUNCTIONALITY------------------------------------------
 
-// o.cloudinary.uploader.upload("my_picture.jpg", function(result) { 
-//       console.log(result) 
-//     });
+    // o.cloudinary.uploader.upload("my_picture.jpg", function(result) {
+    //       console.log(result)
+    //     });
 
 
     // o.postImage()= function(image) {
@@ -66,8 +66,8 @@
       user.username = user.username.toLowerCase();
       $http.post('/api/user/login', user).success(function(res) {
         setToken(res.token);
-        $rootScope._user = isLoggedIn();
-        console.log($rootScope._user)
+        o.status._user = isLoggedIn();
+        console.log(o.status._user)
         q.resolve();
       });
       return q.promise;
@@ -76,7 +76,7 @@
     o.logoutUser = function() {
       var q = $q.defer()
       removeToken();
-      $rootScope._user = isLoggedIn();
+      o.status._user = isLoggedIn();
       q.resolve();
       return q.promise;
     };
@@ -131,41 +131,41 @@
       var output = str.replace(/-/g, '+').replace(/_/g, '/');
       switch (output.length % 4) {
         case 0:
-        {
-          break;
-        }
+          {
+            break;
+          }
         case 2:
-        {
-          output += '==';
-          break;
-        }
+          {
+            output += '==';
+            break;
+          }
         case 3:
-        {
-          output += '=';
-          break;
-        }
+          {
+            output += '=';
+            break;
+          }
         default:
-        throw 'Illegal base64url string'
+          throw 'Illegal base64url string'
       }
       return decodeURIComponent(escape($window.atob(output)));
     }
     //alerts
-    o.grabAlert = function(user_id){
+    o.grabAlert = function(user_id) {
       var q = $q.defer();
-      $http.get('/api/user/alert/' + user_id).success(function(res){
+      $http.get('/api/user/alert/' + user_id).success(function(res) {
         q.resolve(res);
       })
       return q.promise;
     }
-    o.deleteAlerts = function(id){
+    o.deleteAlerts = function(id) {
       var q = $q.defer();
-      $http.post('/api/user/delete/alert/' + id).success(function(res){
+      $http.post('/api/user/delete/alert/' + id).success(function(res) {
         q.resolve(res);
       })
       return q.promise;
     }
 
-    $rootScope._user = isLoggedIn();
+    o.status._user = isLoggedIn();
     return o;
   }
 })();

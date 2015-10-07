@@ -3,11 +3,11 @@
   angular.module('app')
     .controller('CreateQuestionController', CreateQuestionController);
 
-  CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope'];
+  CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope', "UserFactory"];
 
-  function CreateQuestionController($state, QuestionFactory, $rootScope) {
+  function CreateQuestionController($state, QuestionFactory, $rootScope, UserFactory) {
     var vm = this;
-    vm.status = $rootScope._user;
+    vm.status = UserFactory.status;
     vm.question = {}
     vm.createQ = createQ;
     vm.showTagInput = showTagInput;
@@ -21,7 +21,7 @@
 
 
     function getQuestions() {
-      QuestionFactory.findQuestions(vm.status.id).then(function(res) {
+      QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
         // console.log(res)
 
         vm.allquestions = res;
@@ -33,8 +33,8 @@
 
     function createQ() {
       vm.question.questionBody = vm.desc; // setting desc to questionbody
-      console.log(vm.status.id);
-      vm.question.user_id = vm.status.id;
+      console.log(vm.status._user.id);
+      vm.question.user_id = vm.status._user.id;
       // vm.question.tag = vm.tag
 
 
