@@ -11,7 +11,7 @@ body {
     -moz-border-radius: 25px;
     border-radius: 25px; */
   }
-  
+
   #loadingGif {
     height: 40px;
     width: 40px;
@@ -60,7 +60,7 @@ body {
   }
 
   .navImage {
-    height: 100%;
+    height: 100px;
     width: 50%;
   }
 
@@ -115,15 +115,12 @@ body {
     margin-top: .3em;
   }
 
-  md-backdrop.md-opaque {
-    background-color: rgba(33,33,33,0) !important; 
+  /*md-backdrop.md-opaque {
+    background-color: rgba(33,33,33,0) !important;
     top: 0;
 
-  }
-/*
-md-backdrop {
-  top: 0;
-  } */ 
+  }*/
+
 
   /*================TAG STYLES==========================================*/
 
@@ -143,7 +140,7 @@ md-backdrop {
   /*================QUESTIONs &  CARD STYLES==========================================*/
 
   .md-input-container.flex.md-default-theme.md-input-focused {
-    color: #26a69a; 
+    color: #26a69a;
   }
   .qCards {
     width: 100%;
