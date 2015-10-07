@@ -13,7 +13,7 @@
 				q.resolve();
 			})
 			return q.promise;
-		}
+		} 
 
 		o.addTags = function(tags, question_id){
 			var q = $q.defer();
