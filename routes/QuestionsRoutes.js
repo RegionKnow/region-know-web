@@ -178,30 +178,56 @@ router.post('/alert/:id', function(req, res){
 		})
 	})
 	function alertUser(users, question){
-		console.log(users, question)
+		// console.log(users, question)
 		var q_lat = question.lat
 		var q_lng = question.lng
 
 		for(var i =0; i < users.length; i++){
-			//pushes quesiton reference into user alerts, if distance matchs , and user ids are not the same
-			
+		//pushes quesiton reference into user alerts, if distance matchs , and user ids are not the same
 			if(getSpaceDiffernece(users[i].lat, q_lat, users[i].lng, q_lng) < (users[i].radius * 1000)){
-				
-				if(users[i]._id.toString() !== question.postedBy.toString()){
-					console.log(users[i]._id, question.postedBy)
-					User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
-						console.log('pushed to some users')
-					})
+				if(!users[i].filterAlert){ // if filter by tags is off!
+					if(users[i]._id.toString() !== question.postedBy.toString()){
+					// console.log(users[i]._id, question.postedBy)
+						User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
+							console.log('pushed to some users')
+						})
+					}
 				}
+				else{
+					if(users[i]._id.toString() !== question.postedBy.toString()){
+						var checkObj = {}
+						for(var j=0; j< users[i].tags.length; j++){
+							
+							var result = checkAlertTag(users[i].tags[j], question, users[i]._id, checkObj)
+							if(result) return;
+						}
+						for(id in checkObj){
+							User.update({_id: id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
+								console.log('pushed to some users in alert Filter function')
+								return true;
+							})
+						}
+					}
+				}	
+			}
+		}
+	}
+	function checkAlertTag(user_tag, question, user_id, checkObj)  {
+		for(var p =0; p < question.tags.length; p++){
+			if(user_tag == question.tags[p]){
+				if(checkObj[user_id]){
+					checkObj[user_id] += 1;
+				}else{
+					checkObj[user_id] = 1; 
+				}
+				
+				console.log(checkObj)
+				// var idPop = true; 
+						
 			}
 		}
 
-
-		// for(var k=0; k < question.tags.length; k++){
-		// 	for(var j=0; j < users.length ; j ++){
-
-		// 	}
-		// }
+		return false;
 	}
 })
 
