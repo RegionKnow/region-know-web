@@ -52,6 +52,119 @@ router.post('/:id', function(req, res){
 		res.send();
 	})
 })
+
+router.get('/:id', function(req, res){
+
+	res.send(req.question)
+})
+
+router.post('/delete/:id', function(req, res){
+	Questions.update({_id: req.question._id}, {isDeleted: true}, function(err, response){
+
+		res.send(response)
+	})
+
+})
+
+router.post('/edit/:id', function(req, res){
+
+	Questions.update({_id: req.question._id}, {questionBody: req.body.questionBody}, function(err, response){
+		res.send(response)
+	})
+
+})
+
+router.post('/tags/:id', function(req, res){
+	for(var i =0; i < req.body.length; i++){
+		Questions.update({_id: req.question._id}, {$push: {tags: req.body[i]}}, function(err, response){
+			res.send();
+		})
+	}
+
+})
+
+////Upvotes 
+router.post('/upvote/:id/:user_id', function(req, res){
+	if(req.question.upvote.indexOf(req.user._id) != -1){
+		console.log('user already upvoted')
+		res.send('user already voted!')
+	}else if(req.question.downvote.indexOf(req.user._id) != -1){
+		if(req.question.voteNum === 0){
+			var currentVote = req.question.voteNum + 1
+		}else{
+			var currentVote = req.question.voteNum + 2
+		}
+		
+		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
+			console.log('added user to upvoted')		
+			console.log(currentVote)
+			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
+				console.log('vote updated')
+				Questions.update({_id: req.question._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
+					console.log('removed downvote From reference')
+					
+					res.send(rmVote);
+				})
+			})
+		})
+	}
+	else{
+		console.log('user has not upvoted yet')
+		var currentVote = req.question.voteNum + 1
+		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
+			console.log('added user to upvoted')		
+			console.log(currentVote)
+			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
+				console.log('vote updated')
+
+				res.send(vote);
+			})
+		})
+	}
+})
+//Downvotes
+router.post('/downvote/:id/:user_id', function(req, res){
+	if(req.question.downvote.indexOf(req.user._id) != -1){
+		console.log('user already downvoted')
+		res.send('user already downvoted!')
+	}else if(req.question.upvote.indexOf(req.user._id) != -1){
+		if(req.question.voteNum === 1){
+			var currentVote = req.question.voteNum - 1
+		}else if(req.question.voteNum === 0){
+			var currentVote = 0
+		}else if(req.question.voteNum >= 2){
+			var currentVote = req.question.voteNum - 2
+		}
+		
+		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
+			console.log('added user to downvoted')		
+			console.log(currentVote)
+			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
+				console.log('vote updated')
+				Questions.findOneAndUpdate({_id: req.question._id}, {$pull: {upvote: req.user._id}}, function(err, rmVote){
+					console.log('removed downvote From reference')
+					
+					res.send(rmVote);
+				})
+			})
+		})
+	}
+	else{
+		console.log('user has not downvoted yet')
+		var currentVote = req.question.voteNum - 1
+		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
+			console.log('added user to upvoted')		
+			console.log(currentVote)
+			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
+				console.log('vote updated')
+
+				res.send(vote);
+			})
+		})
+	}
+	
+})
+
 // find differnce in miles
 function getSpaceDiffernece(lat1, lat2, lon1, lon2){
 
@@ -137,35 +250,6 @@ router.get('/allquestions/:user_id', function(req, res){
 	}
 })
 
-router.get('/:id', function(req, res){
-
-	res.send(req.question)
-})
-
-router.post('/delete/:id', function(req, res){
-	Questions.update({_id: req.question._id}, {isDeleted: true}, function(err, response){
-
-		res.send(response)
-	})
-
-})
-
-router.post('/edit/:id', function(req, res){
-
-	Questions.update({_id: req.question._id}, {questionBody: req.body.questionBody}, function(err, response){
-		res.send(response)
-	})
-
-})
-
-router.post('/tags/:id', function(req, res){
-	for(var i =0; i < req.body.length; i++){
-		Questions.update({_id: req.question._id}, {$push: {tags: req.body[i]}}, function(err, response){
-			res.send();
-		})
-	}
-
-})
 router.post('/alert/:id', function(req, res){
 	var allusers;
 	var thisquestion;

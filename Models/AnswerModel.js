@@ -7,8 +7,11 @@ var AnswerSchema = new mongoose.Schema({
 	createdDate: Date,
 	generalPoints: Number,
 	knowledgePoint: Number,
-	dateDeleted: Date,
+	isDeleted: {type: Boolean, default: false},
 	name: String,
+	upvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	downvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+	voteNum: {type: Number, default: 0}, 
 	postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	comments: [{
 		commentBody: String,

@@ -3,11 +3,18 @@ body {
   font-family: 'RobotoDraft';
   height: 100%;
 }
+#voteBut{
+  min-width: 50px;
+  }
+#editQuestion{
+  margin-top: 10%;
+  margin-left: 30px;
+}
 #questionVote{
   margin-right: 90%;
 }
 #questionFace{
-  margin-left: 20px; 
+  margin-left: 30px; 
   font-size: 30px;"
 }
 #alerts{
