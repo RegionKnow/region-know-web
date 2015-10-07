@@ -1,0 +1,9 @@
+<div>
+
+    <form ng-submit="vm.submitEdit()">
+    <input class="form-control" placeholder="{{vm.answer.answerBody}}" ng-model="vm.edit.answerBody" required>
+    <br>
+    <button class="btn btn-primary btn-sm" ng-disabled="!vm.edit.answerBody" type="submit">Submit</button>
+
+  </form>
+</div>

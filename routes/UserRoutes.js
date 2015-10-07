@@ -5,7 +5,14 @@ var User = mongoose.model('User');
 var passport = require('passport'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
 var uuid = require('uuid');
 var cloudinary = require('cloudinary');
+var express_jwt = require('express-jwt');
 var env = require('../env');
+
+var auth = express_jwt({
+  'userProperty': 'payload',
+  'secret': env.APP_SECRET
+});
+
 
 //-----------CLOUDNARY.CONFIG----------------------------------------------------
 
@@ -138,15 +145,22 @@ router.get('/auth/facebook/callback',
 
 
 router.get('/auth/google',
-  passport.authenticate('google'));
+  passport.authenticate('google', {scope : ['profile', 'email']}));
 
-router.get('/auth/google/return',
+router.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/'
   }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    if (req.user) {
+      var token = {
+        token: req.user.generateJWT()
+      }
+      res.redirect("/#/auth/token/" + token.token);
+    } else {
+      res.send("You are not authenticated");
+    }
   });
 
 //END OF THIRD PARTY LOGIN OR REGISTRATION =============================================================
