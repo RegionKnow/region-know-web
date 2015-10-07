@@ -3,17 +3,13 @@
 	angular.module('app')
 	.controller('QuestionAnwserController', QuestionAnwserController);
 
-	QuestionAnwserController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory', '$rootScope'];
+	QuestionAnwserController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory'];
 
-	function QuestionAnwserController($state, QuestionFactory, $stateParams, AnswerFactory, $rootScope) {
+	function QuestionAnwserController($state, QuestionFactory, $stateParams, AnswerFactory) {
 		var vm = this;
 		vm.edit = {}
 
-
-
 		vm.AnswerObj = {};
-
-		vm.status = $rootScope._user
 
 
 		//logic for grabing individual question From questions feed
@@ -25,7 +21,6 @@
 			QuestionFactory.findQuestion($stateParams.id).then(function(res){
 
 				vm.question = res
-				console.log(vm.question)
 
 			})
 		}
@@ -42,7 +37,7 @@
 		vm.addAnswer = function(){
 			//AnswerObj is the answer for question
 			// vm.AnswerObj.answerBody = vm.answer // sets answer
-			vm.AnswerObj.user_id = vm.status.id // sets user who submited it
+			vm.AnswerObj.user_id = o.status._user.id // sets user who submited it
 
 			AnswerFactory.addAnswer(vm.AnswerObj).then(function(res){
 

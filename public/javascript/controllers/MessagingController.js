@@ -3,9 +3,9 @@
   angular.module('app')
     .controller('MessageController', MessageController);
 
-  MessageController.$inject = ['$http', '$rootScope', "$stateParams", "$state", "$mdDialog"];
+  MessageController.$inject = ['$http', '$rootScope', "$stateParams", "$state", "$mdDialog", "UserFactory"];
 
-  function MessageController($http, $rootScope, $stateParams, $state, $mdDialog) {
+  function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory) {
     var vm = this;
     console.log("Instantiated");
     vm.title = 'Messaging - RegionKnow';
@@ -22,7 +22,7 @@
       vm.inConversation = true;
       vm.recipient = $stateParams.recipient;
       var participants = {
-        participantOne: $rootScope._user.id,
+        participantOne: UserFactory.status._user.id,
         participantTwo: vm.recipient,
       }
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
@@ -42,7 +42,7 @@
 
     function getConversations() {
       $http.post('/api/convo', {
-        userId: $rootScope._user.id
+        userId: UserFactory.status._user.id
       }).then(function(successResponse) {
         if (successResponse.data.conversations.length < 1) {
           vm.title = "No converstions to display";

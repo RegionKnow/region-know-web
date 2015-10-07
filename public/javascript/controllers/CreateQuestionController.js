@@ -3,11 +3,11 @@
   angular.module('app')
     .controller('CreateQuestionController', CreateQuestionController);
 
-  CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope'];
+  CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope', "UserFactory"];
 
-  function CreateQuestionController($state, QuestionFactory, $rootScope) {
+  function CreateQuestionController($state, QuestionFactory, $rootScope, UserFactory) {
     var vm = this;
-    vm.status = $rootScope._user;
+    vm.status = UserFactory.status;
     vm.question = {}
     vm.createQ = createQ;
     vm.showTagInput = showTagInput;
