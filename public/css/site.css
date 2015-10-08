@@ -141,12 +141,13 @@ body {
     border-radius: 10px;
   }
   .indvTag {
+    border-radius: 1px 5px 3px 5px;
     border-width: 3px;
     box-shadow: 2px 2px 2px black;
     border-color: #000000;
     padding-left: 15px;
-    color: #2F5D92;
-    background-color: #E0EDF5;
+    color: #000;
+    background-color: #26a69a;
     display: inline;
   }
 

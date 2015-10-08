@@ -164,8 +164,8 @@
 								}
 								// resets circle
 					        	console.log(marker)
-					        	vm.homeLocation.lat = this.position.H
-					        	vm.homeLocation.lng = this.position.L
+					        	vm.homeLocation.lat = this.position.J
+					        	vm.homeLocation.lng = this.position.M
 					        	console.log(vm.homeLocation)
 					            // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
 					            // vm.infoWindow.open(vm.map, marker);
@@ -234,13 +234,13 @@
 					var loc = results[0].geometry.location 
 					console.log(loc)
 				vm.map = new google.maps.Map(document.getElementById('map'), {
-						    center: {lat: loc.H, lng: loc.L},
+						    center: {lat: loc.J, lng: loc.M},
 						    scrollwheel: true,
 						    zoom: 11,
 		 		})
 		 		var marker = new google.maps.Marker({
 						            map: vm.map,
-						            position: new google.maps.LatLng(loc.H, loc.L),
+						            position: new google.maps.LatLng(loc.J, loc.M),
 						            title: 'Your Current Location',
 						            draggable: true
 				});
@@ -250,8 +250,8 @@
 								}
 								// resets circle
 					        	console.log(marker)
-					        	vm.homeLocation.lat = this.position.H
-					        	vm.homeLocation.lng = this.position.L
+					        	vm.homeLocation.lat = this.position.J
+					        	vm.homeLocation.lng = this.position.M
 					        	console.log(vm.homeLocation)
 					            // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
 					            // vm.infoWindow.open(vm.map, marker);

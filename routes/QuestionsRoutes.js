@@ -89,11 +89,9 @@ router.post('/upvote/:id/:user_id', function(req, res){
 		console.log('user already upvoted')
 		res.send('user already voted!')
 	}else if(req.question.downvote.indexOf(req.user._id) != -1){
-		if(req.question.voteNum === 0){
-			var currentVote = req.question.voteNum + 1
-		}else{
+
 			var currentVote = req.question.voteNum + 2
-		}
+		
 		
 		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
 			console.log('added user to upvoted')		
@@ -128,13 +126,9 @@ router.post('/downvote/:id/:user_id', function(req, res){
 		console.log('user already downvoted')
 		res.send('user already downvoted!')
 	}else if(req.question.upvote.indexOf(req.user._id) != -1){
-		if(req.question.voteNum === 1){
-			var currentVote = req.question.voteNum - 1
-		}else if(req.question.voteNum === 0){
-			var currentVote = 0
-		}else if(req.question.voteNum >= 2){
+		
 			var currentVote = req.question.voteNum - 2
-		}
+		
 		
 		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
 			console.log('added user to downvoted')		
