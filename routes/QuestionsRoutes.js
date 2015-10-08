@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require("express-jwt");
 var User = mongoose.model('User');
+var Answers = mongoose.model('Answer');
 
 
 
@@ -26,21 +27,46 @@ router.param('user_id', function(req, res, next){
 	})
 })
 
+router.param('Answer_id', function(req, res, next, id){
+
+    Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
+      if(err) return res.status(500).send({err: "Error finding answer"});
+      if(!response) return res.status(400).send({err: "Error getting from the mongodb Kaareeeee"});
+      req.answer = response;
+      next();
+    })
+});
+
 router.post('/create', function(req, res){
 	//
 	//saving user Id to Question
-	req.body.postedBy = req.body.user_id
-	var new_quest = new Questions(req.body)
-	var user_id = req.body.user_id
+	var userName;
+	User.findOne({_id: req.body.user_id}, function(err, response){
+		console.log(response)
+		if(response.username){
+	      userName = response.username;
+	    }else{
+	      userName = response.displayName
+	    }
+	    if(response.image){
+	    	req.body.img = response.image
+	    }
+		req.body.postedBy = req.body.user_id
+		req.body.userName = userName
+		console.log(req.body)
+		var new_quest = new Questions(req.body)
+		var user_id = req.body.user_id
 
-	new_quest.save(function(err, response){
-		//
-		User.update({_id: user_id }, {$push: { questions: {_id: response._id} } }, function(err, user){
+		new_quest.save(function(err, response){
+			//
+			User.update({_id: user_id }, {$push: { questions: {_id: response._id} } }, function(err, user){
 
+			})
+
+			res.send(response._id)
 		})
-
-		res.send(response._id)
 	})
+	
 
 })
 
@@ -309,5 +335,16 @@ router.post('/alert/:id', function(req, res){
 		return false;
 	}
 })
+
+router.post('/confirmAnswer/:id/:Answer_id', function(req, res){
+	Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
+		console.log(response);
+	})
+})
+
+function calculateQuestionPoints(post_obj){
+
+
+}
 
 module.exports = router;
