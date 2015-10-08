@@ -85,6 +85,7 @@
     vm.logoutUser = function() {
       UserFactory.logoutUser().then(function() {
         vm.status = null;
+        $state.go("home");
       });
     };
 

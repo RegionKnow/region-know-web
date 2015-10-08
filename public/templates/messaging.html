@@ -2,7 +2,7 @@
   <h1>{{msg.title}}</h1>
   <md-button ng-click="msg.testRequest()" class="md-accent md-raised">{{msg.button}}</md-button>
   <h1 ng-show="msg.testMessage">{{msg.testMessage}}</h1>
-  <md-card ng-repeat='convo in msg.conversations track by $index'>
+  <md-card ng-repeat='convo in msg.conversations track by $index | orderBy: createdDate'>
     <md-card-content>
       <h2 class="md-title">Last Message:
         <p>
