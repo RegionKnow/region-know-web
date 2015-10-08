@@ -17,10 +17,13 @@
 
       alert('no question found')
     } else {
+      vm.thisQuesitonId = $stateParams.id;
       // console.log($stateParams.id)
       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
         vm.question = res
+        vm.isAnswered = vm.question.answered
+        console.log(vm.isAnswered)
 
       })
     }
@@ -38,7 +41,8 @@
       //AnswerObj is the answer for question
       // vm.AnswerObj.answerBody = vm.answer // sets answer
       vm.AnswerObj.user_id = vm.status._user.id // sets user who submited it
-
+      vm.AnswerObj.questionId = vm.thisQuesitonId;
+      console.log(vm.AnswerObj)
       AnswerFactory.addAnswer(vm.AnswerObj).then(function(res) {
 
           // ;
@@ -76,25 +80,26 @@
       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
         vm.question = res
+
             AnswerFactory.findAnswer(answer_id).then(function(res){
               // console.log(res)
 
               vm.upOrdown = res;
-          
-              // console.log(vm.upOrdown.downvote.indexOf(vm.status._user.id))
-              // if(vm.upOrdown.downvote.indexOf(vm.status._user.id) != -1){
-              //   vm.DownvoteColor = 'orange';
-              //   vm.UpvoteColor = '';
-              // }
-              // if(vm.upOrdown.upvote.indexOf(vm.status._user.id) != -1){
-              //   vm.UpvoteColor = 'orange';
-              //   vm.DownvoteColor = '';
-              // }
+
             })
 
       })
-     
     }
+
+    vm.choseAnswer = function(AnswerId, postedBy){
+      console.log('inside choseAnswer')
+      if(vm.status._user.id != vm.question.postedBy) return;
+      if(vm.question.answered.length > 0) return;
+      QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId).then(function(res){
+        findAnswerVote(AnswerId);
+      })
+    }
+
     vm.upVoteAnswer = function(answer_id){ 
       vm.voteError = false;
       // vm.UpvoteColor = '';

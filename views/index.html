@@ -44,9 +44,9 @@
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
 
-				<div class="col-md-offset-10" id="alerts" ng-show="nav.alertObj.status">
+				<div class="topRight navbar-right" id="alerts" ng-show="nav.alertObj.status">
 
-					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
+					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px; position: fixed;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
 
 					<div class="well" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
 						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
@@ -79,13 +79,19 @@
 					<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
 
 						<md-toolbar id="userInfo" class="md-theme-light">
-
+						
 							<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
-								<br>{{nav.status._user.username}}
-								<br>
+								<div style="margin-left: 30%;">
+									<br>
+									{{nav.status._user.username}}
+									
 
-								<img class="img  img-circle navImage" src="{{nav.status._user.image}}">
-
+									<img class="img  img-circle navImage" src="{{nav.status._user.image}}">
+									<br>
+									<span style="font-size: 15px;">
+									<span>World Rank - </span> <span> City Rank - </span>
+									</span>
+								</div>
 
 							</a>
 
@@ -100,9 +106,9 @@
 							New Question
 						</a>
 
-
-						<!-- <a ui-sref="UserProfile" ng-click="nav.close()"><md-divider>Your Profile</md-divider></a>
-						<a ui-sref="updateProfile" ng-click="nav.close()"><md-divider>updateProfile</md-divider></a> -->
+						<a class="md-button" ng-show="nav.status" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
+							<i class="material-icons">swap_vert</i>Rank
+						</a>
 
 						<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">
 							<i class="material-icons">vpn_key</i>Login
@@ -110,6 +116,7 @@
 							
 						<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register
 						</a>
+
 
 						<a class="md-button" ng-show="nav.status" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
 							<i class="material-icons">settings</i>Settings
@@ -173,6 +180,8 @@
 	<script src="/javascript/controllers/UserSettingsController.js"></script>
 	<script src="/javascript/controllers/PasswordResetController.js"></script>
 	<script src="/javascript/controllers/VoteController.js"></script>
+	<script src="/javascript/controllers/RankController.js"></script>
+
 
 </body>
 

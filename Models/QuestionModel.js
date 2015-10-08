@@ -3,9 +3,11 @@ var crypto = require('crypto');
 var jwt = require("jsonwebtoken")
 
 var QuestionSchema = new mongoose.Schema({
+	userName: String,
+	img: String,
 	questionBody: String,
 	createdDate: Date,
-	answered: Boolean,
+	answered: {type: mongoose.Schema.Types.ObjectId, ref: "Answer"},
 	generalPoints: Number,
 	isDeleted: Boolean,
 	questionLocation: Number,
