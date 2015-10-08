@@ -39,7 +39,6 @@
       $stateParams.recipient = ""
     }
     //End of if bracket
-
     function testRequest() {
       $http.get('/api/convo/rando').then(function(successResponse) {
         vm.testMessage = successResponse.body;
@@ -70,6 +69,7 @@
 
     function closeConvo() {
       vm.inConversation = false;
+      vm.getConversations();
     }
 
 
@@ -79,8 +79,9 @@
         sender: vm.status._user.username,
         body: vm.newMessage
       }).then(function(successResponse) {
+        getOneConvo(participants);
         vm.newMessage = "";
-        console.log(successResponse.data)
+
       }, function(errorResponse) {
         console.log(errorResponse.data);
       })
@@ -90,8 +91,16 @@
 
 
 
+//gets one convo with the participants being an object with the properties participantOne and participantTwo
+function getOneConvo(participants){
+  console.log(participants, "getOneConvo");
+  $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
+    vm.convoInFocus = successResponse.data;
+  }, function(errorResponse) {
+    console.log(errorResponse.data);
+  });
 
-
+}
 
 
 

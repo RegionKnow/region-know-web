@@ -6,10 +6,10 @@
 	<div class="col-md-8 col-lg-10" ng-cloack>
 		<table class="animated rubberBand" style='margin-left: auto; margin-right: auto' ng-cloack>
 			<tr id="questionVote" class="">
- 
+
 					<td>
 						<div class="animated" ng-controller="VoteController as vm" style="margin-right: 30px;">
-						
+
 							<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVote()">
 							<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
 							<div style="font-size:25px;" id="voteNum" ng-class="vm.VoteAnimation">
@@ -28,13 +28,13 @@
 						<span style="font-size: 15px;"><i>{{vm.question.userName}}<i/></span>
 
 						</span>
-						{{vm.question.questionBody}} 
+						{{vm.question.questionBody}}
 						<span id="quesitonTag" ng-repeat="tag in vm.question.tags">
 							<i>{{tag}}</i>
 						</span>
 						<br>
-						
-						
+
+
 					</div>
 				</td>
 
@@ -60,15 +60,15 @@
 							</form>
 						</div>
 
-					</div>	
+					</div>
 
 				</td>
 			</tr>
-		
+
 	</table>
 
 	<br>
-	
+
 	<div>
 		<form ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
 			<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
@@ -97,8 +97,8 @@
 						<span>
 							<i  ng-if="vm.isAnswered != a._id" ng-click="vm.choseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon">help_outline</i>
 							<i  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon">done</i>
-						</span>	
-						
+						</span>
+
 						<div ng-if="vm.status._user.id" style="width: 100px;">
 										<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVoteAnswer(a._id)">
 										<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
@@ -106,21 +106,21 @@
 										{{a.voteNum}}
 										</div>
 										<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.downVoteAnswer(a._id)">
-										<div ng-style="{color: vm.DownvoteColor}" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div></md-button>	
+										<div ng-style="{color: vm.DownvoteColor}" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div></md-button>
 						</div>
 
 					</td>
 					<td>
-						
+
 						<div style="height: 25px;">
 							<span>
 
-								<span class="text-left">{{a.name}}</span> - 
+								<span class="text-left">{{a.name}}</span> -
 								<span style="font-size:25px;">{{a.answerBody}}</span>
-									
+
 							</span>
 							<span ng-if="vm.status._user.id">
-								
+
 
 								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
 
@@ -138,10 +138,12 @@
 										<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
 									</md-button>
 								</span>
-								<span ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i>
+								<md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
+									<span><i class="material-icons">question_answer</i>
+								</md-button>
 								</span>
 							</span>
-							
+
 						</div>
 					</td>
 				</tr>
@@ -149,7 +151,7 @@
 					<td>
 						<div>
 							<span ng-if="vm.status._user.id">
-								
+
 
 								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
 
@@ -170,10 +172,10 @@
 								<span ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i>
 								</span>
 							</span>
-							
+
 						</div>
 					</td>
-			
+
 				</tr>
 				 -->
 			</table>
@@ -181,5 +183,5 @@
 	</div>
 	<br><br>
 	<div class="col-md-2 col-lg-1">
-	
+
 </div>
