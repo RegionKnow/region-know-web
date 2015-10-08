@@ -7,15 +7,17 @@
 
   function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory) {
     var vm = this;
+    vm.status = UserFactory.status;
     console.log("Instantiated");
     vm.title = 'Messaging - RegionKnow';
     vm.button = "Test call button";
     vm.inConversation;
     vm.testRequest = testRequest;
     vm.getConversations = getConversations;
-    vm.openConvo = openConvoFancy;
+    vm.openConvo = openConvo;
     vm.closeConvo = closeConvo;
     vm.conversations;
+    vm.sendMessage = sendMessage;
     vm.getConversations();
 
     if ($stateParams.recipient) {
@@ -67,26 +69,50 @@
 
     }
 
+
+    function sendMessage() {
+      $http.post("/api/convo/new-message", {
+        convoId: vm.convoInFocus._id,
+        sender: vm.status._user.username,
+        body: vm.newMessage
+      }).then(function (successResponse) {
+        vm.newMessage = "";
+        console.log(successResponse.data)
+      }, function (errorResponse) {
+        console.log(errorResponse.data);
+      })
+
+
+    }
+
+
+
+
+
+
+
+
+
     function openConvoFancy(ev, convoIndex) {
       vm.convoInFocus = vm.conversations[convoIndex];
       $mdDialog.show({
-          controller: [function () {
+          controller: [function() {
             var vm = this;
             console.log("Anon Controller");
           }],
           template: '<md-dialog>' +
-                    '  <md-dialog-content>' +
-                    '     Hi There {{vm.employee}}' +
-                    '  </md-dialog-content>' +
-                    '</md-dialog>',
+            '  <md-dialog-content>' +
+            '     Hi There {{vm.employee}}' +
+            '  </md-dialog-content>' +
+            '</md-dialog>',
           // targetEvent: ev,
           clickOutsideToClose: true,
           controllerAs: 'vm'
         })
         .then(function(answer) {
-        console.log('You said the information was "' + answer + '".');
+          console.log('You said the information was "' + answer + '".');
         }, function() {
-        console.log('You cancelled the dialog.');
+          console.log('You cancelled the dialog.');
         });
     };
   }
