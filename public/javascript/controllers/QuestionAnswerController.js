@@ -3,9 +3,9 @@
   angular.module('app')
     .controller('QuestionAnwserController', QuestionAnwserController);
 
-  QuestionAnwserController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory', 'UserFactory'];
+  QuestionAnwserController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory', 'UserFactory', '$http'];
 
-  function QuestionAnwserController($state, QuestionFactory, $stateParams, AnswerFactory, UserFactory) {
+  function QuestionAnwserController($state, QuestionFactory, $stateParams, AnswerFactory, UserFactory, $http) {
     var vm = this;
     vm.edit = {}
     vm.status = UserFactory.status;
@@ -17,7 +17,7 @@
 
       alert('no question found')
     } else {
-      console.log($stateParams.id)
+      // console.log($stateParams.id)
       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
         vm.question = res
@@ -68,21 +68,57 @@
         // }
       )
     }
-    function findAnswerVote(question_id){
-      QuestionFactory.findQuestion(question_id).then(function(res){
-        vm.voteNum = res.voteNum;
+
+
+    function findAnswerVote(answer_id){
+      // console.log(answer_id)
+      //gets whole question again to reload populate on answers!
+      QuestionFactory.findQuestion($stateParams.id).then(function(res) {
+
+        vm.question = res
+            AnswerFactory.findAnswer(answer_id).then(function(res){
+              // console.log(res)
+
+              vm.upOrdown = res;
+          
+              // console.log(vm.upOrdown.downvote.indexOf(vm.status._user.id))
+              // if(vm.upOrdown.downvote.indexOf(vm.status._user.id) != -1){
+              //   vm.DownvoteColor = 'orange';
+              //   vm.UpvoteColor = '';
+              // }
+              // if(vm.upOrdown.upvote.indexOf(vm.status._user.id) != -1){
+              //   vm.UpvoteColor = 'orange';
+              //   vm.DownvoteColor = '';
+              // }
+            })
+
       })
+     
     }
     vm.upVoteAnswer = function(answer_id){ 
+      vm.voteError = false;
+      // vm.UpvoteColor = '';
+      // vm.DownvoteColor = '';
       $http.post('/api/answer/upvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res){
         console.log(res)
+        if(res == "You already voted!"){
+         vm.voteError = true;  
+        }
+        // vm.VoteAnimation = 'animated fadeInUp';
         findAnswerVote(answer_id);
       })
     }
 
     vm.downVoteAnswer = function(answer_id){
-      $http.post('/api/answer/downvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res, callback){
-        console.log(res)
+      vm.voteError = false;
+      // vm.UpvoteColor = '';
+      // vm.DownvoteColor = '';
+      $http.post('/api/answer/downvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res){
+        // console.log(res)
+       if(res == 'You already downvoted!'){
+        vm.voteError = true;
+       }
+        // vm.VoteAnimation = 'animated fadeInDown';
         findAnswerVote(answer_id);
       })
     }
