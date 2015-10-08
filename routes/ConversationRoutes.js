@@ -67,15 +67,18 @@ router.post("/convo-finder", function(req, res) {
 
 
 router.post('/new-message', function(req, res) {
+  //Finds conversation that message is apart of
+  var newMessage = {
+    sender: req.body.sender,
+    body: req.body.body,
+    createdDate: new Date()
+  }
   Conversation.update({
     _id: req.body.convoId
   }, {
+    //Push into messages array of the conversation and creates a new date for that convo
     $push: {
-      messages: {
-        sender: req.body.sender,
-        body: req.body.body,
-        createdDate: new Date()
-      }
+      messages: newMessage
     }
   }, function(error, result) {
     if (error) return res.status(500).send({
@@ -84,8 +87,9 @@ router.post('/new-message', function(req, res) {
     if (!result) return res.status(500).send({
       error: 'For some reason this coversation does not exist'
     });
-    console.log(result);
-    res.send({message: "Success!"});
+    res.send({
+      message: "Success!"
+    });
   });
 })
 

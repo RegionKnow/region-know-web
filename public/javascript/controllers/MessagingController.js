@@ -8,9 +8,10 @@
   function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory) {
     var vm = this;
     vm.status = UserFactory.status;
-    console.log("Instantiated");
-    vm.title = 'Messaging - RegionKnow';
+    vm.title = 'Messaging';
     vm.button = "Test call button";
+
+    //Setup function/variable associations for controller
     vm.inConversation;
     vm.testRequest = testRequest;
     vm.getConversations = getConversations;
@@ -20,6 +21,8 @@
     vm.sendMessage = sendMessage;
     vm.getConversations();
 
+
+    //Handles if user came from another the navbar or the question detail state
     if ($stateParams.recipient) {
       vm.inConversation = true;
       vm.recipient = $stateParams.recipient;
@@ -35,6 +38,7 @@
     } else {
       $stateParams.recipient = ""
     }
+    //End of if bracket
 
     function testRequest() {
       $http.get('/api/convo/rando').then(function(successResponse) {
@@ -66,7 +70,6 @@
 
     function closeConvo() {
       vm.inConversation = false;
-
     }
 
 
@@ -75,10 +78,10 @@
         convoId: vm.convoInFocus._id,
         sender: vm.status._user.username,
         body: vm.newMessage
-      }).then(function (successResponse) {
+      }).then(function(successResponse) {
         vm.newMessage = "";
         console.log(successResponse.data)
-      }, function (errorResponse) {
+      }, function(errorResponse) {
         console.log(errorResponse.data);
       })
 
