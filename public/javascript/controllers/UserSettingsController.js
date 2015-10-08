@@ -111,23 +111,45 @@
 			UserSettingsFactory.getUserInfo(vm.userId).then(function(res){
 				console.log(res);
 				vm.currentRadius = res.radius
+				var zoom;
+				if(vm.currentRadius > 5){
+					zoom = 11
+				}else if(vm.currentRadius > 7){
+					zoom = 10
+				}
+				else{
+					zoom = 13
+				}
 				vm.map = new google.maps.Map(document.getElementById('map'), {
 						    center: {lat: res.lat, lng: res.lng},
 						    scrollwheel: true,
-						    zoom: 11,
+						    zoom: zoom,
 		 		})
-		 		getCircle(res.lat, res.lng);
+		 		
 		 		var marker = new google.maps.Marker({
 						            map: vm.map,
 						            position: new google.maps.LatLng(res.lat, res.lng),
 						            title: 'Your Current Location',
 						            draggable: false
 				});
+				vm.cityCircle = new google.maps.Circle({
+							    strokeColor: '#FF0000',
+								strokeOpacity: 0.8,
+								strokeWeight: 2,
+								fillColor: '#FF0000',
+								fillOpacity: 0.35,
+								map: vm.map,
+								center: {lat: res.lat, lng: res.lng},
+								radius: getMeters(vm.currentRadius)
+			    });
 				
 				
 			})
 
 			vm.mapHomeStatus = true;
+		}
+		function createCircle(callback){
+			console.log('trying to make circle')
 		}
 		
 		vm.openMap = function(){
@@ -158,6 +180,7 @@
 						            title: 'Your Current Location',
 						            draggable: true
 				});
+				
 				google.maps.event.addListener(marker, 'dragend', function(){
 								if(vm.cityCircle){
 									vm.cityCircle.setMap(null); 
@@ -244,6 +267,16 @@
 						            title: 'Your Current Location',
 						            draggable: true
 				});
+				vm.cityCircle = new google.maps.Circle({
+							    strokeColor: '#FF0000',
+								strokeOpacity: 0.8,
+								strokeWeight: 2,
+								fillColor: '#FF0000',
+								fillOpacity: 0.35,
+								map: vm.map,
+								center: {lat: loc.J, lng: loc.M},
+								radius: getMeters(vm.distance)
+			    });
 				google.maps.event.addListener(marker, 'dragend', function(){
 								if(vm.cityCircle){
 									vm.cityCircle.setMap(null); 
