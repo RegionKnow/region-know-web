@@ -13,7 +13,7 @@
 		<br>
 		<br>
 
-		<label ng-click="uploadImage = true;">Click to upload Photo
+		<!-- <label ng-click="uploadImage = true;">Click to upload Photo
 			<br>
 
 			<form ng-show="uploadImage">
@@ -25,16 +25,30 @@
 
 			</form>
 
-		</label>
-		<div>
-			<br/>
+		</label> -->
 
 
-			<md-button class="md-button-ripple"><a ui-sref="updateProfile">Edit Profile</a></md-button>
-			<md-button class="md-button-ripple"><a ng-click="vm.deleteUserProfile()">Deactive Profile</a></md-button>
+		<ng-form name="form"  >
+		Single Image with validations
+		<button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+		accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+		ngf-resize="{width: 100, height: 100}">Select</button>
 
-		</div>
+		Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+		<button ng-click="submit()">submit</button>
+	</ng-form>
+
+	Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+
+	<div>
+		<br/>
+
+
+		<md-button class="md-button-ripple"><a ui-sref="updateProfile">Edit Profile</a></md-button>
+		<md-button class="md-button-ripple"><a ng-click="vm.deleteUserProfile()">Deactive Profile</a></md-button>
+
 	</div>
+</div>
 </div>
 
 <div class="col-md-2"></div>
