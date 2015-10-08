@@ -31,7 +31,7 @@
         participantTwo: vm.recipient,
       }
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
-        console.log(successResponse.data);
+        vm.convoInFocus = successResponse.data;
       }, function(errorResponse) {
         console.log(errorResponse.data);
       });
