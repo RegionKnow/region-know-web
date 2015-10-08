@@ -67,7 +67,26 @@ router.post("/convo-finder", function(req, res) {
 
 
 router.post('/new-message', function(req, res) {
-
+  Conversation.update({
+    _id: req.body.convoId
+  }, {
+    $push: {
+      messages: {
+        sender: req.body.sender,
+        body: req.body.body,
+        createdDate: new Date()
+      }
+    }
+  }, function(error, result) {
+    if (error) return res.status(500).send({
+      error: 'Something went wrong on the server updating the message'
+    });
+    if (!result) return res.status(500).send({
+      error: 'For some reason this coversation does not exist'
+    });
+    console.log(result);
+    res.send({message: "Success!"});
+  });
 })
 
 router.get('/rando', function(req, res) {
