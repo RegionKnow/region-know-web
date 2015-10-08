@@ -5,8 +5,10 @@ var User = mongoose.model('User');
 var passport = require('passport'); //Multiple ways of bringing authentication from different providers. such as fb, local, google, twitch
 var uuid = require('uuid');
 var cloudinary = require('cloudinary');
+var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
 var env = require('../env');
+// var request = require('request');
 
 var auth = express_jwt({
   'userProperty': 'payload',
@@ -24,9 +26,17 @@ cloudinary.config({
 
 
 router.post('/uploadPhoto', function(req, res) {
-  // console.log(req.body);
-  res.send();
+  var form = new multiparty.Form();
+  form.parse(req, function(err, userId, files){
+    req.post(env.CLOUDINARY_BASE_URL, files, function(response){
+      console.log(response, "32 userRoutes");
+    })
+    res.send();
+  })
+  
 })
+
+
 //---------GETTING ID OF USER AND FINDING THAT SPECIFIC USER-------------------------
 
 router.param('userId', function(req, res, next, userId) {

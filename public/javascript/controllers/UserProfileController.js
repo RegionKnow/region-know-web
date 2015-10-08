@@ -49,22 +49,22 @@
     // upload on file select or drop
     $scope.upload = function (file) {
     	
-    	console.log(file.$ngfDataUrl);
-    	console.log($scope.profilePhoto);
-    	$http.post('/api/user/uploadPhoto', file).then(function(successRes){
-    		console.log(successRes.data)
-    	});
-    	// Upload.upload({
-    	// 	url: '/api/user/uploadPhoto',
-    	// 	data: {file: file, 'userId': vm.status._user.id}
-    	// }).then(function (resp) {
-    	// 	console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-    	// }, function (resp) {
-    	// 	console.log('Error status: ' + resp.status);
-    	// }, function (evt) {
-    	// 	var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    	// 	console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    	// console.log(file.$ngfDataUrl);
+    	// console.log($scope.profilePhoto);
+    	// $http.post('/api/user/uploadPhoto', file).then(function(successRes){
+    	// 	console.log(successRes.data)
     	// });
+Upload.upload({
+	url: '/api/user/uploadPhoto',
+	data: {file: file, 'userId': vm.status._user.id}
+}).then(function (resp) {
+	console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+}, function (resp) {
+	console.log('Error status: ' + resp.status);
+}, function (evt) {
+	var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+	console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+});
 };
 
 
