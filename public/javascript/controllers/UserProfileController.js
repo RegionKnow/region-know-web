@@ -44,6 +44,7 @@
 			if ($scope.form.file.$valid && $scope.file && !$scope.file.$error) {
 				$scope.upload($scope.file);
 			}
+
 		};
 
     // upload on file select or drop
