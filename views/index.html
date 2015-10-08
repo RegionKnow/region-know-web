@@ -27,7 +27,7 @@
 
 				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars md-button-ripple" style="font-size: 2.6em;">
 				</i>
-				
+
 				<span id="tradeName">
 					&nbsp;RegionKnow
 				</span>
@@ -37,7 +37,7 @@
 				</i>
 
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">insert_comment</i>
-				</a> 
+				</a>
 
 				&nbsp;
 
@@ -100,7 +100,7 @@
 						<a class="md-button" ng-show="nav.status" ui-sref="QuestionsFeed" ng-click="nav.close()">
 							<i class="material-icons">home</i>Home
 						</a>
-						
+
 						<a class="md-button" ng-show="nav.status" ui-sref="CreateQuestion" ng-click="nav.close()">
 							<i class="material-icons">help_outline</i>
 							New Question
@@ -113,7 +113,7 @@
 						<a class="md-button" ng-hide="nav.status" ui-sref="Login" ng-click="!nav.close()">
 							<i class="material-icons">vpn_key</i>Login
 						</a>
-							
+
 						<a class="md-button" ng-show="!nav.status" ui-sref="Register" ng-click="nav.close()">Register
 						</a>
 
@@ -135,9 +135,9 @@
 				</section>
 
 			<div class="col-md-2"></div>
-			
+
 		</div>
-	
+
 	<ui-view></ui-view>
 
 </div>
