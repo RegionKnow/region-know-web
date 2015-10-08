@@ -91,16 +91,16 @@
 
 
 
-//gets one convo with the participants being an object with the properties participantOne and participantTwo
-function getOneConvo(participants){
-  console.log(participants, "getOneConvo");
-  $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
-    vm.convoInFocus = successResponse.data;
-  }, function(errorResponse) {
-    console.log(errorResponse.data);
-  });
+    //gets one convo with the participants being an object with the properties participantOne and participantTwo
+    function getOneConvo(participants) {
+      console.log(participants, "getOneConvo");
+      $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
+        vm.convoInFocus = successResponse.data;
+      }, function(errorResponse) {
+        console.log(errorResponse.data);
+      });
 
-}
+    }
 
 
 
