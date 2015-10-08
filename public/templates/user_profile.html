@@ -5,7 +5,7 @@
 	<div class="col-md-8">
 
 
-		
+
 		<h4>{{vm.userLoggedIn.username}}</h4>
 		<h4>{{vm.userLoggedIn.displayName}}</h4>
 
@@ -19,7 +19,7 @@
 			<form ng-show="uploadImage">
 
 				<input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-				accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+				accept="image/*" ngf-max-size="20MB" ngf-min-height="100"
 				ngf-resize="{width: 100, height: 100}">
 				<md-button type="submit" ng-click="upload(); uploadImage = false;">Submit Photo</md-button>
 
@@ -28,28 +28,32 @@
 		</label> -->
 
 
-		<ng-form name="form"  >
-		Single Image with validations
-		<button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-		accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Select</button>
+		<ng-form name="form">
+			Single Image with validations
+			<button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Select</button>
 
-		<!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
+			<!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
 
-		Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
-		<button ng-click="submit()">submit</button>
-	</ng-form>
+			Drop files:
+			<div ngf-drop ng-model="files" class="drop-box">Drop</div>
+			<button ng-click="submit()">submit</button>
+		</ng-form>
 
-	Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+		Image thumbnail:
+		<img ngf-thumbnail="file || '/thumb.jpg'">
 
-	<div>
-		<br/>
+		<div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
+			<md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
+		</div>
+		<div>
+			<br/>
 
 
-		<md-button class="md-button-ripple"><a ui-sref="updateProfile">Edit Profile</a></md-button>
-		<md-button class="md-button-ripple"><a ng-click="vm.deleteUserProfile()">Deactive Profile</a></md-button>
+			<md-button class="md-button-ripple"><a ui-sref="updateProfile">Edit Profile</a></md-button>
+			<md-button class="md-button-ripple"><a ng-click="vm.deleteUserProfile()">Deactive Profile</a></md-button>
 
+		</div>
 	</div>
-</div>
 </div>
 
 <div class="col-md-2"></div>
