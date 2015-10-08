@@ -132,19 +132,20 @@
         console.log(results);
         var loc = results[0].geometry.location;
         console.log(loc);
-        vm.question.lat = loc.H;
-        vm.question.lng = loc.L;
+        vm.question.lat = loc.J;
+        vm.question.lng = loc.M;
+        console.log(vm.question);
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.H,
-            lng: loc.L
+            lat: loc.J,
+            lng: loc.M
           },
           scrollwheel: true,
           zoom: 11,
         })
         var marker = new google.maps.Marker({
           map: vm.map,
-          position: new google.maps.LatLng(loc.H, loc.L),
+          position: new google.maps.LatLng(loc.J, loc.M),
           title: 'Your Current Location',
           draggable: true
         });
@@ -153,8 +154,8 @@
             vm.cityCircle.setMap(null);
           }
 
-          vm.question.lat = marker.internalPosition.H;
-          vm.question.lng = marker.internalPosition.L;
+          vm.question.lat = marker.internalPosition.J;
+          vm.question.lng = marker.internalPosition.M;
           console.log(vm.question);
 
 
