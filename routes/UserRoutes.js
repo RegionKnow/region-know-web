@@ -29,7 +29,7 @@ router.post('/uploadPhoto', function(req, res) {
     cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
       console.log(typeof picInfo.url);
       console.log(picInfo.url);
-      User.update({_id: data.userId[0]}, {username: "Kandianne", image: picInfo.url}, function(err, updatedUser){
+      User.update({_id: data.userId[0]}, {image: picInfo.url}, function(err, updatedUser){
         if(err) return res.status(500).send({err:"Could not find user to update"});
         if(!updatedUser) return res.status(500).send({err:"Client messed something up"});
         res.send(updatedUser);
