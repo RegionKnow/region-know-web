@@ -23,7 +23,18 @@
 
 				<td>
 					<div id="questionFace">
-						{{vm.question.questionBody}}
+						<span style="margin-right: 10%">
+						<img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">
+						<span style="font-size: 15px;"><i>{{vm.question.userName}}<i/></span>
+
+						</span>
+						{{vm.question.questionBody}} 
+						<span id="quesitonTag" ng-repeat="tag in vm.question.tags">
+							<i>{{tag}}</i>
+						</span>
+						<br>
+						
+						
 					</div>
 				</td>
 
@@ -53,22 +64,13 @@
 
 				</td>
 			</tr>
-
-			<!-- <br>
-			<tr>
-				<td>
-					<span ng-repeat="tag in vm.question.tags">
-						{{tag}}
-					</span>
-				</td>
-			</tr>
-		-->
+		
 	</table>
 
 	<br>
 	
 	<div>
-		<form ng-submit="vm.addAnswer()">
+		<form ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
 			<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
 
 			<br>
@@ -92,6 +94,11 @@
 			<table>
 				<tr>
 					<td >
+						<span>
+							<i  ng-if="vm.isAnswered != a._id" ng-click="vm.choseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon">help_outline</i>
+							<i  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon">done</i>
+						</span>	
+						
 						<div ng-if="vm.status._user.id" style="width: 100px;">
 										<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVoteAnswer(a._id)">
 										<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
@@ -101,17 +108,44 @@
 										<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.downVoteAnswer(a._id)">
 										<div ng-style="{color: vm.DownvoteColor}" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div></md-button>	
 						</div>
+
 					</td>
 					<td>
-						<div>
+						
+						<div style="height: 25px;">
 							<span>
+
 								<span class="text-left">{{a.name}}</span> - 
-								<span style="font-size:25px;">{{a.answerBody}}</span>	
+								<span style="font-size:25px;">{{a.answerBody}}</span>
+									
 							</span>
+							<span ng-if="vm.status._user.id">
+								
+
+								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
+
+
+								<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
+									<a ui-sref="EditAnswer({ans_id: a._id, ques_id: vm.question._id })">
+										<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
+											<i class="material-icons">edit</i>
+										</md-button>
+									</a>
+								</span>
+
+								<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
+									<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
+										<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
+									</md-button>
+								</span>
+								<span ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i>
+								</span>
+							</span>
+							
 						</div>
 					</td>
 				</tr>
-				<tr>
+<!-- 				<tr>
 					<td>
 						<div>
 							<span ng-if="vm.status._user.id">
@@ -136,9 +170,12 @@
 								<span ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i>
 								</span>
 							</span>
+							
 						</div>
 					</td>
+			
 				</tr>
+				 -->
 			</table>
 		</div>
 	</div>

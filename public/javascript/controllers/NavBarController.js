@@ -32,18 +32,20 @@
 
     function alertWatch() {
       $timeout(function() {
-        UserFactory.grabAlert(vm.status.id).then(function(res) {
+        UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           console.log('watching for alerts')
+          // console.log(res)
           if(!res.alerts) return;
-          if (res.alerts.length > 0) {
-            vm.alertObj.status = true;
-            vm.alertObj.alertNum = res.alerts.length;
-            vm.alertObj.alerts = res.alerts;
-            console.log(vm.alertObj)
-          } else {
-            // console.log('hiding alerts')
-            vm.alertStatus = false;
-          }
+            if (res.alerts.length > 0) {
+              // console.log('found Alerts!')
+              vm.alertObj.status = true;
+              vm.alertObj.alertNum = res.alerts.length;
+              vm.alertObj.alerts = res.alerts;
+              // console.log(vm.alertObj)
+            } else {
+              // console.log('hiding alerts')
+              vm.alertStatus = false;
+            }
 
         })
         alertWatch();
@@ -54,7 +56,7 @@
       console.log('trying to open alerts')
       vm.showAlertTab = true;
       $timeout(function() {
-        UserFactory.deleteAlerts(vm.status.id).then(function() {
+        UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           console.log('deleted alerts')
           vm.alertObj.status = false;
         })

@@ -6,8 +6,17 @@
 	function QuestionFactory($q, $http, $window, $rootScope) {
 		var o = {};
 
+		o.confirmAnswer = function(id, Answer_id){
+			console.log('trying to confrim answer for quesiton')
+			var q = $q.defer();
+			$http.post('/api/question/confirmAnswer/' + id + '/' + Answer_id, null).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
+
 		o.sendAlerts = function(id){
-			console.log('alerting in routes')
+			// console.log('alerting in routes')
 			var q = $q.defer();
 			$http.post('api/question/alert/' + id, null).success(function(res){
 				q.resolve();
