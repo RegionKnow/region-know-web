@@ -70,6 +70,11 @@
         templateUrl: 'templates/edit_answer.html',
         controller: 'EditAnswerController',
         controllerAs: 'vm'
+      }).state('Rank', {
+        url: '/rank/:id',
+        templateUrl: 'templates/rank.html',
+        controller: 'RankController',
+        controllerAs: 'vm'
       })
 
 

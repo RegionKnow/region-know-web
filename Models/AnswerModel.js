@@ -9,6 +9,7 @@ var AnswerSchema = new mongoose.Schema({
 	knowledgePoint: Number,
 	isDeleted: {type: Boolean, default: false},
 	name: String,
+	questionId: {type: mongoose.Schema.Types.ObjectId, ref: "Question"},
 	upvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
 	downvote: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
 	voteNum: {type: Number, default: 0}, 

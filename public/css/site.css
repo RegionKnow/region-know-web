@@ -136,7 +136,19 @@ body {
 
 
   /*================TAG STYLES==========================================*/
-
+  #quesitonTag{
+    margin-left: 7px;
+    font-size: 15px;
+    border-radius: 10px;
+    border-radius: 1px 5px 3px 5px;
+    border-width: 3px;
+    box-shadow: 2px 2px 2px black;
+    border-color: #000000;
+    padding-left: 15px;
+    color: #000;
+    background-color: #26a69a;
+    display: inline;
+  }
   .tagDiv {
     border-radius: 10px;
   }
@@ -152,7 +164,11 @@ body {
   }
 
   /*================QUESTIONs &  CARD STYLES==========================================*/
-
+  #QDicon{
+    display: inline;
+    opacity: 1.0;
+    font-size: 3em;
+  }
   .md-input-container.flex.md-default-theme.md-input-focused {
     color: #26a69a;
   }
