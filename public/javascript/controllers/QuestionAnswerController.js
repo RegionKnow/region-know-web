@@ -94,7 +94,8 @@
     vm.choseAnswer = function(AnswerId, postedBy){
       console.log('inside choseAnswer')
       if(vm.status._user.id != vm.question.postedBy) return;
-      if(vm.question.answered.length > 0) return;
+      console.log(vm.question.answered)
+      if(vm.question.answered) return;
       QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId).then(function(res){
         findAnswerVote(AnswerId);
       })
