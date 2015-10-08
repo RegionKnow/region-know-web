@@ -91,23 +91,6 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-// passport.use(new GoogleStrategy({
-//     clientID: '484030355290-9jal1apd50jqrvla3hdi8ml4r25h8n48.apps.googleusercontent.com',
-//     clientSecret: 'jC0gn7QTj2gdEVaKMuHHR3ot',
-//     callbackURL: "http://localhost:3000/api/user/auth/google/callback",
-//     // passReqToCallback: true,
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     process.nextTick(function() {
-//       User.findOrCreate({
-//         googleId: profile.id
-//       }, function(err, user) {
-//         return done(err, user);
-//       });
-//     });
-//
-//   }
-// ))
 
 
 
