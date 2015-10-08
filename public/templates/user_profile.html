@@ -31,8 +31,9 @@
 		<ng-form name="form"  >
 		Single Image with validations
 		<button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-		accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
-		ngf-resize="{width: 100, height: 100}">Select</button>
+		accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Select</button>
+
+		<!-- ngf-resize="{width: 100, height: 100}" -->
 
 		Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
 		<button ng-click="submit()">submit</button>

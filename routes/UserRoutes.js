@@ -8,7 +8,6 @@ var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
 var env = require('../env');
-// var request = require('request');
 
 var auth = express_jwt({
   'userProperty': 'payload',
@@ -24,18 +23,22 @@ cloudinary.config({
   api_secret: env.CLOUDINARY_SECRET
 });
 
-
 router.post('/uploadPhoto', function(req, res) {
   var form = new multiparty.Form();
-  form.parse(req, function(err, userId, files){
-    req.post(env.CLOUDINARY_BASE_URL, files, function(response){
-      console.log(response, "32 userRoutes");
+  form.parse(req, function(err, data, fileObject){
+    cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
+      console.log(typeof picInfo.url);
+      console.log(picInfo.url);
+      User.update({id: data.userId[0]}, {username: "hey"}, function(err, updatedUser){
+        if(err) return res.status(500).send({err:"Could not find user to update"});
+        if(!updatedUser) return res.status(500).send({err:"Client messed something up"});
+        console.log(updatedUser);
+        res.redirect(picInfo.url);
+        console.log(updatedUser, "last one");
+      })
     })
-    res.send();
   })
-  
 })
-
 
 //---------GETTING ID OF USER AND FINDING THAT SPECIFIC USER-------------------------
 
