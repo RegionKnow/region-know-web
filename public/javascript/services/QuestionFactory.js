@@ -52,9 +52,9 @@
 
 		o.findQuestion = function(id){ // function to find indiv question
 			var q = $q.defer();
-			console.log(id)
+			// console.log(id)
 			$http.get('api/question/' + id).success(function(res){
-				console.log('got past routes')
+				// console.log('got past routes')
 				q.resolve(res);
 			})
 			return q.promise;

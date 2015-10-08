@@ -14,7 +14,7 @@ var auth = express_jwt({
   'secret': env.APP_SECRET
 });
 
-
+ 
 //-----------CLOUDNARY.CONFIG and ROUTES----------------------------------------------------
 
 cloudinary.config({
