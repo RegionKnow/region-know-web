@@ -145,8 +145,10 @@
         getCircle(0, 0)
         console.log(res)
 
-        vm.currentLocation.lat = res.location.lat
-        vm.currentLocation.lng = res.location.lng
+        vm.currentLocation.lat = res.location.lat;
+        vm.currentLocation.lng = res.location.lng;
+        vm.homeLocation.lat = res.location.lat;
+        vm.homeLocation.lng = res.location.lng;
           //building map with current location
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
