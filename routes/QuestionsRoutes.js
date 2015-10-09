@@ -338,19 +338,36 @@ router.post('/alert/:id', function(req, res){
 	}
 })
 
-router.post('/confirmAnswer/:id/:Answer_id', function(req, res){
-	Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
-		console.log(response);
-		res.send(response)
+router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
+	
+	User.findOne({_id: req.user._id}, function(err, user){
+			var kp = user.knowledgePoints + 1
+			User.update({_id: req.user._id}, {knowledgePoints: kp}, function(err, newRes){
+				Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
+					console.log(response);
+					res.send(response)
+				})
+			})
 	})
 })
 
-router.post('/deconfirmAnswer/:id/:Answer_id', function(req, res){
-	var undo = '5616d71d4ea803832f346c4d'
-	Questions.update({_id: req.question._id}, { $unset: { answered: 1 }}, function(err, response){
-		console.log(response);
-		res.send(response)
 
+router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
+		User.findOne({_id: req.user._id}, function(err, user){
+			var kp = user.knowledgePoints - 1
+			User.update({_id: req.user._id}, {knowledgePoints: kp}, function(err, newRes){
+				Questions.update({_id: req.question._id}, { $unset: { answered: 1 }}, function(err, response){
+					console.log(response);
+					res.send(response)
+				})
+			})
+		})
+})
+
+router.post('/kpoints/:user_id', function(req, res){
+	User.findOne({_id: req.user._id}, function(err, response){
+		// console.log(response)
+		res.send(response)
 	})
 })
 function calculateQuestionPoints(post_obj){

@@ -89,17 +89,23 @@
       })
     }
 
-    vm.choseAnswer = function(AnswerId, postedBy) {
-      if (vm.status._user.id != vm.question.postedBy) return;
-      if (vm.question.answered) return;
-      QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId).then(function(res) {
+
+    vm.choseAnswer = function(AnswerId, postedBy){
+      console.log('inside choseAnswer')
+      if(vm.status._user.id != vm.question.postedBy) return;
+      if(vm.question.answered) return;
+      QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
+        console.log(res)
         findAnswerVote(AnswerId);
         vm.isAnswered = AnswerId;
       })
     }
-    vm.cancelChoseAnswer = function(AnswerId, postedBy) {
-      if (vm.status._user.id != vm.question.postedBy) return;
-      QuestionFactory.deConfirmAnswer(vm.thisQuesitonId, AnswerId).then(function(res) {
+
+    vm.cancleChoseAnswer = function(AnswerId, postedBy){
+      console.log('inside UnchoseAnswer')
+      if(vm.status._user.id != vm.question.postedBy) return;
+      QuestionFactory.deConfirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
+        console.log(res)
         findAnswerVote(AnswerId);
         vm.isAnswered = null;
       })
