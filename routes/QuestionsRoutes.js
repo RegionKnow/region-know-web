@@ -66,7 +66,7 @@ router.post('/create', function(req, res){
 			res.send(response._id)
 		})
 	})
-	
+
 
 })
 
@@ -109,7 +109,7 @@ router.post('/tags/:id', function(req, res){
 
 })
 
-////Upvotes 
+////Upvotes
 router.post('/upvote/:id/:user_id', function(req, res){
 	if(req.question.upvote.indexOf(req.user._id) != -1){
 		console.log('user already upvoted')
@@ -117,16 +117,16 @@ router.post('/upvote/:id/:user_id', function(req, res){
 	}else if(req.question.downvote.indexOf(req.user._id) != -1){
 
 			var currentVote = req.question.voteNum + 2
-		
-		
+
+
 		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')		
+			console.log('added user to upvoted')
 			console.log(currentVote)
 			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
 				console.log('vote updated')
 				Questions.update({_id: req.question._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
 					console.log('removed downvote From reference')
-					
+
 					res.send(rmVote);
 				})
 			})
@@ -136,7 +136,7 @@ router.post('/upvote/:id/:user_id', function(req, res){
 		console.log('user has not upvoted yet')
 		var currentVote = req.question.voteNum + 1
 		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')		
+			console.log('added user to upvoted')
 			console.log(currentVote)
 			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
 				console.log('vote updated')
@@ -152,18 +152,18 @@ router.post('/downvote/:id/:user_id', function(req, res){
 		console.log('user already downvoted')
 		res.send('user already downvoted!')
 	}else if(req.question.upvote.indexOf(req.user._id) != -1){
-		
+
 			var currentVote = req.question.voteNum - 2
-		
-		
+
+
 		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to downvoted')		
+			console.log('added user to downvoted')
 			console.log(currentVote)
 			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
 				console.log('vote updated')
 				Questions.findOneAndUpdate({_id: req.question._id}, {$pull: {upvote: req.user._id}}, function(err, rmVote){
 					console.log('removed downvote From reference')
-					
+
 					res.send(rmVote);
 				})
 			})
@@ -173,7 +173,7 @@ router.post('/downvote/:id/:user_id', function(req, res){
 		console.log('user has not downvoted yet')
 		var currentVote = req.question.voteNum - 1
 		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')		
+			console.log('added user to upvoted')
 			console.log(currentVote)
 			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
 				console.log('vote updated')
@@ -182,7 +182,7 @@ router.post('/downvote/:id/:user_id', function(req, res){
 			})
 		})
 	}
-	
+
 })
 
 // find differnce in miles
@@ -349,8 +349,8 @@ router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 	})
 })
 
-router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 
+router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 		User.findOne({_id: req.user._id}, function(err, user){
 			var kp = user.knowledgePoints - 1
 			User.update({_id: req.user._id}, {knowledgePoints: kp}, function(err, newRes){

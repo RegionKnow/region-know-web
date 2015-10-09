@@ -9,6 +9,83 @@ var uuid = require('uuid');
 var app = express();
 var env = require('./env.js');
 
+//For Android cloud messaging services testing
+// var gcm = require('node-gcm');
+//
+//
+// var message = new gcm.Message({
+//     collapseKey: 'demo',
+//     priority: 'high',
+//     contentAvailable: true,
+//     delayWhileIdle: true,
+//     timeToLive: 3,
+//     restrictedPackageName: "somePackageName",
+//     dryRun: true,
+//     data: {
+//         key1: 'message1',
+//         key2: 'message2'
+//     },
+//     notification: {
+//         title: "Hello, World",
+//         icon: "ic_launcher",
+//         body: "This is a notification that will be displayed ASAP."
+//     }
+// });
+//
+// var sender = new gcm.Sender(env.google.GCM_APIKEY)
+// console.log(env.google.GCM_APIKEY);
+// // sender.send(message, { registrationIds: regIds }, function (err, result) {
+// //     if(err) console.error(err);
+// //     else    console.log(result);
+// // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //----------------------------Basic require for mongodb---------------------------------------------
 require('./Models/AnswerModel.js');
 require('./Models/ConversationModel.js');
