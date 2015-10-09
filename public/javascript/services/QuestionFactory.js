@@ -6,21 +6,29 @@
 	function QuestionFactory($q, $http, $window, $rootScope) {
 		var o = {};
 
-		o.confirmAnswer = function(id, Answer_id){
+		o.confirmAnswer = function(id, Answer_id, userId){
 			console.log('trying to confrim answer for quesiton')
 			var q = $q.defer();
-			$http.post('/api/question/confirmAnswer/' + id + '/' + Answer_id, null).success(function(res){
+			$http.post('/api/question/confirmAnswer/' + id + '/' + Answer_id + '/' + userId, null).success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
 		}
-		o.deConfirmAnswer = function(id, Answer_id){
+		o.deConfirmAnswer = function(id, Answer_id, userId){
 			var q = $q.defer();
-			$http.post('/api/question/deconfirmAnswer/' + id + '/' + Answer_id, null).success(function(res){
+			$http.post('/api/question/deconfirmAnswer/' + id + '/' + Answer_id + '/' + userId, null).success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;
 		}
+		o.getKpoints = function(id){
+			// console.log('alerting in routes')
+			var q = $q.defer();
+			$http.post('api/question/kpoints/' + id, null).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		} 
 
 		o.sendAlerts = function(id){
 			// console.log('alerting in routes')
@@ -100,6 +108,7 @@
 			})
 			return q.promise;
 		}
+
 		return o;
 	}
 })();
