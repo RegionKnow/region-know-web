@@ -9,7 +9,7 @@ var uuid = require('uuid');
 var app = express();
 var env = require('./env.js');
 
-
+//For Android cloud messaging services testing
 // var gcm = require('node-gcm');
 //
 //
