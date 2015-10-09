@@ -23,8 +23,6 @@
 
         vm.question = res
         vm.isAnswered = vm.question.answered
-        console.log(vm.isAnswered)
-
       })
     }
     //options for showing edit and delete buttons
@@ -74,22 +72,23 @@
     }
 
 
-    function findAnswerVote(answer_id){
+    function findAnswerVote(answer_id) {
       // console.log(answer_id)
       //gets whole question again to reload populate on answers!
       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
         vm.question = res
 
-            AnswerFactory.findAnswer(answer_id).then(function(res){
-              // console.log(res)
+        AnswerFactory.findAnswer(answer_id).then(function(res) {
+          // console.log(res)
 
-              vm.upOrdown = res;
+          vm.upOrdown = res;
 
-            })
+        })
 
       })
     }
+
 
     vm.choseAnswer = function(AnswerId, postedBy){
       console.log('inside choseAnswer')
@@ -98,40 +97,43 @@
       QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
         console.log(res)
         findAnswerVote(AnswerId);
+        vm.isAnswered = AnswerId;
       })
     }
+
     vm.cancleChoseAnswer = function(AnswerId, postedBy){
       console.log('inside UnchoseAnswer')
       if(vm.status._user.id != vm.question.postedBy) return;
       QuestionFactory.deConfirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
         console.log(res)
         findAnswerVote(AnswerId);
+        vm.isAnswered = null;
       })
     }
 
-    vm.upVoteAnswer = function(answer_id){
+    vm.upVoteAnswer = function(answer_id) {
       vm.voteError = false;
       // vm.UpvoteColor = '';
       // vm.DownvoteColor = '';
-      $http.post('/api/answer/upvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res){
+      $http.post('/api/answer/upvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res) {
         console.log(res)
-        if(res == "You already voted!"){
-         vm.voteError = true;
+        if (res == "You already voted!") {
+          vm.voteError = true;
         }
         // vm.VoteAnimation = 'animated fadeInUp';
         findAnswerVote(answer_id);
       })
     }
 
-    vm.downVoteAnswer = function(answer_id){
+    vm.downVoteAnswer = function(answer_id) {
       vm.voteError = false;
       // vm.UpvoteColor = '';
       // vm.DownvoteColor = '';
-      $http.post('/api/answer/downvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res){
+      $http.post('/api/answer/downvote/' + answer_id + '/' + vm.status._user.id, null).success(function(res) {
         // console.log(res)
-       if(res == 'You already downvoted!'){
-        vm.voteError = true;
-       }
+        if (res == 'You already downvoted!') {
+          vm.voteError = true;
+        }
         // vm.VoteAnimation = 'animated fadeInDown';
         findAnswerVote(answer_id);
       })
@@ -149,11 +151,11 @@
     vm.deleteAnswer = function(answer_id) {
 
       AnswerFactory.deleteAnswer(answer_id).then(function(res) {
-         QuestionFactory.findQuestion($stateParams.id).then(function(res) {
+        QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
-              vm.question = res
+            vm.question = res
           })
-        // $state.go('QuestionFeed')
+          // $state.go('QuestionFeed')
       })
     }
 
