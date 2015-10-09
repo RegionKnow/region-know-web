@@ -294,7 +294,9 @@ router.post('/alert/:id', function(req, res){
 					if(users[i]._id.toString() !== question.postedBy.toString()){
 					// console.log(users[i]._id, question.postedBy)
 						User.update({_id: users[i]._id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
-							console.log('pushed to some users')
+
+							if(err) return res.status(500).send({err: "There was an error on the server"});
+							res.send();
 						})
 					}
 				}
