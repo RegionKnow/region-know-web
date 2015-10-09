@@ -88,8 +88,10 @@
 
 									<img class="img  img-circle navImage" src="{{nav.status._user.image}}">
 									<br>
-									<span style="font-size: 15px;">
-									<span>World Rank - </span> <span> City Rank - </span>
+									<span ng-controller="RankController as vm">
+										<span style="font-size: 15px;">
+											<span>GeneralPoints -  {{vm.gP}}</span> <span> KnowledgePoints - {{vm.kP}}</span>
+										</span>
 									</span>
 								</div>
 
@@ -166,6 +168,8 @@
 	<script src="/javascript/services/QuestionFactory.js"></script>
 	<script src="/javascript/services/AnswerFactory.js"></script>
 	<script src="/javascript/services/UserSettingsFactory.js"></script>
+	<script src="/javascript/services/RankFactory.js"></script>
+
 
 
 
