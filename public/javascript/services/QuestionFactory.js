@@ -14,6 +14,13 @@
 			})
 			return q.promise;
 		}
+		o.deConfirmAnswer = function(id, Answer_id){
+			var q = $q.defer();
+			$http.post('/api/question/deconfirmAnswer/' + id + '/' + Answer_id, null).success(function(res){
+				q.resolve(res);
+			})
+			return q.promise;
+		}
 
 		o.sendAlerts = function(id){
 			// console.log('alerting in routes')

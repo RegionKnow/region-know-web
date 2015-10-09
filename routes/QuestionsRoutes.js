@@ -53,7 +53,7 @@ router.post('/create', function(req, res){
 	    }
 		req.body.postedBy = req.body.user_id
 		req.body.userName = userName
-		console.log(req.body)
+		// console.log(req.body)
 		var new_quest = new Questions(req.body)
 		var user_id = req.body.user_id
 
@@ -339,9 +339,18 @@ router.post('/alert/:id', function(req, res){
 router.post('/confirmAnswer/:id/:Answer_id', function(req, res){
 	Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
 		console.log(response);
+		res.send(response)
 	})
 })
 
+router.post('/deconfirmAnswer/:id/:Answer_id', function(req, res){
+	var undo = '5616d71d4ea803832f346c4d'
+	Questions.update({_id: req.question._id}, {answered: undo}, function(err, response){
+		console.log(response);
+		res.send(response)
+
+	})
+})
 function calculateQuestionPoints(post_obj){
 
 
