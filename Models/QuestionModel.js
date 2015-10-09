@@ -8,7 +8,6 @@ var QuestionSchema = new mongoose.Schema({
 	questionBody: String,
 	createdDate: Date,
 	answered: {type: mongoose.Schema.Types.ObjectId, ref: "Answer"},
-	generalPoints: Number,
 	isDeleted: Boolean,
 	questionLocation: Number,
 	lat: Number,

@@ -8,6 +8,7 @@ var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
 var env = require('../env');
+var Questions = mongoose.model('Question')
 
 var auth = express_jwt({
   'userProperty': 'payload',
@@ -317,5 +318,53 @@ router.post('/filterOff/:userId', function(req, res) {
     })
   })
 
+  router.get('/gp/:userId', function(req, res){ // function to get points
+    User.findOne({_id: req.user._id}).populate('questions answers').exec(function(err, response){
+      var voteCount = 0;
 
+      // var kPointCount = 0;
+
+      var voteCountObj = {}
+
+        for(var i =0; i < response.questions.length; i++){
+          // console.log(voteCount)
+          voteCount += response.questions[i].voteNum
+        }
+
+        for(var k =0; k < response.answers.length; k++){
+          // console.log(voteCount)
+
+          voteCount += response.answers[k].voteNum;
+        }
+
+        // for(var j =0; j < response.answers.length; j++){
+        //   var temp_id = response.answers[j].questionId
+        //   var temp_A_id = response.answers[j]._id
+        //   // console.log(temp_A_id) 
+        //   findKpoints(temp_id, temp_A_id)
+        //   console.log(kPointCount, 'line 345')
+        // }
+        // console.log(kcount + 'line 347')
+        voteCountObj.count = voteCount;
+
+        res.send(voteCountObj)
+    })
+
+  })
+  // function findKpoints(questionId, answerId){
+    
+  //     Questions.findOne({_id: questionId}, function(err, QA){
+  //           if(QA.answered){
+  //             console.log(QA.answered, answerId)
+  //              if(QA.answered.toString() === answerId.toString()){
+                  
+  //                 kcount += 1
+  //                 console.log('adding kp', kcount)
+                  
+  //                 // console.log(countObj)
+  //             }
+  //           } 
+  //     })
+
+  // }
   module.exports = router;
