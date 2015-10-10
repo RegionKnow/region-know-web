@@ -95,21 +95,16 @@ require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
 
-<<<<<<< HEAD
-var db = process.env.MONGOLAB_URI || env.MONGOLAB_URI || "mongodb://localhost/FinalApp";
-mongoose.connect("mongodb://localhost/FinalApp", function(err) {
-  =======
-  var db = process.env.MONGOLAB_URI || /*env.MONGOLAB_URI ||*/ "mongodb://localhost/FinalApp";
-  mongoose.connect(db, function(err) {
-    >>>>>>> ec7654d0a5c7af36be328e561f93c72ef537d377
-    if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
+var db = process.env.MONGOLAB_URI || /*env.MONGOLAB_URI ||*/ "mongodb://localhost/FinalApp";
+mongoose.connect(db, function(err) {
+  if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
 
-    var x = new Date();
-    console.log("Connected to %s at %s", db, x.toLocaleString());
-  });
+  var x = new Date();
+  console.log("Connected to %s at %s", db, x.toLocaleString());
+});
 
 
-  app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
 app.engine('.html', require('ejs').renderFile);
 //Allow for these directories to be usable on the client side
