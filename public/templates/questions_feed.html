@@ -4,41 +4,37 @@
 
 	<div class="col-md-8 animated fadeIn" ng-cloack>
 
-		
-		
-	<md-input-container flex>
-		<label>Search Questions by Name or Tag's</label>
-		<input ng-model="vm.search">
-	</md-input-container>
-
-	<br>
-	Questions Auto Filterd By HomeLocation In settings!
-	<br>
 
 
-	<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
-		<a ui-sref="ViewQuesiton({id: q._id})">
+		<md-input-container flex>
+			<label>Search Questions by Name or Tag's</label>
+			<input ng-model="vm.search">
+		</md-input-container>
 
-			<div class="mdl-card mdl-shadow--4dp qCards">
+		<br> Questions Auto Filtered By HomeLocation In settings!
+		<br>
 
-				<div class="mdl-card__supporting-text" style="opacity: none;">
-					<span>
+
+		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
+			<a ui-sref="ViewQuesiton({id: q._id})">
+
+				<div class="mdl-card mdl-shadow--4dp qCards">
+
+					<div class="mdl-card__supporting-text" style="opacity: none;">
+						<span>
 					<i class="material-icons qIcon">help_outline</i>
-					</span>
-					&nbsp;
-					<span>
-						{{q.questionBody}}
-					</span>
+					</span> &nbsp;
+						<span>
+							<h2>{{q.questionBody}}</h2>
+						</span>
+					</div>
 				</div>
-			</div>
 
-		</a>
+			</a>
 
+		</div>
 	</div>
+
+	<div class="col-md-2"></div>
+
 </div>
-
-<div class="col-md-2"></div>
-
-</div>
-
-
