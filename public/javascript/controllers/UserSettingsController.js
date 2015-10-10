@@ -13,31 +13,26 @@
 
     vm.filterOn = function() {
       UserSettingsFactory.filterOn(vm.userId).then(function(res) {
-        console.log('filter Question is On');
         vm.getUser(vm.userId)
       })
     }
     vm.filterOff = function() {
       UserSettingsFactory.filterOff(vm.userId).then(function(res) {
-        console.log('filter Question is Off');
         vm.getUser(vm.userId)
       })
     }
     vm.filterAlertOn = function() {
       UserSettingsFactory.filterAlertOn(vm.userId).then(function(res) {
-        console.log('filter Question is On');
         vm.getUser(vm.userId)
       })
     }
     vm.filterAlertOff = function() {
       UserSettingsFactory.filterAlertOff(vm.userId).then(function(res) {
-        console.log('filter Question is Off');
         vm.getUser(vm.userId)
       })
     }
     vm.getUser = function(userId) {
       UserSettingsFactory.getUserInfo(userId).then(function(res) {
-        console.log('user Information grabbed!')
         vm.CUI = res;
       })
     }
@@ -50,7 +45,6 @@
     function getTags() {
       UserSettingsFactory.getTags(vm.userId).then(function(res) {
         vm.tags = res
-        console.log(vm.tags)
       })
     }
     getTags(); // gets all tags when user loads settings
@@ -60,15 +54,14 @@
       if (counter % 2 === 0) {
         vm.showInput = false;
       }
-      console.log(vm.showInput)
     }
     vm.addTag = function(tag) {
       vm.tagError = false;
       if (tag == "") {
         return
       }
+
       var split_tag = tag.split('')
-      console.log(split_tag)
       for (var k = 0; k < split_tag.length; k++) {
         if (split_tag[k] == ' ') {
           vm.tagError = true;
@@ -85,12 +78,8 @@
     }
 
     vm.saveTags = function() {
-        // if(vm.tags.length === 0){
-        // 	return
-        // }
         UserSettingsFactory.removeTags(vm.userId).then(function(res) {
           UserSettingsFactory.addTags(vm.tags, vm.userId).then(function(res) {
-            console.log('saved tags')
           })
         })
 
@@ -108,7 +97,8 @@
     }
     vm.openhomeMap = function() {
       UserSettingsFactory.getUserInfo(vm.userId).then(function(res) {
-        vm.currentRadius = res.radius
+        vm.currentRadius = res.radius;
+        vm.distance = res.radius;
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
             lat: res.lat,
@@ -143,7 +133,6 @@
 
         //Sets up vm.circle with a value so there is no undefined error in the change event listener below
         getCircle(0, 0)
-        console.log(res)
 
         vm.currentLocation.lat = res.location.lat;
         vm.currentLocation.lng = res.location.lng;
@@ -168,7 +157,6 @@
         //Makes it so user can just select radius and go instead of needing to drag the pin
         document.getElementById('settingsRadius').addEventListener("change", function() {
           vm.cityCircle.setMap(null);
-          console.log(vm.homeLocation);
           vm.currentLocation.lat = vm.homeLocation.lat || marker.position.J
           vm.currentLocation.lng = vm.homeLocation.lng || marker.position.M
           getCircle(vm.currentLocation.lat, vm.currentLocation.lng);
@@ -181,9 +169,6 @@
           // resets circle
           vm.homeLocation.lat = this.position.J
           vm.homeLocation.lng = this.position.M
-          console.log(vm.homeLocation)
-            // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
-            // vm.infoWindow.open(vm.map, marker);
           getCircle(vm.homeLocation.lat, vm.homeLocation.lng);
 
 
@@ -231,12 +216,10 @@
       getCircle(); // gets circle around radius
 
       vm.homeLocation.radius = vm.distance
-      console.log(vm.homeLocation)
       var id = vm.userId
 
       UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res) {
         vm.hlAdded = true;
-        console.log('added homeLocation to UserModel')
         vm.successMes = res;
       })
     }
@@ -252,9 +235,7 @@
         address: vm.searchLoc
       };
       geocoder.geocode(geocoderRequest, function(results, status) {
-        console.log(results)
         var loc = results[0].geometry.location
-        console.log(loc)
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
             lat: loc.J,
@@ -274,10 +255,8 @@
             vm.cityCircle.setMap(null);
           }
           // resets circle
-          console.log(marker)
           vm.homeLocation.lat = this.position.J
           vm.homeLocation.lng = this.position.M
-          console.log(vm.homeLocation)
             // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
             // vm.infoWindow.open(vm.map, marker);
           getCircle(vm.homeLocation.lat, vm.homeLocation.lng);

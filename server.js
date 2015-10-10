@@ -9,6 +9,83 @@ var uuid = require('uuid');
 var app = express();
 var env = require('./env.js');
 
+//For Android cloud messaging services testing
+// var gcm = require('node-gcm');
+//
+//
+// var message = new gcm.Message({
+//     collapseKey: 'demo',
+//     priority: 'high',
+//     contentAvailable: true,
+//     delayWhileIdle: true,
+//     timeToLive: 3,
+//     restrictedPackageName: "somePackageName",
+//     dryRun: true,
+//     data: {
+//         key1: 'message1',
+//         key2: 'message2'
+//     },
+//     notification: {
+//         title: "Hello, World",
+//         icon: "ic_launcher",
+//         body: "This is a notification that will be displayed ASAP."
+//     }
+// });
+//
+// var sender = new gcm.Sender(env.google.GCM_APIKEY)
+// console.log(env.google.GCM_APIKEY);
+// // sender.send(message, { registrationIds: regIds }, function (err, result) {
+// //     if(err) console.error(err);
+// //     else    console.log(result);
+// // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //----------------------------Basic require for mongodb---------------------------------------------
 require('./Models/AnswerModel.js');
 require('./Models/ConversationModel.js');
@@ -18,16 +95,21 @@ require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
 
+<<<<<<< HEAD
 var db = process.env.MONGOLAB_URI || env.MONGOLAB_URI || "mongodb://localhost/FinalApp";
 mongoose.connect("mongodb://localhost/FinalApp", function(err) {
-  if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
+  =======
+  var db = process.env.MONGOLAB_URI || /*env.MONGOLAB_URI ||*/ "mongodb://localhost/FinalApp";
+  mongoose.connect(db, function(err) {
+    >>>>>>> ec7654d0a5c7af36be328e561f93c72ef537d377
+    if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
 
-  var x = new Date();
-  console.log("Connected to %s at %s", db, x.toLocaleString());
-});
+    var x = new Date();
+    console.log("Connected to %s at %s", db, x.toLocaleString());
+  });
 
 
-app.set('views', path.join(__dirname, 'views'));
+  app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
 app.engine('.html', require('ejs').renderFile);
 //Allow for these directories to be usable on the client side
