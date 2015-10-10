@@ -95,7 +95,7 @@ require('./config/passport.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
 
-var db = process.env.MONGOLAB_URI || env.MONGOLAB_URI || "mongodb://localhost/FinalApp";
+var db = process.env.MONGOLAB_URI || /*env.MONGOLAB_URI ||*/ "mongodb://localhost/FinalApp";
 mongoose.connect(db, function(err) {
   if (err) return console.log("Error connecting to database: %s. Make sure you ran mongod :)", db);
 

@@ -7,17 +7,16 @@
 
 		var vm = this;
 		var user_id = UserFactory.status._user.id
-		console.log(user_id)
 		vm.generalPoints = function(){
 			RankFactory.getGeneralPoints(user_id).then(function(res){
-				console.log(res)
+				// console.log(res)
 				vm.gP = res.count;
-				
+
 			})
 		}
 		vm.knowledgePoints = function(){
 			QuestionFactory.getKpoints(user_id).then(function(res){
-				console.log(res);
+				// console.log(res);
 				vm.kP = res.knowledgePoints;
 			})
 		}
