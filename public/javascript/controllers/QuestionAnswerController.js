@@ -101,7 +101,7 @@
       })
     }
 
-    vm.cancleChoseAnswer = function(AnswerId, postedBy){
+    vm.cancelChoseAnswer = function(AnswerId, postedBy){
       console.log('inside UnchoseAnswer')
       if(vm.status._user.id != vm.question.postedBy) return;
       QuestionFactory.deConfirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
