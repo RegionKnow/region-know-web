@@ -1,4 +1,3 @@
-//Needs setup in server.js
 
 var mongoose = require('mongoose');
 var express = require('express');
@@ -6,6 +5,76 @@ var router = express.Router();
 var User = mongoose.model('User');
 var Conversation = mongoose.model('Conversation');
 var User = mongoose.model('User');
+
+
+var activeConversations = [];
+
+
+router.post("/activate-convo", function (req, res) {
+  if(activeConversations.length === 0) {
+    activeConversations.push({
+      convo: req.body.convoId,
+      numMessages: req.body.numMessages,
+      participants: {participantOne: {id: req.body.user}}
+    });
+    res.send()
+  } else {
+      activeConversations = activeConversations.map(function (item) {
+        if(item.convo === req.body.convoId){
+          if(item.participants.participantOne){
+            item.participants.participantTwo = {id: req.body.user};
+            return item;
+          } else {
+            item.participants.participantOne = {id: req.body.user};
+            return item;
+          }
+        } else {
+          return item;
+        }
+      })
+  }
+  res.send();
+
+});
+
+router.post("/live-convo", function(req, res) {
+  //Search activeConversations for convo, updates response object
+  console.log("live-convo");
+  activeConversations = activeConversations.map(function(item) {
+    if (item.convo === req.body.convoId){
+      if(item.participants.participantOne.id === req.body.user){
+        item.participants.participantOne.response = res;
+        return item;
+      } else if(item.participants.participantTwo.id === req.body.user){
+        item.participants.participantTwo.response = res;
+        return item;
+      }
+    } else {
+      return item;
+    }
+  })
+  
+})
+
+router.post("/deactivate-convo", function (req, res) {
+  activeConversations = activeConversations.filter(function (item) {
+    if(!item.participants.participantOne || !item.participants.participantTwo) {
+    return item.convo !== req.body.convoId;
+  } else {
+    if(item.participants.participantOne.id === req.body.user){
+      item.participants.participantOne = "";
+      return true;
+    } else{
+      item.participants.participantTwo = "";
+      return true;
+    }
+  }
+
+  });
+  console.log(activeConversations);
+  res.send();
+
+});
 
 //Queries mongo for conversation between two people
 router.post("/convo-finder", function(req, res) {
@@ -87,6 +156,13 @@ router.post('/new-message', function(req, res) {
     if (!result) return res.status(500).send({
       error: 'For some reason this coversation does not exist'
     });
+
+    activeConversations.forEach(function (item) {
+      if(item.convoId === req.body.convoId){
+        console.log(item);
+      }
+    })
+
     res.send({
       message: "Success!"
     });
@@ -95,9 +171,12 @@ router.post('/new-message', function(req, res) {
 
 router.get('/rando', function(req, res) {
   var number = Math.floor((Math.random() * 256));
+  console.log(typeof res);
+  setTimeout(function() {
   res.send({
-    body: "You got it " + number
-  });
+    body: number
+  })
+}, 10000)
 
 })
 

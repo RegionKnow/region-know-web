@@ -95,6 +95,7 @@ router.post('/delete/:id', function(req, res){
 router.post('/edit/:id', function(req, res){
 
 	Questions.update({_id: req.question._id}, {questionBody: req.body.questionBody}, function(err, response){
+		if(err) return res.status(500).send({error: "There was an error editing the question"})
 		res.send(response)
 	})
 
@@ -112,37 +113,31 @@ router.post('/tags/:id', function(req, res){
 ////Upvotes
 router.post('/upvote/:id/:user_id', function(req, res){
 	if(req.question.upvote.indexOf(req.user._id) != -1){
-		console.log('user already upvoted')
-		res.send('user already voted!')
-	}else if(req.question.downvote.indexOf(req.user._id) != -1){
+		res.send('User already voted!');
+	} else if(req.question.downvote.indexOf(req.user._id) != -1){
 
-			var currentVote = req.question.voteNum + 2
+		Questions.update({_id: req.question._id}, {
+			$push: {upvote: req.user._id},
+			$pull: {downvote: req.user._id},
+			$inc: {voteNum: 2}
 
-
-		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')
-			console.log(currentVote)
-			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
-				console.log('vote updated')
-				Questions.update({_id: req.question._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
-					console.log('removed downvote From reference')
-
-					res.send(rmVote);
-				})
-			})
+		}, function(err, updateStatus){
+				if(err) return res.status(500).send({error: "Problem querying database"});
+				console.log("DEBUG: Changed up date query");
+				console.log("DEBUG UPDATE STATUS: %s", updateStatus);
+				res.send(updateStatus);
 		})
 	}
 	else{
-		console.log('user has not upvoted yet')
-		var currentVote = req.question.voteNum + 1
-		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')
-			console.log(currentVote)
-			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
-				console.log('vote updated')
-
+		console.log('DEBUG: user has not upvoted yet')
+		Questions.update({_id: req.question._id}, {
+			$push: {upvote: req.user._id},
+			$inc: {voteNum: 1}
+		}, function(err, vote){
+			if(err) return res.status(500).send({error: "Problem querying database"});
+				console.log('DEBUG: added user to upvoted')
+				console.log('DEBUG: vote updated')
 				res.send(vote);
-			})
 		})
 	}
 })
@@ -151,35 +146,33 @@ router.post('/downvote/:id/:user_id', function(req, res){
 	if(req.question.downvote.indexOf(req.user._id) != -1){
 		console.log('user already downvoted')
 		res.send('user already downvoted!')
-	}else if(req.question.upvote.indexOf(req.user._id) != -1){
+	} else if(req.question.upvote.indexOf(req.user._id) != -1){
 
-			var currentVote = req.question.voteNum - 2
+			Questions.update({_id: req.question._id}, {
+				$pull: {upvote: req.user._id},
+				$push: {downvote: req.user._id},
+				$inc: {voteNum: -2}
 
-
-		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to downvoted')
-			console.log(currentVote)
-			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
-				console.log('vote updated')
-				Questions.findOneAndUpdate({_id: req.question._id}, {$pull: {upvote: req.user._id}}, function(err, rmVote){
-					console.log('removed downvote From reference')
-
+			}, function(err, rmVote){
+					console.log('vote updated');
+					console.log('added user to downvoted');
+					console.log('removed downvote From reference');
 					res.send(rmVote);
-				})
-			})
 		})
-	}
-	else{
+	} else {
 		console.log('user has not downvoted yet')
-		var currentVote = req.question.voteNum - 1
-		Questions.update({_id: req.question._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-			console.log('added user to upvoted')
-			console.log(currentVote)
-			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
-				console.log('vote updated')
 
+		Questions.update({_id: req.question._id}, {
+			$push: {downvote: req.user._id},
+			$inc: {voteNum: -1}
+
+		}, function(err, vote){
+
+				console.log('vote updated')
+				console.log('added user to upvoted')
 				res.send(vote);
-			})
+
+
 		})
 	}
 
@@ -277,7 +270,6 @@ router.post('/alert/:id', function(req, res){
 		allusers = users
 		Questions.findOne({_id: req.question._id}, function(err, quest){
 			thisquestion = quest
-			console.log('trying to alert users')
 			alertUser(allusers, thisquestion);
 			res.send('sent Alerts to Users');
 		})
@@ -328,9 +320,7 @@ router.post('/alert/:id', function(req, res){
 					checkObj[user_id] = 1;
 				}
 
-				console.log(checkObj)
-				// var idPop = true;
-
+				console.log(checkObj);
 			}
 		}
 
@@ -341,7 +331,6 @@ router.post('/alert/:id', function(req, res){
 router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 	User.update({_id: req.user._id}, {$inc: {knowledgePoints: 1}}, function(err, user){
 				Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
-					console.log(response);
 					res.send(response)
 				})
 	})
@@ -351,7 +340,6 @@ router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 		User.update({_id: req.user._id}, {$inc: {knowledgePoints: -1}}, function(err, user){
 				Questions.update({_id: req.question._id}, { $unset: { answered: 1 }}, function(err, response){
-					console.log(response);
 					res.send(response)
 		})
 	})
@@ -359,7 +347,6 @@ router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 
 router.post('/kpoints/:user_id', function(req, res){
 	User.findOne({_id: req.user._id}, function(err, response){
-		// console.log(response)
 		res.send(response)
 	})
 })
