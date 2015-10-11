@@ -1,27 +1,28 @@
-<br>
-<div class="col-md-2"></div>
-<div class="col-md-8 animated fadeInDown">
-	<div class="well">
 
-		<span><center><h3>Add Tags to your Question</h3></center>
-			<br>
-			<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
+<div class="row topRows">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 animated fadeInDown">
+		<div class="well">
 
-				<span class="" ng-repeat="tag in vm.tags track by $index">
+			<span><center><h3>Add Tags to your Question</h3></center>
+				<br>
+				<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
 
-					<div class="indvTag">
-						{{tag}}
-						<div ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+					<span class="" ng-repeat="tag in vm.tags track by $index">
+
+						<div class="indvTag">
+							{{tag}}
+							<div ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+							</div>
 						</div>
-					</div>
-					&nbsp;
-				</span>
+						&nbsp;
+					</span>
 
-			</div>
+				</div>
 
 
-		</span>
-		<br>
+			</span>
+			<br>
 			<!-- <form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
 				<input class="form-control" ng-model="vm.tag">
 			</form> -->
@@ -30,43 +31,43 @@
 				<label>Input New Tag...</label>
 				<input ng-model="vm.tag">
 
-				</md-input-container>
-			</form>
-			<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
+			</md-input-container>
+		</form>
+		<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
 
 	</div>
 
-</span>
 
 
 
-<br>
+	<br>
 
 	<!-- <form ng-submit="vm.addQlocation()">
 		<input class="form-control" ng-model="vm.questionLocation" placeholder="Enter Specific Location">
 	</form> -->
 	<form ng-submit="vm.addQlocation()">
-			<md-input-container flex>
-			<label>Enter Specific Location...</label>
-			<input ng-model="vm.questionLocation" >
+		<md-input-container flex>
+		<label>Enter Specific Location...</label>
+		<input ng-model="vm.questionLocation" >
 
-			</md-input-container>
-		</form>
+	</md-input-container>
+</form>
+<br>
+<div ng-show="vm.mapStatus" id="map"></div>
+<br>
+<form ng-submit="vm.createQ()">
+
+	<input class="form-control" placeholder="desc of question" ng-model="vm.desc">
+
 	<br>
-	<div ng-show="vm.mapStatus" id="map"></div>
-		<br>
-		<form ng-submit="vm.createQ()">
 
-			<input class="form-control" placeholder="desc of question" ng-model="vm.desc">
+	<br>
+	<center>
+		<button class="btn btn-lg" type="submit">Submit</button>
+	</center>
 
-			<br>
-
-			<br>
-			<center>
-				<button class="btn btn-lg" type="submit">Submit</button>
-			</center>
-
-		</form>
-	</div>
+</form>
 </div>
+
 <div class="col-md-2"></div>
+</div>
