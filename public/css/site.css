@@ -2,10 +2,44 @@ body {
 
   font-family: 'RobotoDraft';
   height: 100%;
+  width: 100%;
 }
+
+.homeWell {
+  background: none;
+  /*background:rgba(255,255,255,0.5);*/
+  text-shadow: 3px 0px 17px #000;
+  color: white;
+  border: none;
+  margin-top: 13%;
+  border-radius: 26px;
+  /*margin-bottom: 20%;*/
+} 
+/*=======WELCOME PAGE STYLE=======================*/
+
+
+.welcomePage {
+  background: url("http://www.landcast.com/file?name=/public/images/photo-galleries/seattle-wa-aerial-march-2014/01-DSC_0096.JPG") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+/*=======WELCOME PAGE STYLE END=======================*/
+
 #voteBut{
   min-width: 50px;
-  }
+}
 #editQuestion{
   margin-top: 10%;
   margin-left: 30px;
@@ -51,134 +85,142 @@ body {
 
 
   /*================NAVIGATION STYLES==========================================*/
+  .col-md-11 {
+   min-height: 0px !important;
+ }
+
+ #navParent {
+  height: 100%;
+}
+
+.sideNav {
+  box-shadow: 1px 1px 13px 1px #333;
+  height: 100%;
+  position: fixed;
+}
+.sideNav .material-icons {
+  color: #26a69a;
+  padding-right: 1em;
+  padding-left: 1em;
+  vertical-align: middle;
+  font-size: 2em;
+}
+
+.navImage {
+  height: 100px;
+  width: 50%;
+}
+
+#navBar a, #userInfo {
+  width: 93%;
+  display: inline-block;
+  height: 7.9%;
+  text-align: left;
+  vertical-align: middle;
+  padding-top: .9em;
+}
 
 
-  #navBar {
-    font-size: 1.3em;
-    height: 100%;
-    margin: auto;
-  }
+#userInfo {
+  height: 40%;
+  width: 100%;
+  top: 0;
+  background-color: #26a69a;
+}
 
-  .sideNav {
-    box-shadow: 1px 1px 13px 1px #333;
-    height: 100%;
-    position: fixed;
-  }
-  .sideNav .material-icons {
-    color: #26a69a;
-    padding-right: 1em;
-    padding-left: 1em;
-    vertical-align: middle;
-    font-size: 2em;
-  }
+a:hover, a:visited, a:active {
+  text-decoration: none;
+  color: #26a69a;
+}
 
-  .navImage {
-    height: 100px;
-    width: 50%;
-  }
+.loggedInUser {
+  color: #26a69a;
+}
 
-  #navBar a, #userInfo {
-    width: 93%;
-    display: inline-block;
-    height: 7.9%;
-    text-align: left;
-    vertical-align: middle;
-    padding-top: .9em;
-  }
+.topNav {
+  background-color: white;
+  height: 60px;
+  box-shadow: 1px 1px 9px #333;
+  color: #26a69a;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+}
 
+.topRows {
+  margin-top: 60px;
+}
+#tradeName {
+  font-size: 1.6em;
+  padding-top: -.7em;
+  padding-left: .3em;
+}
 
-  #userInfo {
-    height: 40%;
-    width: 100%;
-    top: 0;
-    background-color: #26a69a;
-  }
-
-  a:hover, a:visited, a:active {
-    text-decoration: none;
-    color: #26a69a;
-  }
-
-  .loggedInUser {
-    color: #26a69a;
-  }
-
-  .topNav {
-    height: 60px;
-    box-shadow: 1px 1px 9px #333;
-    margin-bottom: 3em;
-    color: #26a69a;
-  }
-
-  #tradeName {
-    font-size: 1.6em;
-    padding-top: -.7em;
-    padding-left: .3em;
-  }
-
-  .topRight {
-    padding-right: 1em;
-    padding-top: 1em;
-    font-size: 1.3em;
-  }
+.topRight {
+  padding-right: 1em;
+  padding-top: 1em;
+  font-size: 1.3em;
+}
 
 
-  #naviBars {
-    color: #26a69a;
-    margin-top: .3em;
-  }
+#naviBars {
+  color: #26a69a;
+  margin-top: .3em;
+}
 
   /*md-backdrop.md-opaque {
     background-color: rgba(33,33,33,0) !important;
     top: 0;
 
-  }*/
+    }*/
 
 
-  /*================TAG STYLES==========================================*/
-  #quesitonTag{
-    margin-left: 7px;
-    font-size: 15px;
-    border-radius: 10px;
-    border-radius: 1px 5px 3px 5px;
-    border-width: 3px;
-    box-shadow: 2px 2px 2px black;
-    border-color: #000000;
-    padding-left: 15px;
-    color: #000;
-    background-color: #26a69a;
-    display: inline;
-  }
-  .tagDiv {
-    border-radius: 10px;
-  }
-  .indvTag {
-    border-radius: 1px 5px 3px 5px;
-    border-width: 3px;
-    box-shadow: 2px 2px 2px black;
-    border-color: #000000;
-    padding-left: 15px;
-    color: #000;
-    background-color: #26a69a;
-    display: inline;
-  }
+    /*================TAG STYLES==========================================*/
+    #quesitonTag{
+      margin-left: 7px;
+      font-size: 15px;
+      border-radius: 10px;
+      border-radius: 1px 5px 3px 5px;
+      border-width: 3px;
+      box-shadow: 2px 2px 2px black;
+      border-color: #000000;
+      padding-left: 15px;
+      color: #000;
+      background-color: #26a69a;
+      display: inline;
+    }
+    .tagDiv {
+      border-radius: 10px;
+    }
+    .indvTag {
+      border-radius: 1px 5px 3px 5px;
+      border-width: 3px;
+      box-shadow: 2px 2px 2px black;
+      border-color: #000000;
+      padding-left: 15px;
+      color: #000;
+      background-color: #26a69a;
+      display: inline;
+    }
 
-  /*================QUESTIONs &  CARD STYLES==========================================*/
-  #QDicon{
-    display: inline;
-    opacity: 1.0;
-    font-size: 3em;
-  }
-  .md-input-container.flex.md-default-theme.md-input-focused {
-    color: #26a69a;
-  }
-  .qCards {
-    width: 100%;
-    height: 100px;
-    margin-top: 1em;
-  }
-  .qIcon {
-    font-size: 6em;
-    padding-top: 5%;
-    opacity: .3;
-  }
+    /*================QUESTIONs &  CARD STYLES==========================================*/
+    #QDicon{
+      display: inline;
+      opacity: 1.0;
+      font-size: 3em;
+    }
+    .md-input-container.flex.md-default-theme.md-input-focused {
+      color: #26a69a;
+    }
+    .qCards {
+      width: 100%;
+      height: 100px;
+      margin-top: 1em;
+      font-size: 1em;
+    }
+    .qIcon {
+      font-size: 6em;
+      padding-top: 5%;
+      opacity: .3;
+    }

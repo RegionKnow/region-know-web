@@ -3,13 +3,11 @@
   angular.module('app')
   .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope'];
+  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal"];
 
-  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope) {
+  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal) {
     var vm = this;
     vm.status = UserFactory.status;
-
-
 
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
@@ -35,12 +33,12 @@
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           // console.log('watching for alerts')
           if(!res.alerts) return;
-            if (res.alerts.length > 0) {              vm.alertObj.status = true;
-              vm.alertObj.alertNum = res.alerts.length;
-              vm.alertObj.alerts = res.alerts;
-            } else {              
-              vm.alertStatus = false;
-            }
+          if (res.alerts.length > 0) {              vm.alertObj.status = true;
+            vm.alertObj.alertNum = res.alerts.length;
+            vm.alertObj.alerts = res.alerts;
+          } else {              
+            vm.alertStatus = false;
+          }
 
         })
         alertWatch();
@@ -67,13 +65,13 @@
       });
     };
 
-    vm.loginUser = function() {
-      UserFactory.loginUser(vm.user).then(function(res) {
-        vm.status = UserFactory.status;
-        vm.user = null;
-        $state.go("QuestionsFeed");
-      });
-    };
+    // vm.loginUser = function() {
+    //   UserFactory.loginUser(vm.user).then(function(res) {
+    //     vm.status = UserFactory.status;
+    //     vm.user = null;
+    //     $state.go("QuestionsFeed");
+    //   });
+    // };
 
     vm.logoutUser = function() {
       UserFactory.logoutUser().then(function() {
@@ -81,6 +79,29 @@
         $state.go("Home");
       });
     };
+
+    //---------FUNCTIONALITY FOR MODALS----------------------------------------------------------
+    vm.openLoginModal = function() {
+      var loginModal = $modal.open({
+        templateUrl: 'templates/login.html',
+        controller: 'ModalInstanceController',
+        controllerAs: "vm",
+        size: "md"
+      });
+      loginModal.result.then(function(user){
+        console.log(user);
+        UserFactory.loginUser(user).then(function(res) {
+          vm.status = UserFactory.status;
+          vm.user = null;
+          $state.go("QuestionsFeed");
+        });
+      });
+    };
+
+
+
+
+
 
   }
 })();
