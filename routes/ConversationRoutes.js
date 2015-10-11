@@ -6,12 +6,21 @@ var User = mongoose.model('User');
 var Conversation = mongoose.model('Conversation');
 var User = mongoose.model('User');
 
-
+//When the server is started this array contains data for all live active conversations
 var activeConversations = [];
 
-
+//This route is for activating the conversaton into the live domain
 router.post("/activate-convo", function (req, res) {
-  if(activeConversations.length === 0) {
+  var isConvoInArray = (function(){
+    if(activeConversations.length < 1) return false;
+    for(var index = 0; index < activeConversations.length; x++){
+      if (activeConversations[index].convo === req.body.convoId){
+        return true;
+      }
+    }
+    return false;
+  })();
+  if(!isConvoInArray) {
     activeConversations.push({
       convo: req.body.convoId,
       numMessages: req.body.numMessages,
@@ -159,11 +168,11 @@ router.post('/new-message', function(req, res) {
     activeConversations.forEach(function (item) {
       var convoResponseOne, convoResponseTwo;
       if(item.convo === req.body.convoId){
-        if(item.participants.participantOne.response){
+        if(item.participants.participantOne && item.participants.participantOne.response){
           convoResponseOne = item.participants.participantOne.response;
           convoResponseOne.send(newMessage);
         }
-        if(item.participants.participantTwo.response){
+        if(item.participants.participantTwo && item.participants.participantTwo.response){
           convoResponseTwo = item.participants.participantTwo.response;
           convoResponseTwo.send(newMessage);
         }

@@ -346,6 +346,7 @@ router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 })
 
 router.post('/kpoints/:user_id', function(req, res){
+	if(!req.user) return res.send();
 	User.findOne({_id: req.user._id}, function(err, response){
 		res.send(response)
 	})
