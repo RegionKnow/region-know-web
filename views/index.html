@@ -107,16 +107,9 @@
 		</a>
 
 		<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
-			<i class="material-icons">swap_vert</i>Rank
+			<i class="material-icons">swap_vert</i>
+			Rank
 		</a>
-
-		<a class="md-button" ng-hide="nav.status._user" ui-sref="Login" ng-click="!nav.close()">
-			<i class="material-icons">vpn_key</i>Login
-		</a>
-
-		<a class="md-button" ng-show="!nav.status._user" ui-sref="Register" ng-click="nav.close()"><i class="material-icons">star</i>Register
-		</a>
-
 
 		<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
 			<i class="material-icons">settings</i>Settings
@@ -128,6 +121,13 @@
 
 		<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
 			<i class="material-icons">lock</i>Log Out
+		</a>
+
+		<a class="md-button" ng-hide="nav.status._user" ui-sref="Login" ng-click="!nav.close()">
+			<i class="material-icons">vpn_key</i>Login
+		</a>
+
+		<a class="md-button" ng-show="!nav.status._user" ui-sref="Register" ng-click="nav.close()"><i class="material-icons">star</i>Register
 		</a>
 
 	</md-sidenav>

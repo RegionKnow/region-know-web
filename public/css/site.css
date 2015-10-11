@@ -150,6 +150,7 @@ a:hover, a:visited, a:active {
 
 .topRows {
   margin-top: 60px;
+  padding-top: 6%;
 }
 #tradeName {
   font-size: 1.6em;
