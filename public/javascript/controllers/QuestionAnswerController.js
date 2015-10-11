@@ -90,12 +90,11 @@
     }
 
 
-    vm.choseAnswer = function(AnswerId, postedBy){
+    vm.chooseAnswer = function(AnswerId, postedBy){
       console.log('inside choseAnswer')
       if(vm.status._user.id != vm.question.postedBy) return;
       if(vm.question.answered) return;
       QuestionFactory.confirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
-        console.log(res)
         findAnswerVote(AnswerId);
         vm.isAnswered = AnswerId;
       })
@@ -105,7 +104,6 @@
       console.log('inside UnchoseAnswer')
       if(vm.status._user.id != vm.question.postedBy) return;
       QuestionFactory.deConfirmAnswer(vm.thisQuesitonId, AnswerId, vm.status._user.id).then(function(res){
-        console.log(res)
         findAnswerVote(AnswerId);
         vm.isAnswered = null;
       })
