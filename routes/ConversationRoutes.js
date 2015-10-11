@@ -39,7 +39,6 @@ router.post("/activate-convo", function (req, res) {
 
 router.post("/live-convo", function(req, res) {
   //Search activeConversations for convo, updates response object
-  console.log("live-convo");
   activeConversations = activeConversations.map(function(item) {
     if (item.convo === req.body.convoId){
       if(item.participants.participantOne.id === req.body.user){
@@ -53,7 +52,7 @@ router.post("/live-convo", function(req, res) {
       return item;
     }
   })
-  
+
 })
 
 router.post("/deactivate-convo", function (req, res) {
@@ -158,8 +157,16 @@ router.post('/new-message', function(req, res) {
     });
 
     activeConversations.forEach(function (item) {
-      if(item.convoId === req.body.convoId){
-        console.log(item);
+      var convoResponseOne, convoResponseTwo;
+      if(item.convo === req.body.convoId){
+        if(item.participants.participantOne.response){
+          convoResponseOne = item.participants.participantOne.response;
+          convoResponseOne.send(newMessage);
+        }
+        if(item.participants.participantTwo.response){
+          convoResponseTwo = item.participants.participantTwo.response;
+          convoResponseTwo.send(newMessage);
+        }
       }
     })
 
