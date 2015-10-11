@@ -26,18 +26,9 @@
 		});
 
 	};
-		//-----------------------------------------------------------------------------------
-		// EDIT Profile with Image upload
 
-
-		// $scope.submit = function() {
-		// 	if (form.file.$valid && $scope.file && !$scope.file.$error) {
-		// 		$scope.upload($scope.file);
-		// 	}
-		// };
-
-		//submitting file and checking if valid
-		$scope.submit = function() {
+	//submitting file and checking if valid
+	$scope.submit = function() {
 			// console.log($scope.form.file.$valid);
 			// console.log(!$scope.file.$error);
 
@@ -55,11 +46,11 @@
     		url: '/api/user/uploadPhoto',
     		data: {file: file, 'userId': vm.status._user.id}
     	}).then(function (resp) {
-				vm.loading = false;
+    		vm.loading = false;
 
     		// console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
     	}, function (resp) {
-				vm.loading = false;
+    		vm.loading = false;
 
     		// console.log('Error status: ' + resp.status);
     	}, function (evt) {

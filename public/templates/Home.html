@@ -1,24 +1,32 @@
-<div class="container-fluid">
-	<div class="row">
+
+<div class="container-fluid welcomePage">
+	<div class="row topRows">
 
 		<div class="col-md-2"></div>
-		<div class="col-md-8 row text-center well">
+		<div class="col-md-8 row text-center well homeWell">
 
 			<div>
-				<h3>RegionKnow</h3>
-				<a ui-sref="Login">
-					<md-button class="md-raised md-primary" ng-click="">Login</md-button>
-				</a>
-				<a ui-sref="Register">
-					<md-button class="md-raised md-primary" ng-click="">Register</md-button>
-				</a>
-			</div>
-			<div class="col-md-offset-5 col-md-3">
-				<md-button href="api/user/auth/facebook" style="background-color: #46629E" class="md-primary md-raised btn-block">Login with FB</md-button>
-			<md-button href="api/user/auth/google" style="background-color: #DC4B3E" class="md-primary md-raised btn-block">Login with Google</md-button>
+				<h1>RegionKnow</h1>
+				<h3>Ask questions, get answers and more.</h3>
+				
+				<div>
+					<md-button class="md-raised" ng-click="nav.openLoginModal()">Login</md-button>
+
+					<md-button class="md-raised" ng-click="nav.openRegisterModal()">Register</md-button>
+				</div>
+				<br>
+				<i>or login with an account below...</i>
+				<br>
+				<br>
+				<md-button href="api/user/auth/facebook" class="md-fab md-button md-mini"><i class="fa fa-facebook" style="font-size: 1.3em;"></i></md-button>
+
+				<md-button href="api/user/auth/google" class="md-fab md-button md-mini"><i class="fa fa-google" style="font-size: 1.3em;"></i></md-button>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
 
 	</div>
 </div>
+
+
+
