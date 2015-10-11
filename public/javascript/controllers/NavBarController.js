@@ -58,12 +58,12 @@
 
     //---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
-    vm.registerUser = function() {
-      UserFactory.registerUser(vm.user).then(function() {
-        vm.user = null;
-        $state.go("Login");
-      });
-    };
+    // vm.registerUser = function() {
+    //   UserFactory.registerUser(vm.user).then(function() {
+    //     vm.user = null;
+    //     $state.go("Login");
+    //   });
+    // };
 
     // vm.loginUser = function() {
     //   UserFactory.loginUser(vm.user).then(function(res) {
@@ -89,7 +89,6 @@
         size: "md"
       });
       loginModal.result.then(function(user){
-        console.log(user);
         UserFactory.loginUser(user).then(function(res) {
           vm.status = UserFactory.status;
           vm.user = null;
@@ -98,8 +97,23 @@
       });
     };
 
+    
 
-
+    vm.openRegisterModal = function() {
+      var registerModal = $modal.open({
+        templateUrl: 'templates/register.html',
+        controller: 'ModalInstanceController',
+        controllerAs: "vm",
+        size: "md"
+      });
+      registerModal.result.then(function(newUser){
+        console.log(newUser);
+        UserFactory.registerUser(newUser).then(function() {
+          vm.user = null;
+          vm.openLoginModal();
+        });
+      });
+    };
 
 
 
