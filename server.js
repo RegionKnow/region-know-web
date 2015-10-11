@@ -122,15 +122,15 @@ app.set('view options', {
 var newSessionID = uuid();
 
 app.use(session({
-    genid: function(req) {
+  genid: function(req) {
       return newSessionID; // use UUIDs for session IDs
     },
     secret: 'regionknow_secret'
   }))
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
 
 //middleware that allows for us to parse JSON and UTF-8 from the body of an HTTP request
