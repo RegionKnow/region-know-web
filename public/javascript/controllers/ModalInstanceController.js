@@ -11,7 +11,6 @@
 
 		vm.registerUser = function() {
 			$modalInstance.close(vm.user);
-			console.log(vm.user)
 		};
 
 		vm.loginUser = function() {

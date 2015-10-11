@@ -1,43 +1,40 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<h1>Register</h1>
+		<div class="col-md-12">
 
-			<form ng-submit="nav.registerUser()">
+			<form ng-submit="vm.registerUser()">
 
-				<div class="form-group">
-					<label>User Name</label>
-					<input type="text" class="form-control" ng-model="nav.user.username"/>
-				</div>
+				<md-input-container flex>
+				<label>User Name</label>
+				<input type="text" ng-model="vm.user.username"/>
+			</md-input-container>
 
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" ng-model="nav.user.email"/>
-				</div>
+			<md-input-container flex>
+			<label>Email</label>
+			<input type="email" ng-model="vm.user.email"/>
+		</md-input-container>
 
-				<div class="form-group">
-					<label >Password</label>
-					<input type="password" class="form-control" ng-model="nav.user.password"/>
-				</div>
+		<md-input-container flex>
+		<label >Password</label>
+		<input type="password" ng-model="vm.user.password"/>
+	</md-input-container>
 
-				<div class="form-group">
-					<label >Confirm Password</label>
-					<input type="password" class="form-control"/>
-				</div>
+	<md-input-container flex>
+	<label >Confirm Password</label>
+	<input type="password"/>
+</md-input-container>
 
-				<div class="text-center">
+<div class="text-center">
 
-					<md-button type="submit" class="md-raised md-primary">
-					Submit
-				</md-button>
-			</div>
-			<br/>
+	<md-button type="submit" class="md-raised md-primary">
+	Submit
+</md-button>
+</div>
+<br/>
 
-		</form>
-	</div>
-	<div class="col-md-2"></div>
+</form>
+</div>
 
 </div>
 </div>

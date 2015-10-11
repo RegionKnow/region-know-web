@@ -15,10 +15,10 @@
       url: '/',
       templateUrl: 'templates/home.html'
     })
-    .state('Register', {
-      url: '/register',
-      templateUrl: 'templates/register.html',
-    })
+    // .state('Register', {
+    //   url: '/register',
+    //   templateUrl: 'templates/register.html',
+    // })
     // .state('Login', {
     //   url: '/login',
     //   templateUrl: 'templates/login.html',
