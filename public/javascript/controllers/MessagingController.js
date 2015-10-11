@@ -83,9 +83,11 @@
         user: vm.status._user.id
       }, config).then(
         function(successResponse) {
-          console.log(successResponse);
+          getOneConvo();
+          liveConvo();
         },
         function(errorResponse) {
+          liveConvo();
           console.log(errorResponse.data);
         })
     }
@@ -159,7 +161,6 @@
           participantTwo: vm.convoInFocus.participantTwo
         }
       }
-      console.log(participants, "getOneConvo");
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
         vm.convoInFocus = successResponse.data;
       }, function(errorResponse) {
