@@ -84,14 +84,17 @@
 					{{nav.status._user.username}}
 					<br>
 
+
+
 					<img class="img  img-circle navImage" ng-src="{{nav.status._user.image}}">
 
 					<br>
-					<span ng-controller="RankController as vm">
+						
 						<span style="font-size: 15px;">
-							<span>GeneralPoints -  {{vm.gP}}</span> <span> KnowledgePoints - {{vm.kP}}</span>
+							<span>GeneralPoints -  {{nav.status._user.generalPoints}} KnowledgePoints - {{nav.status._user.knowledgePoints}}</span>
 						</span>
-					</span>
+
+
 				</div>
 
 			</a>
