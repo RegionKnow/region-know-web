@@ -6,9 +6,10 @@
   NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal"];
 
   function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal) {
+
     var vm = this;
     vm.status = UserFactory.status;
-
+    console.log(vm.status)
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
     vm.toggleLeft = buildToggler('left');
@@ -43,6 +44,11 @@
         })
         alertWatch();
       }, 3000);
+
+      $timeout(function() {
+        console.log('reloading Nav')
+        UserFactory.reloadNav();
+      }, 180000);
 
     }
     vm.openAlerts = function() {
@@ -114,6 +120,23 @@
         });
       });
     };
+   //  (function(){
+   //    RankFactory.getGeneralPoints(vm.status._user.id).then(function(res){
+   //      console.log(res)
+   //      console.log('ran gp find')
+   //      vm.gP = res.count;
+        
+   //    })
+   //  })();
+   // (function(){
+   //    QuestionFactory.getKpoints(vm.status._user.id).then(function(res){
+   //      console.log(res);
+   //      console.log('ran kp find')
+   //      vm.kP = res.knowledgePoints;
+   //    })
+   //  })();
+    // vm.knowledgePoints();
+    // vm.generalPoints();
 
 
 
