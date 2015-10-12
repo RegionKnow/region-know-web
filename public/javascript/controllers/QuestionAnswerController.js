@@ -38,10 +38,13 @@
     vm.addAnswer = function() {
       //AnswerObj is the answer for question
       // vm.AnswerObj.answerBody = vm.answer // sets answer
+
       vm.AnswerObj.user_id = vm.status._user.id // sets user who submited it
       vm.AnswerObj.questionId = vm.thisQuesitonId;
       console.log(vm.AnswerObj)
-      AnswerFactory.addAnswer(vm.AnswerObj).then(function(res) {
+      var temp_Obj = angular.copy(vm.AnswerObj)
+      vm.AnswerObj = null;
+      AnswerFactory.addAnswer(temp_Obj).then(function(res) {
 
           // ;
           vm.loading = true; // showing loading gif

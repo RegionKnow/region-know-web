@@ -119,17 +119,18 @@ router.post('/upvote/:id/:user_id', function(req, res){
 			var currentVote = req.question.voteNum + 2
 
 
-		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
+		Questions.update({_id: req.question._id}, {$push: {upvote: {_id: req.user._id}}, voteNum: currentVote, $pull: {downvote: req.user._id} }, function(err, response){
 			console.log('added user to upvoted')
 			console.log(currentVote)
-			Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
-				console.log('vote updated')
-				Questions.update({_id: req.question._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
-					console.log('removed downvote From reference')
+			// Questions.update({_id: req.question._id}, {voteNum: currentVote}, function(err, vote){
+			// 	console.log('vote updated')
+			// 	Questions.update({_id: req.question._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
+			// 		console.log('removed downvote From reference')
 
-					res.send(rmVote);
-				})
-			})
+			// 		res.send(rmVote);
+			// 	})
+			// })
+			res.send(response)
 		})
 	}
 	else{
@@ -338,9 +339,11 @@ router.post('/alert/:id', function(req, res){
 
 router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 	
-	User.findOne({_id: req.user._id}, function(err, user){
+	User.findOne({_id: req.question.postedBy}, function(err, user){
 			var kp = user.knowledgePoints + 1
-			User.update({_id: req.user._id}, {knowledgePoints: kp}, function(err, newRes){
+			console.log(kp)
+			User.update({_id: req.question.postedBy}, {knowledgePoints: kp}, function(err, newRes){
+				console.log(newRes)
 				Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
 					console.log(response);
 					res.send(response)
@@ -351,22 +354,21 @@ router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 
 
 router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
-		User.findOne({_id: req.user._id}, function(err, user){
+		User.findOne({_id: req.question.postedBy}, function(err, user){
 			var kp = user.knowledgePoints - 1
-			User.update({_id: req.user._id}, {knowledgePoints: kp}, function(err, newRes){
+			User.update({_id: req.question.postedBy}, {knowledgePoints: kp}, function(err, newRes){
 				Questions.update({_id: req.question._id}, { $unset: { answered: 1 }}, function(err, response){
 					console.log(response);
-					res.send(response)
+					res.send(response) 
 				})
 			})
 		})
 })
 
 router.post('/kpoints/:user_id', function(req, res){
-	User.findOne({_id: req.user._id}, function(err, response){
-		// console.log(response)
+	console.log(req.user)
 		res.send(response)
-	})
+
 })
 function calculateQuestionPoints(post_obj){
 
