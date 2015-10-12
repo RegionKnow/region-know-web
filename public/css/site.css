@@ -19,8 +19,11 @@ h2 {
   border: none;
   margin-top: 3%;
   border-radius: 26px;
+  min-height: 0px !important;
+  position: absolute;
+  top: 0px;
   /*margin-bottom: 20%;*/
-} 
+}
 
 .homeWell h1 {
   font-size: 6em;
@@ -64,7 +67,7 @@ h2 {
   margin-right: 90%;
 }
 #questionFace{
-  margin-left: 30px; 
+  margin-left: 30px;
   font-size: 30px;"
 }
 #alerts{
@@ -148,12 +151,15 @@ h2 {
   height: 7.9%;
   text-align: left;
   vertical-align: middle;
-  padding-top: .9em;
+  /*padding-top: .9em;*/
+}
+md-backdrop {
+  position: absolute;
+  height: 141.5%;
 }
 
-
 #userInfo {
-  height: 40%;
+  height: 36%;
   width: 100%;
   top: 0;
   background-color: #26a69a;
@@ -180,8 +186,11 @@ a:hover, a:visited, a:active {
 }
 
 .topRows {
-  margin-top: 60px;
-  padding-top: 6%;
+  position: relative;
+  top: 85px;
+  padding-bottom: 10px;
+  /*margin-top: 60px;
+  padding-top: 6%;*/
 }
 #tradeName {
   font-size: 1.6em;

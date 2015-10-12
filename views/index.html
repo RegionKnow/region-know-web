@@ -32,7 +32,7 @@
 					&nbsp;RegionKnow
 				</span>
 
-				
+
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">question_answer</i>
 				</a>
 
@@ -58,7 +58,6 @@
 		<!-- THIS IS WHERE SIDE NAV CODE STARTS====================================================== -->
 		<div class="row">
 
-			<div class="col-md-2"></div>
 
 			<section id="navBar" layout="row" flex>
 
@@ -78,13 +77,13 @@
 
 			<md-toolbar id="userInfo" class="md-theme-light">
 
-			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
-				<div style="margin-left: 30%;">
+			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
+				<div style="margin-left: 30%; position: absolute; top: -25px;">
 					<br>
 					{{nav.status._user.username}}
 					<br>
 
-					<img class="img  img-circle navImage" src="{{nav.status._user.image}}">
+					<img class="img  img-circle navImage" ng-src="{{nav.status._user.image}}">
 					<br>
 					<span ng-controller="RankController as vm">
 						<span style="font-size: 15px;">
@@ -123,18 +122,14 @@
 			<i class="material-icons">lock</i>Log Out
 		</a>
 
-		<a class="md-button" ng-hide="nav.status._user" ui-sref="Login" ng-click="!nav.close()">
-			<i class="material-icons">vpn_key</i>Login
-		</a>
 
-		<a class="md-button" ng-show="!nav.status._user" ui-sref="Register" ng-click="nav.close()"><i class="material-icons">star</i>Register
-		</a>
+
+
 
 	</md-sidenav>
 
 </section>
 
-<div class="col-md-2"></div>
 
 </div>
 
@@ -186,7 +181,7 @@
 	<script src="/javascript/controllers/VoteController.js"></script>
 	<script src="/javascript/controllers/RankController.js"></script>
 	<script src="/javascript/controllers/ModalInstanceController.js"></script>
-	
+
 
 
 </body>
