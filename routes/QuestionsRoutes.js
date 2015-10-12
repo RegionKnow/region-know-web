@@ -356,6 +356,7 @@ router.post('/kpoints/:user_id', function(req, res){
 	User.findOne({_id: req.user._id}, function(err, response){
 
 		res.send(response)
+	})
 
 })
 function calculateQuestionPoints(post_obj){
