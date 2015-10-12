@@ -27,12 +27,13 @@
     };
 
     vm.alertObj = {}
-    alertWatch();
+    // alertWatch();
+    checkVotes();
 
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
-          // console.log('watching for alerts')
+          console.log('watching for alerts')
           if(!res.alerts) return;
           if (res.alerts.length > 0) {              vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
@@ -44,13 +45,8 @@
         })
         alertWatch();
       }, 3000);
-
-      $timeout(function() {
-        console.log('reloading Nav')
-        UserFactory.reloadNav();
-      }, 180000);
-
     }
+
     vm.openAlerts = function() {
       vm.showAlertTab = true;
       $timeout(function() {
@@ -59,6 +55,21 @@
         })
       }, 30000);
 
+    }
+
+    function checkVotes(){
+      $timeout(function() {
+        console.log('reloading Nav')
+        UserFactory.getGeneralPoints(vm.status._user.id).then(function(response){
+          // console.log(response)
+          UserFactory.reloadNav(vm.status._user.id).then(function(res){
+            // console.log(res)
+            vm.status._user.generalPoints = res.generalPoints
+            vm.status._user.knowledgePoints = res.knowledgePoints
+          }); 
+        })
+        checkVotes();
+      }, 30000);
     }
 
 
@@ -85,6 +96,8 @@
         $state.go("Home");
       });
     };
+
+
 
     //---------FUNCTIONALITY FOR MODALS----------------------------------------------------------
     vm.openLoginModal = function() {
@@ -120,25 +133,6 @@
         });
       });
     };
-   //  (function(){
-   //    RankFactory.getGeneralPoints(vm.status._user.id).then(function(res){
-   //      console.log(res)
-   //      console.log('ran gp find')
-   //      vm.gP = res.count;
-
-   //    })
-   //  })();
-   // (function(){
-   //    QuestionFactory.getKpoints(vm.status._user.id).then(function(res){
-   //      console.log(res);
-   //      console.log('ran kp find')
-   //      vm.kP = res.knowledgePoints;
-   //    })
-   //  })();
-    // vm.knowledgePoints();
-    // vm.generalPoints();
-
-
 
   }
 })();
