@@ -38,7 +38,7 @@
           if (res.alerts.length > 0) {              vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
             vm.alertObj.alerts = res.alerts;
-          } else {              
+          } else {
             vm.alertStatus = false;
           }
 
@@ -116,7 +116,7 @@
       });
     };
 
-    
+
 
     vm.openRegisterModal = function() {
       var registerModal = $modal.open({
@@ -133,5 +133,6 @@
         });
       });
     };
+
   }
 })();
