@@ -1,4 +1,4 @@
-<div class="row introFeatures" ng-cloack>
+<div class="row topRows" ng-cloack>
 
 	<div class="col-md-2"></div>
 
@@ -7,34 +7,37 @@
 
 
 		<md-input-container flex>
-			<label>Search Questions by Name or Tag's</label>
-			<input ng-model="vm.search">
-		</md-input-container>
+		<label>Search Questions by Name or Tags</label>
+		<input ng-model="vm.search">
+	</md-input-container>
 
-		<br> Questions Auto Filtered By HomeLocation In settings!
+	<div class="text-center">
+		<br><h2>Click on a question to answer it</h2>
+		<i>Questions filtered according to user settings</i>
 		<br>
-
-
-		<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
-			<a ui-sref="ViewQuesiton({id: q._id})">
-
-				<div class="mdl-card mdl-shadow--4dp qCards">
-
-					<div class="mdl-card__supporting-text" style="opacity: none;">
-						<span>
-					<i class="material-icons qIcon">help_outline</i>
-					</span> &nbsp;
-						<span>
-							<h2>{{q.questionBody}}</h2>
-						</span>
-					</div>
-				</div>
-
-			</a>
-
-		</div>
+		<br>
 	</div>
 
-	<div class="col-md-2"></div>
+
+	<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
+		<a ui-sref="ViewQuesiton({id: q._id})">
+
+			<div class="mdl-card mdl-shadow--4dp qCards">
+
+				<div class="mdl-card__supporting-text" style="opacity: none;">
+					<span>
+						<i class="material-icons qIcon">help_outline</i>
+						&nbsp;
+						<p>{{q.questionBody}}</p>
+					</span> 
+				</div>
+			</div>
+
+		</a>
+
+	</div>
+</div>
+
+<div class="col-md-2"></div>
 
 </div>
