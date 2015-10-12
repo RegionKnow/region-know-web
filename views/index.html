@@ -79,11 +79,13 @@
 
 			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
 				<div style="margin-left: 30%; position: absolute; top: -25px;">
+
 					<br>
 					{{nav.status._user.username}}
 					<br>
 
 					<img class="img  img-circle navImage" ng-src="{{nav.status._user.image}}">
+
 					<br>
 					<span ng-controller="RankController as vm">
 						<span style="font-size: 15px;">

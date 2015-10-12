@@ -73,6 +73,9 @@
       return q.promise;
     };
 
+    o.reloadNav = function(){
+      o.status._user = isLoggedIn();
+    }
     o.logoutUser = function() {
       var q = $q.defer()
       removeToken();

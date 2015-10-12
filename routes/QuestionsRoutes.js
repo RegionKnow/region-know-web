@@ -113,6 +113,7 @@ router.post('/tags/:id', function(req, res){
 ////Upvotes
 router.post('/upvote/:id/:user_id', function(req, res){
 	if(req.question.upvote.indexOf(req.user._id) != -1){
+
 		res.send('User already voted!');
 	} else if(req.question.downvote.indexOf(req.user._id) != -1){
 
@@ -126,6 +127,7 @@ router.post('/upvote/:id/:user_id', function(req, res){
 				console.log("DEBUG: Changed up date query");
 				console.log("DEBUG UPDATE STATUS: %s", updateStatus);
 				res.send(updateStatus);
+
 		})
 	}
 	else{
@@ -329,7 +331,9 @@ router.post('/alert/:id', function(req, res){
 })
 
 router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
+
 	User.update({_id: req.user._id}, {$inc: {knowledgePoints: 1}}, function(err, user){
+
 				Questions.update({_id: req.question._id}, {answered: req.answer._id}, function(err, response){
 					res.send(response)
 				})
@@ -338,18 +342,22 @@ router.post('/confirmAnswer/:id/:Answer_id/:user_id', function(req, res){
 
 
 router.post('/deconfirmAnswer/:id/:Answer_id/:user_id', function(req, res){
-		User.update({_id: req.user._id}, {$inc: {knowledgePoints: -1}}, function(err, user){
+	User.update({_id: req.user._id}, {$inc: {knowledgePoints: -1}}, function(err, user){
 				Questions.update({_id: req.question._id}, { $unset: { answered: 1 }}, function(err, response){
 					res.send(response)
+
 		})
 	})
 })
 
 router.post('/kpoints/:user_id', function(req, res){
+
 	if(!req.user) return res.send();
 	User.findOne({_id: req.user._id}, function(err, response){
+
 		res.send(response)
 	})
+
 })
 function calculateQuestionPoints(post_obj){
 
