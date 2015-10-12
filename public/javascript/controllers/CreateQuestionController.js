@@ -23,7 +23,8 @@
     function getQuestions() {
       QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
 
-
+        //Adds dateInMilliseconds to all questions to for sorting purposes
+        
         vm.allquestions = res.map(function (item) {
           item.createdDate = new Date(item.createdDate);
           item.dateInMilliseconds = item.createdDate.getTime();
