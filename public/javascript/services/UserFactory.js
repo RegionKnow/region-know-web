@@ -73,9 +73,26 @@
       return q.promise;
     };
 
-    o.reloadNav = function(){
-      o.status._user = isLoggedIn();
+    o.reloadNav = function(id){
+      var q = $q.defer();
+
+      $http.get('/api/user/' + id).success(function(res){
+        q.resolve(res)
+      })
+      
+      // console.log(o.status._user)
+      return q.promise;
     }
+
+    o.getGeneralPoints = function(id){
+      console.log('hitting gp factory')
+      var q = $q.defer();
+      $http.get('/api/user/gp/' + id).success(function(res){
+        q.resolve(res);
+      })
+      return q.promise;
+    }
+
     o.logoutUser = function() {
       var q = $q.defer()
       removeToken();

@@ -26,7 +26,8 @@
 
 					<div class="mdl-card__supporting-text" style="opacity: none;">
 						<span>
-						<i class="material-icons qIcon">help_outline</i>
+						<i ng-if="!q.answered" class="material-icons qIcon" style="color: black;">help_outline</i>
+						<i ng-if="q.answered" class="material-icons qIcon" style="color: green;">check</i>
 						&nbsp;
 						<p>{{q.questionBody}}</p>
 					</span>

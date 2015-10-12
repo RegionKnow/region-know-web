@@ -13,7 +13,7 @@ var activeConversations = [];
 router.post("/activate-convo", function (req, res) {
   var isConvoInArray = (function(){
     if(activeConversations.length < 1) return false;
-    for(var index = 0; index < activeConversations.length; x++){
+    for(var index = 0; index < activeConversations.length; index++){
       if (activeConversations[index].convo === req.body.convoId){
         return true;
       }
