@@ -114,6 +114,12 @@ h2 {
   height: 100%;
   position: fixed;
 }
+
+.sideNav a{
+  color: #26a69a;
+}
+
+
 .sideNav .material-icons {
   color: #26a69a;
   padding-right: 1em;
@@ -185,6 +191,7 @@ a:hover, a:visited, a:active {
   color: #26a69a;
   margin-top: .3em;
 }
+
 
   /*md-backdrop.md-opaque {
     background-color: rgba(33,33,33,0) !important;
@@ -289,4 +296,5 @@ a:hover, a:visited, a:active {
       box-shadow: 1px 1px 6px #999;
       /*border: thin solid #26a69a;*/
     }
+  }
 
