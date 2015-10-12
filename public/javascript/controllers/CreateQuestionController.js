@@ -22,9 +22,15 @@
 
     function getQuestions() {
       QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
-        // console.log(res)
 
-        vm.allquestions = res;
+
+        vm.allquestions = res.map(function (item) {
+          item.createdDate = new Date(item.createdDate);
+          item.dateInMilliseconds = item.createdDate.getTime();
+          return item;
+        }).sort(function (a, b) {
+          return b.dateInMilliseconds - a.dateInMilliseconds;
+        });
       })
     }
 
