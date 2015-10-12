@@ -138,7 +138,7 @@
 								<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
 							</md-button>
 						</span>
-						<md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
+						<md-button ng-if="vm.status._user.id !== a.postedBy" ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
 						<span><i class="material-icons">question_answer</i>
 						</md-button>
 					</span>

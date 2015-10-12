@@ -75,6 +75,7 @@
     }
 
     function liveConvo() {
+      if(!vm.convoInFocus) return;
       var config = {
         timeout: 60000
       }
@@ -123,9 +124,7 @@
     }
 
     function deactivateConvo() {
-      // var config = {
-      //   timeout: 30000
-      // }
+
       $http.post('/api/convo/deactivate-convo', {convoId: vm.convoInFocus._id, user: vm.status._user.id}).then(function (successResponse) {
         console.log(successResponse.data);
         vm.convoInFocus = null;
@@ -136,6 +135,7 @@
 
 
     function sendMessage() {
+      if(!vm.newMessage) return;
       $http.post("/api/convo/new-message", {
         convoId: vm.convoInFocus._id,
         sender: vm.status._user.username,
