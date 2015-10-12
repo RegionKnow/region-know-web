@@ -1,7 +1,7 @@
 <div ng-hide="msg.inConversation">
   <h1>{{msg.title}}</h1>
   <md-button ng-click="msg.testRequest()" class="md-accent md-raised">{{msg.button}}</md-button>
-  <h1 ng-show="msg.testMessage">{{msg.testMessage}}</h1>
+  <p ng-show="msg.testMessage">{{msg.testMessage}}</p>
   <md-card ng-repeat='convo in msg.conversations track by $index | orderBy: createdDate'>
     <md-card-content>
       <h2 class="md-title">Last Message:
@@ -19,22 +19,25 @@
       <md-button class='md-raised md-accent'>Delete</md-button>
     </div>
   </md-card>
+
 </div>
 <div ng-show="msg.inConversation">
   <div ng-repeat="message in msg.convoInFocus.messages">
-    <p><strong>{{message.body}}</strong></p>
+    <p>
+      <strong>{{message.body}}</strong>
+    </p>
     <p>-{{message.sender}} at {{message.createdDate | date:'h:mma, MM/dd/yyyy'}}</p>
   </div>
   <ul>
     <li>{{msg.convoInFocus.participantOne.username}}</li>
     <li>{{msg.convoInFocus.participantTwo.username}}</li>
   </ul>
-  <div flex="50">
+  <form ng-submit="msg.sendMessage()">
     <md-input-container>
       <label>Enter Message</label>
       <textarea ng-model="msg.newMessage" cols="20" rows="4"></textarea>
     </md-input-container>
-  </div>
-  <md-button class='md-raised md-primary' ng-click="msg.sendMessage();">Send Message</md-button>
-  <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
+    <md-button class='md-raised md-primary' ng-disabled="!msg.newMessage" type='submit'>Send Message</md-button>
+    <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
+  </form>
 </div>

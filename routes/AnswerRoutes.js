@@ -8,14 +8,14 @@ var User = mongoose.model('User');
 
 // })
 router.param('id', function(req, res, next, id){
-   
-    req.answerId = id;
-    Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
-      if(err) return res.status(500).send({err: "Error finding answer"});
-      if(!response) return res.status(400).send({err: "Error getting from the mongodb Kaareeeee"});
-      req.answer = response;
-      next();
-    })
+  req.answerId = id;
+  console.log(id, "13 answerroutes");
+  Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
+    if(err) return res.status(500).send({err: "Error finding answer"});
+    if(!response) return res.status(400).send({err: "Error getting from the mongodb Kaareeeee"});
+    req.answer = response;
+    next();
+  })
 });
 
 router.param('user_id', function(req, res, next){
@@ -65,15 +65,15 @@ router.post('/', function(req, res) {
         if (err) return res.status(400).send({
           err: 'The client fucked up'
         });
-        if (!user) return res.status(500).send({
-          err: 'the server could not find a user'
-        });
-      })
+          if (!user) return res.status(500).send({
+            err: 'the server could not find a user'
+          });
+        })
       //pushing reference into userModel for the answer
 
       res.send(resultOfAnswerSave); // sending resultOfAnswerSave to back to client to be parsed and displayed
     })
-  })
+})
 
 })
 
@@ -87,9 +87,10 @@ router.post('/delete', function(req, res){
   })
 })
 
-router.post('/edit/:id', function(req, res){
-  console.log(req.body,"line 62")
-  Answers.update({_id: req.params.id}, {answerBody: req.body.answerBody}, function(err, response){
+router.post('/edit', function(req, res){
+  console.log(req.body.answerIdProp, "line 62")
+
+  Answers.update({_id: req.body.answerIdProp}, {answerBody: req.body.editProp}, function(err, response){
     if(err) return res.status(500).send({err: "Error finding answer"});
     if(!response) return res.status(400).send({err: "Error getting from the mongodb error finding answer"});
     res.send(response)
@@ -106,8 +107,8 @@ router.post('/upvote/:id/:user_id', function(req, res){
     console.log('user already upvoted')
     res.send('You already voted!')
   }else if(req.answer.downvote.indexOf(req.user._id) != -1){
-   
-      var currentVote = req.answer.voteNum + 2
+
+    var currentVote = req.answer.voteNum + 2
     
     
     Answers.update({_id: req.answer._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
@@ -144,7 +145,7 @@ router.post('/downvote/:id/:user_id', function(req, res){
     res.send('You already downvoted!')
   }else if(req.answer.upvote.indexOf(req.user._id) != -1){
 
-      var currentVote = req.answer.voteNum - 2
+    var currentVote = req.answer.voteNum - 2
     
     
     Answers.update({_id: req.answer._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){

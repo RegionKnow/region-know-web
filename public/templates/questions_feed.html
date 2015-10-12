@@ -1,19 +1,22 @@
-<div class="row introFeatures" ng-cloack>
+<div class="row topRows" ng-cloack>
 
 	<div class="col-md-2"></div>
 
 	<div class="col-md-8 animated fadeIn" ng-cloack>
 
-		
-		
-	<md-input-container flex>
-		<label>Search Questions by Name or Tag's</label>
+
+
+		<md-input-container flex>
+		<label>Search Questions by Name or Tags</label>
 		<input ng-model="vm.search">
 	</md-input-container>
 
-	<br>
-	Questions Auto Filterd By HomeLocation In settings!
-	<br>
+	<div class="text-center">
+		<br><h2>Click on a question to answer it</h2>
+		<i>Questions filtered according to user settings</i>
+		<br>
+		<br>
+	</div>
 
 
 	<div ng-repeat="q in vm.allquestions | filter:vm.search " ng-show="q.isDeleted != true">
@@ -23,12 +26,10 @@
 
 				<div class="mdl-card__supporting-text" style="opacity: none;">
 					<span>
-					<i class="material-icons qIcon">help_outline</i>
-					</span>
-					&nbsp;
-					<span>
-						{{q.questionBody}}
-					</span>
+						<i class="material-icons qIcon">help_outline</i>
+						&nbsp;
+						<p>{{q.questionBody}}</p>
+					</span> 
 				</div>
 			</div>
 
@@ -40,5 +41,3 @@
 <div class="col-md-2"></div>
 
 </div>
-
-

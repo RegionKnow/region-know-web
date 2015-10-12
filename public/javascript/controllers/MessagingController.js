@@ -39,9 +39,22 @@
       $stateParams.recipient = ""
     }
     //End of if bracket
+
+
+
+
+
     function testRequest() {
-      $http.get('/api/convo/rando').then(function(successResponse) {
-        vm.testMessage = successResponse.body;
+      var config = {
+        timeout: 30000
+      }
+      $http.get('/api/convo/rando', config).then(function(successResponse) {
+        console.log(successResponse);
+        vm.testMessage = successResponse.data.body;
+      }, function(errorResponse) {
+        console.log(errorResponse.data);
+
+        vm.testMessage = errorResponse.data;
       });
     }
 
@@ -61,15 +74,64 @@
       })
     }
 
+    function liveConvo() {
+      var config = {
+        timeout: 60000
+      }
+      $http.post("/api/convo/live-convo", {
+        convoId: vm.convoInFocus._id,
+        user: vm.status._user.id
+      }, config).then(
+        function(successResponse) {
+          getOneConvo();
+          liveConvo();
+        },
+        function(errorResponse) {
+          liveConvo();
+          console.log(errorResponse.data);
+        })
+    }
     function openConvo(convoIndex) {
       vm.convoInFocus = vm.conversations[convoIndex];
       vm.inConversation = true;
+      activateConvo();
+      liveConvo();
 
     }
+
+    function activateConvo() {
+      // var config = {
+      //   timeout: 30000
+      // }
+      $http.post('/api/convo/activate-convo', {
+        convoId: vm.convoInFocus._id,
+        numMessages: vm.convoInFocus.messages.length,
+        user: vm.status._user.id
+      }).then(function (successResponse) {
+        console.log("DEBUG: Convo active");
+      }, function (errorResponse) {
+        console.log(errorResponse.data);
+      });
+    }
+
 
     function closeConvo() {
       vm.inConversation = false;
       vm.getConversations();
+      deactivateConvo();
+
+    }
+
+    function deactivateConvo() {
+      // var config = {
+      //   timeout: 30000
+      // }
+      $http.post('/api/convo/deactivate-convo', {convoId: vm.convoInFocus._id, user: vm.status._user.id}).then(function (successResponse) {
+        console.log(successResponse.data);
+        vm.convoInFocus = null;
+      }, function (errorResponse) {
+        console.log(errorResponse.data);
+      });
     }
 
 
@@ -93,7 +155,12 @@
 
     //gets one convo with the participants being an object with the properties participantOne and participantTwo
     function getOneConvo(participants) {
-      console.log(participants, "getOneConvo");
+      if(!participants) {
+        participants = {
+          participantOne: vm.convoInFocus.participantOne,
+          participantTwo: vm.convoInFocus.participantTwo
+        }
+      }
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
         vm.convoInFocus = successResponse.data;
       }, function(errorResponse) {
