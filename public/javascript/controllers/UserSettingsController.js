@@ -78,9 +78,6 @@
     }
 
     vm.saveTags = function() {
-        // if(vm.tags.length === 0){
-        // 	return
-        // }
         UserSettingsFactory.removeTags(vm.userId).then(function(res) {
           UserSettingsFactory.addTags(vm.tags, vm.userId).then(function(res) {
           })
@@ -100,7 +97,8 @@
     }
     vm.openhomeMap = function() {
       UserSettingsFactory.getUserInfo(vm.userId).then(function(res) {
-        vm.currentRadius = res.radius
+        vm.currentRadius = res.radius;
+        vm.distance = res.radius;
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
             lat: res.lat,
@@ -159,7 +157,6 @@
         //Makes it so user can just select radius and go instead of needing to drag the pin
         document.getElementById('settingsRadius').addEventListener("change", function() {
           vm.cityCircle.setMap(null);
-          console.log(vm.homeLocation);
           vm.currentLocation.lat = vm.homeLocation.lat || marker.position.J
           vm.currentLocation.lng = vm.homeLocation.lng || marker.position.M
           getCircle(vm.currentLocation.lat, vm.currentLocation.lng);
@@ -172,8 +169,6 @@
           // resets circle
           vm.homeLocation.lat = this.position.J
           vm.homeLocation.lng = this.position.M
-            // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
-            // vm.infoWindow.open(vm.map, marker);
           getCircle(vm.homeLocation.lat, vm.homeLocation.lng);
 
 

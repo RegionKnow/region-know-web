@@ -1,55 +1,56 @@
-<div class="col-md-2"></div>
-<div class="col-md-8 animated fadeIn" ng-cloack>
+<div class="row topRows">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 animated fadeIn" ng-cloack>
 
-	<div class="well">
-
-		<span >
-				Filter Question-feed by your Tags is
+		<div class="well">
+			<center><h2>Your Custom Settings</h2></center>
+			<span >
+				Question-feed filter is&nbsp; 
 				<span ng-show="!vm.CUI.filter">
-				<button class="btn btn-default btn-md" ng-click="vm.filterOn()" ><span style="color:red;">Off</span></button>
+					<button class="btn btn-default btn-md" ng-click="vm.filterOn()" ><span style="color:red;">Off</span></button>
 				</span>
 
 				<span ng-show="vm.CUI.filter">
-				<button class="btn btn-default btn-md" ng-click="vm.filterOff()" ><span style="color:green;">On</span></button>
+					<button class="btn btn-default btn-md" ng-click="vm.filterOff()" ><span style="color:green;">On</span></button>
 				</span>
-		</span>
-		<br>
-		<br>
-		<span >
+			</span>
+			<br>
+			<br>
+			<span >
 				Filter Alerts by your Tags
 				<span ng-show="!vm.CUI.filterAlert">
-				<button class="btn btn-default btn-md" ng-click="vm.filterAlertOn()"><span style="color:red;">Off</span></button>
+					<button class="btn btn-default btn-md" ng-click="vm.filterAlertOn()"><span style="color:red;">Off</span></button>
 				</span>
 				<span ng-show="vm.CUI.filterAlert">
-				<button class="btn btn-default btn-md" ng-click="vm.filterAlertOff()"><span style="color:green;">On</span></button>
+					<button class="btn btn-default btn-md" ng-click="vm.filterAlertOff()"><span style="color:green;">On</span></button>
 				</span>
 				<!-- <span ng-show="vm.CUI.filterAlert" >Filter is On!</span>
 				<span ng-show="!vm.CUI.filterAlert">Filter is Off!</span> -->
-		</span>
-		<span>
+			</span>
+			<span>
 
-		<br>
+				<br>
 
-		<br>
+				<br>
 
-			<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
-				<span class="" ng-repeat="tag in vm.tags track by $index">
-					<div class="indvTag">
-						{{tag}}
-						<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
-						</span>
-					</div>
-					&nbsp;
-				</span>
-			</div>
-		</span>
+				<div class="tagDiv" style=" min-height: 30px; background-color: #FFFFFF;" ng-click="vm.showTagInput()">
+					<span class="" ng-repeat="tag in vm.tags track by $index">
+						<div class="indvTag">
+							{{tag}}
+							<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+							</span>
+						</div>
+						&nbsp;
+					</span>
+				</div>
+			</span>
 
-		<br>
+			<br>
 
-		<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
-			<md-input-container flex>
-			<label>Input New Tag...</label>
-			<input ng-model="vm.tag">
+			<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
+				<md-input-container flex>
+				<label>Input New Tag...</label>
+				<input ng-model="vm.tag">
 
 			</md-input-container>
 		</form>
@@ -75,35 +76,36 @@
 		</center>
 
 		<!-- map -->
-				<span ng-cloack>
+		<span ng-cloack>
 
-					<select ng-show="vm.mapStatus" class="form-control" ng-model='vm.distance' id="settingsRadius" >
-						<option ng-selected="true">Select Radius</option>
-						<option value='1' >1 Mile</option>
-						<option value='2'>2 Miles</option>
-						<option value='3'>3 Miles</option>
-						<option value='4'>4 Miles</option>
-						<option value='5'>5 Miles</option>
-						<option value='6'>6 Miles</option>
-						<option value='7'>7 Miles</option>
-						<option value='8'>8 Miles</option>
-						<option value='9'>9 Miles</option>
-						<option value='10'>10 Miles</option>
-					</select>
+			<select ng-show="vm.mapStatus" class="form-control" ng-model='vm.distance' id="settingsRadius" >
+				<option ng-selected="true">Select Radius</option>
+				<option value='1' >1 Mile</option>
+				<option value='2'>2 Miles</option>
+				<option value='3'>3 Miles</option>
+				<option value='4'>4 Miles</option>
+				<option value='5'>5 Miles</option>
+				<option value='6'>6 Miles</option>
+				<option value='7'>7 Miles</option>
+				<option value='8'>8 Miles</option>
+				<option value='9'>9 Miles</option>
+				<option value='10'>10 Miles</option>
+			</select>
 
 
-					<input ng-show="vm.mapStatus" class="form-control" id="searchLoc" placeholder="search Location" ng-model="vm.searchLoc"> <button ng-show="vm.mapStatus" ng-click="vm.searchLocation()" class="btn btn-primary btn-md">Search</button>
-				</span>
-				<br>
+			<input ng-show="vm.mapStatus" class="form-control" id="searchLoc" placeholder="search Location" ng-model="vm.searchLoc"> <button ng-show="vm.mapStatus" ng-click="vm.searchLocation()" class="btn btn-primary btn-md">Search</button>
+		</span>
+		<br>
 
-				<div ng-if="vm.mapStatus || vm.mapHomeStatus" id="map"></div>
+		<div ng-if="vm.mapStatus || vm.mapHomeStatus" id="map"></div>
 
-				<br><center>
-				<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()" ng-disabled="!vm.distance">Submit Home Location</button>
-				<button ng-show="vm.mapStatus" class="btn btn-warning btn-sm" ng-click="vm.closeMap()">Cancel</button></center>
-				<span class="animated rubberBand" ng-show="vm.successMes">{{vm.successMes}}</span>
-				<span class="animated rubberBand" ng-show="vm.hlError">Error Submiting HomeLocation, please make sure you selected a radius, and moved the pin!</span>
+		<br><center>
+		<button ng-show="vm.mapStatus" class="btn btn-primary" ng-click="vm.submitHomeLocation()" ng-disabled="!vm.distance">Submit Home Location</button>
+		<button ng-show="vm.mapStatus" class="btn btn-warning btn-sm" ng-click="vm.closeMap()">Cancel</button></center>
+		<span class="animated rubberBand" ng-show="vm.successMes">{{vm.successMes}}</span>
+		<span class="animated rubberBand" ng-show="vm.hlError">Error Submiting HomeLocation, please make sure you selected a radius, and moved the pin!</span>
 	</div>
 
 </div>
 <div class="col-md-2"></div>
+</div>

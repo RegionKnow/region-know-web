@@ -26,21 +26,11 @@
 		});
 
 	};
-		//-----------------------------------------------------------------------------------
-		// EDIT Profile with Image upload
 
-
-		// $scope.submit = function() {
-		// 	if (form.file.$valid && $scope.file && !$scope.file.$error) {
-		// 		$scope.upload($scope.file);
-		// 	}
-		// };
-
-		//submitting file and checking if valid
-		$scope.submit = function() {
-			console.log($scope.form.file.$valid);
-			console.log($scope.file);
-			console.log(!$scope.file.$error);
+	//submitting file and checking if valid
+	$scope.submit = function() {
+			// console.log($scope.form.file.$valid);
+			// console.log(!$scope.file.$error);
 
 			if ($scope.form.file.$valid && $scope.file && !$scope.file.$error) {
 				$scope.upload($scope.file);
@@ -56,16 +46,16 @@
     		url: '/api/user/uploadPhoto',
     		data: {file: file, 'userId': vm.status._user.id}
     	}).then(function (resp) {
-				vm.loading = false;
+    		vm.loading = false;
 
-    		console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    		// console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
     	}, function (resp) {
-				vm.loading = false;
-				
-    		console.log('Error status: ' + resp.status);
+    		vm.loading = false;
+
+    		// console.log('Error status: ' + resp.status);
     	}, function (evt) {
     		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    		// console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     	});
     };
 

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('app')
-    .controller('CreateQuestionController', CreateQuestionController);
+  .controller('CreateQuestionController', CreateQuestionController);
 
   CreateQuestionController.$inject = ['$state', 'QuestionFactory', '$rootScope', "UserFactory"];
 
@@ -10,7 +10,7 @@
     vm.status = UserFactory.status;
     vm.question = {}
     vm.createQ = createQ;
-    vm.showTagInput = showTagInput;
+    // vm.showTagInput = showTagInput;
     vm.getQuestions = getQuestions;
     vm.addTag = addTag;
     vm.deleteTag = deleteTag;
@@ -76,14 +76,14 @@
     var counter = 0;
     vm.tags = [];
 
-    function showTagInput() {
-      counter += 1
-      vm.showInput = true;
-      if (counter % 2 === 0) {
-        vm.showInput = false;
-      }
-      console.log(vm.showInput);
-    }
+    // function showTagInput() {
+    //   counter += 1
+    //   vm.showInput = true;
+    //   if (counter % 2 === 0) {
+    //     vm.showInput = false;
+    //   }
+    //   console.log(vm.showInput);
+    // }
 
     function addTag(tag) {
       vm.tagError = false;
