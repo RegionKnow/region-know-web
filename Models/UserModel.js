@@ -19,8 +19,8 @@ var UserSchema = new mongoose.Schema({
 	filterAlert: Boolean,
 	tags: [{type: String}],
 	radius: Number,
-	generalPoints: Number,
-	knowledgePoints: {type: Number, default: 0},
+	generalPoints: {type: Number, default: 1},
+	knowledgePoints: {type: Number, default: 1},
 	alerts: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
 	questions: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
 	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}]
@@ -35,7 +35,10 @@ UserSchema.methods.generateJWT = function() {
 		id : this._id,
 		username : this.username,
 		image: this.image,
-		exp: exp.getTime() / 1000
+		exp: exp.getTime() / 1000,
+		generalPoints: this.generalPoints,
+		knowledgePoints: this.knowledgePoints
+
 	}, "super_secret");
 }
 
