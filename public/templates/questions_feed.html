@@ -19,7 +19,7 @@
 		</div>
 
 
-		<div ng-repeat="q in vm.allquestions | filter: vm.search " ng-show="q.isDeleted != true">
+		<div ng-repeat="q in vm.allquestions | filter: vm.search" ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
 
 				<div class="mdl-card mdl-shadow--4dp qCards">
@@ -38,7 +38,8 @@
 		</div>
 	</div>
 
-	<br><br>
+	<br>
+	<br>
 </div>
 
 
