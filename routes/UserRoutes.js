@@ -327,10 +327,10 @@ router.post('/filterOff/:userId', function(req, res) {
       temp_fullUserObject = response
       var voteCount = 0; //count the number of votes a user has
       var currentGp = response.generalPoints
-     
+
       console.log('generalPoint route being run')
 
-      
+
         //gets all votes from users questions
         for(var i =0; i < response.questions.length; i++){
           // console.log(voteCount)
@@ -342,38 +342,41 @@ router.post('/filterOff/:userId', function(req, res) {
 
           voteCount += response.answers[k].voteNum;
         }
-        
+
         //function to get knowledgePoints and push them into userModel for refresh
         for(var j =0; j < response.answers.length; j++){
           var temp_id = response.answers[j].questionId // saves the question id of answer
           var temp_A_id = response.answers[j]._id // saves the id of the answer
           // console.log(temp_A_id) 
           findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision 
-          
+
         }
 
         voteCountObj.count = voteCount + 1 // adds one point from userModel default
 
         User.update({_id: req.user._id}, {generalPoints: voteCountObj.count}, function(err, update){
-            console.log('updated GeneralPoints')
+          console.log('updated GeneralPoints')
             // res.send('updated General Points' + voteCountObj.count)
-        })
-    })
-    function findKpoints(questionId, answerId,l1, userId){
+          })
+      })
+function findKpoints(questionId, answerId,l1, userId){
         var loopcount = 0 // counts how many times this function runs
         // var kPointCount = 0
-          Questions.findOne({_id: questionId}, function(err, QA){
-            loopcount += 1
+        Questions.findOne({_id: questionId}, function(err, QA){
+          if(err) return res.status(500).send({err: "Server hit an error searching for QA"});
+          if(!QA) return res.status(400).send({err: "No QA"});
+          loopcount += 1
                 if(QA.answered){ // makes sure quesiton has an answer
                   console.log(QA.answered, answerId)
-                    if(QA.answered.toString() === answerId.toString()){
-                      
-                      kPointCount += 1
-                      // console.log('adding kp', kPointCount)
-                      
+
+                  if(QA.answered.toString() === answerId.toString()){
+
+                    kPointCount += 1
+                    console.log('adding kp', kPointCount)
+
                       // console.log(countObj)
                     }
-                }
+                  }
                   console.log(kPointCount)
                   console.log(l1, loopcount) //loop count is compared to J from outer loop, if they match
                 if(l1 === loopcount) { // all viable questions have been searched, update KP's
@@ -383,12 +386,13 @@ router.post('/filterOff/:userId', function(req, res) {
                     
                   })
                 }
-          })
-        }
+              })
+}
     // setTimeout(function() {
     //   res.send('updated both knowledgepoints and general points')
     // }, 3000);
 
-  })
-  
-  module.exports = router;
+
+})
+
+module.exports = router;
