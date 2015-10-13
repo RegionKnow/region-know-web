@@ -69,7 +69,7 @@
           }); 
         })
         checkVotes();
-      }, 300000);
+      }, 60000);
     }
 
     function CollectRanks(){
@@ -79,7 +79,7 @@
           console.log('Ranks Organized')
         })
         CollectRanks();
-      }, 100000);
+      }, 60000);
     }
 
 
