@@ -129,7 +129,8 @@ router.post('/register', function(req, res) {
 
 router.post('/login', function(req, res, next) { //goes to passport module, in config.
   passport.authenticate('local', function(err, user, info) { //calling from the passport
-    if (!user) return res.status(400).send(info);
+    console.log(info);
+    if (!user) return res.status(400).send({err: "Invalid username or password"});
     res.send({
       token: user.generateJWT()
     }); //generating a token when there is a user in the collection.
@@ -347,8 +348,8 @@ router.post('/filterOff/:userId', function(req, res) {
         for(var j =0; j < response.answers.length; j++){
           var temp_id = response.answers[j].questionId // saves the question id of answer
           var temp_A_id = response.answers[j]._id // saves the id of the answer
-          // console.log(temp_A_id) 
-          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision 
+          // console.log(temp_A_id)
+          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision
 
         }
 
@@ -383,7 +384,7 @@ function findKpoints(questionId, answerId,l1, userId){
                     // console.log('current K point count'  + kPointCount)
                   User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
                     console.log('updated KnowledgePoints')
-                    
+
                   })
                 }
               })
