@@ -42,8 +42,11 @@
 <!--
 				<div class="" id="alerts" ng-show="true"> -->
 
-				<div class="" style="position: absolute; right: -25px; border: thin solid #999; margin-top: 12px; padding: 4px; background-color: #f0f0f0; border-radius: 2px 2px 3px 3px; box-shadow: 1px 1px 2px #777" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
-					<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
+				<div class="" style="position: absolute; right: -25px; border: thin solid #999; margin-top: 12px; padding: 4px; background-color: #f0f0f0; border-radius: 2px 2px 3px 3px; box-shadow: 1px 1px 2px #777; display:block;" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
+					
+						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
+					
+
 				</div>
 
 				<!-- </div> -->
@@ -92,9 +95,9 @@
 					<br>
 
 					<span style="font-size: 15px;">
-						<span>General Points -  {{vm.gP}}</span>
+						<span>General Points -  {{nav.status._user.generalPoints}}</span>
 						<br>
-						<span> Knowledge Points - {{vm.kP}}</span>
+						<span> Knowledge Points - {{nav.status._user.knowledgePoints}}</span>
 					</span>
 				</span>
 				<br>
