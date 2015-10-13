@@ -3,9 +3,9 @@
   angular.module('app')
   .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal"];
+  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal", 'RankFactory'];
 
-  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal) {
+  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal, RankFactory) {
 
     var vm = this;
     vm.status = UserFactory.status;
@@ -27,9 +27,9 @@
     };
 
     vm.alertObj = {}
-    // alertWatch();
+    alertWatch();
     checkVotes();
-
+    CollectRanks();
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
@@ -46,14 +46,21 @@
         alertWatch();
       }, 3000);
     }
-
+    var count = 1;
     vm.openAlerts = function() {
-      vm.showAlertTab = true;
+      count += 1
+      console.log('cought alerts')
+      if(count % 2 === 0 ){
+        vm.showAlertTab = true;
+      }else{
+        vm.showAlertTab = false;
+      }
+    
       $timeout(function() {
         UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           vm.alertObj.status = false;
         })
-      }, 30000);
+      }, 3000000);
 
     }
 
@@ -69,7 +76,17 @@
           }); 
         })
         checkVotes();
-      }, 30000);
+      }, 60000);
+    }
+
+    function CollectRanks(){
+      console.log('collecting Ranks')
+      $timeout(function() {
+        RankFactory.collectRanks().then(function(res){
+          console.log('Ranks Organized')
+        })
+        CollectRanks();
+      }, 60000);
     }
 
 
@@ -115,8 +132,6 @@
         });
       });
     };
-
-
 
     vm.openRegisterModal = function() {
       var registerModal = $modal.open({

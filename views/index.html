@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-	<title>RegionKnow</title>
+	<title>KnowOff</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
@@ -29,27 +29,27 @@
 				</i>
 
 				<span id="tradeName">
-					&nbsp;RegionKnow
+					&nbsp;KnowOff
 				</span>
 
+				<button ng-show="nav.alertObj.status" class=" md-mini topRight navbar-right alertButton md-fab md-primary md-hue-5 md-button md-default-theme" style="color: white; position: absolute; right: -25px; font-size: 20px; padding: 0;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</button>
 
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">question_answer</i>
 				</a>
-
 				&nbsp;
-
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
+<!--
+				<div class="" id="alerts" ng-show="true"> -->
 
-				<div class="topRight navbar-right" id="alerts" ng-show="nav.alertObj.status">
-
-					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px; position: fixed;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
-
-					<div class="well" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
-						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
-					</div>
-
+				<div class="" style="position: absolute; right: -25px; border: thin solid #999; margin-top: 12px; padding: 4px; background-color: #f0f0f0; border-radius: 2px 2px 3px 3px; box-shadow: 1px 1px 2px #777" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
+					<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
 				</div>
+
+				<!-- </div> -->
+
+
+
 
 			</div>
 
@@ -80,6 +80,7 @@
 			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
 				<div style="margin-left: 30%; position: absolute; top: -25px;">
 
+
 					<br>
 					{{nav.status._user.username}}
 					<br>
@@ -90,48 +91,51 @@
 
 					<br>
 
-						<span style="font-size: 15px;">
-							<span>GeneralPoints -  {{nav.status._user.generalPoints}} KnowledgePoints - {{nav.status._user.knowledgePoints}}</span>
-						</span>
+					<span style="font-size: 15px;">
+						<span>General Points -  {{vm.gP}}</span>
+						<br>
+						<span> Knowledge Points - {{vm.kP}}</span>
+					</span>
+				</span>
+				<br>
 
+			</div>
 
-				</div>
-
-			</a>
-
-		</md-toolbar>
-
-		<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
-			<i class="material-icons">home</i>View Questions
 		</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
-			<i class="material-icons">help_outline</i>
-			New Question
-		</a>
+	</md-toolbar>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
-			<i class="material-icons">swap_vert</i>
-			Rank
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
+		<i class="material-icons">home</i>View Questions
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
-			<i class="material-icons">settings</i>Settings
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
+		<i class="material-icons">help_outline</i>
+		New Question
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Message" ng-click="nav.close();">
-			<i class="material-icons">question_answer</i>Messaging
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
+		<i class="material-icons">swap_vert</i>
+		Rank
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
-			<i class="material-icons">lock</i>Log Out
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
+		<i class="material-icons">settings</i>Settings
+	</a>
+
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Message" ng-click="nav.close();">
+		<i class="material-icons">question_answer</i>Messaging
+	</a>
+
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
+		<i class="material-icons">lock</i>Log Out
+	</a>
 
 
 
 
 
-	</md-sidenav>
+</md-sidenav>
 
 </section>
 
