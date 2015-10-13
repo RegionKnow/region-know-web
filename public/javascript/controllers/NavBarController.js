@@ -42,7 +42,7 @@
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           console.log('watching for alerts')
           if(!res.alerts) return;
-          if (res.alerts.length > 0) {              
+          if (res.alerts.length > 0) {
             vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
             vm.alertObj.alerts = res.alerts;
@@ -102,23 +102,10 @@
 
     //---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
-    // vm.registerUser = function() {
-    //   UserFactory.registerUser(vm.user).then(function() {
-    //     vm.user = null;
-    //     $state.go("Login");
-    //   });
-    // };
-
-    // vm.loginUser = function() {
-    //   UserFactory.loginUser(vm.user).then(function(res) {
-    //     vm.status = UserFactory.status;
-    //     vm.user = null;
-    //     $state.go("QuestionsFeed");
-    //   });
-    // };
+  
 
 
-    //USER login/REG 
+    //USER login/REG
 
     vm.logoutUser = function() {
       UserFactory.logoutUser().then(function() {
