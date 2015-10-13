@@ -40,12 +40,14 @@
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
 
+
 				<div ng-show="nav.showAlertTab" id="alerts">
 					<div ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
 						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
 					</div>
 
 				</div>
+
 
 			</div>
 		</div>
