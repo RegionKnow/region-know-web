@@ -18,7 +18,7 @@ var AnswerSchema = new mongoose.Schema({
 		commentBody: String,
 		createdDate: Date,
 		dateDeleted: Date,
-		postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+		postedBy: String
 	}]
 });
 

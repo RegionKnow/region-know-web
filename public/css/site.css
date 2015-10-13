@@ -1,14 +1,27 @@
-body {
-
+body, html {
+/*  background: rgba(38,166,154,0.6);*/
   font-family: 'RobotoDraft';
   height: 100%;
   width: 100%;
+ /* background: -webkit-linear-gradient(red, blue); 
+  background: -o-linear-gradient(red, blue); 
+  background: -moz-linear-gradient(red, blue); 
+  background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
+
+/*.col-md-8 {
+  background-color: white;
+  height: 100%;
+  box-shadow: 1px 1px 19px #777;
+  }*/
 
 h2 {
   color: #26a69a;
 }
 
+md-input-container {
+  font-size: 1.3em;
+}
 
 /*=======WELCOME PAGE STYLE=======================*/
 .homeWell {
@@ -51,11 +64,9 @@ h2 {
   margin-left: 0px;
 }
 
-/*=======WELCOME PAGE STYLE END=======================*/
+/*=======QUESTION STYLES=======================*/
 
-#voteBut{
-  min-width: 50px;
-}
+
 #editQuestion{
   margin-top: 10%;
   margin-left: 30px;
@@ -64,48 +75,41 @@ h2 {
   margin-right: 90%;
 }
 #questionFace{
-  margin-left: 30px; 
-  font-size: 30px;"
+  padding-left: 3em; 
+  font-size: 2em;
+  color: #777;
+  width: 80%;
 }
-#alerts{
-/*    width: 50px;
-    height: 50px;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px; */
-  }
 
-  #loadingGif {
-    height: 40px;
-    width: 40px;
-  }
-  #questionInput {
-    /*	width: 60%*/
-  }
+#loadingGif {
+  height: 40px;
+  width: 40px;
+}
 
-  /*=================PROFILE STYLES==============================================*/
 
-  .profileImage {
-    border-radius: 9px;
-    box-shadow: 1px 2px 6px #333;
-  }
+/*=================PROFILE STYLES==============================================*/
 
-  .pointsTable {
-    margin: auto;
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
+.profileImage {
+  border-radius: 9px;
+  box-shadow: 1px 2px 6px #333;
+}
 
-  .pointsTable td {
-    padding: 9px;
-  }
+.pointsTable {
+  margin: auto;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
 
-  /*================NAVIGATION STYLES==========================================*/
-  .col-md-11 {
-   min-height: 0px !important;
- }
+.pointsTable td {
+  padding: 9px;
+}
 
- #navParent {
+/*================NAVIGATION STYLES==========================================*/
+.col-md-11 {
+ min-height: 0px !important;
+}
+
+#navParent {
   height: 100%;
 }
 
@@ -139,7 +143,7 @@ h2 {
   height: 7.9%;
   text-align: left;
   vertical-align: middle;
-  padding-top: .9em;
+  padding-top: .6em;
 }
 
 
@@ -172,12 +176,11 @@ a:hover, a:visited, a:active {
 
 .topRows {
   margin-top: 60px;
-  padding-top: 6%;
+  /*padding-top: 6%;*/
 }
 #tradeName {
   font-size: 1.6em;
   padding-top: -.7em;
-  padding-left: .3em;
 }
 
 .topRight {
@@ -210,7 +213,6 @@ a:hover, a:visited, a:active {
       box-shadow: 2px 2px 2px black;
       border-color: #000000;
       padding-left: 15px;
-      color: #000;
       background-color: #26a69a;
       display: inline;
     }
@@ -226,6 +228,17 @@ a:hover, a:visited, a:active {
       color: #333;
       /*      background-color: #26a69a;*/
       display: inline;
+    }
+
+    .qTag {
+      border: thin solid #999;
+      border-radius: 3px 6px;
+      box-shadow: 1px 1px 6px #333;
+      padding: 3px;
+      margin: 6px;
+      color: #333;
+      display: inline;
+      font-size: .5em;
     }
 
     /*================QUESTIONs &  CARD STYLES==========================================*/
@@ -244,57 +257,99 @@ a:hover, a:visited, a:active {
       font-size: 1em;
     }
 
+    .qDetailCards {
+      font-size: 1em;
+      width: 100%;
+      height: 20%;
+      color: #777;
+      padding: 2.3em;
+    }
+
+    .aCards {
+      font-size: 1em;
+      width: 69%;
+      height: 60%;
+      color: #777;
+      padding: 2.3em;
+      margin-top: 1em;
+      margin-left: auto;
+      margin-right: auto;
+      
+    }
+
+    .aCards p {
+      font-size: 1.6em;
+      padding-left: 13%;
+      width: 97%;
+      text-align: left;
+    }
+
     .qCards p {
       font-size: 1.6em;
       float: right;
       margin-top: 9%;
       margin-right: 10%;
     }
+
     .qIcon {
       font-size: 6em;
       padding-top: 5%;
       opacity: .3;
-    }
+    } 
 
-
-    /*================USER SETTINGS STYLES==========================================*/
-
-    .searchHome {
-      margin: auto;
+    #answerIcons .mdl-button {
+      display: block;
+      color: #777;
+      margin-left: 30%
     }
+    /*.answerBody {
+      -moz-box-shadow:    inset 0 0 16px #26a69a;
+      -webkit-box-shadow: inset 0 0 16px #26a69a;
+      box-shadow:         inset 0 0 16px #26a69a;
+      padding: 2em;
+      /*border-radius: 17px;
+      margin-top: 1em;
+      color: #777;
+      }*/
 
-    #settingsRadius {
-      width: 46%;
-      display: inline;
-      margin-top: 6%;
-      margin-bottom: 3%;
-      /*border: thin solid #26a69a;*/
-      /*font-size: 1.3em;*/
-    }
+      /*================USER SETTINGS STYLES==========================================*/
 
-    #map {
-      width: 100%;
-      height: 400px;
-    }
-    #settingsMap{
-      width: 100%;
-      height: 200px;
-    }
+      .searchHome {
+        margin: auto;
+      }
 
-    .filterCard {
-      width: 90%;
-      padding: 7px;
-      text-align: center;
-    }
+      #settingsRadius {
+        width: 46%;
+        display: inline;
+        margin-top: 6%;
+        margin-bottom: 3%;
+        /*border: thin solid #26a69a;*/
+        /*font-size: 1.3em;*/
+      }
 
-    .filteringTable {
-      margin: auto;
-    }
+      #map {
+        width: 100%;
+        height: 400px;
+      }
+      #settingsMap{
+        width: 100%;
+        height: 200px;
+      }
 
-    .filteringTable td {
-      padding: 9px;
-      box-shadow: 1px 1px 6px #999;
-      /*border: thin solid #26a69a;*/
+      .filterCard {
+        width: 90%;
+        padding: 7px;
+        text-align: center;
+      }
+
+      .filteringTable {
+        margin: auto;
+      }
+
+      .filteringTable td {
+        padding: 9px;
+        box-shadow: 1px 1px 6px #999;
+        /*border: thin solid #26a69a;*/
+      }
     }
-  }
 

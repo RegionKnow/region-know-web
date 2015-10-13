@@ -80,7 +80,7 @@
 
 
 			<a class="loggedInUser" ng-show="nav.status" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
-				<div style="margin-left: 30%;">
+				<div style="margin-left: 7%; text-align: center; height: 90%; padding-bottom: 6%;">
 					<br>
 					{{nav.status._user.username}}
 					<br>
@@ -90,9 +90,12 @@
 					<br>
 					<span ng-controller="RankController as vm">
 						<span style="font-size: 15px;">
-							<span>GeneralPoints -  {{vm.gP}}</span> <span> KnowledgePoints - {{vm.kP}}</span>
+							<span>General Points -  {{vm.gP}}</span>
+							<br>
+							<span> Knowledge Points - {{vm.kP}}</span>
 						</span>
 					</span>
+					<br>
 				</div>
 
 			</a>
