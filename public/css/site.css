@@ -241,11 +241,11 @@ a:hover, a:visited, a:active {
 }
 
 
-  /*md-backdrop.md-opaque {
-    background-color: rgba(33,33,33,0) !important;
+  md-backdrop.md-opaque {
+    background-color: rgba(33,33,33,0.3) !important;
     top: 0;
 
-    }*/
+    }
 
 
     /*================TAG STYLES==========================================*/
@@ -258,30 +258,33 @@ a:hover, a:visited, a:active {
       box-shadow: 2px 2px 2px black;
       border-color: #000000;
       padding-left: 15px;
-      background-color: #26a69a;
+      background-color: #F0f0f0;
       display: inline;
     }
     .tagDiv {
       border-radius: 10px;
     }
     .indvTag {
+     /* width: auto;
+      height: 50px;*/
       border: thin solid #999;
-      border-radius: 3px 6px;
+      border-radius: 6px 12px;
       box-shadow: 1px 1px 6px #333;
       padding: 3px;
       margin: 6px;
       color: #333;
-      /*      background-color: #26a69a;*/
+      background-color: #F0f0f0;
+
       display: inline;
     }
 
     .qTag {
       border: thin solid #999;
-      border-radius: 3px 6px;
+      border-radius: 3px 12px;
       box-shadow: 1px 1px 6px #333;
       padding: 3px;
       margin: 6px;
-      color: #333;
+      background-color: #f0f0f0;
       display: inline;
       font-size: .5em;
     }

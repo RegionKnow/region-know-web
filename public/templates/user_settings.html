@@ -16,13 +16,17 @@
 			<br>
 
 			<div class="searchHome">
-				<md-input-container ng-show="vm.mapStatus">
+				
+			<center><md-button ng-show="vm.mapStatus" class="md-button md-primary md-raised" ng-click="vm.searchLocation()">Find Location on map</md-button>
+			<md-button ng-show="vm.mapStatus" ng-click="vm.closeMap()">Cancel</md-button>
+			</center>
+			
+			<md-input-container ng-show="vm.mapStatus">
+				
 				<label>Type location you want to find here...</label>
 				<input ng-model="vm.searchLoc"> 
 
 			</md-input-container>
-			<center><md-button ng-show="vm.mapStatus" class="md-button md-primary md-raised" ng-click="vm.searchLocation()">Find Location on map</md-button>
-			</center>
 		</div>
 
 
@@ -59,8 +63,7 @@
 			</center>
 			<br><center>
 			<md-button ng-show="vm.mapStatus" class="md-button md-raised md-primary" ng-click="vm.submitHomeLocation()" ng-disabled="!vm.distance">Submit Home Location</md-button>
-			<br>
-			<md-button ng-show="vm.mapStatus" ng-click="vm.closeMap()">Cancel</md-button>
+			
 		</center>
 		<span class="animated rubberBand" ng-show="vm.successMes">{{vm.successMes}}</span>
 		<span class="animated rubberBand" ng-show="vm.hlError">Error Submiting HomeLocation, please make sure you selected a radius, and moved the pin!</span>
@@ -69,6 +72,24 @@
 
 
 	
+	<br>
+	<form ng-submit="vm.addTag(vm.tag)">
+			<md-input-container flex>
+			<label>Input tag and press ENTER...</label>
+			<input ng-model="vm.tag">
+
+		</md-input-container>
+		<div class="tagDiv">
+			<span class="" ng-repeat="tag in vm.tags track by $index">
+				<div class="indvTag">
+					{{tag}}
+					<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+					</span>
+				</div>
+				&nbsp;
+			</span>
+		</div>
+	</form>
 	<br>
 	<table class="filteringTable">
 		<tr>
@@ -104,36 +125,15 @@
 	</table>
 	<span>
 		<br>
-
+<!-- 
 		<center>
 			<md-button ng-click="vm.showTagInput()" class="md-button md-primary md-raised" ng-show="createQTag">Create filtering tags</md-button>
 		</center>
+		 -->
 		
-		<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
-			<md-input-container flex>
-			<label>Input tag and press ENTER...</label>
-			<input ng-model="vm.tag">
-
-		</md-input-container>
-		<br><br>
-		<div class="tagDiv">
-			<span class="" ng-repeat="tag in vm.tags track by $index">
-				<div class="indvTag">
-					{{tag}}
-					<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
-					</span>
-				</div>
-				&nbsp;
-			</span>
-		</div>
 		<br>
 		<br>
 
-	</span>
-
-	<br>
-
-</form>
 
 <span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
 
