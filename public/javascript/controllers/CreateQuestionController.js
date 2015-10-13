@@ -138,15 +138,15 @@
       };
       geocoder.geocode(geocoderRequest, function(results, status) {
         console.log(results);
-        var loc = results[0].geometry.location;
+        var loc = results[0].geometry.bounds;
         console.log(loc);
-        vm.question.lat = loc.J;
-        vm.question.lng = loc.M;
+        vm.question.lat = loc.La.j;
+        vm.question.lng = loc.Pa.j;
         console.log(vm.question);
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.J,
-            lng: loc.M
+            lat: loc.La.j,
+            lng: loc.Pa.j
           },
           scrollwheel: true,
           zoom: 11,
