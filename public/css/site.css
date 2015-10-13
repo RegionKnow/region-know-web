@@ -241,11 +241,11 @@ a:hover, a:visited, a:active {
 }
 
 
-  /*md-backdrop.md-opaque {
-    background-color: rgba(33,33,33,0) !important;
+  md-backdrop.md-opaque {
+    background-color: rgba(33,33,33,0.3) !important;
     top: 0;
 
-    }*/
+    }
 
 
     /*================TAG STYLES==========================================*/
