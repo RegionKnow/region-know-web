@@ -15,14 +15,6 @@
       url: '/',
       templateUrl: 'templates/home.html'
     })
-    // .state('Register', {
-    //   url: '/register',
-    //   templateUrl: 'templates/register.html',
-    // })
-    // .state('Login', {
-    //   url: '/login',
-    //   templateUrl: 'templates/login.html',
-    // })
     .state('QuestionsFeed', {
       url: '/questionsFeed',
       templateUrl: 'templates/questions_feed.html',
