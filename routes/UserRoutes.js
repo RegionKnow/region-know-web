@@ -369,7 +369,7 @@ router.post('/filterOff/:userId', function(req, res) {
                     if(QA.answered.toString() === answerId.toString()){
                       
                       kPointCount += 1
-                      console.log('adding kp', kPointCount)
+                      // console.log('adding kp', kPointCount)
                       
                       // console.log(countObj)
                     }
@@ -377,7 +377,7 @@ router.post('/filterOff/:userId', function(req, res) {
                   console.log(kPointCount)
                   console.log(l1, loopcount) //loop count is compared to J from outer loop, if they match
                 if(l1 === loopcount) { // all viable questions have been searched, update KP's
-                    console.log('current K point count'  + kPointCount)
+                    // console.log('current K point count'  + kPointCount)
                   User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
                     console.log('updated KnowledgePoints')
                     
@@ -385,9 +385,9 @@ router.post('/filterOff/:userId', function(req, res) {
                 }
           })
         }
-    setTimeout(function() {
-      res.send('updated both knowledgepoints and general points')
-    }, 3000);
+    // setTimeout(function() {
+    //   res.send('updated both knowledgepoints and general points')
+    // }, 3000);
 
   })
   
