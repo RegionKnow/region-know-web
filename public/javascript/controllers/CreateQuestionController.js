@@ -144,23 +144,23 @@ function getQuestions() {
         address: vm.questionLocation
       };
       geocoder.geocode(geocoderRequest, function(results, status) {
-        console.log(results);
-        var loc = results[0].geometry.bounds;
+        console.log(results[0]);
+        var loc = results[0].geometry.location;
         console.log(loc);
-        vm.question.lat = loc.La.j;
-        vm.question.lng = loc.Pa.j;
+        vm.question.lat = loc.lat();
+        vm.question.lng = loc.lng();
         console.log(vm.question);
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.La.j,
-            lng: loc.Pa.j
+            lat: loc.lat(),
+            lng: loc.lng()
           },
           scrollwheel: true,
           zoom: 11,
         })
         var marker = new google.maps.Marker({
           map: vm.map,
-          position: new google.maps.LatLng(loc.J, loc.M),
+          position: new google.maps.LatLng(loc.lat(), loc.lng()),
           title: 'Your Current Location',
           draggable: true
         });
@@ -168,9 +168,9 @@ function getQuestions() {
           if (vm.cityCircle) {
             vm.cityCircle.setMap(null);
           }
-
-          vm.question.lat = marker.internalPosition.J;
-          vm.question.lng = marker.internalPosition.M;
+          console.log(marker)
+          vm.question.lat = marker.position.lat();
+          vm.question.lng = marker.position.lng();
           console.log(vm.question);
 
 
