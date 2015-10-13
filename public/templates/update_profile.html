@@ -1,23 +1,23 @@
-<div class="container-fluid topRows">
 	<div class="row">
 
 		<div class="col-md-2"></div>
-		<form ng-submit="vm.updateProfile(nav.user)" class="col-md-8">
+		<!-- vm.updateProfile(nav.user); -->
+		<form ng-submit=" modal.close();" class="col-md-8">
 			<h1>Update</h1>
 
 			<div class="form-group">
 				<label>User Name</label>
-				<input type="text" class="form-control" ng-model="nav.user.username"/>
+				<input type="text" class="form-control" ng-model="modal.user.username"/>
 			</div>
 
 			<div class="form-group">
 				<label>Email</label>
-				<input type="email" class="form-control" ng-model="nav.user.email"/>
+				<input type="email" class="form-control" ng-model="modal.user.email"/>
 			</div>
 
 			<div class="form-group">
 				<label >Change Password</label>
-				<input type="password" class="form-control" ng-model="nav.user.password"/>
+				<input type="password" class="form-control" ng-model="modal.user.password"/>
 			</div>
 
 
@@ -29,6 +29,7 @@
 			Delete Profile
 		</md-button> -->
 	</form>
+	<md-button ng-click="modal.dismiss()">Close</md-button>
 </div>
 <br/>
 
@@ -36,5 +37,4 @@
 </div>
 <div class="col-md-2"></div>
 
-</div>
 </div>
