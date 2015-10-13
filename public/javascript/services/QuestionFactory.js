@@ -43,6 +43,8 @@
 			var q = $q.defer();
 			$http.post('api/question/tags/' + question_id, tags).success(function(res){
 				q.resolve(res);
+			}).error(function(res){
+				q.resolve(res);
 			})
 			return q.promise;
 		}
