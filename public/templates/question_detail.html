@@ -178,7 +178,7 @@
 
 <md-button required type="submit" ng-disabled="!comment">Submit Comment</md-button>
 <div ng-repeat="comment in a.comments">
-	<strong>{{comment.postedBy}}:</strong> {{comment.commentBody}} <i class="material-icons" style="font-size:0.79em;" ng-click="vm.deleteAnswerComment(a._id, comment._id)">clear</i>
+	<strong>{{comment.postedBy}}:</strong> {{comment.commentBody}} <i class="material-icons" style="font-size:0.79em;" ng-click="vm.deleteAnswerComment(a._id, comment._id)" ng-show="comment.postedBy === nav.status._user.username">clear</i>
 </form>
 
 </div>

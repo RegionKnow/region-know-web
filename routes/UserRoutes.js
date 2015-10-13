@@ -368,6 +368,7 @@ function findKpoints(questionId, answerId,l1, userId){
           loopcount += 1
                 if(QA.answered){ // makes sure quesiton has an answer
                   console.log(QA.answered, answerId)
+
                   if(QA.answered.toString() === answerId.toString()){
 
                     kPointCount += 1
@@ -379,17 +380,18 @@ function findKpoints(questionId, answerId,l1, userId){
                   console.log(kPointCount)
                   console.log(l1, loopcount) //loop count is compared to J from outer loop, if they match
                 if(l1 === loopcount) { // all viable questions have been searched, update KP's
-                  console.log('current K point count'  + kPointCount)
-                User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
-                  console.log('updated KnowledgePoints')
-
-                })
-              }
-            })
+                    // console.log('current K point count'  + kPointCount)
+                  User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
+                    console.log('updated KnowledgePoints')
+                    
+                  })
+                }
+              })
 }
-// setTimeout(function() {
-//   res.send('updated both knowledgepoints and general points')
-// }, 3000);
+    // setTimeout(function() {
+    //   res.send('updated both knowledgepoints and general points')
+    // }, 3000);
+
 
 })
 
