@@ -9,7 +9,9 @@
 
     var vm = this;
     vm.status = UserFactory.status;
-    console.log(vm.status)
+    if(!vm.status._user){
+      $state.go("Home")
+    }
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
     vm.toggleLeft = buildToggler('left');
@@ -55,7 +57,7 @@
       }else{
         vm.showAlertTab = false;
       }
-    
+
       $timeout(function() {
         UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           vm.alertObj.status = false;
@@ -73,7 +75,7 @@
             // console.log(res)
             vm.status._user.generalPoints = res.generalPoints
             vm.status._user.knowledgePoints = res.knowledgePoints
-          }); 
+          });
         })
         checkVotes();
       }, 60000);

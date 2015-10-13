@@ -9,7 +9,9 @@
 		var vm = this;
 		vm.status = UserFactory.status;
 		vm.loading = false;
-
+		if(!vm.status._user){
+			$state.go("Home")
+		}
 	//-------------GET LOGGED IN USER-------------------------
 
 	if(vm.status) {

@@ -11,6 +11,10 @@
     vm.status = UserFactory.status;
     vm.AnswerObj = {};
 
+    if(!vm.status._user){
+      $state.go("Home")
+    }
+
 
     //logic for grabing individual question From questions feed
     if (!$stateParams.id) {
