@@ -39,25 +39,17 @@
 				&nbsp;
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
-<!--
-				<div class="" id="alerts" ng-show="true"> -->
 
-				<div class="" style="position: absolute; right: -25px; border: thin solid #999; margin-top: 12px; padding: 4px; background-color: #f0f0f0; border-radius: 2px 2px 3px 3px; box-shadow: 1px 1px 2px #777; display:block;" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
-					
+				<div ng-show="nav.showAlertTab" id="alerts">
+					<div ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
 						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
-					
+					</div>
 
 				</div>
 
-				<!-- </div> -->
-
-
-
 
 			</div>
-
 		</div>
-
 		<!-- THIS IS WHERE SIDE NAV CODE STARTS====================================================== -->
 		<div class="row">
 
@@ -155,31 +147,31 @@
 
 
 
-	<!-- Global Src -->
-	<script src="/javascript/app.js"></script>
-	<!-- Factories -->
-	<script src="/javascript/services/UserFactory.js"></script>
-	<script src="/javascript/services/QuestionFactory.js"></script>
-	<script src="/javascript/services/AnswerFactory.js"></script>
-	<script src="/javascript/services/UserSettingsFactory.js"></script>
-	<script src="/javascript/services/RankFactory.js"></script>
+<!-- Global Src -->
+<script src="/javascript/app.js"></script>
+<!-- Factories -->
+<script src="/javascript/services/UserFactory.js"></script>
+<script src="/javascript/services/QuestionFactory.js"></script>
+<script src="/javascript/services/AnswerFactory.js"></script>
+<script src="/javascript/services/UserSettingsFactory.js"></script>
+<script src="/javascript/services/RankFactory.js"></script>
 
 
 
 
-	<!-- Controllers -->
+<!-- Controllers -->
 
-	<script src="/javascript/controllers/CreateQuestionController.js"></script>
-	<script src="/javascript/controllers/QuestionAnswerController.js"></script>
-	<script src="/javascript/controllers/NavBarController.js"></script>
-	<script src="/javascript/controllers/UserProfileController.js"></script>
-	<script src="javascript/controllers/EditAnswerController.js"></script>
-	<script src="/javascript/controllers/MessagingController.js"></script>
-	<script src="/javascript/controllers/UserSettingsController.js"></script>
-	<script src="/javascript/controllers/PasswordResetController.js"></script>
-	<script src="/javascript/controllers/VoteController.js"></script>
-	<script src="/javascript/controllers/RankController.js"></script>
-	<script src="/javascript/controllers/ModalInstanceController.js"></script>
+<script src="/javascript/controllers/CreateQuestionController.js"></script>
+<script src="/javascript/controllers/QuestionAnswerController.js"></script>
+<script src="/javascript/controllers/NavBarController.js"></script>
+<script src="/javascript/controllers/UserProfileController.js"></script>
+<script src="javascript/controllers/EditAnswerController.js"></script>
+<script src="/javascript/controllers/MessagingController.js"></script>
+<script src="/javascript/controllers/UserSettingsController.js"></script>
+<script src="/javascript/controllers/PasswordResetController.js"></script>
+<script src="/javascript/controllers/VoteController.js"></script>
+<script src="/javascript/controllers/RankController.js"></script>
+<script src="/javascript/controllers/ModalInstanceController.js"></script>
 
 
 
