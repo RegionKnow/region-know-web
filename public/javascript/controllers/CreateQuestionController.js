@@ -19,6 +19,10 @@
 
     vm.getQuestions(); //getting all questions when page loads
 
+    // document.getElementById("qDirections").addEventListener("click", function() {
+    //   vm.createQDirections = false;
+    //   console.log("hey")
+    // });
 
     function getQuestions() {
       QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {

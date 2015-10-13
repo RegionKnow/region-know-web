@@ -1,14 +1,15 @@
-<div class="row topRows text-center introFeatures">
+<div class="row topRows text-center introFeatures animated fadeIn">
 
 	<div class="col-md-2 col-lg-1"></div>
 
-
-	<div class="col-md-8 col-lg-10" ng-cloack>
-		<table class="animated rubberBand" style='margin-left: auto; margin-right: auto' ng-cloack>
-			<tr id="questionVote" class="">
+	<div class="col-md-8 col-lg-10" ng-cloak>
+		<center><h2>{{vm.question.userName}} asked...</h2></center>
+		<br>
+		<table class="mdl-card mdl-shadow--4dp qDetailCards" width="100%" ng-cloak>
+			<tr id="questionVote">
 
 				<td>
-					<div class="animated" ng-controller="VoteController as vm" style="margin-right: 30px;">
+					<div ng-controller="VoteController as vm" style="margin-right: 30px;">
 
 						<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVote()">
 						<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
@@ -21,27 +22,21 @@
 				</div>
 			</td>
 
-			<td>
-				<div id="questionFace">
-					<span style="margin-right: 10%">
-						<img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">
-						<span style="font-size: 15px;"><i>{{vm.question.userName}}<i/></span>
+			<td id="questionFace">
+				{{vm.question.questionBody}}
 
-					</span>
-					{{vm.question.questionBody}}
-					<span id="quesitonTag" ng-repeat="tag in vm.question.tags">
-						<i>{{tag}}</i>
-					</span>
-					<br>
+				<br>
 
-
+				<div class="qTag" ng-repeat="tag in vm.question.tags">
+					{{tag}}
 				</div>
 			</td>
+
 
 			<td>
 				<div id="editQuestion">
 
-					<md-button class="md-raised md-primary" id="voteBut" ng-click="vm.showOptions()" ng-if="vm.status._user.id === vm.question.postedBy && !vm.options">Options</md-button>
+					<md-button ng-click="vm.showOptions()" ng-if="vm.status._user.id === vm.question.postedBy && !vm.options"><i class="material-icons">more_vert</i></md-button>
 					<span ng-if="vm.options">
 						<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
 						<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>
@@ -56,132 +51,128 @@
 						<form ng-submit="vm.submitEdit()">
 							<input class="form-control" placeholder="{{vm.question.questionBody}}" ng-model="vm.edit.questionBody" required>
 							<br>
-							<button class="btn btn-primary btn-sm" ng-disabled="!vm.edit.questionBody" type="submit">Submit</button>
+							<md-button class="md-primary md-raised" ng-disabled="!vm.edit.questionBody" type="submit">Submit</md-button>
 						</form>
 					</div>
 
 				</div>
+				
 
 			</td>
 		</tr>
+		
+
+		<!-- <img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;"> -->
 
 	</table>
 
 	<br>
+	<form ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
+		<md-input-container flex class="text-left">
+		<label>Answer this question here...</label>
+		<input ng-model="vm.AnswerObj.answerBody" require>
+	</md-input-container>
+	<br>
+
+	<!-- <h5 ng-show="vm.errorMessage" style="color: red;">Sorry! You can not submit an empty answer.</h5> -->
+	<md-button class="md-raised md-primary" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
+	Submit Answer
+</md-button>
+</form>
+
+
+<div>
+
+	<br>
 
 	<div>
-		<form ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
-			<textarea class="form-control" id="questionInput" rows="2" ng-model="vm.AnswerObj.answerBody" require></textarea>
-
-			<br>
-
-			<!-- <h5 ng-show="vm.errorMessage" style="color: red;">Sorry! You can not submit an empty answer.</h5> -->
-			<button class="btn btn-primary" ng-disabled="!vm.AnswerObj.answerBody" type="submit">
-				Submit Answer
-			</button>
-		</form>
-
-		<br>
-		<br>
-
-		<div>
-			<img ng-if="vm.loading" id="loadingGif" src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
-		</div>
-
-		<div class="animated bounceIn" ng-show="vm.voteError" style="color: red;">Sorry you already voted on that Answer!</div>
-		<div class="mdl-card mdl-shadow--4dp qCards" ng-repeat="a in vm.question.answers" ng-show="!a.isDeleted">
-
-			<table>
-				<tr>
-					<td >
-						<span>
-							<i  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon">help_outline</i>
-							<i  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">done</i>
-						</span>
-
-						<div ng-if="vm.status._user.id" style="width: 100px;">
-							<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVoteAnswer(a._id)">
-							<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
-							<div ng-class="vm.VoteAnimation" style="font-size:25px;" id="voteNum">
-								{{a.voteNum}}
-							</div>
-							<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.downVoteAnswer(a._id)">
-							<div ng-style="{color: vm.DownvoteColor}" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div></md-button>
-						</div>
-
-					</td>
-					<td>
-
-						<div style="height: 25px;">
-							<span>
-
-								<span class="text-left">{{a.name}}</span> -
-								<span style="font-size:25px;">{{a.answerBody}}</span>
-
-							</span>
-							<span ng-if="vm.status._user.id">
-
-
-								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
-
-
-								<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
-									<a ui-sref="EditAnswer({ans_id: a._id, ques_id: vm.question._id })">
-										<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
-										<i class="material-icons">edit</i>
-									</md-button>
-								</a>
-							</span>
-
-							<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
-								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
-								<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
-							</md-button>
-						</span>
-						<md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
-						<span><i class="material-icons">question_answer</i>
-						</md-button>
-					</span>
-				</span>
-
-			</div>
-		</td>
-	</tr>
-<!-- 				<tr>
-					<td>
-						<div>
-							<span ng-if="vm.status._user.id">
-
-
-								<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button>
-
-
-								<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
-									<a ui-sref="EditAnswer({ans_id: a._id, ques_id: vm.question._id })">
-										<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
-											<i class="material-icons">edit</i>
-										</md-button>
-									</a>
-								</span>
-
-								<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
-									<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
-										<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
-									</md-button>
-								</span>
-								<span ui-sref='Message({recipient: a.postedBy})'><i class="material-icons">email</i>
-								</span>
-							</span>
-
-						</div>
-					</td>
-
-				</tr>
-			-->
-		</table>
+		<img ng-if="vm.loading" id="loadingGif" src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
 	</div>
+
+	<div class="animated bounceIn" ng-show="vm.voteError" style="color: red;">Sorry you already voted on that Answer!</div>
+	<center><h2>Answers to {{vm.question.userName}}'s Question...</h2></center>
+	<br>
+	<div class=" mdl-card mdl-shadow--4dp aCards" ng-repeat="a in vm.question.answers track by $index" ng-show="!a.isDeleted">
+		
+		<table width="100%">
+			<tr>
+				<td >
+					<span>
+						<i  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon">done</i>
+						<i style="color:green;"  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">spellcheck</i>
+					</span>
+
+					<div ng-if="vm.status._user.id" style="width: 100px;">
+						<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.upVoteAnswer(a._id)">
+						<div ng-style="{color: vm.UpvoteColor}" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></div></md-button>
+						<div ng-class="vm.VoteAnimation" style="font-size:25px;" id="voteNum">
+							{{a.voteNum}}
+						</div>
+						<md-button aria-label="..." class="md-raised md-primary" id="voteBut" ng-click="vm.downVoteAnswer(a._id)">
+						<div ng-style="{color: vm.DownvoteColor}" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></div></md-button>
+					</div>
+
+				</td>
+				<td>
+
+					
+
+					<p>{{a.name}} says...{{a.answerBody}}</p>
+
+					<div>
+						<md-input-container flex class="text-left">
+						<label>Comment on this answer...</label>
+						<input ng-model="comment" require>
+					</md-input-container>
+
+					<md-button ng-click="vm.commentAnswer(a._id, comment)" required>Submit Comment</md-button>
+					<div ng-repeat="comment in a.comments">
+						<strong>{{comment.postedBy}}:</strong> {{comment.commentBody}} <i class="material-icons" style="font-size:0.79em;" ng-click="vm.deleteAnswerComment(a._id, comment._id)">clear</i>
+					</div>
+				</div>
+
+			</span>
+
+		</div>
+	</td>
+	<td id="answerIcons">
+
+		<span ng-if="vm.status._user.id">
+
+			
+
+
+			<span ng-if="vm.status._user.id === a.postedBy">
+				<a ui-sref="EditAnswer({ans_id: a._id, ques_id: vm.question._id })">
+					<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
+					<i class="material-icons">edit</i>
+				</md-button>
+			</a>
+			<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
+			<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
+		</md-button>
+	</span>
+
+	<!-- <md-button ng-click="answerComment = true;" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button> -->
+
+	<md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
+	<span><i class="material-icons">question_answer</i>
+	</md-button>
+</span>
+</td>
+</tr>
+
+</table>
+
+
 </div>
+</div>
+
+
 <br><br>
 <div class="col-md-2 col-lg-1">
 
 </div>
+
+
+

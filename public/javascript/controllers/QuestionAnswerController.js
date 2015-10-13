@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('app')
-    .controller('QuestionAnwserController', QuestionAnwserController);
+  .controller('QuestionAnwserController', QuestionAnwserController);
 
   QuestionAnwserController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory', 'UserFactory', '$http'];
 
@@ -50,7 +50,7 @@
           vm.loading = true; // showing loading gif
           vm.AnswerObj = {} // removes local object answer
             //
-          var AnswerId = {}
+            var AnswerId = {}
           AnswerId.id = res._id // saves id of answer
           var QuestionId = $stateParams.id
 
@@ -71,10 +71,10 @@
         // 	;
         // 	vm.errorMessage = res;
         // }
-      )
+        )
     }
 
-
+    //=========================ANSWER STUFF=====================================================
     function findAnswerVote(answer_id) {
       // console.log(answer_id)
       //gets whole question again to reload populate on answers!
@@ -140,10 +140,35 @@
       })
     }
 
+
+    //====================COMMENTS FOR ANSWERS=========================================
+    vm.commentAnswer = function(ans_id, comment){
+      console.log(comment);
+      console.log(ans_id);
+      AnswerFactory.commentAnswer(ans_id, comment, vm.status._user.username).then(function(res){
+
+        vm.loading = false;
+        comment = "";
+        QuestionFactory.findQuestion($stateParams.id).then(function(res) {
+          vm.isAnswered = vm.question.answered
+          vm.question = res
+        })
+      })
+    }
+
+    vm.deleteAnswerComment = function(commentId, ansId) {
+      // comment.splice(comment.indexOf(commentId), 0);
+      AnswerFactory.deleteAnswerComment(commentId, ansId).then(function(res){
+       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
+        vm.isAnswered = vm.question.answered
+        vm.question = res
+      })
+     })
+    }
+
+
     vm.deleteQuestion = function(quesiton_id) {
-
       QuestionFactory.deleteQuestion(quesiton_id).then(function(res) {
-
         $state.go('QuestionsFeed')
       })
     }
@@ -154,10 +179,10 @@
       AnswerFactory.deleteAnswer(answer_id).then(function(res) {
         QuestionFactory.findQuestion($stateParams.id).then(function(res) {
 
-            vm.question = res
-          })
+          vm.question = res
+        })
           // $state.go('QuestionFeed')
-      })
+        })
     }
 
     vm.editQuestion = function() {

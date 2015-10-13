@@ -18,6 +18,7 @@ router.param('id', function(req, res, next, id){
   })
 });
 
+
 router.param('user_id', function(req, res, next){
   User.findOne({_id: req.params.user_id}, function(err, response){
     req.user = response;
@@ -96,6 +97,30 @@ router.post('/edit', function(req, res){
     res.send(response)
   })
 })
+
+router.post('/comment/:id', function(req, res){
+ var newComment = {commentBody: req.body.commentBody, createdDate: new Date(), postedBy: req.body.postedBy};
+ Answers.update({_id: req.body.answerId}, {$push: {comments: newComment}}, function(err, response){
+  if(err) return res.status(500).send({err: "Error finding answer"});
+  if(!response) return res.status(400).send({err: "Error getting from the mongodb error finding answer"});
+  res.send(response)
+})
+})
+
+
+router.post('/deleteAnswerComment/', function(req, res){
+  console.log(req.body, "answerroutes 111");
+  console.log(req.body.ansId)
+  console.log(req.body.answerCommentId)
+  // Answers.findOne({_id: id}).populate('answers')
+  Answers.update({_id: req.body.ansId}, {$pull: {comments:{_id:req.body.answerCommentId}}}, function(err, response){
+    if(err) return res.status(500).send({err: "Error finding answer"});
+    if(!response) return res.status(400).send({err: "Error getting from the mongodb error finding answer"});
+    console.log(response);
+    res.send(response)
+  })
+})
+
 
 router.post('/:id', function(req, res){
   res.send(req.answer)
