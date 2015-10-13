@@ -127,6 +127,7 @@
         })
       })
     }
+    
     ////Map Search
     function addQlocation() {
       vm.mapStatus = true;

@@ -3,9 +3,9 @@
   angular.module('app')
   .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal"];
+  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal", 'RankFactory'];
 
-  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal) {
+  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal, RankFactory) {
 
     var vm = this;
     vm.status = UserFactory.status;
@@ -27,13 +27,13 @@
     };
 
     vm.alertObj = {}
-    // alertWatch();
+    alertWatch();
     checkVotes();
-
+    CollectRanks();
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
-          console.log('watching for alerts')
+          // console.log('watching for alerts')
           if(!res.alerts) return;
           if (res.alerts.length > 0) {              vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
@@ -69,7 +69,17 @@
           }); 
         })
         checkVotes();
-      }, 30000);
+      }, 300000);
+    }
+
+    function CollectRanks(){
+      console.log('collecting Ranks')
+      $timeout(function() {
+        RankFactory.collectRanks().then(function(res){
+          console.log('Ranks Organized')
+        })
+        CollectRanks();
+      }, 100000);
     }
 
 
@@ -115,8 +125,6 @@
         });
       });
     };
-
-
 
     vm.openRegisterModal = function() {
       var registerModal = $modal.open({
