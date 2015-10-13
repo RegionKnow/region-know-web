@@ -1,12 +1,13 @@
 
 <div class="row topRows animated fadeIn">
-	<center>
-		<h2>Fill out the fields below to ask your question</h2>
-		<i ng-click="createQDirections = true;">Click for directions</i>
-	</center>
+	
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		
+		<br><br><br>
+		<center>
+			<h2>Fill out the fields below to ask your question</h2>
+			<i ng-click="createQDirections = true;">Click for directions</i>
+		</center>
 		<ol ng-show="createQDirections" class="mdl-card mdl-shadow--4dp qCards" style="padding-right: 1em; height: 13%;">
 			<br>
 			<li>Type question in section that says "Type question here..."</li>
@@ -74,6 +75,7 @@
 <center>
 	<md-button class="md-button md-raised md-primary" ng-click="vm.createQ()">Finish and post question</md-button>
 </center>
+<br><br><br>
 </div>
 
 
