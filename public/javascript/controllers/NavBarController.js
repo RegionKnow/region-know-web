@@ -137,13 +137,10 @@
         controllerAs: "vm",
         size: "md"
       });
-      loginModal.result.then(function(user){
-        UserFactory.loginUser(user).then(function(res) {
-          vm.status = UserFactory.status;
-          vm.user = null;
-          $state.go("QuestionsFeed");
+      loginModal.result.then(function(){
+        vm.status = UserFactory.status;
+        $state.go("QuestionsFeed");
         });
-      });
     };
 
     vm.openRegisterModal = function() {
@@ -153,12 +150,9 @@
         controllerAs: "vm",
         size: "md"
       });
-      registerModal.result.then(function(newUser){
-        console.log(newUser);
-        UserFactory.registerUser(newUser).then(function() {
-          vm.user = null;
-          vm.openLoginModal();
-        });
+      registerModal.result.then(function(){
+        console.log("Registered User");
+        vm.openLoginModal();
       });
     };
 

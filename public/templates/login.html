@@ -3,38 +3,39 @@
 
 		<br>
 		<div class="col-md-12">
-			
+
 			<br>
 			<form ng-submit="vm.loginUser()">
 
 				<md-input-container flex>
-				<label>User Name</label>
-				<input type="text" ng-model="vm.user.username">
-			</md-input-container>
+					<label>User Name</label>
+					<input type="text" ng-model="vm.user.username">
+				</md-input-container>
 
-			<md-input-container flex>
-			<label >Password</label>
-			<input type="password" ng-model="vm.user.password"/>
-		</md-input-container>
+				<md-input-container flex>
+					<label>Password</label>
+					<input type="password" ng-model="vm.user.password" />
+				</md-input-container>
+
+				<p style="color: red" ng-show="vm.loginError">Invalid password or username</p>
+
+				<div class="text-center">
+
+					<md-button type="submit" class="md-raised md-primary">
+						Submit
+					</md-button>
+					<br/>
+
+					<md-button class="md-button" ui-sref="PasswordResetStart">Forgot Password?</md-button>
+				</div>
 
 
-		<div class="text-center">
+			</form>
 
-			<md-button type="submit" class="md-raised md-primary">
-			Submit
-		</md-button>
-		<br/>
+			<div>
+			</div>
+		</div>
 
-		<md-button class="md-button"  ui-sref="PasswordResetStart">Forgot Password?</md-button>
+
 	</div>
-
-
-</form>
-
-<div>
-</div>
-</div>
-
-
-</div>
 </div>
