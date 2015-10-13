@@ -81,33 +81,29 @@
 			<md-toolbar id="userInfo" class="md-theme-light">
 
 			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
-				<div style="margin-left: 30%; position: absolute; top: -25px;">
+				<div style="margin-left: 25%; position: absolute; top: -25px;">
 
 
 					<br>
 					{{nav.status._user.username}}
 					<br>
-
-
-
+					<br>
 					<img class="img  img-circle navImage" ng-src="{{nav.status._user.image}}">
 
 					<br>
 
 					<span style="font-size: 15px;">
-						<span>General Points -  {{nav.status._user.generalPoints}}</span>
+						<span>{{nav.status._user.generalPoints}} - General Points</span>
 						<br>
-						<span> Knowledge Points - {{nav.status._user.knowledgePoints}}</span>
+						<span>{{nav.status._user.knowledgePoints}} -  Knowledge Points</span>
 					</span>
-				</span>
-				<br>
 
-			</div>
+				</div>
 
 		</a>
 
 	</md-toolbar>
-
+	<br><br>
 	<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
 		<i class="material-icons">home</i>View Questions
 	</a>
@@ -133,10 +129,6 @@
 	<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
 		<i class="material-icons">lock</i>Log Out
 	</a>
-
-
-
-
 
 </md-sidenav>
 
