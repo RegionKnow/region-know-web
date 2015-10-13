@@ -12,6 +12,7 @@
     if(!vm.status._user){
       $state.go("Home")
     }
+    console.log(vm.status._user)
 
     //---------FUNCTIONALITY FOR SIDE NAVBAR----------------------------------------------------------
     vm.toggleLeft = buildToggler('left');
@@ -28,16 +29,21 @@
       $mdSidenav('left').close()
     };
 
+
+    //alerts. ranking, score collections ALL TIME OUT EVENTS RUNNING
     vm.alertObj = {}
+
     alertWatch();
     checkVotes();
     CollectRanks();
+
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           console.log('watching for alerts')
           if(!res.alerts) return;
-          if (res.alerts.length > 0) {              vm.alertObj.status = true;
+          if (res.alerts.length > 0) {              
+            vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
             vm.alertObj.alerts = res.alerts;
           } else {
@@ -48,7 +54,9 @@
         alertWatch();
       }, 3000);
     }
+
     var count = 1;
+
     vm.openAlerts = function() {
       count += 1
       console.log('cought alerts')
@@ -78,7 +86,7 @@
           });
         })
         checkVotes();
-      }, 60000);
+      }, 600000);
     }
 
     function CollectRanks(){
@@ -88,7 +96,7 @@
           console.log('Ranks Organized')
         })
         CollectRanks();
-      }, 60000);
+      }, 600000);
     }
 
 
@@ -108,6 +116,9 @@
     //     $state.go("QuestionsFeed");
     //   });
     // };
+
+
+    //USER login/REG 
 
     vm.logoutUser = function() {
       UserFactory.logoutUser().then(function() {

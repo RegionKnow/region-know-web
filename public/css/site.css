@@ -11,13 +11,10 @@ body, html {
   background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
 
-h2 {
-  background:#fff;
-}
+
 
 .col-md-8 {
   /*box-shadow: 1px 1px 19px #777;*/
-  background:#fff;
   /*height: 1600px;*/
   top: 0;
   margin-top: 0;
@@ -36,7 +33,29 @@ h2 {
 md-input-container {
   font-size: 1.3em;
 }
+/*=============ALERT STYLE=============================*/
 
+
+#alerts {
+  position: absolute;
+  right: -77px;
+  margin-top: 12px; 
+  padding: 4px; 
+}
+
+#alerts a {
+  display: block;
+  text-align: left;
+  /*border: thin solid #999; */
+  background-color: #f0f0f0; 
+  border-radius: 2px 2px 3px 3px; 
+  box-shadow: 1px 1px 2px #777;
+  margin-bottom: .3em;
+  padding: .3em;
+  z-index: 1;
+  width: 160px;
+  margin-right: -53px;
+}
 /*=======WELCOME PAGE STYLE=======================*/
 .homeWell {
   background: none;
@@ -239,30 +258,32 @@ a:hover, a:visited, a:active {
       box-shadow: 2px 2px 2px black;
       border-color: #000000;
       padding-left: 15px;
-      background-color: #26a69a;
+      background-color: #F0f0f0;
       display: inline;
     }
     .tagDiv {
       border-radius: 10px;
     }
     .indvTag {
+     /* width: auto;
+      height: 50px;*/
       border: thin solid #999;
-      border-radius: 3px 6px;
+      border-radius: 6px 12px;
       box-shadow: 1px 1px 6px #333;
       padding: 3px;
       margin: 6px;
       color: #333;
-      /*      background-color: #26a69a;*/
+      background-color: #F0f0f0;
       display: inline;
     }
 
     .qTag {
       border: thin solid #999;
-      border-radius: 3px 6px;
+      border-radius: 3px 12px;
       box-shadow: 1px 1px 6px #333;
       padding: 3px;
       margin: 6px;
-      color: #333;
+      background-color: #f0f0f0;
       display: inline;
       font-size: .5em;
     }
