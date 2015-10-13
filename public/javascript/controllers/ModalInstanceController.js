@@ -1,21 +1,35 @@
 (function() {
-	'use strict';
-	angular.module('app')
-	.controller('ModalInstanceController', ModalInstanceController);
+  'use strict';
+  angular.module('app')
+    .controller('ModalInstanceController', ModalInstanceController);
 
-	ModalInstanceController.$inject = ["$modalInstance", "$state"];
+  ModalInstanceController.$inject = ["$modalInstance", "$state", "UserFactory", "$timeout"];
 
-	function ModalInstanceController($modalInstance, $state) {
-		var vm = this;
-		vm.user = {};
+  function ModalInstanceController($modalInstance, $state, UserFactory, $timeout) {
+    var vm = this;
+    vm.user = {};
 
-		vm.registerUser = function() {
-			$modalInstance.close(vm.user);
-		};
+    vm.registerUser = function() {
+      UserFactory.registerUser(vm.user).then(function() {
+        $modalInstance.close();
+      });
+    };
 
-		vm.loginUser = function() {
-			$modalInstance.close(vm.user);
-		};
 
-	}
+
+    vm.loginUser = function() {
+      UserFactory.loginUser(vm.user).then(function(succesRes) {
+        vm.user = null;
+        $modalInstance.close();
+      }, function(errorResponse) {
+        console.log(errorResponse.data);
+			vm.loginError = true;
+			$timeout(function () {
+				vm.loginError = false;
+			}, 10000);
+
+      })
+    };
+
+  }
 })();
