@@ -11,6 +11,10 @@
     vm.title = 'Messaging';
     vm.button = "Test call button";
 
+    if(!vm.status._user){
+      $state.go("Home")
+    }
+
     //Setup function/variable associations for controller
     vm.inConversation;
     vm.testRequest = testRequest;

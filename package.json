@@ -4,11 +4,13 @@
   "description": "An application for the Coder Camps FullStack JS course",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "postinstall": "bash ./post_install.sh"
   },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.12.4",
+    "bower": "^1.5.3",
     "cloudinary": "^1.2.4",
     "crypto": "0.0.3",
     "ejs": "^2.3.4",

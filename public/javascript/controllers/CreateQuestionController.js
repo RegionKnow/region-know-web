@@ -8,6 +8,9 @@
   function CreateQuestionController($state, QuestionFactory, $rootScope, UserFactory) {
     var vm = this;
     vm.status = UserFactory.status;
+    if(!vm.status._user){
+      $state.go("Home")
+    }
     vm.question = {}
     vm.createQ = createQ;
     // vm.showTagInput = showTagInput;
@@ -28,7 +31,7 @@ function getQuestions() {
   QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
 
         //Adds dateInMilliseconds to all questions to for sorting purposes
-        
+
         vm.allquestions = res.map(function (item) {
           item.createdDate = new Date(item.createdDate);
           item.dateInMilliseconds = item.createdDate.getTime();
@@ -132,7 +135,7 @@ function getQuestions() {
         })
       })
     }
-    
+
     ////Map Search
     function addQlocation() {
       vm.mapStatus = true;
