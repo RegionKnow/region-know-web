@@ -3,9 +3,9 @@
   angular.module('app')
   .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal"];
+  NavBarController.$inject = ['$mdSidenav', '$timeout', '$mdUtil', 'UserFactory', '$state', '$rootScope', "$modal", 'RankFactory'];
 
-  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal) {
+  function NavBarController($mdSidenav, $timeout, $mdUtil, UserFactory, $state, $rootScope, $modal, RankFactory) {
 
     var vm = this;
     vm.status = UserFactory.status;
@@ -28,7 +28,8 @@
 
     vm.alertObj = {}
     alertWatch();
-
+    checkVotes();
+    CollectRanks();
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
@@ -37,20 +38,15 @@
           if (res.alerts.length > 0) {              vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
             vm.alertObj.alerts = res.alerts;
-          } else {              
+          } else {
             vm.alertStatus = false;
           }
 
         })
         alertWatch();
       }, 3000);
-
-      $timeout(function() {
-        console.log('reloading Nav')
-        UserFactory.reloadNav();
-      }, 180000);
-
     }
+
     vm.openAlerts = function() {
       vm.showAlertTab = true;
       $timeout(function() {
@@ -59,6 +55,31 @@
         })
       }, 30000);
 
+    }
+
+    function checkVotes(){
+      $timeout(function() {
+        console.log('reloading Nav')
+        UserFactory.getGeneralPoints(vm.status._user.id).then(function(response){
+          // console.log(response)
+          UserFactory.reloadNav(vm.status._user.id).then(function(res){
+            // console.log(res)
+            vm.status._user.generalPoints = res.generalPoints
+            vm.status._user.knowledgePoints = res.knowledgePoints
+          }); 
+        })
+        checkVotes();
+      }, 60000);
+    }
+
+    function CollectRanks(){
+      console.log('collecting Ranks')
+      $timeout(function() {
+        RankFactory.collectRanks().then(function(res){
+          console.log('Ranks Organized')
+        })
+        CollectRanks();
+      }, 60000);
     }
 
 
@@ -86,6 +107,8 @@
       });
     };
 
+
+
     //---------FUNCTIONALITY FOR MODALS----------------------------------------------------------
     vm.openLoginModal = function() {
       var loginModal = $modal.open({
@@ -103,8 +126,6 @@
       });
     };
 
-    
-
     vm.openRegisterModal = function() {
       var registerModal = $modal.open({
         templateUrl: 'templates/register.html',
@@ -120,25 +141,6 @@
         });
       });
     };
-   //  (function(){
-   //    RankFactory.getGeneralPoints(vm.status._user.id).then(function(res){
-   //      console.log(res)
-   //      console.log('ran gp find')
-   //      vm.gP = res.count;
-        
-   //    })
-   //  })();
-   // (function(){
-   //    QuestionFactory.getKpoints(vm.status._user.id).then(function(res){
-   //      console.log(res);
-   //      console.log('ran kp find')
-   //      vm.kP = res.knowledgePoints;
-   //    })
-   //  })();
-    // vm.knowledgePoints();
-    // vm.generalPoints();
-
-
 
   }
 })();

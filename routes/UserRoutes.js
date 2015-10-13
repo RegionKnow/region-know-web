@@ -319,52 +319,76 @@ router.post('/filterOff/:userId', function(req, res) {
   })
 
   router.get('/gp/:userId', function(req, res){ // function to get points
+    var voteCountObj = {}
+    var temp_fullUserObject
+    var kPointCount = 1 ;
+    // grabs all the user information, including his quesitons and answers
     User.findOne({_id: req.user._id}).populate('questions answers').exec(function(err, response){
-      var voteCount = 0;
+      temp_fullUserObject = response
+      var voteCount = 0; //count the number of votes a user has
+      var currentGp = response.generalPoints
+     
+      console.log('generalPoint route being run')
 
-      // var kPointCount = 0;
-
-      var voteCountObj = {}
-
+      
+        //gets all votes from users questions
         for(var i =0; i < response.questions.length; i++){
           // console.log(voteCount)
           voteCount += response.questions[i].voteNum
         }
-
+        //gets all votes from user answers
         for(var k =0; k < response.answers.length; k++){
           // console.log(voteCount)
 
           voteCount += response.answers[k].voteNum;
         }
+        
+        //function to get knowledgePoints and push them into userModel for refresh
+        for(var j =0; j < response.answers.length; j++){
+          var temp_id = response.answers[j].questionId // saves the question id of answer
+          var temp_A_id = response.answers[j]._id // saves the id of the answer
+          // console.log(temp_A_id) 
+          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision 
+          
+        }
 
-        // for(var j =0; j < response.answers.length; j++){
-        //   var temp_id = response.answers[j].questionId
-        //   var temp_A_id = response.answers[j]._id
-        //   // console.log(temp_A_id) 
-        //   findKpoints(temp_id, temp_A_id)
-        //   console.log(kPointCount, 'line 345')
-        // }
-        // console.log(kcount + 'line 347')
-        voteCountObj.count = voteCount;
+        voteCountObj.count = voteCount + 1 // adds one point from userModel default
 
-        res.send(voteCountObj)
+        User.update({_id: req.user._id}, {generalPoints: voteCountObj.count}, function(err, update){
+            console.log('updated GeneralPoints')
+            // res.send('updated General Points' + voteCountObj.count)
+        })
     })
+    function findKpoints(questionId, answerId,l1, userId){
+        var loopcount = 0 // counts how many times this function runs
+        // var kPointCount = 0
+          Questions.findOne({_id: questionId}, function(err, QA){
+            loopcount += 1
+                if(QA.answered){ // makes sure quesiton has an answer
+                  console.log(QA.answered, answerId)
+                    if(QA.answered.toString() === answerId.toString()){
+                      
+                      kPointCount += 1
+                      console.log('adding kp', kPointCount)
+                      
+                      // console.log(countObj)
+                    }
+                }
+                  console.log(kPointCount)
+                  console.log(l1, loopcount) //loop count is compared to J from outer loop, if they match
+                if(l1 === loopcount) { // all viable questions have been searched, update KP's
+                    console.log('current K point count'  + kPointCount)
+                  User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
+                    console.log('updated KnowledgePoints')
+                    
+                  })
+                }
+          })
+        }
+    setTimeout(function() {
+      res.send('updated both knowledgepoints and general points')
+    }, 3000);
 
   })
-  // function findKpoints(questionId, answerId){
-    
-  //     Questions.findOne({_id: questionId}, function(err, QA){
-  //           if(QA.answered){
-  //             console.log(QA.answered, answerId)
-  //              if(QA.answered.toString() === answerId.toString()){
-                  
-  //                 kcount += 1
-  //                 console.log('adding kp', kcount)
-                  
-  //                 // console.log(countObj)
-  //             }
-  //           } 
-  //     })
-
-  // }
+  
   module.exports = router;

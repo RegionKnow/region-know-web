@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('UserProfileController', UserProfileController);
 
-	UserProfileController.$inject = ['UserFactory', '$state', '$scope', 'Upload', '$http'];
+	UserProfileController.$inject = ['UserFactory', '$state', '$scope', 'Upload', '$http', "$modal"];
 
-	function UserProfileController(UserFactory, $state,  $scope, Upload, $http) {
+	function UserProfileController(UserFactory, $state,  $scope, Upload, $http, $modal) {
 		var vm = this;
 		vm.status = UserFactory.status;
 		vm.loading = false;
@@ -71,6 +71,28 @@
 			  // });
     });
     };
+
+vm.coolUpdate = function updateProfile() {
+  var updateUser = $modal.open({
+    templateUrl: "templates/update_profile.html",
+    controller: ['$modalInstance', function($modalInstance) {
+			var modal = this;
+			modal.close = function() {
+				vm.updateProfile(modal.user);
+				$modalInstance.close();
+			}
+			modal.dismiss = $modalInstance.dismiss;
+      console.log("Modal");
+    }],
+    controllerAs: 'modal',
+		size: 'lg'
+  })
+
+  updateUser.result.then(function() {
+    console.log("Modal closed");
+  })
+}
+
 }
 
 
