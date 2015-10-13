@@ -121,7 +121,7 @@
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
         })
-      }, function() {
+      }, function(res) {
         console.log('skpped tags, still trying to alert');
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
