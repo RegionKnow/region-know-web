@@ -21,12 +21,11 @@
       UserFactory.loginUser(vm.user).then(function(succesRes) {
         vm.user = null;
         $modalInstance.close();
-      }, function(errorResponse) {
-        console.log(errorResponse.data);
+      }, function() {
 			vm.loginError = true;
 			$timeout(function () {
 				vm.loginError = false;
-			}, 10000);
+			}, 1000);
 
       })
     };
