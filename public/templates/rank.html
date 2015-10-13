@@ -1,14 +1,39 @@
 <div class="topRows">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<center>
+<!-- 		<center>
 			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.worldRank()">
 			World Rank
-		</md-button>
-		<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.currentRank()">
-		Current Rank
-	</md-button>
-</center>
+			</md-button>
+			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.currentRank()">
+			Current Rank
+			</md-button>
+		</center> -->
+		<div ng-repeat="user in vm.rankObj track by $index">
+			<span>
+			
+			<!-- <a ui-sref="ViewQuesiton({id: q._id})"> -->
+
+				<h2>#{{$index + 1}}</h2><div class="mdl-card mdl-shadow--4dp qCards">
+
+					<div class="mdl-card__supporting-text" style="opacity: none;">
+						<span>
+						<img src="{{user.img}}" class="img-circle" style="height: 10%; width: 10%;">
+							{{user.name}}
+							</span>
+							<h2>Score - {{user.score}}</h2>
+							<span>{{user.kPoints}} Knowledge Points</span>
+							<span>
+							{{user.gPoints}} General Points</span>
+						&nbsp;
+						
+						</span>
+					</div>
+				</div>
+
+			<!-- </a> -->
+
+		</div>
 
 </div>
 

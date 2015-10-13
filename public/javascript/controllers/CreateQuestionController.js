@@ -19,9 +19,13 @@
 
     vm.getQuestions(); //getting all questions when page loads
 
+    // document.getElementById("qDirections").addEventListener("click", function() {
+    //   vm.createQDirections = false;
+    //   console.log("hey")
+    // });
 
-    function getQuestions() {
-      QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
+function getQuestions() {
+  QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
 
         //Adds dateInMilliseconds to all questions to for sorting purposes
         
@@ -33,7 +37,7 @@
           return b.dateInMilliseconds - a.dateInMilliseconds;
         });
       })
-    }
+}
 
 
     //////Method to create question!
@@ -121,13 +125,14 @@
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
         })
-      }, function() {
+      }, function(res) {
         console.log('skpped tags, still trying to alert');
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
         })
       })
     }
+    
     ////Map Search
     function addQlocation() {
       vm.mapStatus = true;
@@ -137,15 +142,15 @@
       };
       geocoder.geocode(geocoderRequest, function(results, status) {
         console.log(results);
-        var loc = results[0].geometry.location;
+        var loc = results[0].geometry.bounds;
         console.log(loc);
-        vm.question.lat = loc.J;
-        vm.question.lng = loc.M;
+        vm.question.lat = loc.La.j;
+        vm.question.lng = loc.Pa.j;
         console.log(vm.question);
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.J,
-            lng: loc.M
+            lat: loc.La.j,
+            lng: loc.Pa.j
           },
           scrollwheel: true,
           zoom: 11,

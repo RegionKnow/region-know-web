@@ -157,8 +157,9 @@
         //Makes it so user can just select radius and go instead of needing to drag the pin
         document.getElementById('settingsRadius').addEventListener("change", function() {
           vm.cityCircle.setMap(null);
-          vm.currentLocation.lat = vm.homeLocation.lat || marker.position.J
-          vm.currentLocation.lng = vm.homeLocation.lng || marker.position.M
+          console.log(marker.position)
+          vm.currentLocation.lat = vm.homeLocation.lat || marker.position.lat();
+          vm.currentLocation.lng = vm.homeLocation.lng || marker.position.lng();
           getCircle(vm.currentLocation.lat, vm.currentLocation.lng);
         });
 
@@ -167,8 +168,9 @@
             vm.cityCircle.setMap(null);
           }
           // resets circle
-          vm.homeLocation.lat = this.position.J
-          vm.homeLocation.lng = this.position.M
+          console.log(this.position.lat(), this.position.lng())
+          vm.homeLocation.lat = this.position.lat();
+          vm.homeLocation.lng = this.position.lng();
           getCircle(vm.homeLocation.lat, vm.homeLocation.lng);
 
 
@@ -235,11 +237,11 @@
         address: vm.searchLoc
       };
       geocoder.geocode(geocoderRequest, function(results, status) {
-        var loc = results[0].geometry.location
+        var loc = results[0].geometry.bounds
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.J,
-            lng: loc.M
+            lat: loc.La.j,
+            lng: loc.Pa.j
           },
           scrollwheel: true,
           zoom: 11,

@@ -321,7 +321,7 @@ router.post('/filterOff/:userId', function(req, res) {
   router.get('/gp/:userId', function(req, res){ // function to get points
     var voteCountObj = {}
     var temp_fullUserObject
-    var kPointCount = 0 ;
+    var kPointCount = 1 ;
     // grabs all the user information, including his quesitons and answers
     User.findOne({_id: req.user._id}).populate('questions answers').exec(function(err, response){
       temp_fullUserObject = response
