@@ -3,7 +3,8 @@
 	<div class="col-md-2 col-lg-1"></div>
 
 	<div class="col-md-8 col-lg-10" ng-cloak>
-		<center><h2>{{vm.question.userName}} asked...</h2></center>
+		<br>
+		<center><h2><img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">&nbsp;{{vm.question.userName}} asked...</h2></center>
 		<br>
 		<table class="mdl-card mdl-shadow--4dp qDetailCards" width="100%" ng-cloak>
 			<tr id="questionVote">
@@ -119,17 +120,10 @@
 
 					<p>{{a.name}} says...{{a.answerBody}}</p>
 
-					<div>
-						<md-input-container flex class="text-left">
-						<label>Comment on this answer...</label>
-						<input ng-model="comment" require>
-					</md-input-container>
-
-					<md-button ng-click="vm.commentAnswer(a._id, comment)" required>Submit Comment</md-button>
-					<div ng-repeat="comment in a.comments">
-						<strong>{{comment.postedBy}}:</strong> {{comment.commentBody}} <i class="material-icons" style="font-size:0.79em;" ng-click="vm.deleteAnswerComment(a._id, comment._id)">clear</i>
-					</div>
+					
 				</div>
+
+				
 
 			</span>
 
@@ -138,10 +132,10 @@
 	<td id="answerIcons">
 
 
-		<span class="text-right" ng-if="vm.status._user.id === a.postedBy">
+		<!-- <span class="text-right" ng-if="vm.status._user.id === a.postedBy">
 			<md-button aria-label="..." class="mdl-button mdl-js-button mdl-js-ripple-effect">
 			<i ng-click="vm.deleteAnswer(a._id)" class="material-icons">delete</i>
-		</md-button>
+		</md-button> -->
 	</span>
 	<md-button ng-if="vm.status._user.id !== a.postedBy" ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
 	<span><i class="material-icons">question_answer</i>
@@ -166,9 +160,9 @@
 
 <!-- <md-button ng-click="answerComment = true;" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">insert_comment</i></md-button> -->
 
-<md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
+<!-- <md-button ui-sref='Message({recipient: a.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect">
 <span><i class="material-icons">question_answer</i>
-</md-button>
+</md-button> -->
 </span>
 </td>
 </tr>
@@ -176,7 +170,20 @@
 </table>
 
 
+<form  ng-submit="vm.commentAnswer(a._id, comment)">
+	<md-input-container flex class="text-left">
+	<label>Comment on this answer...</label>
+	<input ng-model="comment" require>
+</md-input-container>
+
+<md-button required type="submit" ng-disabled="!comment">Submit Comment</md-button>
+<div ng-repeat="comment in a.comments">
+	<strong>{{comment.postedBy}}:</strong> {{comment.commentBody}} <i class="material-icons" style="font-size:0.79em;" ng-click="vm.deleteAnswerComment(a._id, comment._id)" ng-show="comment.postedBy === nav.status._user.username">clear</i>
+</form>
+
 </div>
+
+
 </div>
 
 

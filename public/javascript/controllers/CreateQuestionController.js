@@ -39,6 +39,7 @@ function getQuestions() {
         }).sort(function (a, b) {
           return b.dateInMilliseconds - a.dateInMilliseconds;
         });
+        console.log(vm.allquestions)
       })
 }
 
