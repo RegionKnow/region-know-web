@@ -29,11 +29,14 @@
       $mdSidenav('left').close()
     };
 
+
+    //alerts. ranking, score collections ALL TIME OUT EVENTS RUNNING
     vm.alertObj = {}
 
     alertWatch();
     checkVotes();
     CollectRanks();
+
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
@@ -51,7 +54,9 @@
         alertWatch();
       }, 3000);
     }
+
     var count = 1;
+
     vm.openAlerts = function() {
       count += 1
       console.log('cought alerts')
@@ -111,6 +116,9 @@
     //     $state.go("QuestionsFeed");
     //   });
     // };
+
+
+    //USER login/REG 
 
     vm.logoutUser = function() {
       UserFactory.logoutUser().then(function() {
