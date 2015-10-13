@@ -32,24 +32,24 @@
 					&nbsp;KnowOff
 				</span>
 
+				<button ng-show="nav.alertObj.status" class=" md-mini topRight navbar-right alertButton md-fab md-primary md-hue-5 md-button md-default-theme" style="color: white; position: absolute; right: -25px; font-size: 20px; padding: 0;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</button>
 
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">question_answer</i>
 				</a>
-
 				&nbsp;
-
 				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
+<!-- 
+				<div class="" id="alerts" ng-show="true"> -->
 
-				<div class="topRight navbar-right" id="alerts" ng-show="nav.alertObj.status">
-
-					<a class="md-fab md-primary md-hue-5 md-button md-default-theme" style="color: red; font-size: 35px; position: fixed;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</a>
-
-					<div class="well" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
-						<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
-					</div>
-
+				<div class="" style="position: absolute; right: -25px; border: thin solid #999; margin-top: 12px; padding: 4px; background-color: #f0f0f0; border-radius: 2px 2px 3px 3px; box-shadow: 1px 1px 2px #777" ng-repeat="alert in nav.alertObj.alerts" ng-show="nav.showAlertTab">
+					<a ui-sref="ViewQuesiton({id: alert._id})">{{alert.questionBody}}</a>
 				</div>
+
+				<!-- </div> -->
+				
+
+			
 
 			</div>
 

@@ -33,7 +33,7 @@
     function alertWatch() {
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
-          // console.log('watching for alerts')
+          console.log('watching for alerts')
           if(!res.alerts) return;
           if (res.alerts.length > 0) {              vm.alertObj.status = true;
             vm.alertObj.alertNum = res.alerts.length;
@@ -46,14 +46,21 @@
         alertWatch();
       }, 3000);
     }
-
+    var count = 1;
     vm.openAlerts = function() {
-      vm.showAlertTab = true;
+      count += 1
+      console.log('cought alerts')
+      if(count % 2 === 0 ){
+        vm.showAlertTab = true;
+      }else{
+        vm.showAlertTab = false;
+      }
+    
       $timeout(function() {
         UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           vm.alertObj.status = false;
         })
-      }, 30000);
+      }, 3000000);
 
     }
 
