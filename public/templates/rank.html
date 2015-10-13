@@ -1,20 +1,20 @@
 <div class="topRows">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<center>
+<!-- 		<center>
 			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.worldRank()">
 			World Rank
 			</md-button>
 			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.currentRank()">
 			Current Rank
 			</md-button>
-		</center>
-		<div ng-repeat="user in vm.rankObj | orderBy: '-score'">
+		</center> -->
+		<div ng-repeat="user in vm.rankObj track by $index">
 			<span>
 			
 			<!-- <a ui-sref="ViewQuesiton({id: q._id})"> -->
 
-				<div class="mdl-card mdl-shadow--4dp qCards">
+				<h2>#{{$index + 1}}</h2><div class="mdl-card mdl-shadow--4dp qCards">
 
 					<div class="mdl-card__supporting-text" style="opacity: none;">
 						<span>
