@@ -32,7 +32,11 @@ router.get('/getRanks', function(req, res){
 
 router.get('/', function(req, res){
 	Rank.find({}, function(err, response){
-		res.send(response);
+		sortedResponse = response.sort(function (a, b) {
+          return b.score - a.score
+        });
+        console.log(sortedResponse)
+		res.send(sortedResponse);
 	})
 })
 
