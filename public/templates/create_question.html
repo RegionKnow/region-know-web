@@ -1,20 +1,23 @@
 
-<div class="row topRows">
+<div class="row topRows animated fadeIn">
+	<center>
+		<h2>Fill out the fields below to ask your question</h2>
+		<i ng-click="createQDirections = true;">Click for directions</i>
+	</center>
 	<div class="col-md-2"></div>
-	<div class="col-md-8 animated fadeIn">
-		<center>
-			<h2>Fill out the fields below to ask your question</h2>
-			<i ng-click="createQDirections = true;">Click for directions</i>
-		</center>
-		<ol ng-show="createQDirections" class="mdl-card mdl-shadow--4dp qCards animated fadeIn">
+	<div class="col-md-8">
+		
+		<ol ng-show="createQDirections" class="mdl-card mdl-shadow--4dp qCards" style="padding-right: 1em; height: 13%;">
 			<br>
 			<li>Type question in section that says "Type question here..."</li>
 			<li>Type location of your question in the section that says "Type location of question then press ENTER...". For example, type "Los Angeles" then press ENTER key.</li>
 			<li>Type tags for your question in section that says "Add tag(s) to your question and press ENTER after each one...". Tags are like categories that you feel your question is related to. For example, if you ask "Where is the best place to get a good veggie burger in town", suitable tags could be "food", "burgers", "vegetarian", etc. Make sure to press the ENTER key after each tag that you type.</li>
+			<br>
 			<center><i ng-click="createQDirections = false;">Close</i></center>
+			<br>
 		</ol>
 		
-		<md-input-container flex>
+		<md-input-container flex animated fadeIn>
 		
 		<label>Type question here...</label>
 		<input ng-model="vm.desc">
@@ -32,7 +35,7 @@
 	<!-- <form ng-submit="vm.addQlocation()">
 		<input class="form-control" ng-model="vm.questionLocation" placeholder="Enter Specific Location">
 	</form> -->
-	<form ng-submit="vm.addQlocation()">
+	<form ng-submit="vm.addQlocation()" animated fadeIn>
 		<md-input-container flex>
 		<label>Type location of question then press ENTER...</label>
 		<input ng-model="vm.questionLocation" >
@@ -50,7 +53,7 @@
 
 </span>
 <br>
-<form ng-submit="vm.addTag(vm.tag)">
+<form ng-submit="vm.addTag(vm.tag)" animated fadeIn>
 	<md-input-container flex>
 	<label>Add tag(s) to your question and press ENTER after each one...</label>
 	<input ng-model="vm.tag">

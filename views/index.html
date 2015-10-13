@@ -80,6 +80,7 @@
 			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
 				<div style="margin-left: 30%; position: absolute; top: -25px;">
 
+					
 					<br>
 					{{nav.status._user.username}}
 					<br>
@@ -89,49 +90,52 @@
 					<img class="img  img-circle navImage" ng-src="{{nav.status._user.image}}">
 
 					<br>
-						
-						<span style="font-size: 15px;">
-							<span>GeneralPoints -  {{nav.status._user.generalPoints}} KnowledgePoints - {{nav.status._user.knowledgePoints}}</span>
-						</span>
+					
+					<span style="font-size: 15px;">
+						<span>General Points -  {{vm.gP}}</span>
+						<br>
+						<span> Knowledge Points - {{vm.kP}}</span>
+					</span>
+				</span>
+				<br>
 
+			</div>
 
-				</div>
-
-			</a>
-
-		</md-toolbar>
-
-		<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
-			<i class="material-icons">home</i>View Questions
 		</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
-			<i class="material-icons">help_outline</i>
-			New Question
-		</a>
+	</md-toolbar>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
-			<i class="material-icons">swap_vert</i>
-			Rank
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
+		<i class="material-icons">home</i>View Questions
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
-			<i class="material-icons">settings</i>Settings
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
+		<i class="material-icons">help_outline</i>
+		New Question
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Message" ng-click="nav.close();">
-			<i class="material-icons">question_answer</i>Messaging
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
+		<i class="material-icons">swap_vert</i>
+		Rank
+	</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
-			<i class="material-icons">lock</i>Log Out
-		</a>
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
+		<i class="material-icons">settings</i>Settings
+	</a>
+
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Message" ng-click="nav.close();">
+		<i class="material-icons">question_answer</i>Messaging
+	</a>
+
+	<a class="md-button" ng-show="nav.status._user" ui-sref="Home" ng-click="nav.close(); nav.logoutUser()">
+		<i class="material-icons">lock</i>Log Out
+	</a>
 
 
 
 
 
-	</md-sidenav>
+</md-sidenav>
 
 </section>
 

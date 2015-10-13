@@ -19,9 +19,13 @@
 
     vm.getQuestions(); //getting all questions when page loads
 
+    // document.getElementById("qDirections").addEventListener("click", function() {
+    //   vm.createQDirections = false;
+    //   console.log("hey")
+    // });
 
-    function getQuestions() {
-      QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
+function getQuestions() {
+  QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
 
         //Adds dateInMilliseconds to all questions to for sorting purposes
         
@@ -33,7 +37,7 @@
           return b.dateInMilliseconds - a.dateInMilliseconds;
         });
       })
-    }
+}
 
 
     //////Method to create question!
