@@ -106,7 +106,7 @@
 		<br>
 
 		<center>
-			<md-button ng-click="vm.showTagInput()" ng-show="createQTag">Create filtering tags</md-button>
+			<md-button ng-click="vm.showTagInput()" class="md-button md-primary md-raised" ng-show="createQTag">Create filtering tags</md-button>
 		</center>
 		
 		<form ng-submit="vm.addTag(vm.tag)" ng-show="vm.showInput">
@@ -115,7 +115,7 @@
 			<input ng-model="vm.tag">
 
 		</md-input-container>
-
+		<br><br>
 		<div class="tagDiv">
 			<span class="" ng-repeat="tag in vm.tags track by $index">
 				<div class="indvTag">
