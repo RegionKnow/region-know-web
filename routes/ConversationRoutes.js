@@ -13,7 +13,7 @@ var activeConversations = [];
 router.post("/activate-convo", function (req, res) {
   var isConvoInArray = (function(){
     if(activeConversations.length < 1) return false;
-    for(var index = 0; index < activeConversations.length; x++){
+    for(var index = 0; index < activeConversations.length; index++){
       if (activeConversations[index].convo === req.body.convoId){
         return true;
       }
@@ -29,6 +29,7 @@ router.post("/activate-convo", function (req, res) {
     res.send()
   } else {
       activeConversations = activeConversations.map(function (item) {
+        if(!item) return;
         if(item.convo === req.body.convoId){
           if(item.participants.participantOne){
             item.participants.participantTwo = {id: req.body.user};
@@ -49,6 +50,7 @@ router.post("/activate-convo", function (req, res) {
 router.post("/live-convo", function(req, res) {
   //Search activeConversations for convo, updates response object
   activeConversations = activeConversations.map(function(item) {
+    if(!item) return;
     if (item.convo === req.body.convoId){
       if(item.participants.participantOne.id === req.body.user){
         item.participants.participantOne.response = res;
@@ -66,6 +68,7 @@ router.post("/live-convo", function(req, res) {
 
 router.post("/deactivate-convo", function (req, res) {
   activeConversations = activeConversations.filter(function (item) {
+    if(!item) return;
     if(!item.participants.participantOne || !item.participants.participantTwo) {
     return item.convo !== req.body.convoId;
   } else {
@@ -166,6 +169,7 @@ router.post('/new-message', function(req, res) {
     });
 
     activeConversations.forEach(function (item) {
+      if(!item) return;
       var convoResponseOne, convoResponseTwo;
       if(item.convo === req.body.convoId){
         if(item.participants.participantOne && item.participants.participantOne.response){

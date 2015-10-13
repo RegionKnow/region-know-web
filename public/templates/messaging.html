@@ -26,7 +26,7 @@
     <p>
       <strong>{{message.body}}</strong>
     </p>
-    <p>-{{message.sender}} at {{message.createdDate | date:'h:mma, MM/dd/yyyy'}}</p>
+    <small>-{{message.sender}} at {{message.createdDate | date:'h:mma, MM/dd/yyyy'}}</small>
   </div>
   <ul>
     <li>{{msg.convoInFocus.participantOne.username}}</li>
@@ -34,10 +34,11 @@
   </ul>
   <form ng-submit="msg.sendMessage()">
     <md-input-container>
-    <label>Enter Message</label>
-    <textarea ng-model="msg.newMessage" cols="20" rows="4"></textarea>
-  </md-input-container>
-  <md-button class='md-raised md-primary' ng-disabled="!msg.newMessage" type='submit'>Send Message</md-button>
-  <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
-</form>
+      <label>Enter Message</label>
+      <input type='text' ng-model="msg.newMessage"></input>
+    </md-input-container>
+    <md-button class='md-raised md-primary' ng-disabled="!msg.newMessage" type='submit'>Send Message</md-button>
+    <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
+  </form>
+
 </div>

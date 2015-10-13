@@ -1,8 +1,6 @@
 <div class="row text-center topRows animated fadeIn">
 
-	<div class="col-md-2"></div>
-
-	<div class="col-md-8">
+	<div class="col-md-offset-2 col-md-8">
 
 
 		<div class="row">
@@ -36,7 +34,7 @@
 				<!-- Drop files: -->
 				<!-- <div ngf-drop ng-model="files" class="drop-box"></div> -->
 				<p>Image thumbnail preview:</p>
-				<img ngf-thumbnail="file || '/thumb.jpg'"><br>
+				<img style='width: 200px; height: 200px;' ngf-thumbnail="file || '/thumb.jpg'"><br>
 				<md-button ng-click="submit()">Submit</md-button>
 			</ng-form>
 
@@ -47,8 +45,9 @@
 			<md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
 		</div>
 		<div>
-			<md-button ui-sref="updateProfile">Edit Profile</md-button>
-			<br>
+
+			<md-button ng-click='vm.coolUpdate()'>Edit Profile</md-button>
+
 			<md-button ng-click="vm.deleteUserProfile()">Deactive Profile</md-button>
 		</div>
 		<md-button ng-click="profileOptions = false;">Close</md-button>

@@ -92,6 +92,7 @@ require('./Models/ConversationModel.js');
 require('./Models/QuestionModel.js');
 require('./Models/UserModel.js');
 require('./config/passport.js');
+require('./Models/RankModel.js');
 
 //-----------------------Adds error handling to mongoose.connect--------------------------------------
 
@@ -145,6 +146,7 @@ var conversationRoutes = require('./routes/ConversationRoutes');
 var questionRoutes = require('./routes/QuestionsRoutes');
 var answerRoutes = require('./routes/AnswerRoutes');
 var resetPassRoutes = require('./routes/ResetPasswordRoutes');
+var rankRoutes = require('./routes/RankRoutes');
 
 
 //on homepage load, render the index page
@@ -164,6 +166,7 @@ app.use('/api/convo', conversationRoutes);
 app.use('/api/question', questionRoutes);
 app.use('/api/answer', answerRoutes);
 app.use('/api/password-reset', resetPassRoutes);
+app.use('/api/rank', rankRoutes);
 
 
 app.use('/', function(req, res) {

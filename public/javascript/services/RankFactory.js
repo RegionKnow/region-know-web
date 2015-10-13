@@ -8,10 +8,21 @@
 	function RankFactory($http, $q){
 		var o = {}
 
-		o.getGeneralPoints = function(id){
-			console.log('hitting gp factory')
+		o.collectRanks = function(){
+			
 			var q = $q.defer();
-			$http.get('/api/user/gp/' + id).success(function(res){
+
+			$http.get('/api/rank/getRanks').success(function(){
+				q.resolve();
+			})
+			return q.promise;
+		}
+
+		o.getAll = function(){
+
+			var q = $q.defer();
+
+			$http.get('/api/rank').success(function(res){
 				q.resolve(res);
 			})
 			return q.promise;

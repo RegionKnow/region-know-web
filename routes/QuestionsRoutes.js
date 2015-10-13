@@ -6,6 +6,10 @@ var jwt = require("express-jwt");
 var User = mongoose.model('User');
 var Answers = mongoose.model('Answer');
 
+var auth = {
+'userProperty': 'payload',
+'secret': 'super_secret'
+}
 
 
 
@@ -55,6 +59,7 @@ router.post('/create', function(req, res){
 		req.body.userName = userName
 		// console.log(req.body)
 		var new_quest = new Questions(req.body)
+		new_quest.createdDate = new Date();
 		var user_id = req.body.user_id
 
 		new_quest.save(function(err, response){
@@ -124,21 +129,16 @@ router.post('/upvote/:id/:user_id', function(req, res){
 
 		}, function(err, updateStatus){
 				if(err) return res.status(500).send({error: "Problem querying database"});
-				console.log("DEBUG: Changed up date query");
-				console.log("DEBUG UPDATE STATUS: %s", updateStatus);
 				res.send(updateStatus);
 
 		})
 	}
 	else{
-		console.log('DEBUG: user has not upvoted yet')
 		Questions.update({_id: req.question._id}, {
 			$push: {upvote: req.user._id},
 			$inc: {voteNum: 1}
 		}, function(err, vote){
 			if(err) return res.status(500).send({error: "Problem querying database"});
-				console.log('DEBUG: added user to upvoted')
-				console.log('DEBUG: vote updated')
 				res.send(vote);
 		})
 	}
@@ -146,7 +146,6 @@ router.post('/upvote/:id/:user_id', function(req, res){
 //Downvotes
 router.post('/downvote/:id/:user_id', function(req, res){
 	if(req.question.downvote.indexOf(req.user._id) != -1){
-		console.log('user already downvoted')
 		res.send('user already downvoted!')
 	} else if(req.question.upvote.indexOf(req.user._id) != -1){
 

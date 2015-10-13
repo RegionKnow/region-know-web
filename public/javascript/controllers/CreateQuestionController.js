@@ -24,13 +24,20 @@
     //   console.log("hey")
     // });
 
-    function getQuestions() {
-      QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
-        // console.log(res)
+function getQuestions() {
+  QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
 
-        vm.allquestions = res;
+        //Adds dateInMilliseconds to all questions to for sorting purposes
+        
+        vm.allquestions = res.map(function (item) {
+          item.createdDate = new Date(item.createdDate);
+          item.dateInMilliseconds = item.createdDate.getTime();
+          return item;
+        }).sort(function (a, b) {
+          return b.dateInMilliseconds - a.dateInMilliseconds;
+        });
       })
-    }
+}
 
 
     //////Method to create question!
@@ -118,13 +125,14 @@
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
         })
-      }, function() {
+      }, function(res) {
         console.log('skpped tags, still trying to alert');
         QuestionFactory.sendAlerts(question_id).then(function(res) {
           console.log('lookng to send alerts');
         })
       })
     }
+    
     ////Map Search
     function addQlocation() {
       vm.mapStatus = true;

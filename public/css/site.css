@@ -1,5 +1,5 @@
 body, html {
-/*  background: rgba(38,166,154,0.6);*/
+  /*  background: rgba(38,166,154,0.6);*/
   font-family: 'RobotoDraft';
   height: 100%;
   width: 100%;
@@ -15,101 +15,105 @@ body, html {
   box-shadow: 1px 1px 19px #777;
   }*/
 
-h2 {
-  color: #26a69a;
-}
+  h2 {
+    color: #26a69a;
+  }
 
-md-input-container {
-  font-size: 1.3em;
-}
+  md-input-container {
+    font-size: 1.3em;
+  }
 
-/*=======WELCOME PAGE STYLE=======================*/
-.homeWell {
-  background: none;
-  /*background:rgba(255,255,255,0.5);*/
-  text-shadow: 3px 0px 6px #000;
-  color: white;
-  border: none;
-  margin-top: 3%;
-  border-radius: 26px;
-  /*margin-bottom: 20%;*/
-} 
+  /*=======WELCOME PAGE STYLE=======================*/
+  .homeWell {
+    background: none;
+    /*background:rgba(255,255,255,0.5);*/
+    text-shadow: 3px 0px 6px #000;
+    color: white;
+    border: none;
+    margin-top: 3%;
+    border-radius: 26px;
+    min-height: 0px !important;
+    position: absolute;
+    top: 0px;
+    /*margin-bottom: 20%;*/
+  }
 
-.homeWell h1 {
-  font-size: 6em;
-}
+  .homeWell h1 {
+    font-size: 6em;
+  }
 
-.homeWell h3 {
-  font-size: 3em;
-  font-weight: bold;
-}
-.homeWell i {
-  font-size: 1.3em;
-}
+  .homeWell h3 {
+    font-size: 3em;
+    font-weight: bold;
+  }
+  .homeWell i {
+    font-size: 1.3em;
+  }
 
-.welcomePage {
-  background: url("http://www.landcast.com/file?name=/public/images/photo-galleries/seattle-wa-aerial-march-2014/01-DSC_0096.JPG") no-repeat center center fixed;
-  background-size: cover;
-  height: 100%;
-}
-
-
-.container-fluid {
-  padding-right: 0px;
-  padding-left: 0px;
-}
-
-.row {
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-/*=======QUESTION STYLES=======================*/
+  .welcomePage {
+    background: url("http://www.landcast.com/file?name=/public/images/photo-galleries/seattle-wa-aerial-march-2014/01-DSC_0096.JPG") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+  }
 
 
-#editQuestion{
-  margin-top: 10%;
-  margin-left: 30px;
-}
-#questionVote{
-  margin-right: 90%;
-}
-#questionFace{
-  padding-left: 3em; 
-  font-size: 2em;
-  color: #777;
-  width: 80%;
-}
+  .container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 
-#loadingGif {
-  height: 40px;
-  width: 40px;
-}
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  /*=======QUESTION STYLES=======================*/
 
 
-/*=================PROFILE STYLES==============================================*/
+  #editQuestion{
+    margin-top: 10%;
+    margin-left: 30px;
+  }
+  #questionVote{
+    margin-right: 90%;
+  }
+  #questionFace{
+    padding-left: 3em; 
+    font-size: 2em;
+    color: #777;
+    width: 80%;
+  }
 
-.profileImage {
-  border-radius: 9px;
-  box-shadow: 1px 2px 6px #333;
-}
+  #loadingGif {
+    height: 40px;
+    width: 40px;
+  }
 
-.pointsTable {
-  margin: auto;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
 
-.pointsTable td {
-  padding: 9px;
-}
+  /*=================PROFILE STYLES==============================================*/
 
-/*================NAVIGATION STYLES==========================================*/
-.col-md-11 {
- min-height: 0px !important;
-}
+  .profileImage {
+    border-radius: 9px;
+    box-shadow: 1px 2px 6px #333;
 
-#navParent {
+  }
+
+  .pointsTable {
+    margin: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .pointsTable td {
+    padding: 9px;
+  }
+
+  /*================NAVIGATION STYLES==========================================*/
+  .col-md-11 {
+   min-height: 0px !important;
+ }
+
+ #navParent {
   height: 100%;
 }
 
@@ -144,11 +148,16 @@ md-input-container {
   text-align: left;
   vertical-align: middle;
   padding-top: .6em;
+  /*padding-top: .9em;*/
 }
 
+md-backdrop {
+  position: absolute;
+  height: 141.5%;
+}
 
 #userInfo {
-  height: 40%;
+  height: 36%;
   width: 100%;
   top: 0;
   background-color: #26a69a;
@@ -175,9 +184,12 @@ a:hover, a:visited, a:active {
 }
 
 .topRows {
-  margin-top: 60px;
-  /*padding-top: 6%;*/
+
+  position: relative;
+  top: 85px;
+  padding-bottom: 10px;
 }
+
 #tradeName {
   font-size: 1.6em;
   padding-top: -.7em;
