@@ -65,12 +65,16 @@
 			<md-button ng-show="vm.mapStatus" class="md-button md-raised md-primary" ng-click="vm.submitHomeLocation()" ng-disabled="!vm.distance">Submit Home Location</md-button>
 			
 		</center>
-		<span class="animated rubberBand" ng-show="vm.successMes">{{vm.successMes}}</span>
+		
 		<span class="animated rubberBand" ng-show="vm.hlError">Error Submiting HomeLocation, please make sure you selected a radius, and moved the pin!</span>
 
 	</div>
-
-
+	<center>
+		<span class="animated rubberBand" ng-show="vm.successMes">{{vm.successMes}}</span>
+		<div ng-show="!vm.LocSuccess">
+			<md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
+		</div>
+	<center>
 	
 	<br>
 	<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>

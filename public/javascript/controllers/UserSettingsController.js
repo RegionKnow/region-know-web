@@ -197,9 +197,10 @@
         radius: getMeters(vm.distance)
       });
     }
-
+    vm.LocSuccess = true;
     vm.submitHomeLocation = function() { // submits location user selects
       vm.mapStatus = false;
+      vm.LocSuccess = false;
       //makes sure there is a lat and lng
       if (!vm.homeLocation.lat) {
         vm.hlError = true;
@@ -221,6 +222,7 @@
       var id = vm.userId
 
       UserSettingsFactory.addHomeLocation(vm.homeLocation, id).then(function(res) {
+        vm.LocSuccess = true;
         vm.hlAdded = true;
         vm.successMes = res;
       })
