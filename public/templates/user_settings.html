@@ -73,6 +73,8 @@
 
 	
 	<br>
+	<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
+
 	<form ng-submit="vm.addTag(vm.tag)">
 			<md-input-container flex>
 			<label>Input tag and press ENTER...</label>
@@ -135,7 +137,6 @@
 		<br>
 
 
-<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
 
 
 

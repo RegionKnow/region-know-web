@@ -348,8 +348,13 @@ router.post('/filterOff/:userId', function(req, res) {
         for(var j =0; j < response.answers.length; j++){
           var temp_id = response.answers[j].questionId // saves the question id of answer
           var temp_A_id = response.answers[j]._id // saves the id of the answer
+<<<<<<< HEAD
+          
+          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision 
+=======
 
           findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision
+>>>>>>> 124e16b79072d376a6499dd20acb584495d040e9
 
         }
 
