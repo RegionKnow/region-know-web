@@ -177,8 +177,7 @@ function getQuestions() {
 
         });
       });
-
-    }
-  }
+}
+}
 
 })();
