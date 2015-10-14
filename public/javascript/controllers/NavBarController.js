@@ -38,7 +38,6 @@
     CollectRanks();
 
     function alertWatch() {
-      if(true) return;
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           console.log('watching for alerts')

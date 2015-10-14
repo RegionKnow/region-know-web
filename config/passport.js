@@ -15,10 +15,20 @@ function moduleAvailable(name) {
 if (moduleAvailable('../env.js')) {
 var env = require('../env.js');
 } else {
-var env = {};
+var env = {
+  facebook: {
+    SECRET: false,
+    CLIENTID: false,
+    CALLBACKURL: false
+  },
+  google: {
+    SECRET: false,
+    CLIENTID: false,
+    CALLBACKURL: false
+  }
+};
 }
 
-console.log(process.env['facebook.CALLBACKURL']);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -65,9 +75,9 @@ function generateFacebookPhotoUrl(id, accessToken, height, width) {
 
 
 passport.use(new FacebookStrategy({
-    clientID: process.env['facebook.CLIENTID'] || env.facebook.CLIENTID,
-    clientSecret: process.env['facebook.SECRET'] || env.facebook.SECRET,
-    callbackURL: process.env['facebook.CALLBACKURL'] || env.facebook.CALLBACKURL,
+    clientID:  env.facebook.CLIENTID || process.env['facebook.CLIENTID'],
+    clientSecret: env.facebook.SECRET || process.env['facebook.SECRET'] ,
+    callbackURL: env.facebook.CALLBACKURL || process.env['facebook.CALLBACKURL'],
     passReqToCallback: true,
     profileFields: ['id', 'name', 'emails', 'photos']
   },
@@ -118,9 +128,9 @@ function generateGooglePhotoUrl(photoUrl, size) {
 }
 // For Google login
 passport.use(new GoogleStrategy({
-    clientID: process.env['google.CLIENTID'] || env.google.CLIENTID,
-    clientSecret: process.env['google.SECRET'] || env.google.SECRET,
-    callbackURL: process.env['google.CALLBACKURL'] || env.google.CALLBACKURL
+    clientID: env.google.CLIENTID || process.env['google.CLIENTID'],
+    clientSecret: env.google.SECRET || process.env['google.SECRET'],
+    callbackURL: env.google.CALLBACKURL || process.env['google.CALLBACKURL']
       // profileFields: ['id', 'name', 'emails', 'photos']
   },
   function(accessToken, refreshToken, profile, done) {

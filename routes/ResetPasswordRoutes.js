@@ -9,17 +9,19 @@ var jwt = require("jsonwebtoken");
 
 
 function moduleAvailable(name) {
-    try {
-        require.resolve(name);
-        return true;
-    } catch(e){}
-    return false;
+  try {
+    require.resolve(name);
+    return true;
+  } catch (e) {}
+  return false;
 }
 
 if (moduleAvailable('../env.js')) {
-var env = require('../env.js');
+  var env = require('../env.js');
 } else {
-var env = {};
+  var env = {
+    EMAIL_PASS: null
+  };
 }
 
 var transporter = nodemailer.createTransport({
@@ -48,8 +50,8 @@ function SendEmail(user, resObj) {
   var linkBase = process.env.PROJECT_URL || "http://localhost:3000/#/resetEnd/";
   var link = "http://localhost:3000/#/resetEnd/" + resetPassToken;
   var text = "<h2>Hello, " + name + "!<br><br>You recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have 10 minutes. Let the games begin.</h2>" +
-  "<br><br>" +
-  "<p>Sincerely,</p>" + "<p>RegionKnow Team</p>";
+    "<br><br>" +
+    "<p>Sincerely,</p>" + "<p>RegionKnow Team</p>";
   var mailOptions = {
     from: 'Region Know Admins  <no-reply@regionknow.com>', // sender address
     to: user.email, // list of receivers
@@ -84,13 +86,13 @@ router.post("/", function(req, res) {
     if (error) return res.status(500).send({
       err: "Something happened on the server,"
     });
-      if (!user) return res.status(404).send({
-        err: "That user doesn't exist"
-      });
-        else {
-          SendEmail(user, res);
-        }
-      })
+    if (!user) return res.status(404).send({
+      err: "That user doesn't exist"
+    });
+    else {
+      SendEmail(user, res);
+    }
+  })
 });
 
 
@@ -101,27 +103,27 @@ router.post('/finish', function(req, res) {
     if (error) return res.status(500).send({
       err: "Error on the server finding user for password change"
     });
-      if (!user) return res.status(400).send({
-        err: "For some reason we couldn't find you on the server"
-      });
+    if (!user) return res.status(400).send({
+      err: "For some reason we couldn't find you on the server"
+    });
+    else {
+      user.setPassword(req.body.newPassword);
+      user.save(function(error, result) {
+        if (error) return res.status(500).send({
+          err: "Error on the server saving user for password change"
+        });
+        if (!result) return res.status(400).send({
+          err: "For some reason we couldn't find you on the server"
+        });
         else {
-          user.setPassword(req.body.newPassword);
-          user.save(function(error, result) {
-            if (error) return res.status(500).send({
-              err: "Error on the server saving user for password change"
-            });
-              if (!result) return res.status(400).send({
-                err: "For some reason we couldn't find you on the server"
-              });
-                else {
-                  res.send({
-                    success: "Password succesfully changed"
-                  });
-                }
-              })
+          res.send({
+            success: "Password succesfully changed"
+          });
         }
-
       })
+    }
+
+  })
 })
 
 
