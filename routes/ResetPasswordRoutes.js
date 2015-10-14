@@ -45,6 +45,7 @@ function SendEmail(user, resObj) {
     }
   }, passwordSecret);
   var name = user.displayName || user.username;
+  var linkBase = process.env.PROJECT_URL || "http://localhost:3000/#/resetEnd/";
   var link = "http://localhost:3000/#/resetEnd/" + resetPassToken;
   var text = "<h2>Hello, " + name + "!<br><br>You recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have 10 minutes. Let the games begin.</h2>" +
   "<br><br>" +
