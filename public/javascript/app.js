@@ -13,7 +13,7 @@
 
     $stateProvider.state('Home', {
       url: '/',
-      templateUrl: 'templates/home.html'
+      templateUrl: 'templates/main.html'
     })
     .state('QuestionsFeed', {
       url: '/questionsFeed',

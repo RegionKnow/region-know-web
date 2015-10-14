@@ -19,7 +19,8 @@
     vm.deleteTag = deleteTag;
     vm.saveTags = saveTags;
     vm.addQlocation = addQlocation;
-
+    vm.Qsubmit = true;
+    vm.Qfeed = true;
     vm.getQuestions(); //getting all questions when page loads
 
     // document.getElementById("qDirections").addEventListener("click", function() {
@@ -29,7 +30,7 @@
 
 function getQuestions() {
   QuestionFactory.findQuestions(vm.status._user.id).then(function(res) {
-
+        vm.Qfeed = false;
         //Adds dateInMilliseconds to all questions to for sorting purposes
 
         vm.allquestions = res.map(function (item) {
@@ -47,7 +48,9 @@ function getQuestions() {
     //////Method to create question!
 
     function createQ() {
-      vm.question.questionBody = vm.desc; // setting desc to questionbody
+      vm.Qsubmit = false;
+      vm.question.questionBody = vm.desc;
+      vm.desc = null; // setting desc to questionbody
       console.log(vm.status._user.id);
       vm.question.user_id = vm.status._user.id;
       // vm.question.tag = vm.tag

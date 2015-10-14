@@ -7,9 +7,11 @@
 
 		var vm = this;
 		var user_id = UserFactory.status._user.id
+		vm.rankLoad = false;
 		getRanks();
 		function getRanks(){
 			RankFactory.getAll().then(function(res){
+				vm.rankLoad = true;
 				vm.rankObj = res
 			})
 		}

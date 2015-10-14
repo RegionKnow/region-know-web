@@ -5,21 +5,35 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
-var env = require('../env');
 var jwt = require("jsonwebtoken");
+
+
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
+
+if (moduleAvailable('../env.js')) {
+var env = require('../env.js');
+} else {
+var env = {};
+}
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'regionknow@gmail.com',
-    pass: env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS || env.EMAIL_PASS
   }
 });
 
 
 //Send email function
 function SendEmail(user, resObj) {
-  console.log("Line 22ish, Password Reset Route. Secret: %s", env.PASSWORD_RESET_SECRET);
+  var passwordSecret = process.env.PASSWORD_RESET_SECRET || env.PASSWORD_RESET_SECRET;
   var date = new Date().getTime();
   var fiveMinutesInMilliseconds = 1000 * 600;
   date += fiveMinutesInMilliseconds;
@@ -29,8 +43,9 @@ function SendEmail(user, resObj) {
       id: user._id,
       name: user.username
     }
-  }, env.PASSWORD_RESET_SECRET);
+  }, passwordSecret);
   var name = user.displayName || user.username;
+  var linkBase = process.env.PROJECT_URL || "http://localhost:3000/#/resetEnd/";
   var link = "http://localhost:3000/#/resetEnd/" + resetPassToken;
   var text = "<h2>Hello, " + name + "!<br><br>You recently requested to have your password reset. If you received this in error, ignore this message it will expire. Otherwise, click <a href='" + link + "'>here</a> to begin the process......... you have 10 minutes. Let the games begin.</h2>" +
   "<br><br>" +

@@ -7,21 +7,35 @@ var uuid = require('uuid');
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
-var env = require('../env');
-var Questions = mongoose.model('Question')
+var Questions = mongoose.model('Question');
+
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
+
+if (moduleAvailable('../env.js')) {
+var env = require('../env.js');
+} else {
+var env = {};
+}
 
 var auth = express_jwt({
   'userProperty': 'payload',
-  'secret': env.APP_SECRET
+  'secret': process.env.APP_SECRET || env.APP_SECRET
 });
+
 
 
 //-----------CLOUDNARY.CONFIG and ROUTES----------------------------------------------------
 
 cloudinary.config({
-  cloud_name: env.CLOUDINARY_NAME,
-  api_key: env.CLOUDINARY_KEY,
-  api_secret: env.CLOUDINARY_SECRET
+  cloud_name: process.env.CLOUDINARY_NAME || env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY || env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET || env.CLOUDINARY_SECRET
 });
 
 router.post('/uploadPhoto', function(req, res) {
@@ -348,7 +362,7 @@ router.post('/filterOff/:userId', function(req, res) {
         for(var j =0; j < response.answers.length; j++){
           var temp_id = response.answers[j].questionId // saves the question id of answer
           var temp_A_id = response.answers[j]._id // saves the id of the answer
-          
+
           findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision
 
         }

@@ -9,8 +9,8 @@
 
     var vm = this;
     vm.status = UserFactory.status;
-    if(!vm.status._user){
-      $state.go("Home")
+    if(vm.status._user){
+      $state.go("QuestionsFeed")
     }
     console.log(vm.status._user)
 

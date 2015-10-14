@@ -4,9 +4,21 @@ var FacebookStrategy = require('passport-facebook').Strategy; //It's requiring t
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;; //It's requiring the passport for our local database authentication.
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var env = require('../env');
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
 
+if (moduleAvailable('../env.js')) {
+var env = require('../env.js');
+} else {
+var env = {};
+}
 
+console.log(process.env['facebook.CALLBACKURL']);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -53,9 +65,9 @@ function generateFacebookPhotoUrl(id, accessToken, height, width) {
 
 
 passport.use(new FacebookStrategy({
-    clientID: env.facebook.CLIENTID,
-    clientSecret: env.facebook.SECRET,
-    callbackURL: env.facebook.CALLBACKURL,
+    clientID: process.env['facebook.CLIENTID'] || env.facebook.CLIENTID,
+    clientSecret: process.env['facebook.SECRET'] || env.facebook.SECRET,
+    callbackURL: process.env['facebook.CALLBACKURL'] || env.facebook.CALLBACKURL,
     passReqToCallback: true,
     profileFields: ['id', 'name', 'emails', 'photos']
   },
@@ -106,9 +118,9 @@ function generateGooglePhotoUrl(photoUrl, size) {
 }
 // For Google login
 passport.use(new GoogleStrategy({
-    clientID: env.google.CLIENTID,
-    clientSecret: env.google.SECRET,
-    callbackURL: env.google.CALLBACKURL
+    clientID: process.env['google.CLIENTID'] || env.google.CLIENTID,
+    clientSecret: process.env['google.SECRET'] || env.google.SECRET,
+    callbackURL: process.env['google.CALLBACKURL'] || env.google.CALLBACKURL
       // profileFields: ['id', 'name', 'emails', 'photos']
   },
   function(accessToken, refreshToken, profile, done) {
