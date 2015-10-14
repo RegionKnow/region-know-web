@@ -72,7 +72,7 @@
 
 			<md-toolbar id="userInfo" class="md-theme-light">
 			
-			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="UserProfile" style="color: white;" ng-click="nav.close()">
+			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" style="color: white;" ng-click="nav.close()">
 				<div>
 
 					<center>
