@@ -73,7 +73,7 @@ passport.use(new FacebookStrategy({
   },
   function(req, accessToken, refreshToken, profile, done) {
     User.findOne({
-      facebookId: profile.id
+      email: profile.emails[0].value
     }, function(err, user) {
       if (err) return done(err, null);
       if (user) {
@@ -131,7 +131,7 @@ passport.use(new GoogleStrategy({
       // Whatever is returned will be stored in profile.
       // Returns err if it cannot connect
       User.findOne({
-        'googleId': profile.id
+        'email': profile.emails[0].value
       }, function(err, user) {
         // console.log("DEBUG: Contents of profile:") ;
         // console.log(profile) ;

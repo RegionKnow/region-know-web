@@ -71,20 +71,20 @@
 			<md-sidenav class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left">
 
 			<md-toolbar id="userInfo" class="md-theme-light">
-			
+
 			<a class="loggedInUser" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" style="color: white;" ng-click="nav.close()">
 				<div>
 
 					<center>
-						
+
 						<br>
 						{{nav.status._user.username}}
 						<br>
-						
+
 						<img class="img  img-circle navImage" style="width: 40%;" ng-src="{{nav.status._user.image}}">
 
 						<br>
-						
+
 
 						<table id="sideNavPoints">
 							<tr>
@@ -96,7 +96,7 @@
 					</div>
 				</center>
 			</a>
-			
+
 		</md-toolbar>
 		<br><br>
 		<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
