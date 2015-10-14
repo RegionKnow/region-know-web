@@ -10,7 +10,7 @@
     vm.edit = {}
     vm.status = UserFactory.status;
     vm.AnswerObj = {};
-
+    vm.Qloaded = true;
     if(!vm.status._user){
       $state.go("Home")
     }
@@ -24,7 +24,7 @@
       vm.thisQuesitonId = $stateParams.id;
       // console.log($stateParams.id)
       QuestionFactory.findQuestion($stateParams.id).then(function(res) {
-
+        vm.Qloaded = false;
         vm.question = res
         vm.isAnswered = vm.question.answered
       })

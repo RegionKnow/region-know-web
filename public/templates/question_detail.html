@@ -1,8 +1,13 @@
 <div class="row topRows text-center introFeatures animated fadeIn">
 
 	<div class="col-md-2 col-lg-1"></div>
+	<div class="col-md-8 col-lg-10 col-sm-12" ng-show="vm.Qloaded">
+		<div id="loadingGif" ng-show="vm.Qfeed">
+			<img src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
+		</div>
+	</div>
 
-	<div class="col-md-8 col-lg-10" ng-cloak>
+	<div class="col-md-8 col-lg-10" ng-show="!vm.Qloaded" ng-cloak>
 		<br>
 		<center><h2 class="whiteh2"><img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">&nbsp;{{vm.question.userName}} asked...</h2></center>
 		<br>
