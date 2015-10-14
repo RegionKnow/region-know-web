@@ -42,8 +42,6 @@ router.post('/uploadPhoto', function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, data, fileObject){
     cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
-      console.log(typeof picInfo.url);
-      console.log(picInfo.url);
       User.update({_id: data.userId[0]}, {image: picInfo.url}, function(err, updatedUser){
         if(err) return res.status(500).send({err:"Could not find user to update"});
         if(!updatedUser) return res.status(500).send({err:"Client messed something up"});
@@ -218,7 +216,6 @@ router.post('/location/:userId', function(req, res) {
     _id: req.user._id
   }, req.body, function(err, response) {
 
-    console.log(response)
     res.send()
   })
 
@@ -226,9 +223,7 @@ router.post('/location/:userId', function(req, res) {
 
 router.post('/tags/:userId', function(req, res) {
   var tags = req.body
-    // for(var k = 0; k < req.body.length; k ++){
-    // 	console.log(req.body[k])
-    // }
+
     for (var i = 0; i < req.body.length; i++) {
       User.update({
         _id: req.user._id
@@ -258,7 +253,6 @@ router.delete('/tags/:userId', function(req, res) {
   }, {
     tags: []
   }, function(err, response) {
-    console.log(response)
     res.send(response.tags)
   })
 
@@ -276,7 +270,6 @@ router.post('/filterOn/:userId', function(req, res) {
   }, {
     filter: true
   }, function(err, response) {
-    console.log('truned filter on')
     res.send(response)
   })
 })
@@ -287,7 +280,6 @@ router.post('/filterOff/:userId', function(req, res) {
   }, {
     filter: false
   }, function(err, response) {
-    console.log('truned filter off')
     res.send(response)
   })
 })
@@ -298,7 +290,6 @@ router.post('/filterOff/:userId', function(req, res) {
     }, {
       filterAlert: true
     }, function(err, response) {
-      console.log('truned Alertfilter on')
       res.send(response)
     })
   })
@@ -309,7 +300,6 @@ router.post('/filterOff/:userId', function(req, res) {
     }, {
       filterAlert: false
     }, function(err, response) {
-      console.log('truned Alertfilter off')
       res.send(response)
     })
   })
@@ -343,7 +333,6 @@ router.post('/filterOff/:userId', function(req, res) {
       var voteCount = 0; //count the number of votes a user has
       var currentGp = response.generalPoints
 
-      console.log('generalPoint route being run')
 
 
         //gets all votes from users questions
@@ -370,7 +359,6 @@ router.post('/filterOff/:userId', function(req, res) {
         voteCountObj.count = voteCount + 1 // adds one point from userModel default
 
         User.update({_id: req.user._id}, {generalPoints: voteCountObj.count}, function(err, update){
-          console.log('updated GeneralPoints')
             // res.send('updated General Points' + voteCountObj.count)
           })
       })
@@ -387,17 +375,13 @@ function findKpoints(questionId, answerId,l1, userId){
                   if(QA.answered.toString() === answerId.toString()){
 
                     kPointCount += 1
-                    console.log('adding kp', kPointCount)
 
                       // console.log(countObj)
                     }
                   }
-                  console.log(kPointCount)
-                  console.log(l1, loopcount) //loop count is compared to J from outer loop, if they match
                 if(l1 === loopcount) { // all viable questions have been searched, update KP's
                     // console.log('current K point count'  + kPointCount)
                   User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
-                    console.log('updated KnowledgePoints')
                   })
                 }
         })
