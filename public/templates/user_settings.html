@@ -40,7 +40,7 @@
 
 				</table>
 				<br>
-
+				<br>
 			</div>
 
 		</div>
@@ -48,42 +48,49 @@
 
 
 
-	</div>
 
-	<br>
-	<md-button class="md-raised md-primary" ng-click="profileOptions = true;">Profile Options</md-button>
-	<span style="margin:auto;" ng-show="profileOptions" class="mdl-card mdl-shadow--4dp">
+
 		<br>
-		<md-button ng-click="photoUpload = true;">Add or change profile photo</md-button>
-		<div ng-show="photoUpload">
+		
+		
 
-			<ng-form name="form">
-			<div>
-				<md-button class="md-primary md-raised" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-resize="{width: 600, height: 600}" THIS APPLIES MAX SIZE TO PHOTO ngf-min-height="100">Choose Picture</md-button>
-			</div>
-			<!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
+		<span style="margin:auto;" ng-show="profileOptions" class="mdl-card mdl-shadow--4dp">
+			<br>
+			<md-button ng-click="photoUpload = true;">Add or change profile photo</md-button>
+			<div ng-show="photoUpload">
 
-			<!-- Drop files: -->
-			<!-- <div ngf-drop ng-model="files" class="drop-box"></div> -->
-			<p>Image thumbnail preview:</p>
-			<img style='width: 200px; height: 200px;' ngf-thumbnail="file || '/thumb.jpg'"><br>
-			<md-button ng-click="submit()">Submit</md-button>
-		</ng-form>
+				<ng-form name="form">
+				<div>
+					<md-button class="md-primary md-raised" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-resize="{width: 600, height: 600}" THIS APPLIES MAX SIZE TO PHOTO ngf-min-height="100">Choose Picture</md-button>
+				</div>
+				<!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
 
-	</div>
+				<!-- Drop files: -->
+				<!-- <div ngf-drop ng-model="files" class="drop-box"></div> -->
+				<p>Image thumbnail preview:</p>
+				<img style='width: 200px; height: 200px;' ngf-thumbnail="file || '/thumb.jpg'"><br>
+				<md-button ng-click="submit()">Submit</md-button>
+			</ng-form>
+
+		</div>
 
 
-	<div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
-		<md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
-	</div>
-	<div>
+		<div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
+			<md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
+		</div>
+		<div>
 
-		<md-button ng-click='vm.coolUpdate()'>Edit Profile</md-button>
+			<md-button ng-click='vm.coolUpdate()'>Edit Profile</md-button>
 
-		<md-button ng-click="vm.deleteUserProfile()">Deactive Profile</md-button>
-	</div>
-	<md-button ng-click="profileOptions = false;">Close</md-button>
-</span>
+			<md-button ng-click="vm.deleteUserProfile()">Deactive Profile</md-button>
+		</div>
+		<md-button ng-click="profileOptions = false;">Close</md-button>
+	</span>
+
+</div>
+<br>
+<md-button class="md-raised md-primary md-block" ng-click="profileOptions = true;">Profile Options</md-button>
+
 <center><h2>Your Custom Settings</h2></center>
 
 <div>
