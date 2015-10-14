@@ -147,8 +147,6 @@
 
     //====================COMMENTS FOR ANSWERS=========================================
     vm.commentAnswer = function(ans_id, comment){
-      console.log(comment);
-      console.log(ans_id);
       AnswerFactory.commentAnswer(ans_id, comment, vm.status._user.username).then(function(res){
 
         vm.loading = false;

@@ -70,7 +70,7 @@
         UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           vm.alertObj.status = false;
         })
-      }, 3000000);
+      }, 30000);
 
     }
 
@@ -102,7 +102,7 @@
 
     //---------FUNCTIONALITY FOR REGISTER & LOGIN USER----------------------------------------------------------
 
-  
+
 
 
     //USER login/REG
