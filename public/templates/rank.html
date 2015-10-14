@@ -1,10 +1,10 @@
 <div class="topRows">
 	<div class="col-md-2"></div>
-	<center>
-			<div ng-show="!vm.rankLoad">
-				<md-progress-circular md-mode='indeterminate' md-diameter='100'></md-progress-circular>
-			</div>
-	<center>
+
+	<div ng-show="!vm.rankLoad" class="col-md-8">
+		<md-progress-circular md-mode='indeterminate' md-diameter='100'></md-progress-circular>
+	</div>
+
 	<div class="col-md-8" ng-show="vm.rankLoad">
 		<br>
 		<center><h2 class="whiteh2">How do you rank in the KnowOff?</h2></center>
