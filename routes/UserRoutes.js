@@ -128,12 +128,12 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/login', function(req, res, next) { //goes to passport module, in config.
-  passport.authenticate('local', function(err, user, info) { //calling from the passport
-    console.log(info);
+  passport.authenticate('local', function(err, user) { //calling from the passport
     if (!user) return res.status(400).send({err: "Invalid username or password"});
     res.send({
       token: user.generateJWT()
     }); //generating a token when there is a user in the collection.
+
   })(req, res, next);
 });
 
@@ -349,7 +349,7 @@ router.post('/filterOff/:userId', function(req, res) {
           var temp_id = response.answers[j].questionId // saves the question id of answer
           var temp_A_id = response.answers[j]._id // saves the id of the answer
           
-          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision 
+          findKpoints(temp_id, temp_A_id, j, req.user._id) // runs comparision
 
         }
 

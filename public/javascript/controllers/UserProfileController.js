@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('UserProfileController', UserProfileController);
 
-	UserProfileController.$inject = ['UserFactory', '$state', '$scope', 'Upload', '$http', "$modal"];
+	UserProfileController.$inject = ['UserFactory', '$state', '$scope', 'Upload', '$http', "$modal", "$mdToast"];
 
-	function UserProfileController(UserFactory, $state,  $scope, Upload, $http, $modal) {
+	function UserProfileController(UserFactory, $state,  $scope, Upload, $http, $modal, $mdToast) {
 		var vm = this;
 		vm.status = UserFactory.status;
 		vm.loading = false;
@@ -49,7 +49,7 @@
     		data: {file: file, 'userId': vm.status._user.id}
     	}).then(function (resp) {
     		vm.loading = false;
-
+				$mdToast.show($mdToast.simple().content('Please relogin to show changes'))
     		// console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
     	}, function (resp) {
     		vm.loading = false;

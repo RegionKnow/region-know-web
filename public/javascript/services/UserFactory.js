@@ -12,6 +12,7 @@
     }
 
     function setToken(token) {
+      if(!token) return;
       localStorage.setItem("token", token);
     }
 
@@ -64,11 +65,12 @@
     o.loginUser = function(user) {
       var q = $q.defer();
       user.username = user.username.toLowerCase();
-      $http.post('/api/user/login', user).success(function(res) {
-        setToken(res.token);
+      $http.post('/api/user/login', user).then(function(successRes) {
+        setToken(successRes.data.token);
         o.status._user = isLoggedIn();
-        console.log(o.status._user)
         q.resolve();
+      }, function (errorRes) {
+        q.reject();
       });
       return q.promise;
     };
@@ -79,7 +81,7 @@
       $http.get('/api/user/' + id).success(function(res){
         q.resolve(res)
       })
-      
+
       // console.log(o.status._user)
       return q.promise;
     }
