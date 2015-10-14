@@ -12,8 +12,8 @@ function moduleAvailable(name) {
     return false;
 }
 
-if (moduleAvailable('./env.js')) {
-var env = require('./env.js');
+if (moduleAvailable('../env.js')) {
+var env = require('../env.js');
 } else {
 var env = {};
 }

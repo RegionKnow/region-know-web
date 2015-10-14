@@ -19,7 +19,7 @@
     vm.deleteTag = deleteTag;
     vm.saveTags = saveTags;
     vm.addQlocation = addQlocation;
-
+    vm.Qsubmit = true;
     vm.getQuestions(); //getting all questions when page loads
 
     // document.getElementById("qDirections").addEventListener("click", function() {
@@ -47,7 +47,9 @@ function getQuestions() {
     //////Method to create question!
 
     function createQ() {
-      vm.question.questionBody = vm.desc; // setting desc to questionbody
+      vm.Qsubmit = false;
+      vm.question.questionBody = vm.desc;
+      vm.desc = null; // setting desc to questionbody
       console.log(vm.status._user.id);
       vm.question.user_id = vm.status._user.id;
       // vm.question.tag = vm.tag
