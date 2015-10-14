@@ -69,6 +69,7 @@
       $timeout(function() {
         UserFactory.deleteAlerts(vm.status._user.id).then(function() {
           vm.alertObj.status = false;
+          vm.showAlertTab = false;
         })
       }, 30000);
 
