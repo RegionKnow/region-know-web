@@ -10,6 +10,9 @@ body, html {
   background: -moz-linear-gradient(red, blue);
   background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
+#logo {
+  width: 10%;
+}
 
 #titleOnNav {
   font-size: .7em;
@@ -87,8 +90,8 @@ md-input-container {
   text-shadow: 3px 0px 6px #000;
   color: white;
   border: none;
-  margin-top: 3%;
-  border-radius: 26px;
+  margin-top: -3%;
+  /*border-radius: 26px;*/
   min-height: 0px !important;
   position: absolute;
   top: 0px;
@@ -96,7 +99,7 @@ md-input-container {
 }
 
 .homeWell h1 {
-  font-size: 6em;
+  font-size: 5em;
 }
 
 .homeWell h3 {
@@ -110,7 +113,7 @@ md-input-container {
 .welcomePage {
   background: url("../imgs/background.png") no-repeat center center fixed;
   background-size: cover;
-  height: 100%;
+  height: 77%;
 }
 
 
@@ -124,6 +127,52 @@ md-input-container {
   margin-left: 0px;
 }
 
+.welcomeBasics {
+  background-color: white;
+  font-size: 1.3em;
+  padding-top: 3.9em;
+  padding-bottom: 3.9em;
+}
+
+.welcomeBasics i {
+  color: #26a69a;
+  font-size: 3.9em;
+}
+
+.aboutUs {
+  background: rgba(38,166,154,0.5);
+  /*background-color: #26a69a;*/
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.aboutUs .well {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.copywright {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: white;
+}
+
+#welcome-nav {
+  position: fixed;
+  color: white;
+  padding-right: 1em;
+  padding-top: 1em;
+  z-index: 1;
+  right: 0;
+}
+
+#welcome-nav a {
+  color: white;
+  text-shadow: 1px 1px 3px #000;
+  text-decoration: none;
+}
 /*=======QUESTION STYLES=======================*/
 
 
