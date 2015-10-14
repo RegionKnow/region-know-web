@@ -90,11 +90,11 @@
 <div>
 
 	<br>
-
-	<div>
-		<img ng-if="vm.loading" id="loadingGif" src="http://dailyreportersngr.com/wp-content/plugins/no-spam-at-all/img/loading.gif">
-	</div>
-
+	<center>
+		<div>
+			<md-progress-circular ng-if="vm.loading" md-mode='indeterminate' md-diameter='100'></md-progress-circular>
+		</div>
+	</center>
 	<div class="animated bounceIn" ng-show="vm.voteError" style="color: red;">Sorry you already voted on that Answer!</div>
 	<center><h2 class="whiteh2">Answers to {{vm.question.userName}}'s Question...</h2></center>
 	<br>
@@ -104,8 +104,8 @@
 			<tr>
 				<td >
 					<span>
-						<i  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon">done</i>
-						<i style="color:green;"  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">spellcheck</i>
+						<i  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon" style="margin-right: 20%;">done</i>
+						<i style="color:green; margin-right: 20%;"  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">spellcheck</i>
 					</span>
 
 					<div ng-if="vm.status._user.id" style="width: 100px;">
