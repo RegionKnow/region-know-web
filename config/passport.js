@@ -53,9 +53,9 @@ function generateFacebookPhotoUrl(id, accessToken, height, width) {
 
 
 passport.use(new FacebookStrategy({
-    clientID: env.facebook.CLIENTID,
-    clientSecret: env.facebook.SECRET,
-    callbackURL: env.facebook.CALLBACKURL,
+    clientID: process.env.facebook.CLIENTID || env.facebook.CLIENTID,
+    clientSecret: process.env.facebook.SECRET || env.facebook.SECRET,
+    callbackURL: process.env.facebook.CALLBACKURL || env.facebook.CALLBACKURL,
     passReqToCallback: true,
     profileFields: ['id', 'name', 'emails', 'photos']
   },
@@ -106,9 +106,9 @@ function generateGooglePhotoUrl(photoUrl, size) {
 }
 // For Google login
 passport.use(new GoogleStrategy({
-    clientID: env.google.CLIENTID,
-    clientSecret: env.google.SECRET,
-    callbackURL: env.google.CALLBACKURL
+    clientID: process.env.google.CLIENTID || env.google.CLIENTID,
+    clientSecret: process.env.google.SECRET || env.google.SECRET,
+    callbackURL: process.env.google.CALLBACKURL || env.google.CALLBACKURL
       // profileFields: ['id', 'name', 'emails', 'photos']
   },
   function(accessToken, refreshToken, profile, done) {
