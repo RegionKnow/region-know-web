@@ -7,13 +7,7 @@ var uuid = require('uuid');
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
-var Questions = mongoose.model('Question')
-
-var auth = express_jwt({
-  'userProperty': 'payload',
-  'secret': env.APP_SECRET
-});
-
+var Questions = mongoose.model('Question');
 
 function moduleAvailable(name) {
     try {
@@ -28,6 +22,14 @@ var env = require('./env.js');
 } else {
 var env = {};
 }
+
+var auth = express_jwt({
+  'userProperty': 'payload',
+  'secret': process.env.APP_SECRET || env.APP_SECRET
+});
+
+
+
 //-----------CLOUDNARY.CONFIG and ROUTES----------------------------------------------------
 
 cloudinary.config({
