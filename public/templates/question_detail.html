@@ -4,7 +4,7 @@
 
 	<div class="col-md-8 col-lg-10" ng-cloak>
 		<br>
-		<center><h2><img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">&nbsp;{{vm.question.userName}} asked...</h2></center>
+		<center><h2 class="whiteh2"><img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;">&nbsp;{{vm.question.userName}} asked...</h2></center>
 		<br>
 		<table class="mdl-card mdl-shadow--4dp qDetailCards" width="100%" ng-cloak>
 			<tr id="questionVote">
@@ -91,7 +91,7 @@
 	</div>
 
 	<div class="animated bounceIn" ng-show="vm.voteError" style="color: red;">Sorry you already voted on that Answer!</div>
-	<center><h2>Answers to {{vm.question.userName}}'s Question...</h2></center>
+	<center><h2 class="whiteh2">Answers to {{vm.question.userName}}'s Question...</h2></center>
 	<br>
 	<div class=" mdl-card mdl-shadow--4dp aCards" ng-repeat="a in vm.question.answers track by $index" ng-show="!a.isDeleted">
 

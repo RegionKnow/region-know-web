@@ -1,11 +1,11 @@
 <div class="row topRows">
 	<div class="col-md-2"></div>
-	<div class="col-md-8 animated fadeIn" ng-cloak>
+	<div class="col-md-8 animated fadeIn mdl-card mdl-shadow--4dp" ng-cloak>
 		
-
+		<br>
 		<center><h2>Your Custom Settings</h2></center>
 
-		<div >
+		<div>
 			<center>
 				<br>
 				<h4>Your home location is the place you know best and love...</h4>
@@ -17,11 +17,11 @@
 
 			<div class="searchHome">
 				
-			<center><md-button ng-show="vm.mapStatus" class="md-button md-primary md-raised" ng-click="vm.searchLocation()">Find Location on map</md-button>
-			<md-button ng-show="vm.mapStatus" ng-click="vm.closeMap()">Cancel</md-button>
-			</center>
-			
-			<md-input-container ng-show="vm.mapStatus">
+				<center><md-button ng-show="vm.mapStatus" class="md-button md-primary md-raised" ng-click="vm.searchLocation()">Find Location on map</md-button>
+					<md-button ng-show="vm.mapStatus" ng-click="vm.closeMap()">Cancel</md-button>
+				</center>
+
+				<md-input-container ng-show="vm.mapStatus">
 				
 				<label>Type location you want to find here...</label>
 				<input ng-model="vm.searchLoc"> 
@@ -76,50 +76,50 @@
 	<span ng-show="vm.tagError" class="animated rubberBand">Cannot Submit tag with Spaces</span>
 
 	<form ng-submit="vm.addTag(vm.tag)">
-			<md-input-container flex>
-			<label>Input tag and press ENTER...</label>
-			<input ng-model="vm.tag">
+		<md-input-container flex>
+		<label>Input tag and press ENTER...</label>
+		<input ng-model="vm.tag">
 
-		</md-input-container>
-		<div class="tagDiv">
-			<span class="" ng-repeat="tag in vm.tags track by $index">
-				<div class="indvTag">
-					{{tag}}
-					<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
-					</span>
-				</div>
-				&nbsp;
+	</md-input-container>
+	<div class="tagDiv">
+		<span class="" ng-repeat="tag in vm.tags track by $index">
+			<div class="indvTag">
+				{{tag}}
+				<span ng-click="vm.deleteTag($index)" class="glyphicon glyphicon-remove" aria-hidden="true">
+				</span>
+			</div>
+			&nbsp;
+		</span>
+	</div>
+</form>
+<br>
+<table class="filteringTable">
+	<tr>
+		<center><h4>You can filter the questions you see, or not...</h4></center>
+		<br>
+		<td >
+			Question-feed filter is&nbsp; 
+			<span ng-show="!vm.CUI.filter">
+				<md-button class="md-raised" ng-click="vm.filterOn(); createQTag = true;" ><span style="color:red;">Off</span></md-button>
 			</span>
-		</div>
-	</form>
-	<br>
-	<table class="filteringTable">
-		<tr>
-			<center><h4>You can filter the questions you see, or not...</h4></center>
-			<br>
-			<td >
-				Question-feed filter is&nbsp; 
-				<span ng-show="!vm.CUI.filter">
-					<md-button class="md-raised" ng-click="vm.filterOn(); createQTag = true;" ><span style="color:red;">Off</span></md-button>
-				</span>
 
 
-				<span ng-show="vm.CUI.filter">
-					<md-button class="md-raised" ng-click="vm.filterOff(); createQTag = false;" ><span style="color:green;">On</span></md-button>
-				</span>
+			<span ng-show="vm.CUI.filter">
+				<md-button class="md-raised" ng-click="vm.filterOff(); createQTag = false;" ><span style="color:green;">On</span></md-button>
+			</span>
 
 
-			</td>
-			
-			<td>
-				Filter Alerts by your Tags
-				<span ng-show="!vm.CUI.filterAlert">
-					<md-button class="md-raised" ng-click="vm.filterAlertOn(); createQTag = true;"><span style="color:red;">Off</span></md-button>
-				</span>
+		</td>
 
-				<span ng-show="vm.CUI.filterAlert">
-					<md-button class="md-raised" ng-click="vm.filterAlertOff();  createQTag = false;"><span style="color:green;">On</span></md-button>
-				</span>
+		<td>
+			Filter Alerts by your Tags
+			<span ng-show="!vm.CUI.filterAlert">
+				<md-button class="md-raised" ng-click="vm.filterAlertOn(); createQTag = true;"><span style="color:red;">Off</span></md-button>
+			</span>
+
+			<span ng-show="vm.CUI.filterAlert">
+				<md-button class="md-raised" ng-click="vm.filterAlertOff();  createQTag = false;"><span style="color:green;">On</span></md-button>
+			</span>
 				<!-- <span ng-show="vm.CUI.filterAlert" >Filter is On!</span>
 				<span ng-show="!vm.CUI.filterAlert">Filter is Off!</span> -->
 			</td>
@@ -131,10 +131,10 @@
 		<center>
 			<md-button ng-click="vm.showTagInput()" class="md-button md-primary md-raised" ng-show="createQTag">Create filtering tags</md-button>
 		</center>
-		 -->
-		
-		<br>
-		<br>
+	-->
+
+	<br>
+	<br>
 
 
 

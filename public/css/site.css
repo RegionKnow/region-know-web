@@ -4,14 +4,20 @@ body, html {
   height: 100%;
   width: 100%;
   /*background: #E8F4F3;*/
-  /*  background:#26a69a;*/
+  background:#26a69a;
  /* background: -webkit-linear-gradient(red, blue); 
   background: -o-linear-gradient(red, blue); 
   background: -moz-linear-gradient(red, blue); 
   background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
 
+#sideNavPoints {
+  text-align: center;
+}
 
+#sideNavPoints td {
+  padding: .7em;
+}
 
 .col-md-8 {
   /*box-shadow: 1px 1px 19px #777;*/
@@ -28,6 +34,10 @@ body, html {
 
  h2 {
   color: #26a69a;
+}
+
+.whiteh2 {
+  color: #fff;
 }
 
 md-input-container {
@@ -121,7 +131,12 @@ md-input-container {
   height: 40px;
   width: 40px;
 }
+/*=====================================MESSAGING=================================*/
 
+#convoButtons {
+  float: right;
+  margin-top: -9%;
+}
 
 /*=================PROFILE STYLES==============================================*/
 
@@ -190,9 +205,9 @@ md-backdrop {
 }
 
 #userInfo {
+  margin-top: 1em;
   height: 36%;
   width: 100%;
-  top: 0;
   background-color: #26a69a;
 }
 
@@ -211,7 +226,7 @@ a:hover, a:visited, a:active {
   box-shadow: 1px 1px 9px #333;
   color: #26a69a;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   width: 100%;
   top: 0;
 }
@@ -241,116 +256,130 @@ a:hover, a:visited, a:active {
 }
 
 
-  md-backdrop.md-opaque {
-    background-color: rgba(33,33,33,0.3) !important;
-    top: 0;
+md-backdrop.md-opaque {
+  background-color: rgba(33,33,33,0.3) !important;
+  top: 0;
 
-    }
+}
 
 
-    /*================TAG STYLES==========================================*/
-    #quesitonTag{
-      margin-left: 7px;
-      font-size: 15px;
-      border-radius: 10px;
-      border-radius: 1px 5px 3px 5px;
-      border-width: 3px;
-      box-shadow: 2px 2px 2px black;
-      border-color: #000000;
-      padding-left: 15px;
-      background-color: #F0f0f0;
-      display: inline;
-    }
-    .tagDiv {
-      border-radius: 10px;
-    }
-    .indvTag {
+/*================TAG STYLES==========================================*/
+#quesitonTag{
+  margin-left: 7px;
+  font-size: 15px;
+  border-radius: 10px;
+  border-radius: 1px 5px 3px 5px;
+  border-width: 3px;
+  box-shadow: 2px 2px 2px black;
+  border-color: #000000;
+  padding-left: 15px;
+  background-color: #F0f0f0;
+  display: inline;
+}
+.tagDiv {
+  border-radius: 10px;
+}
+.indvTag {
      /* width: auto;
-      height: 50px;*/
-      border: thin solid #999;
-      border-radius: 6px 12px;
-      box-shadow: 1px 1px 6px #333;
-      padding: 3px;
-      margin: 6px;
-      color: #333;
-      background-color: #F0f0f0;
+     height: 50px;*/
+     border: thin solid #999;
+     border-radius: 6px 12px;
+     box-shadow: 1px 1px 6px #333;
+     padding: 3px;
+     margin: 6px;
+     color: #333;
+     background-color: #F0f0f0;
 
-      display: inline;
-    }
+     display: inline;
+   }
 
-    .qTag {
-      border: thin solid #999;
-      border-radius: 3px 12px;
-      box-shadow: 1px 1px 6px #333;
-      padding: 3px;
-      margin: 6px;
-      background-color: #f0f0f0;
-      display: inline;
-      font-size: .5em;
-    }
+   .qTag {
+    border: thin solid #999;
+    border-radius: 3px 12px;
+    box-shadow: 1px 1px 6px #333;
+    padding: 3px;
+    margin: 6px;
+    background-color: #f0f0f0;
+    display: inline;
+    font-size: .5em;
+  }
 
-    /*================QUESTIONs &  CARD STYLES==========================================*/
-    #QDicon{
-      display: inline;
-      opacity: 1.0;
-      font-size: 3em;
-    }
-    .md-input-container.flex.md-default-theme.md-input-focused {
-      color: #26a69a;
-    }
-    .qCards {
-      width: 100%;
-      height: 100px;
-      margin-top: 1em;
-      font-size: 1em;
-    }
+  /*================QUESTIONs &  CARD STYLES==========================================*/
+  #QDicon{
+    display: inline;
+    opacity: 1.0;
+    font-size: 3em;
+  }
+  .md-input-container.flex.md-default-theme.md-input-focused {
+    color: #26a69a;
+  }
+  .qCards {
+    width: 100%;
+    height: 100px;
+    margin-top: 1em;
+    font-size: 1em;
+  }
 
-    .qDetailCards {
-      font-size: 1em;
-      width: 100%;
-      height: 20%;
-      color: #777;
-      padding: 2.3em;
-    }
+  .rankCards {
+   width: 60%;
+   height: 100px;
+   margin-top: 1em;
+   font-size: 1em; 
+   margin-right: auto;
+   margin-left: auto;
+ }
 
-    .aCards {
-      font-size: 1em;
-      width: 90%;
-      height: 60%;
-      color: #777;
-      padding: 2.3em;
-      margin-top: 1em;
-      margin-left: auto;
-      margin-right: auto;
-      
-    }
+ #rankNum {
+  float: right;
+  margin-top: -20%;
+}
 
-    .aCards p {
-      font-size: 1.3em;
-      padding-left: 13%;
-      width: 97%;
-      text-align: left;
-    }
+.qDetailCards {
+  font-size: 1em;
+  width: 100%;
+  height: 20%;
+  color: #777;
+  padding: 2.3em;
+}
 
-    .qCards p {
-      font-size: 1.6em;
-      float: right;
-      margin-top: 9%;
-      padding-right: 3%;
-      width: 77%;
-    }
+.aCards {
+  font-size: 1em;
+  width: 90%;
+  height: 60%;
+  color: #777;
+  padding: 2.3em;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
 
-    .qIcon {
-      font-size: 6em;
-      padding-top: 5%;
-      opacity: .3;
-    } 
+}
 
-    #answerIcons .mdl-button {
-      display: block;
-      color: #777;
-      margin-left: 30%
-    }
+.aCards p {
+  font-size: 1.3em;
+  padding-left: 13%;
+  width: 97%;
+  text-align: left;
+}
+
+.qCards p {
+  font-size: 1.6em;
+  float: right;
+  margin-top: 9%;
+  padding-right: 3%;
+  width: 77%;
+}
+
+.qIcon {
+  font-size: 6em;
+  padding-top: 5%;
+  opacity: .3;
+} 
+
+#answerIcons .mdl-button {
+  display: block;
+  color: #777;
+  margin-left: 30%
+}
     /*.answerBody {
       -moz-box-shadow:    inset 0 0 16px #26a69a;
       -webkit-box-shadow: inset 0 0 16px #26a69a;
