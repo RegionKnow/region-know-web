@@ -3,13 +3,14 @@
   angular.module('app')
     .controller('MessageController', MessageController);
 
-  MessageController.$inject = ['$http', '$rootScope', "$stateParams", "$state", "$mdDialog", "UserFactory"];
+  MessageController.$inject = ['$http', '$rootScope', "$stateParams", "$state", "$mdDialog", "UserFactory", "$q"];
 
-  function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory) {
+  function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory, $q) {
     var vm = this;
     vm.status = UserFactory.status;
     vm.title = 'Messaging';
     vm.button = "Test call button";
+
 
     if(!vm.status._user){
       $state.go("Home")
@@ -17,7 +18,6 @@
 
     //Setup function/variable associations for controller
     vm.inConversation;
-    vm.testRequest = testRequest;
     vm.getConversations = getConversations;
     vm.openConvo = openConvo;
     vm.closeConvo = closeConvo;
@@ -48,21 +48,10 @@
 
 
 
-    function testRequest() {
-      var config = {
-        timeout: 30000
-      }
-      $http.get('/api/convo/rando', config).then(function(successResponse) {
-        console.log(successResponse);
-        vm.testMessage = successResponse.data.body;
-      }, function(errorResponse) {
-        console.log(errorResponse.data);
 
-        vm.testMessage = errorResponse.data;
-      });
-    }
 
     function getConversations() {
+      vm.loading = true;
       $http.post('/api/convo', {
         userId: UserFactory.status._user.id
       }).then(function(successResponse) {
@@ -70,6 +59,7 @@
           vm.title = "No converstions to display";
         } else {
           vm.conversations = successResponse.data.conversations;
+          vm.loading = false;
         }
 
       }, function(errorResponse) {
@@ -79,9 +69,14 @@
     }
 
     function liveConvo() {
+      vm.cancel = $q.defer();
+
       if(!vm.convoInFocus) return;
+      // var config = {
+      //   timeout: 60000
+      // }
       var config = {
-        timeout: 60000
+        timeout: vm.cancel.promise
       }
       $http.post("/api/convo/live-convo", {
         convoId: vm.convoInFocus._id,
@@ -92,7 +87,6 @@
           liveConvo();
         },
         function(errorResponse) {
-          liveConvo();
           console.log(errorResponse.data);
         })
     }
@@ -105,9 +99,7 @@
     }
 
     function activateConvo() {
-      // var config = {
-      //   timeout: 30000
-      // }
+
       $http.post('/api/convo/activate-convo', {
         convoId: vm.convoInFocus._id,
         numMessages: vm.convoInFocus.messages.length,
@@ -124,6 +116,9 @@
       vm.inConversation = false;
       vm.getConversations();
       deactivateConvo();
+      vm.cancel.resolve();
+      vm.cancel = null;
+
 
     }
 
@@ -159,6 +154,7 @@
 
     //gets one convo with the participants being an object with the properties participantOne and participantTwo
     function getOneConvo(participants) {
+      vm.loadingInConvo = true;
       if(!participants) {
         participants = {
           participantOne: vm.convoInFocus.participantOne,
@@ -167,8 +163,10 @@
       }
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
         vm.convoInFocus = successResponse.data;
+        vm.loading = false;
       }, function(errorResponse) {
         console.log(errorResponse.data);
+        vm.loading = false;
       });
 
     }

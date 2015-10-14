@@ -46,7 +46,6 @@ router.post('/create', function(req, res){
 	//saving user Id to Question
 	var userName;
 	User.findOne({_id: req.body.user_id}, function(err, response){
-		console.log(response)
 		if(response.username){
 			userName = response.username;
 		}else{
@@ -155,13 +154,9 @@ router.post('/downvote/:id/:user_id', function(req, res){
 			$inc: {voteNum: -2}
 
 		}, function(err, rmVote){
-			console.log('vote updated');
-			console.log('added user to downvoted');
-			console.log('removed downvote From reference');
 			res.send(rmVote);
 		})
 	} else {
-		console.log('user has not downvoted yet')
 
 		Questions.update({_id: req.question._id}, {
 			$push: {downvote: req.user._id},
@@ -169,8 +164,6 @@ router.post('/downvote/:id/:user_id', function(req, res){
 
 		}, function(err, vote){
 
-			console.log('vote updated')
-			console.log('added user to upvoted')
 			res.send(vote);
 
 
@@ -234,7 +227,6 @@ Math.degrees = function(radians) {
 				var temp_lat = questionsRes[p].lat
 				var temp_lng = questionsRes[p].lng
 				if(getSpaceDiffernece(user_location.lat, temp_lat, user_location.lng, temp_lng) < (user.radius * 1000)){
-					console.log(questionsRes[p], "qroutes237")
 					if(userFilter){ // if userFilter is true
 						// console.log('inside check for Tags')
 						for(var k = 0; k < user_tags.length; k++){ // loop through each tag in userTags
@@ -304,7 +296,6 @@ router.post('/alert/:id', function(req, res){
 					}
 					for(id in checkObj){
 						User.update({_id: id}, {$push: {alerts:{ _id: question._id }}}, function(err, pushes){
-							console.log('pushed to some users in alert Filter function')
 							return true;
 						})
 					}
@@ -322,7 +313,6 @@ function checkAlertTag(user_tag, question, user_id, checkObj)  {
 				checkObj[user_id] = 1;
 			}
 
-			console.log(checkObj);
 		}
 	}
 
