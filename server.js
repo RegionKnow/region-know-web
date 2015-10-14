@@ -4,7 +4,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
-console.log(process.env);
 var passport = require('passport');
 var uuid = require('uuid');
 var app = express();
