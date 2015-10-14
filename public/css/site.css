@@ -5,9 +5,9 @@ body, html {
   width: 100%;
   /*background: #E8F4F3;*/
   background:#26a69a;
- /* background: -webkit-linear-gradient(red, blue); 
-  background: -o-linear-gradient(red, blue); 
-  background: -moz-linear-gradient(red, blue); 
+ /* background: -webkit-linear-gradient(red, blue);
+  background: -o-linear-gradient(red, blue);
+  background: -moz-linear-gradient(red, blue);
   background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
 
@@ -42,7 +42,7 @@ body, html {
   padding-right: 3em;
 }
 /*.col-md-2 {
- background:#26a69a; 
+ background:#26a69a;
  }*/
 
 
@@ -63,16 +63,16 @@ md-input-container {
 #alerts {
   position: absolute;
   right: -77px;
-  margin-top: 12px; 
-  padding: 4px; 
+  margin-top: 12px;
+  padding: 4px;
 }
 
 #alerts a {
   display: block;
   text-align: left;
   /*border: thin solid #999; */
-  background-color: #f0f0f0; 
-  border-radius: 2px 2px 3px 3px; 
+  background-color: #f0f0f0;
+  border-radius: 2px 2px 3px 3px;
   box-shadow: 1px 1px 2px #777;
   margin-bottom: .3em;
   padding: .3em;
@@ -108,7 +108,7 @@ md-input-container {
 }
 
 .welcomePage {
-  background: url("http://www.landcast.com/file?name=/public/images/photo-galleries/seattle-wa-aerial-march-2014/01-DSC_0096.JPG") no-repeat center center fixed;
+  background: url("../imgs/background.png") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
 }
@@ -135,7 +135,7 @@ md-input-container {
   margin-right: 90%;
 }
 #questionFace{
-  padding-left: 3em; 
+  padding-left: 3em;
   font-size: 2em;
   color: #777;
   width: 80%;
@@ -273,7 +273,6 @@ a:hover, a:visited, a:active {
 
 md-backdrop.md-opaque {
   background-color: rgba(33,33,33,0.3) !important;
-  top: 0;
 
 }
 
@@ -343,7 +342,7 @@ md-backdrop.md-opaque {
    width: 60%;
    height: 100px;
    margin-top: 1em;
-   font-size: 1em; 
+   font-size: 1em;
    margin-right: auto;
    margin-left: auto;
  }
@@ -392,7 +391,7 @@ md-backdrop.md-opaque {
   font-size: 6em;
   padding-top: 5%;
   opacity: .3;
-} 
+}
 
 #answerIcons .mdl-button {
   display: block;
@@ -449,4 +448,3 @@ md-backdrop.md-opaque {
         /*border: thin solid #26a69a;*/
       }
     }
-

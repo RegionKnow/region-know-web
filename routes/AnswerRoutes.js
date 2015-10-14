@@ -8,9 +8,7 @@ var User = mongoose.model('User');
 
 // })
 router.param('id', function(req, res, next, id){
-  req.answerId = id;
-  console.log(id, "13 answerroutes");
-  Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
+  req.answerId = id;  Answers.findOne({_id: id}).populate('answers').exec(function(err, response){
     if(err) return res.status(500).send({err: "Error finding answer"});
     if(!response) return res.status(400).send({err: "Error getting from the mongodb Kaareeeee"});
     req.answer = response;
@@ -82,14 +80,11 @@ router.post('/', function(req, res) {
 
 router.post('/delete', function(req, res){
   Answers.update({_id: req.body.answerId}, {isDeleted: true}, function(err, response){
-    console.log('hitting delete in routes line 56');
-    console.log(response);
     res.send(response);
   })
 })
 
 router.post('/edit', function(req, res){
-  console.log(req.body.answerIdProp, "line 62")
 
   Answers.update({_id: req.body.answerIdProp}, {answerBody: req.body.editProp}, function(err, response){
     if(err) return res.status(500).send({err: "Error finding answer"});
@@ -109,14 +104,10 @@ router.post('/comment/:id', function(req, res){
 
 
 router.post('/deleteAnswerComment/', function(req, res){
-  console.log(req.body, "answerroutes 111");
-  console.log(req.body.ansId)
-  console.log(req.body.answerCommentId)
   // Answers.findOne({_id: id}).populate('answers')
   Answers.update({_id: req.body.ansId}, {$pull: {comments:{_id:req.body.answerCommentId}}}, function(err, response){
     if(err) return res.status(500).send({err: "Error finding answer"});
     if(!response) return res.status(400).send({err: "Error getting from the mongodb error finding answer"});
-    console.log(response);
     res.send(response)
   })
 })
@@ -129,34 +120,25 @@ router.post('/:id', function(req, res){
 //upvotes
 router.post('/upvote/:id/:user_id', function(req, res){
   if(req.answer.upvote.indexOf(req.user._id) != -1){
-    console.log('user already upvoted')
     res.send('You already voted!')
   }else if(req.answer.downvote.indexOf(req.user._id) != -1){
 
     var currentVote = req.answer.voteNum + 2
-    
-    
+
+
     Answers.update({_id: req.answer._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-      console.log('added user to upvoted')    
-      console.log(currentVote)
       Answers.update({_id: req.answer._id}, {voteNum: currentVote}, function(err, vote){
-        console.log('vote updated')
         Answers.update({_id: req.answer._id}, {$pull: {downvote: req.user._id}}, function(err, rmVote){
-          console.log('removed downvote From reference')
-          
+
           res.send(rmVote);
         })
       })
     })
   }
   else{
-    console.log('user has not upvoted yet')
     var currentVote = req.answer.voteNum + 1
     Answers.update({_id: req.answer._id}, {$push: {upvote: {_id: req.user._id}}}, function(err, response){
-      console.log('added user to upvoted')    
-      console.log(currentVote)
       Answers.update({_id: req.answer._id}, {voteNum: currentVote}, function(err, vote){
-        console.log('vote updated')
 
         res.send(vote);
       })
@@ -166,40 +148,31 @@ router.post('/upvote/:id/:user_id', function(req, res){
 //Downvotes
 router.post('/downvote/:id/:user_id', function(req, res){
   if(req.answer.downvote.indexOf(req.user._id) != -1){
-    console.log('You already downvoted!')
     res.send('You already downvoted!')
   }else if(req.answer.upvote.indexOf(req.user._id) != -1){
 
     var currentVote = req.answer.voteNum - 2
-    
-    
+
+
     Answers.update({_id: req.answer._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-      console.log('added user to downvoted')    
-      console.log(currentVote)
       Answers.update({_id: req.answer._id}, {voteNum: currentVote}, function(err, vote){
-        console.log('vote updated')
         Answers.findOneAndUpdate({_id: req.answer._id}, {$pull: {upvote: req.user._id}}, function(err, rmVote){
-          console.log('removed downvote From reference')
-          
+
           res.send(rmVote);
         })
       })
     })
   }
   else{
-    console.log('user has not downvoted yet')
     var currentVote = req.answer.voteNum - 1
     Answers.update({_id: req.answer._id}, {$push: {downvote: {_id: req.user._id}}}, function(err, response){
-      console.log('added user to upvoted')    
-      console.log(currentVote)
       Answers.update({_id: req.answer._id}, {voteNum: currentVote}, function(err, vote){
-        console.log('vote updated')
 
         res.send(vote);
       })
     })
   }
-  
+
 })
 
 

@@ -38,6 +38,7 @@
     CollectRanks();
 
     function alertWatch() {
+      if(true) return;
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           console.log('watching for alerts')
@@ -87,7 +88,7 @@
           });
         })
         checkVotes();
-      }, 600000);
+      }, 300000);
     }
 
     function CollectRanks(){
@@ -97,7 +98,7 @@
           console.log('Ranks Organized')
         })
         CollectRanks();
-      }, 600000);
+      }, 300000);
     }
 
 

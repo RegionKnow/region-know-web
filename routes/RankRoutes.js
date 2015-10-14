@@ -10,7 +10,7 @@ router.get('/getRanks', function(req, res){
 			// console.log(users);
 			for(var i = 0; i < users.length; i ++){
 
-				var rankObj = {}; 
+				var rankObj = {};
 				var score = users[i].generalPoints + (users[i].knowledgePoints * 5);
 				rankObj.name = users[i].username;
 				rankObj.gPoints =  users[i].generalPoints;
@@ -35,7 +35,6 @@ router.get('/', function(req, res){
 		sortedResponse = response.sort(function (a, b) {
           return b.score - a.score
         });
-        console.log(sortedResponse)
 		res.send(sortedResponse);
 	})
 })
