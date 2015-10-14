@@ -28,7 +28,7 @@
 				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars mdl-button mdl-js-button mdl-js-ripple-effect" style="font-size: 2.6em;"><span id="titleOnNav">&nbsp;&nbsp;KnowOff</span>
 				</i>
 
-				
+
 
 				<button ng-show="nav.alertObj.status" class=" md-mini topRight navbar-right alertButton md-fab md-primary md-hue-5 md-button md-default-theme" style="color: white; position: absolute; right: -25px; font-size: 20px; padding: 0;" ng-click="nav.openAlerts()">{{nav.alertObj.alertNum}}</button>
 
@@ -136,6 +136,8 @@
 
 <!-- Ext Libs -->
 
+<script src="jquery/dist/jquery.min.js"></script>
+<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
 <script src="angular/angular.min.js"></script>
 <script src="angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="angular-material/angular-material.js"></script>

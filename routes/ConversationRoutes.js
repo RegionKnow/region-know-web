@@ -1,4 +1,4 @@
-
+var Pusher = require('pusher');
 var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
@@ -6,42 +6,83 @@ var User = mongoose.model('User');
 var Conversation = mongoose.model('Conversation');
 var User = mongoose.model('User');
 
+function moduleAvailable(name) {
+  try {
+    require.resolve(name);
+    return true;
+  } catch (e) {}
+  return false;
+}
+
+if (moduleAvailable('../env.js')) {
+  var env = require('../env.js');
+} else {
+  var env = {
+    pusher: {
+      APPID: null,
+      KEY: null,
+      SECRET: null
+    }
+  };
+}
+
+var pusher = new Pusher({
+  appId: process.env['pusher.APPID'] || env.pusher.APPID,
+  key: process.env['pusher.KEY'] || env.pusher.KEY,
+  secret: process.env['pusher.SECRET'] || env.pusher.SECRET,
+  encrypted: true
+});
+
+pusher.port = 3000;
+
+
+
+
+
 //When the server is started this array contains data for all live active conversations
 var activeConversations = [];
 
 //This route is for activating the conversaton into the live domain
-router.post("/activate-convo", function (req, res) {
-  var isConvoInArray = (function(){
-    if(activeConversations.length < 1) return false;
-    for(var index = 0; index < activeConversations.length; index++){
-      if (activeConversations[index].convo === req.body.convoId){
+router.post("/activate-convo", function(req, res) {
+  var isConvoInArray = (function() {
+    if (activeConversations.length < 1) return false;
+    for (var index = 0; index < activeConversations.length; index++) {
+      if (activeConversations[index].convo === req.body.convoId) {
         return true;
       }
     }
     return false;
   })();
-  if(!isConvoInArray) {
+  if (!isConvoInArray) {
     activeConversations.push({
       convo: req.body.convoId,
       numMessages: req.body.numMessages,
-      participants: {participantOne: {id: req.body.user}}
+      participants: {
+        participantOne: {
+          id: req.body.user
+        }
+      }
     });
     res.send()
   } else {
-      activeConversations = activeConversations.map(function (item) {
-        if(!item) return;
-        if(item.convo === req.body.convoId){
-          if(item.participants.participantOne){
-            item.participants.participantTwo = {id: req.body.user};
-            return item;
-          } else {
-            item.participants.participantOne = {id: req.body.user};
-            return item;
-          }
+    activeConversations = activeConversations.map(function(item) {
+      if (!item) return;
+      if (item.convo === req.body.convoId) {
+        if (item.participants.participantOne) {
+          item.participants.participantTwo = {
+            id: req.body.user
+          };
+          return item;
         } else {
+          item.participants.participantOne = {
+            id: req.body.user
+          };
           return item;
         }
-      })
+      } else {
+        return item;
+      }
+    })
   }
   res.send();
 
@@ -50,12 +91,12 @@ router.post("/activate-convo", function (req, res) {
 router.post("/live-convo", function(req, res) {
   //Search activeConversations for convo, updates response object
   activeConversations = activeConversations.map(function(item) {
-    if(!item) return;
-    if (item.convo === req.body.convoId){
-      if(item.participants.participantOne.id === req.body.user){
+    if (!item) return;
+    if (item.convo === req.body.convoId) {
+      if (item.participants.participantOne.id === req.body.user) {
         item.participants.participantOne.response = res;
         return item;
-      } else if(item.participants.participantTwo.id === req.body.user){
+      } else if (item.participants.participantTwo.id === req.body.user) {
         item.participants.participantTwo.response = res;
         return item;
       }
@@ -66,20 +107,20 @@ router.post("/live-convo", function(req, res) {
 
 })
 
-router.post("/deactivate-convo", function (req, res) {
-  activeConversations = activeConversations.filter(function (item) {
-    if(!item) return;
-    if(!item.participants.participantOne || !item.participants.participantTwo) {
-    return item.convo !== req.body.convoId;
-  } else {
-    if(item.participants.participantOne.id === req.body.user){
-      item.participants.participantOne = "";
-      return true;
-    } else{
-      item.participants.participantTwo = "";
-      return true;
+router.post("/deactivate-convo", function(req, res) {
+  activeConversations = activeConversations.filter(function(item) {
+    if (!item) return;
+    if (!item.participants.participantOne || !item.participants.participantTwo) {
+      return item.convo !== req.body.convoId;
+    } else {
+      if (item.participants.participantOne.id === req.body.user) {
+        item.participants.participantOne = "";
+        return true;
+      } else {
+        item.participants.participantTwo = "";
+        return true;
+      }
     }
-  }
 
   });
   console.log(activeConversations);
@@ -168,15 +209,19 @@ router.post('/new-message', function(req, res) {
       error: 'For some reason this coversation does not exist'
     });
 
-    activeConversations.forEach(function (item) {
-      if(!item) return;
+    pusher.trigger(req.body.convoId, 'newMessage', {
+      "message": newMessage
+    });
+
+    activeConversations.forEach(function(item) {
+      if (!item) return;
       var convoResponseOne, convoResponseTwo;
-      if(item.convo === req.body.convoId){
-        if(item.participants.participantOne && item.participants.participantOne.response){
+      if (item.convo === req.body.convoId) {
+        if (item.participants.participantOne && item.participants.participantOne.response) {
           convoResponseOne = item.participants.participantOne.response;
           convoResponseOne.send(newMessage);
         }
-        if(item.participants.participantTwo && item.participants.participantTwo.response){
+        if (item.participants.participantTwo && item.participants.participantTwo.response) {
           convoResponseTwo = item.participants.participantTwo.response;
           convoResponseTwo.send(newMessage);
         }
@@ -193,10 +238,10 @@ router.get('/rando', function(req, res) {
   var number = Math.floor((Math.random() * 256));
   console.log(typeof res);
   setTimeout(function() {
-  res.send({
-    body: number
-  })
-}, 10000)
+    res.send({
+      body: number
+    })
+  }, 10000)
 
 })
 
