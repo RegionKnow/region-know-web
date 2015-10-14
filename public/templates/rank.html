@@ -1,42 +1,38 @@
 <div class="topRows">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-<!-- 		<center>
-			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.worldRank()">
-			World Rank
-			</md-button>
-			<md-button aria-label="..." class="md-raised md-primary" ng-click="vm.currentRank()">
-			Current Rank
-			</md-button>
-		</center> -->
+		<br>
+		<center><h2 class="whiteh2">How do you rank in the KnowOff?</h2></center>
+		<br>
 		<div ng-repeat="user in vm.rankObj track by $index">
 			<span>
-			
-			<!-- <a ui-sref="ViewQuesiton({id: q._id})"> -->
 
-				<h2>#{{$index + 1}}</h2><div class="mdl-card mdl-shadow--4dp qCards">
+				<div class="mdl-card mdl-shadow--4dp rankCards">
 
 					<div class="mdl-card__supporting-text" style="opacity: none;">
-						<span>
-						<img src="{{user.img}}" class="img-circle" style="height: 10%; width: 10%;">
-							{{user.name}}
-							</span>
-							<h2>Score - {{user.score}}</h2>
-							<span>{{user.kPoints}} Knowledge Points</span>
-							<span>
-							{{user.gPoints}} General Points</span>
-						&nbsp;
-						
-						</span>
-					</div>
+						<h3>
+							<img src="{{user.img}}" class="img-circle" style="height: 10%; width: 10%;">
+							&nbsp;{{user.name}}
+						</h3>
+						<h2>Score - {{user.score}}</h2>
+						<h5>{{user.kPoints}} Knowledge Points
+							<br>
+							{{user.gPoints}} General Points
+						</h5>
+
+
+					</span>
+
+					<h1 id="rankNum">#{{$index + 1}}</h1>
 				</div>
+			</div>
 
 			<!-- </a> -->
 
 		</div>
 
-</div>
+	</div>
 
 
-<div class="col-md-2"></div>
+	<div class="col-md-2"></div>
 </div>

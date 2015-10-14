@@ -1,14 +1,16 @@
-<div class="col-md-2"></div>
+<div class="row">
+  <div class="col-md-2"></div>
 
-<div class="col-md-10">
+  <div class="col-md-8">
 
-  <div ng-hide="msg.inConversation" class="topRows">
+    <div ng-hide="msg.inConversation" class="topRows">
 
-    <h1>{{msg.title}}</h1>
-
-    <md-button ng-click="msg.testRequest()" class="md-accent md-raised">
+      <center><h2 class="whiteh2">Your Messages</h2></center>
+      <br>
+<!-- 
+      <md-button ng-click="msg.testRequest()" class="md-accent md-raised">
       {{msg.button}}
-    </md-button>
+    </md-button> -->
 
     <p ng-show="msg.testMessage">
       {{msg.testMessage}}
@@ -17,8 +19,8 @@
     <md-card ng-repeat='convo in msg.conversations track by $index | orderBy: createdDate'>
     <md-card-content>
 
-      <h3 ng-show='convo.participantTwo.username !== vm.status._user.username '>{{convo.participantTwo.username}}</h3>
-     <h3 ng-show='convo.participantTwo.username === vm.status._user.username '>{{convo.participantOne.username }}</h3>
+    <h3 style="color:#777;" ng-show='convo.participantTwo.username !== vm.status._user.username '>{{convo.participantTwo.username}}</h3>
+    <h3 style="color:#777;" ng-show='convo.participantTwo.username === vm.status._user.username '>{{convo.participantOne.username }}</h3>
 
     <h2 class="md-title">Last Message:
       <p>
@@ -26,60 +28,60 @@
           {{convo.messages[convo.messages.length - 1].body || "No messages"}}
         </em>
       </h2>
-
-    </md-card-content>
-
-      <div class="md-actions" layout="row" layout-align="end center">
+      <div id="convoButtons">
         <md-button class='md-raised md-primary' ng-click="msg.openConvo($index);">
         Open Convo
-        </md-button>
+      </md-button>
+      <md-button class='md-raised md-accent'>
+      Delete
+    </md-button>
+  </div>
+</md-card-content>
 
-        <md-button class='md-raised md-accent'>
-        Delete
-        </md-button>
-      </div>
 
-    </md-card>
 
+</md-card>
+
+</div>
+
+
+<div ng-show="msg.inConversation">
+  <br><br><br>
+  <md-card>
+  <md-card-content>
+  You're talking to <span style="color: rgb(0,150,136); font-size: 25px;">{{msg.convoInFocus.participantTwo.username}}</span><hr>
+
+  <div ng-repeat="message in msg.convoInFocus.messages">
+
+    <span>
+      <strong style="font-size: 25px;">{{message.body}}</strong>
+
+      <small>-
+        {{message.sender}} at {{message.createdDate | date:'h:mma, MM/dd/yyyy'}}
+      </small>
+    </span>
+    <hr>
   </div>
 
+  <form ng-submit="msg.sendMessage()">
 
-    <div ng-show="msg.inConversation">
-      <br><br><br>
-      <md-card>
-        <md-card-content>
-        You're talking to <span style="color: rgb(0,150,136); font-size: 25px;">{{msg.convoInFocus.participantTwo.username}}</span><hr>
+    <md-input-container>
+    <label>Enter Message</label>
+    <input type='text' ng-model="msg.newMessage"></input>
+  </md-input-container>
 
-        <div ng-repeat="message in msg.convoInFocus.messages">
+  <md-button class='md-raised md-primary' ng-disabled="!msg.newMessage" type='submit'>Send Message</md-button>
 
-          <span>
-            <strong style="font-size: 25px;">{{message.body}}</strong>
+  <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
 
-            <small>-
-              {{message.sender}} at {{message.createdDate | date:'h:mma, MM/dd/yyyy'}}
-            </small>
-          </span>
-          <hr>
-        </div>
+</form>
 
-        <form ng-submit="msg.sendMessage()">
-
-          <md-input-container>
-            <label>Enter Message</label>
-            <input type='text' ng-model="msg.newMessage"></input>
-          </md-input-container>
-
-          <md-button class='md-raised md-primary' ng-disabled="!msg.newMessage" type='submit'>Send Message</md-button>
-
-          <md-button class='md-raised md-accent' ng-click="msg.closeConvo();">Close Convo</md-button>
-
-        </form>
-
-        </md-card-content>
-      </md-card>
-    </div>
+</md-card-content>
+</md-card>
+</div>
 
 
 </div>
 
 <div class="col-md-2"></div>
+</div>
