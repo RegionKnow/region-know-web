@@ -179,7 +179,7 @@ app.use('/api/password-reset', resetPassRoutes);
 app.use('/api/rank', rankRoutes);
 
 
-app.get('/', function(req, res) {
+app.use('/', function(req, res) {
   res.render('404');
 })
 

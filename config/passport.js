@@ -18,7 +18,7 @@ var env = require('./env.js');
 var env = {};
 }
 
-
+console.log(process.env['facebook.CALLBACKURL']);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
