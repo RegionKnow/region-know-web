@@ -94,7 +94,7 @@ md-input-container {
 }
 
 .welcomePage {
-  background: url("http://www.landcast.com/file?name=/public/images/photo-galleries/seattle-wa-aerial-march-2014/01-DSC_0096.JPG") no-repeat center center fixed;
+  background: url("../imgs/background.png") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
 }
