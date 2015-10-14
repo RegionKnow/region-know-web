@@ -97,11 +97,9 @@
       vm.convoInFocus = vm.conversations[convoIndex];
       vm.channel = pusher.subscribe(vm.convoInFocus._id);
       vm.channel.bind('newMessage', function(data) {
-        console.log(vm.convoInFocus.messages);
         $scope.$apply(function() {
         vm.convoInFocus.messages.push(data.message);
         });
-        console.log(vm.convoInFocus.messages);
       });
       vm.inConversation = true;
 
