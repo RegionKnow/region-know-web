@@ -4,7 +4,19 @@ var FacebookStrategy = require('passport-facebook').Strategy; //It's requiring t
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;; //It's requiring the passport for our local database authentication.
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var env = require('../env') || {};
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
+
+if (moduleAvailable('./env.js')) {
+var env = require('./env.js');
+} else {
+var env = {};
+}
 
 
 

@@ -5,8 +5,22 @@ var mongoose = require('mongoose');
 var User = mongoose.model("User");
 var request = require('request');
 var nodemailer = require('nodemailer');
-var env = require('../env') || {};
 var jwt = require("jsonwebtoken");
+
+
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
+
+if (moduleAvailable('./env.js')) {
+var env = require('./env.js');
+} else {
+var env = {};
+}
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',

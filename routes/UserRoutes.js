@@ -7,7 +7,6 @@ var uuid = require('uuid');
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
-var env = require('../env') || {};
 var Questions = mongoose.model('Question')
 
 var auth = express_jwt({
@@ -16,6 +15,19 @@ var auth = express_jwt({
 });
 
 
+function moduleAvailable(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch(e){}
+    return false;
+}
+
+if (moduleAvailable('./env.js')) {
+var env = require('./env.js');
+} else {
+var env = {};
+}
 //-----------CLOUDNARY.CONFIG and ROUTES----------------------------------------------------
 
 cloudinary.config({
