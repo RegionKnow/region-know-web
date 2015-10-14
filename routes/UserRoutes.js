@@ -7,7 +7,7 @@ var uuid = require('uuid');
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var express_jwt = require('express-jwt');
-var env = require('../env');
+var env = require('../env') || {};
 var Questions = mongoose.model('Question')
 
 var auth = express_jwt({
