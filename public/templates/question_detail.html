@@ -57,11 +57,11 @@
 					</div>
 
 				</div>
-				
+
 
 			</td>
 		</tr>
-		
+
 
 		<!-- <img src="{{vm.question.img}}" class="img-circle" style="height: 10%; width: 10%;"> -->
 
@@ -94,7 +94,7 @@
 	<center><h2>Answers to {{vm.question.userName}}'s Question...</h2></center>
 	<br>
 	<div class=" mdl-card mdl-shadow--4dp aCards" ng-repeat="a in vm.question.answers track by $index" ng-show="!a.isDeleted">
-		
+
 		<table width="100%">
 			<tr>
 				<td >
@@ -116,14 +116,14 @@
 				</td>
 				<td>
 
-					
+
 
 					<p>{{a.name}} says...{{a.answerBody}}</p>
 
-					
+
 				</div>
 
-				
+
 
 			</span>
 
@@ -170,7 +170,7 @@
 </table>
 
 
-<form  ng-submit="vm.commentAnswer(a._id, comment)">
+<form  ng-submit="vm.commentAnswer(a._id, comment); comment ='';">
 	<md-input-container flex class="text-left">
 	<label>Comment on this answer...</label>
 	<input ng-model="comment" require>
@@ -191,6 +191,3 @@
 <div class="col-md-2 col-lg-1">
 
 </div>
-
-
-
