@@ -255,10 +255,10 @@ md-input-container {
   font-size: 2em;
 }
 
-.navImage {
+/*.navImage {
   height: 100px;
   width: 50%;
-}
+  }*/
 
 #navBar a, #userInfo {
   width: 93%;
