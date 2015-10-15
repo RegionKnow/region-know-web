@@ -9,15 +9,15 @@ var uuid = require('uuid');
 var app = express();
 
 function moduleAvailable(name) {
-    try {
-        require.resolve(name);
-        return true;
-    } catch(e){}
-    return false;
+  try {
+    require.resolve(name);
+    return true;
+  } catch(e){}
+  return false;
 }
 
 if (moduleAvailable('./env.js')) {
-var env = require('./env.js');
+  var env = require('./env.js');
 }
 //For Android cloud messaging services testing
 // var gcm = require('node-gcm');
