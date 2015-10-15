@@ -240,18 +240,20 @@
       };
 
       geocoder.geocode(geocoderRequest, function(results, status) {
-        var loc = results[0].geometry.bounds
+        console.log(results)
+        var loc = results[0].geometry.location
         vm.map = new google.maps.Map(document.getElementById('map'), {
           center: {
-            lat: loc.La.j,
-            lng: loc.Pa.j
+            lat: loc.lat(),
+            lng: loc.lng()
           },
           scrollwheel: true,
           zoom: 11,
         })
+        getCircle(loc.lat(), loc.lng())
         var marker = new google.maps.Marker({
           map: vm.map,
-          position: new google.maps.LatLng(loc.J, loc.M),
+          position: new google.maps.LatLng(loc.lat(), loc.lng()),
           title: 'Your Current Location',
           draggable: true
         });
@@ -259,9 +261,10 @@
           if (vm.cityCircle) {
             vm.cityCircle.setMap(null);
           }
+          // console.log(this.position.lat())
           // resets circle
-          vm.homeLocation.lat = this.position.J
-          vm.homeLocation.lng = this.position.M
+          vm.homeLocation.lat = this.position.lat();
+          vm.homeLocation.lng = this.position.lng();
             // vm.infoWindow.setContent('<h6>' + 'Your Current Location' + '</h6>');
             // vm.infoWindow.open(vm.map, marker);
           getCircle(vm.homeLocation.lat, vm.homeLocation.lng);
