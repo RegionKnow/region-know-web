@@ -117,6 +117,7 @@
 
 
 
+
     //---------FUNCTIONALITY FOR MODALS----------------------------------------------------------
     vm.openLoginModal = function() {
       var loginModal = $modal.open({
@@ -144,5 +145,7 @@
       });
     };
 
+
+    
   }
 })();

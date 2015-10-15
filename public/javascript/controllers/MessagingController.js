@@ -7,7 +7,6 @@
 
   function MessageController($http, $rootScope, $stateParams, $state, $mdDialog, UserFactory, $q, $scope) {
     var vm = this;
-    console.log("Instatiating");
     vm.status = UserFactory.status;
     vm.title = 'Messaging';
     vm.button = "Test call button";
@@ -16,10 +15,6 @@
       encrypted: true
     });
 
-    // var channel = pusher.subscribe('test_channel');
-    // channel.bind('my_event', function(data) {
-    //   alert(data.message);
-    // });
 
     if (!vm.status._user) {
       $state.go("Home")
