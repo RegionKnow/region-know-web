@@ -61,12 +61,10 @@ function SendEmail(user, resObj) {
   }
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      console.log(error);
       return resObj.status(500).send({
-        Err: "Error sending email"
+        err: "Error sending email"
       })
     }
-    console.log('Message sent: ' + info.response);
     return resObj.send()
   });
 }
@@ -77,7 +75,7 @@ function SendEmail(user, resObj) {
 
 router.post("/", function(req, res) {
   User.findOne({
-    username: req.body.username
+    email: req.body.email
   }, {
     //Selecting for these fields
     username: 1,
@@ -87,7 +85,7 @@ router.post("/", function(req, res) {
       err: "Something happened on the server,"
     });
     if (!user) return res.status(404).send({
-      err: "That user doesn't exist"
+      err: "That email doesn't exist on our server"
     });
     else {
       SendEmail(user, res);
