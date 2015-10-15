@@ -1,8 +1,8 @@
 (function() {
   angular.module('app').controller("PasswordResetController", PasswordResetController);
-  PasswordResetController.$inject = ["$state", '$http', "$timeout", "$stateParams", "$window"];
+  PasswordResetController.$inject = ["$state", '$http', "$timeout", "$stateParams", "$window", '$modalInstance'];
 
-  function PasswordResetController($state, $http, $timeout, stateParams, $window) {
+  function PasswordResetController($state, $http, $timeout, stateParams, $window, $modalInstance) {
     var vm = this;
     vm.sendEmail = sendEmail;
     vm.changePassword = changePassword;
@@ -46,17 +46,24 @@
 
 
     function sendEmail() {
-      if (!vm.username) return vm.errorMessage = "No input";
+      if (!vm.email){
+        vm.errorMessage = "No input";
+        $timeout(function() {
+          vm.errorMessage = "";
+        }, 1000);
+        return;
+      }
       vm.loading = true;
       $http.post("/api/password-reset", {
-          username: vm.username
+          email: vm.email
         })
         .then(function(responseSuccess) {
           vm.loading = false;
-          vm.errorMessage = "Success! Email Sent!!! Check your email, please.\nRedirecting to login page.."
+          vm.errorMessage = "Success! Email Sent!!! Check your email, please.\nClosing so you can login.."
           $timeout(function() {
-            $state.go("Login");
-          }, 3000)
+            vm.errorMessage = '';
+            $modalInstance.close();
+          }, 2000)
         }, function(responseError) {
           vm.loading = false;
           vm.errorMessage = responseError.data.err;

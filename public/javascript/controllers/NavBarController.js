@@ -38,7 +38,6 @@
     CollectRanks();
 
     function alertWatch() {
-      if(true) return;
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
           // console.log('watching for alerts')
@@ -118,6 +117,7 @@
 
 
 
+
     //---------FUNCTIONALITY FOR MODALS----------------------------------------------------------
     vm.openLoginModal = function() {
       var loginModal = $modal.open({
@@ -145,5 +145,7 @@
       });
     };
 
+
+    
   }
 })();

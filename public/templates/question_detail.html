@@ -4,7 +4,7 @@
 
 	
 	<div class="col-md-8" ng-show="vm.Qloaded">
-			<md-progress-circular md-mode='indeterminate' md-diameter='100'></md-progress-circular>
+		<md-progress-circular md-mode='indeterminate' md-diameter='100'></md-progress-circular>
 	</div>
 	
 	<div class="col-md-8 col-lg-10" ng-show="!vm.Qloaded" ng-cloak>
@@ -78,7 +78,7 @@
 	</table>
 
 	<br>
-	<form ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
+	<form id="answerForm" ng-submit="vm.addAnswer()" ng-if="vm.status._user.id != vm.question.postedBy">
 		<md-input-container flex class="text-left">
 		<label>Answer this question here...</label>
 		<input ng-model="vm.AnswerObj.answerBody" require>
@@ -109,8 +109,10 @@
 			<tr>
 				<td >
 					<span>
-						<i  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon" id="QDicon" style="margin-right: 20%;">done</i>
-						<i style="color:green; margin-right: 20%;"  ng-if="vm.isAnswered === a._id" class="material-icons qIcon" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">spellcheck</i>
+
+						<i style="color:#999;"  ng-if="vm.isAnswered != a._id" ng-click="vm.chooseAnswer(a._id, a.postedBy)" class="material-icons qIcon mdl-button mdl-js-button mdl-js-ripple-effect" id="QDicon">done</i>
+						<i style="color:green;"  ng-if="vm.isAnswered === a._id" class="material-icons qIcon mdl-button mdl-js-button mdl-js-ripple-effect" id="QDicon" ng-click="vm.cancelChoseAnswer(a._id, a.postedBy)">spellcheck</i>
+
 					</span>
 
 					<div ng-if="vm.status._user.id" style="width: 100px;">
