@@ -21,9 +21,11 @@ router.get('/getRanks', function(req, res){
 
 				var UserRank = new Rank(rankObj)
 				UserRank.save(function(err, response){
-					// User.update({_id: users[i]._id }, {$push: { questions: {_id: response._id} } }, function(err, user){
-						// res.send('rank database populated');
-					// })
+					
+				})
+				// console.log(users[i]._id)
+				User.update({_id: users[i]._id }, {score: rankObj.score}, function(err, user){
+						// res.send('user updated with score');
 				})
 			}
 		})

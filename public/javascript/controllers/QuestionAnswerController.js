@@ -39,6 +39,8 @@
     }
 
     // Answer Logic
+   
+
     vm.addAnswer = function() {
       //AnswerObj is the answer for question
       // vm.AnswerObj.answerBody = vm.answer // sets answer

@@ -9,6 +9,8 @@
 		var vm = this;
 		vm.status = UserFactory.status;
 		vm.loading = false;
+		vm.userInfoLoaded = false;
+		getallUserInfo();
 		if(!vm.status._user){
 			$state.go("Home")
 		}
@@ -19,6 +21,13 @@
 			vm.userLoggedIn = res;
 		});
 	};
+	function getallUserInfo(){
+		UserFactory.getallUserInfo(vm.status._user.id).then(function(res){
+			vm.fullUserInfo = res
+			vm.userInfoLoaded = true;
+			console.log(vm.fullUserInfo)
+		})
+	}
 	//----------------------------------------------------------------------------------------------------------------------------------------------------//
 	//PROFILE>DELETE
 	vm.deleteUserProfile = function() {

@@ -186,6 +186,20 @@
       })
       return q.promise;
     }
+    o.findUser = function(id){
+      var q = $q.defer();
+      $http.get('/api/user/liked/' + id).success(function(res){
+        q.resolve(res);
+      })
+      return q.promise;
+    }
+    o.getallUserInfo = function(id){
+      var q = $q.defer();
+      $http.get('/api/user/all/' + id).success(function(res){
+        q.resolve(res);
+      })
+      return q.promise;
+    }
 
     o.status._user = isLoggedIn();
     return o;

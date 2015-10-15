@@ -41,7 +41,7 @@
       if(true) return;
       $timeout(function() {
         UserFactory.grabAlert(vm.status._user.id).then(function(res) {
-          console.log('watching for alerts')
+          // console.log('watching for alerts')
           if(!res.alerts) return;
           if (res.alerts.length > 0) {
             vm.alertObj.status = true;
@@ -60,7 +60,7 @@
 
     vm.openAlerts = function() {
       count += 1
-      console.log('cought alerts')
+      // console.log('cought alerts')
       if(count % 2 === 0 ){
         vm.showAlertTab = true;
       }else{
@@ -78,7 +78,7 @@
 
     function checkVotes(){
       $timeout(function() {
-        console.log('reloading Nav')
+        // console.log('reloading Nav')
         UserFactory.getGeneralPoints(vm.status._user.id).then(function(response){
           // console.log(response)
           UserFactory.reloadNav(vm.status._user.id).then(function(res){
@@ -92,7 +92,7 @@
     }
 
     function CollectRanks(){
-      console.log('collecting Ranks')
+      // console.log('collecting Ranks')
       $timeout(function() {
         RankFactory.collectRanks().then(function(res){
           console.log('Ranks Organized')
