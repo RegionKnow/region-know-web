@@ -10,6 +10,11 @@ body, html {
   background: -moz-linear-gradient(red, blue);
   background: linear-gradient(to right, #26a69a, white, white, white, white, white,#26a69a);*/
 }
+
+.profileOptions {
+  margin: auto;
+}
+
 #logo {
   width: 10%;
 }
@@ -260,101 +265,101 @@ md-input-container {
   width: 50%;
   }*/
 
-#navBar a, #userInfo {
-  width: 93%;
-  display: inline-block;
-  height: 7.9%;
-  text-align: left;
-  vertical-align: middle;
-  padding-top: .6em;
-  /*padding-top: .9em;*/
-}
+  #navBar a, #userInfo {
+    width: 93%;
+    display: inline-block;
+    height: 7.9%;
+    text-align: left;
+    vertical-align: middle;
+    padding-top: .6em;
+    /*padding-top: .9em;*/
+  }
 
-md-backdrop {
-  position: absolute;
-  height: 141.5%;
-}
+  md-backdrop {
+    position: absolute;
+    height: 141.5%;
+  }
 
-#userInfo {
-  margin-top: 1em;
-  height: 36%;
-  width: 100%;
-  background-color: #26a69a;
-}
+  #userInfo {
+    margin-top: 1em;
+    height: 36%;
+    width: 100%;
+    background-color: #26a69a;
+  }
 
-a:hover, a:visited, a:active {
-  text-decoration: none;
-  color: #26a69a;
-}
+  a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: #26a69a;
+  }
 
-.loggedInUser {
-  color: #26a69a;
-}
+  .loggedInUser {
+    color: #26a69a;
+  }
 
-.topNav {
-  background-color: white;
-  height: 60px;
-  box-shadow: 1px 1px 9px #333;
-  color: #26a69a;
-  position: fixed;
-  z-index: 9999;
-  width: 100%;
-  top: 0;
-}
+  .topNav {
+    background-color: white;
+    height: 60px;
+    box-shadow: 1px 1px 9px #333;
+    color: #26a69a;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    top: 0;
+  }
 
-.topRows {
+  .topRows {
 
-  position: relative;
-  top: 85px;
-  padding-bottom: 10px;
-}
+    position: relative;
+    top: 85px;
+    padding-bottom: 10px;
+  }
 
-#tradeName {
-  font-size: 1.6em;
-  line-height: 2em;
-}
-
-
-.topRight {
-  padding-right: 1em;
-  padding-top: 1em;
-  font-size: 1.3em;
-}
+  #tradeName {
+    font-size: 1.6em;
+    line-height: 2em;
+  }
 
 
-#naviBars {
-  color: #26a69a;
-  margin-top: .3em;
-}
+  .topRight {
+    padding-right: 1em;
+    padding-top: 1em;
+    font-size: 1.3em;
+  }
 
 
-md-backdrop.md-opaque {
-  background-color: rgba(33,33,33,0.3) !important;
+  #naviBars {
+    color: #26a69a;
+    margin-top: .3em;
+  }
 
-}
 
-#answerForm {
-  padding: 2em;
-  background-color: rgb(255,255,255);
-  border-radius: 10px;
-}
-/*================TAG STYLES==========================================*/
-#quesitonTag{
-  margin-left: 7px;
-  font-size: 15px;
-  border-radius: 10px;
-  border-radius: 1px 5px 3px 5px;
-  border-width: 3px;
-  box-shadow: 2px 2px 2px black;
-  border-color: #000000;
-  padding-left: 15px;
-  background-color: #F0f0f0;
-  display: inline;
-}
-.tagDiv {
-  border-radius: 10px;
-}
-.indvTag {
+  md-backdrop.md-opaque {
+    background-color: rgba(33,33,33,0.3) !important;
+
+  }
+
+  #answerForm {
+    padding: 2em;
+    background-color: rgb(255,255,255);
+    border-radius: 10px;
+  }
+  /*================TAG STYLES==========================================*/
+  #quesitonTag{
+    margin-left: 7px;
+    font-size: 15px;
+    border-radius: 10px;
+    border-radius: 1px 5px 3px 5px;
+    border-width: 3px;
+    box-shadow: 2px 2px 2px black;
+    border-color: #000000;
+    padding-left: 15px;
+    background-color: #F0f0f0;
+    display: inline;
+  }
+  .tagDiv {
+    border-radius: 10px;
+  }
+  .indvTag {
      /* width: auto;
      height: 50px;*/
      border: thin solid #999;
