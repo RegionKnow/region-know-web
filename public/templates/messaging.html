@@ -55,7 +55,12 @@
       <br>
       <md-card id='convoList' style="position: relative; bottom: 128px; margin-top: 138px" ng-hide='msg.loadingInConvo'>
         <md-card-content>
-          You're talking to <span style="color: rgb(0,150,136); font-size: 25px;">{{msg.convoInFocus.participantTwo.username}}</span>
+          <div ng-show="msg.convoInFocus.participantOne.username === msg.status._user.username">
+            You're talking to <span style="color: rgb(0,150,136); font-size: 25px;">{{msg.convoInFocus.participantTwo.username}}</span>
+          </div>
+          <div ng-show="msg.convoInFocus.participantTwo.username === msg.status._user.username">
+            You're talking to <span style="color: rgb(0,150,136); font-size: 25px;">{{msg.convoInFocus.participantOne.username}}</span>
+          </div>
           <hr>
 
           <div ng-repeat="message in msg.convoInFocus.messages track by $index">

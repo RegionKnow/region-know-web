@@ -238,6 +238,7 @@
       var geocoderRequest = {
         address: vm.searchLoc
       };
+
       geocoder.geocode(geocoderRequest, function(results, status) {
         var loc = results[0].geometry.bounds
         vm.map = new google.maps.Map(document.getElementById('map'), {
