@@ -25,7 +25,7 @@
 		UserFactory.getallUserInfo(vm.status._user.id).then(function(res){
 			vm.fullUserInfo = res
 			vm.userInfoLoaded = true;
-			console.log(vm.fullUserInfo)
+			// console.log(vm.fullUserInfo)
 		})
 	}
 	//----------------------------------------------------------------------------------------------------------------------------------------------------//

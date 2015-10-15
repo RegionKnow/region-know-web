@@ -198,7 +198,7 @@
       $http.get('/api/user/all/' + id).success(function(res){
         q.resolve(res);
       })
-      return q.promise;
+      return q.promise; 
     }
 
     o.status._user = isLoggedIn();

@@ -34,7 +34,7 @@
 		</div>
 	<!-- </div> -->
 
-	<div ng-show="!vm.fullUserInfo.likedQuestions.length === 0">
+	<!-- <div ng-show="!vm.fullUserInfo.likedQuestions.length === 0"> -->
 		<center><h1>Questions you Have liked!</h1></center>
 	
 		<div ng-repeat="q in vm.fullUserInfo.likedQuestions | filter: vm.search" ng-show="q.isDeleted != true">
@@ -55,9 +55,9 @@
 			</a>
 
 		</div>
-	</div>
+	<!-- </div> -->
 
-	<div ng-show="!vm.fullUserInfo.answers.length === 0">
+	<!-- <div ng-show="!vm.fullUserInfo.answers.length === 0"> -->
 	<center><h1>Answers you Have posted!</h1></center>
 		<div ng-repeat="q in vm.fullUserInfo.answers | filter: vm.search" ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q.questionId})">
@@ -77,7 +77,7 @@
 			</a>
 
 		</div>
-	</div>
+	<!-- </div> -->
 </div>
 <div class="col-md-2"></div>
 
