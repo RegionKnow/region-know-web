@@ -88,7 +88,7 @@
     .state("PasswordResetFinish", {
       url: "/resetEnd/:info",
       template: "<div>" +
-        "<md-card class='col-md-offset-2 col-md-8'><md-card-content><md-input-container ><label>New Password</label><input type='password' ng-model='vm.newPassword'></md-input-container><br><md-input-container ><label>Confirm Password</label><input type='password' ng-model='vm.confirmPassword'></md-input-container><br><center><md-button class='md-raised md-primary' ng-click='vm.changePassword()'>Change Password</md-button><md-button class='md-raised md-warn' ng-click='vm.goHome()'>Go Home</md-button></center></div><h1>{{vm.errorMessage}}</h1></md-card-content></md-card>",
+        "<md-card class='col-md-offset-2 col-md-8'><md-card-content><md-input-container ><label>New Password</label><input type='password' ng-model='vm.newPassword'></md-input-container><br><md-input-container ><label>Confirm Password</label><input type='password' ng-model='vm.confirmPassword'></md-input-container><br><center><md-button class='md-raised md-primary' ng-click='vm.changePassword()'>Change Password</md-button><md-button class='md-raised md-warn' ng-click='vm.goHome()'>Go Home</md-button><h1>{{vm.errorMessage}}</h1></center></div></md-card-content></md-card>",
       controller: ['$http', "$timeout", "$window", "$stateParams", '$state', function($http, $timeout, $window, $stateParams, $state) {
         var vm = this;
         vm.changePassword = changePassword;
@@ -97,7 +97,7 @@
         }
 
         function changePassword() {
-          var token = JSON.parse(urlBase64Decoder(stateParams.info.split(".")[1]));
+          var token = JSON.parse(urlBase64Decoder($stateParams.info.split(".")[1]));
           if (token.expirationDate < Date.now()) {
             vm.errorMessage = "Link expired...Sorry";
           } else {
@@ -118,7 +118,7 @@
                     vm.errorMessage = res.data.success;
                     $timeout(function() {
                       $state.go('Home')
-                    }, 500);
+                    }, 850);
                   }, function(res) {
                     console.log(res.data);
                   })

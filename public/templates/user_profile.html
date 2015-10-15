@@ -1,6 +1,6 @@
 <div class="col-md-2"></div>
 
-<div class="col-md-8" ng-show="!vm.userInfoLoaded">		
+<div class="col-md-8" ng-show="!vm.userInfoLoaded">
 	<md-progress-circular md-mode='indeterminate' md-diameter='100'></md-progress-circular>
 </div>
 
@@ -9,12 +9,12 @@
 
 	<div ng-if="vm.fullUserInfo.answers.length === 0 && vm.fullUserInfo.questions.length === 0 && vm.fullUserInfo.likedQuestions.length === 0">
 		<center>
-		<h1>You have not posted anything Yet!</h1>
+		<h1 class="whiteh2">You have not posted anything Yet!</h1>
 		</center>
 	</div>
 
 	<!-- <div ng-show="!vm.fullUserInfo.questions.length === 0"> -->
-	<center><h1>Questions you Have posted!</h1></center>
+	<center><h1 class="whiteh2">Questions you Have posted!</h1></center>
 		<div ng-repeat="q in vm.fullUserInfo.questions | filter: vm.search" ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
 
@@ -35,8 +35,8 @@
 	<!-- </div> -->
 
 	<!-- <div ng-show="!vm.fullUserInfo.likedQuestions.length === 0"> -->
-		<center><h1>Questions you Have liked!</h1></center>
-	
+		<center><h1 class="whiteh2">Questions you Have liked!</h1></center>
+
 		<div ng-repeat="q in vm.fullUserInfo.likedQuestions | filter: vm.search" ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q._id})">
 
@@ -58,7 +58,7 @@
 	<!-- </div> -->
 
 	<!-- <div ng-show="!vm.fullUserInfo.answers.length === 0"> -->
-	<center><h1>Answers you Have posted!</h1></center>
+	<center><h1 class="whiteh2">Answers you Have posted!</h1></center>
 		<div ng-repeat="q in vm.fullUserInfo.answers | filter: vm.search" ng-show="q.isDeleted != true">
 			<a ui-sref="ViewQuesiton({id: q.questionId})">
 
@@ -80,4 +80,3 @@
 	<!-- </div> -->
 </div>
 <div class="col-md-2"></div>
-

@@ -2,7 +2,7 @@
   angular.module('app').controller("PasswordResetController", PasswordResetController);
   PasswordResetController.$inject = ["$state", '$http', "$timeout", "$stateParams", "$window", '$modalInstance'];
 
-  function PasswordResetController($state, $http, $timeout, stateParams, $window, $modalInstance) {
+  function PasswordResetController($state, $http, $timeout, $stateParams, $window, $modalInstance) {
     var vm = this;
     vm.sendEmail = sendEmail;
     vm.changePassword = changePassword;
