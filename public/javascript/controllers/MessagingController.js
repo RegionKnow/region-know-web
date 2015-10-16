@@ -94,6 +94,7 @@
       vm.channel.bind('newMessage', function(data) {
         $scope.$apply(function() {
         vm.convoInFocus.messages.push(data.message);
+        angular.element("html, body").animate({ scrollTop: angular.element(document).height() }, 1000);
         });
       });
       vm.inConversation = true;
