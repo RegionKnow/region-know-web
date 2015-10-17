@@ -9,9 +9,9 @@
     var vm = this;
     vm.status = UserFactory.status;
     if(!vm.status._user){
-      $state.go("Home")
+      $state.go("Home");
     }
-    vm.question = {}
+    vm.question = {};
     vm.createQ = createQ;
     // vm.showTagInput = showTagInput;
     vm.getQuestions = getQuestions;
@@ -40,8 +40,8 @@ function getQuestions() {
         }).sort(function (a, b) {
           return b.dateInMilliseconds - a.dateInMilliseconds;
         });
-        console.log(vm.allquestions)
-      })
+        console.log(vm.allquestions);
+      });
 }
 
 
@@ -73,8 +73,8 @@ function getQuestions() {
             vm.question = {}; // deleting question object
             vm.desc = ''; // deleting question in html
             $state.go('QuestionsFeed');
-          })
-        })
+          });
+        });
       } else { //skips api call to find location
         console.log('skipped getting locaiton');
         QuestionFactory.createQuestion(vm.question).then(function(res) {
@@ -83,7 +83,7 @@ function getQuestions() {
           vm.question = {}; // deleting question object
           vm.desc = ''; // deleting question in html
           $state.go('QuestionsFeed');
-        })
+        });
 
       }
 
@@ -111,7 +111,7 @@ function getQuestions() {
       var split_tag = tag.split('')
       console.log(split_tag)
       for (var k = 0; k < split_tag.length; k++) {
-        if (split_tag[k] == ' ') {
+        if (split_tag[k] === ' ') {
           vm.tagError = true;
           return;
         }
