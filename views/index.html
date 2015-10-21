@@ -6,6 +6,7 @@
 <head>
 	<title>RegiKnow</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="imgs/regiknowLogo.png">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
 	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
@@ -25,7 +26,7 @@
 
 			<div class="col-md-11">
 
-				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars mdl-button mdl-js-button mdl-js-ripple-effect" style="font-size: 2.6em;"><span id="titleOnNav">&nbsp;&nbsp;KnowOff</span>
+				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars mdl-button mdl-js-button mdl-js-ripple-effect" style="font-size: 2.6em;"><span id="titleOnNav">&nbsp;&nbsp;Regiknow</span>
 				</i>
 
 
@@ -35,7 +36,7 @@
 				<a ui-sref="Message"><i class="topRight material-icons navbar-right">question_answer</i>
 				</a>
 				&nbsp;
-				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="Settings">{{nav.status._user.username}}
+				<a class="topRight navbar-right loggedInUser" ng-show="nav.status" ui-sref="UserProfile">{{nav.status._user.username}}
 				</a>
 
 				<div ng-show="nav.showAlertTab" id="alerts">

@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('EditAnswerController', EditAnswerController);
 
-	EditAnswerController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory', '$rootScope'];
+	EditAnswerController.$inject = ['$state', 'QuestionFactory', '$stateParams', 'AnswerFactory'];
 
-	function EditAnswerController($state, QuestionFactory, $stateParams, AnswerFactory, $rootScope) {
+	function EditAnswerController($state, QuestionFactory, $stateParams, AnswerFactory) {
 		var vm = this;
 		vm.edit = {};
 //========================================================================================
@@ -27,12 +27,12 @@
 			AnswerFactory.editAnswer($stateParams.ans_id, vm.edit).then(function(res){
 				console.log(vm.edit);
 
-						vm.answer = res
+						vm.answer = res;
 
 						vm.loading = false;
 						delete vm.edit;
-						$state.go('QuestionsFeed')
-					})
-				}
+						$state.go('QuestionsFeed');
+					});
+				};
 }
 })();

@@ -38,11 +38,16 @@
 				</div>
 			</td>
 
+			<td>
 
+			</td>
 			<td>
 				<div id="editQuestion">
-
+					<md-button ng-controller="VoteController as vm" ng-click="vm.favoriteQuesiton()" ng-if="vm.status._user.id !== vm.question.postedBy && !vm.options" ng-class="vm.favQAnimation" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">favorite</i></md-button>
 					<md-button ng-click="vm.showOptions()" ng-if="vm.status._user.id === vm.question.postedBy && !vm.options"><i class="material-icons">more_vert</i></md-button>
+					<md-button ng-if="vm.status._user.id !== vm.question.postedBy && !vm.options" ui-sref='Message({recipient: vm.question.postedBy})' class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">question_answer</i>
+					</md-button>
+
 					<span ng-if="vm.options">
 						<button class="btn btn-warning btn-xs" ng-click="vm.editQuestion()">Edit</button>
 						<button class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(vm.question._id)">Delete</button>

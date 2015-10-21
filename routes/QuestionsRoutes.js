@@ -41,6 +41,19 @@ router.param('Answer_id', function(req, res, next, id){
 	})
 });
 
+router.post('/favorite/:id/:user_id', function(req, res){
+	User.update({_id: req.user._id}, {$push: {likedQuestions: {_id: req.question._id}}}, function(err, saved){
+		console.log('question saved to userShema', saved)
+		res.send('saved quesiton to favorites')
+	})
+})
+router.post('/unfavorite/:id/:user_id', function(req, res){
+	User.update({_id: req.user._id}, {$pull: {likedQuestions: req.question._id}}, function(err, saved){
+		console.log('question unsaved to userShema', saved)
+		res.send('unsaved quesiton to favorites')
+	})
+})
+
 router.post('/create', function(req, res){
 	//
 	//saving user Id to Question

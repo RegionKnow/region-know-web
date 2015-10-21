@@ -17,7 +17,7 @@
 
 
     if (!vm.status._user) {
-      $state.go("Home")
+      $state.go("Home");
     }
 
     //Setup function/variable associations for controller
@@ -31,7 +31,7 @@
 
     var messageList = angular.element('#convoList');
     var messageForm = angular.element('#messageForm');
-    messageForm.css('width', messageList.css('width'))
+    messageForm.css('width', messageList.css('width'));
 
 
     //Handles if user came from another the navbar or the question detail state
@@ -39,12 +39,12 @@
       vm.inConversation = true;
       vm.recipient = $stateParams.recipient;
       var participants = {
-        participantOne: UserFactory.status._user.id,
+        participantOne: vm.status._user.id,
         participantTwo: vm.recipient,
-      }
+      };
       getOneConvo(participants);
     } else {
-      $stateParams.recipient = ""
+      $stateParams.recipient = "";
     }
     //End of if bracket
 
@@ -66,7 +66,7 @@
       }, function(errorResponse) {
 
         console.log(errorResponse.data);
-      })
+      });
     }
 
     // function liveConvo() {
@@ -94,6 +94,7 @@
       vm.channel.bind('newMessage', function(data) {
         $scope.$apply(function() {
         vm.convoInFocus.messages.push(data.message);
+        angular.element("html, body").animate({ scrollTop: angular.element(document).height() }, 1000);
         });
       });
       vm.inConversation = true;
@@ -142,12 +143,12 @@
         convoId: vm.convoInFocus._id,
         sender: vm.status._user.username,
         body: vm.newMessage
-      }).then(function(successResponse) {
+      }).then(function() {
         vm.newMessage = "";
 
       }, function(errorResponse) {
         console.log(errorResponse.data);
-      })
+      });
 
 
     }
@@ -161,7 +162,7 @@
         participants = {
           participantOne: vm.convoInFocus.participantOne,
           participantTwo: vm.convoInFocus.participantTwo
-        }
+        };
       }
       $http.post('/api/convo/convo-finder', participants).then(function(successResponse) {
         vm.convoInFocus = successResponse.data;

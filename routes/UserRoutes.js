@@ -209,6 +209,15 @@ router.post("/:updateProfile", function(req, res) {
   res.send();
 });
 
+router.get('/liked/:userId', function(req, res){
+  res.send(req.user)
+})
+
+router.get('/all/:userId', function(req, res){
+  User.findOne({_id: req.user._id}).populate('questions answers likedQuestions').exec(function(err, response){
+    res.send(response)
+  })
+})
 
 router.post('/location/:userId', function(req, res) {
 

@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
 	displayName: String,
 	username: {type: String, lowercase: true, unique: true},
 	email: {type: String, lowercase: true, unique: true},
-	image: { type: String},
+	image: { type: String, default: 'http://1.bp.blogspot.com/-fDYO0D23HvM/VcdBvhO0FiI/AAAAAAAAAoU/7vi6V3TYHp4/s1600/Anonymous.png'},
 	passwordHash: String,
 	salt: String,
 	createdDate: Date,
@@ -19,11 +19,14 @@ var UserSchema = new mongoose.Schema({
 	filterAlert: Boolean,
 	tags: [{type: String}],
 	radius: Number,
+	score: Number,
 	generalPoints: {type: Number, default: 1},
 	knowledgePoints: {type: Number, default: 1},
 	alerts: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
 	questions: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
-	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}]
+	answers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}],
+	likedQuestions: [{type: mongoose.Schema.Types.ObjectId, ref: "Question"}],
+	likedAnswers: [{type: mongoose.Schema.Types.ObjectId, ref: "Answer"}]
 	//commentsMade?
 });
 

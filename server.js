@@ -18,7 +18,8 @@ function moduleAvailable(name) {
 
 if (moduleAvailable('./env.js')) {
   var env = require('./env.js');
-}
+} 
+
 //For Android cloud messaging services testing
 // var gcm = require('node-gcm');
 //
