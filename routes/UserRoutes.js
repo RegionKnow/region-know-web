@@ -10,17 +10,17 @@ var express_jwt = require('express-jwt');
 var Questions = mongoose.model('Question');
 
 function moduleAvailable(name) {
-    try {
-        require.resolve(name);
-        return true;
-    } catch(e){}
-    return false;
+  try {
+    require.resolve(name);
+    return true;
+  } catch(e){}
+  return false;
 }
 
 if (moduleAvailable('../env.js')) {
-var env = require('../env.js');
+  var env = require('../env.js');
 } else {
-var env = {};
+  var env = {};
 }
 
 var auth = express_jwt({
@@ -151,6 +151,32 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 
 
 //THIRD PARTY LOGIN OR REGISTRATION =============================================================
+router.get('/auth/linkedin', passport.authenticate('linkedin', {
+  // scope: ['profile']
+
+}));
+
+
+router.get('/auth/linkedin/callback',
+  passport.authenticate('linkedin', {
+    failureRedirect: '/'
+  }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    if (req.user) {
+      console.log(req.user, "167 userroutes");
+      var token = {
+        token: req.user.generateJWT()
+      }
+      res.redirect("/#/auth/token/" + token.token);
+    } else {
+      console.log(req.user, "173 userroutes");
+      res.send("You are not authenticated");
+    }
+  });
+
+
+//FACEBOOK O AUTH....................
 router.get('/auth/facebook', passport.authenticate('facebook', {
   scope: ['email']
 }));
@@ -233,19 +259,19 @@ router.post('/location/:userId', function(req, res) {
 router.post('/tags/:userId', function(req, res) {
   var tags = req.body
 
-    for (var i = 0; i < req.body.length; i++) {
-      User.update({
-        _id: req.user._id
-      }, {
-        $push: {
-          tags: req.body[i]
-        }
-      }, function(err, response) {
+  for (var i = 0; i < req.body.length; i++) {
+    User.update({
+      _id: req.user._id
+    }, {
+      $push: {
+        tags: req.body[i]
+      }
+    }, function(err, response) {
 
-      })
-    }
-    res.send()
-  })
+    })
+  }
+  res.send()
+})
 
 
 router.get('/tags/:userId', function(req, res) {
@@ -393,8 +419,8 @@ function findKpoints(questionId, answerId,l1, userId){
                   User.update({_id: userId}, {knowledgePoints: kPointCount}, function(err, update){
                   })
                 }
-        })
-}
+              })
+      }
     // setTimeout(function() {
     //   res.send('updated both knowledgepoints and general points')
     // }, 3000);

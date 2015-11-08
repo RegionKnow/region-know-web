@@ -2,31 +2,32 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; //It's requiring the passport for our local database authentication.
 var FacebookStrategy = require('passport-facebook').Strategy; //It's requiring the passport for our local database authentication.
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;; //It's requiring the passport for our local database authentication.
+var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 function moduleAvailable(name) {
-    try {
-        require.resolve(name);
-        return true;
-    } catch(e){}
-    return false;
+  try {
+    require.resolve(name);
+    return true;
+  } catch(e){}
+  return false;
 }
 
 if (moduleAvailable('../env.js')) {
-var env = require('../env.js');
+  var env = require('../env.js');
 } else {
-var env = {
-  facebook: {
-    SECRET: false,
-    CLIENTID: false,
-    CALLBACKURL: false
-  },
-  google: {
-    SECRET: false,
-    CLIENTID: false,
-    CALLBACKURL: false
-  }
-};
+  var env = {
+    facebook: {
+      SECRET: false,
+      CLIENTID: false,
+      CALLBACKURL: false
+    },
+    google: {
+      SECRET: false,
+      CLIENTID: false,
+      CALLBACKURL: false
+    }
+  };
 }
 
 
@@ -43,23 +44,87 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new LocalStrategy(function(username, password, done) { //This password is called from password.authenticate, from user routes.
   User.findOne({
-      username: username
+    username: username
     }) //find the username in the model from where it's being called.
-    .exec(function(err, user) {
-      if (err) return done({
-        err: "Server has issues."
-      });
+  .exec(function(err, user) {
+    if (err) return done({
+      err: "Server has issues."
+    });
       if (!user) return done({
         err: "User does not exist"
       });
-      if (!user.checkPassword(password)) return done({
-        err: "Invalid username and password combination."
-      });
-      return done(null, user);
-    });
+        if (!user.checkPassword(password)) return done({
+          err: "Invalid username and password combination."
+        });
+          return done(null, user);
+        });
 }));
 
-// Generates url for Facebook photo of size height x width
+//=================================================for linkedin login---------------------------------------------
+
+passport.use(new LinkedInStrategy({
+  clientID: env.linkedin.CLIENTID || process.env['linkedin.CLIENTID'],
+  clientSecret: env.linkedin.SECRET || process.env['linkedin.SECRET'],
+  callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
+  scope: ['r_emailaddress', 'r_basicprofile'],
+  state: true
+}, function(accessToken, refreshToken, profile, done) {
+  // asynchronous verification, for effect...
+  process.nextTick(function () {
+    // To keep the example simple, the user's LinkedIn profile is returned to
+    // represent the logged-in user. In a typical application, you would want
+    // to associate the LinkedIn account with a user record in your database,
+    // and return that user instead.
+    console.log('process nexttick ran')
+    User.findOne({
+      'email': profile.emails[0].value
+    }, function(err, user) {
+        // console.log("DEBUG: Contents of profile:") ;
+        // console.log(profile) ;
+        if (err) {
+          console.log('DEBUG: Error connecting');
+          return done(err);
+        }
+        if (user) {
+          console.log('DEBUG: Current user');
+          return done(null, user);
+        }
+        // Else no user is found. We need to create a new user.
+        else {
+          console.log("DEBUG: New User.");
+          console.log(profile.id);
+
+          var newUser = new User();
+          newUser.linkedInId = profile.id;
+          // According to the Google API, the name is in
+          // displayName
+          newUser.username = profile.displayName;
+
+          // According to Google API, emails come back as an array
+          // So, need the first element of the array.
+          newUser.email = profile.emails ? profile.emails[0].value : null;
+
+          // Photo
+          // Get bigger photo URL from Google. Sending size = 300
+          newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);
+
+
+          // Created stores date created in the database.
+          newUser.createdDate = new Date();
+
+          // Save the newUser to the database.
+          newUser.save(function(err) {
+            if (err)
+              throw err;
+            // Otherwise return done, no error and newUser.
+            return done(null, newUser);
+          })
+        }
+      });
+});
+}));
+
+// Generates url for Facebook photo of size height x width====================================
 function generateFacebookPhotoUrl(id, accessToken, height, width) {
   var picUrl = "https://graph.facebook.com/";
   picUrl += id;
@@ -75,28 +140,28 @@ function generateFacebookPhotoUrl(id, accessToken, height, width) {
 
 
 passport.use(new FacebookStrategy({
-    clientID:  env.facebook.CLIENTID || process.env['facebook.CLIENTID'],
-    clientSecret: env.facebook.SECRET || process.env['facebook.SECRET'] ,
-    callbackURL: env.facebook.CALLBACKURL || process.env['facebook.CALLBACKURL'],
-    passReqToCallback: true,
-    profileFields: ['id', 'name', 'emails', 'photos']
-  },
-  function(req, accessToken, refreshToken, profile, done) {
-    User.findOne({
-      email: profile.emails[0].value
-    }, function(err, user) {
-      if (err) return done(err, null);
-      if (user) {
-        console.log("Current User, Logging In");
-        return done(null, user);
+  clientID:  env.facebook.CLIENTID || process.env['facebook.CLIENTID'],
+  clientSecret: env.facebook.SECRET || process.env['facebook.SECRET'] ,
+  callbackURL: env.facebook.CALLBACKURL || process.env['facebook.CALLBACKURL'],
+  passReqToCallback: true,
+  profileFields: ['id', 'name', 'emails', 'photos']
+},
+function(req, accessToken, refreshToken, profile, done) {
+  User.findOne({
+    email: profile.emails[0].value
+  }, function(err, user) {
+    if (err) return done(err, null);
+    if (user) {
+      console.log("Current User, Logging In");
+      return done(null, user);
+    } else {
+      console.log("New User, Registering and Logging In");
+      var userModel = new User();
+      if (profile.emails) {
+        userModel.email = profile.emails[0].value;
       } else {
-        console.log("New User, Registering and Logging In");
-        var userModel = new User();
-        if (profile.emails) {
-          userModel.email = profile.emails[0].value;
-        } else {
-          userModel.email = profile.username + "@facebook.com";
-        }
+        userModel.email = profile.username + "@facebook.com";
+      }
         // userModel.image = profile.photos[0].value;
 
         userModel.image = generateFacebookPhotoUrl(profile.id, accessToken, 500, 500);
@@ -110,7 +175,7 @@ passport.use(new FacebookStrategy({
         })
       }
     });
-  }
+}
 ));
 
 
@@ -128,12 +193,12 @@ function generateGooglePhotoUrl(photoUrl, size) {
 }
 // For Google login
 passport.use(new GoogleStrategy({
-    clientID: env.google.CLIENTID || process.env['google.CLIENTID'],
-    clientSecret: env.google.SECRET || process.env['google.SECRET'],
-    callbackURL: env.google.CALLBACKURL || process.env['google.CALLBACKURL']
+  clientID: env.google.CLIENTID || process.env['google.CLIENTID'],
+  clientSecret: env.google.SECRET || process.env['google.SECRET'],
+  callbackURL: env.google.CALLBACKURL || process.env['google.CALLBACKURL']
       // profileFields: ['id', 'name', 'emails', 'photos']
-  },
-  function(accessToken, refreshToken, profile, done) {
+    },
+    function(accessToken, refreshToken, profile, done) {
     // process.nextTick is a Node.js function for asynchronous
     // Waits for data to come back before continuing.
     process.nextTick(function() {
@@ -185,6 +250,6 @@ passport.use(new GoogleStrategy({
           })
         }
       });
-    });
-  }
+});
+}
 ));
