@@ -61,17 +61,17 @@ passport.use(new LocalStrategy(function(username, password, done) { //This passw
 }));
 
 //=================================================for linkedin login---------------------------------------------
-function generateLinkedInPhotoUrl(id, accessToken, height, width) {
-  var picUrl = "https://graph.facebook.com/";
-  picUrl += id;
-  picUrl += "/picture?width=";
-  picUrl += width;
-  picUrl += "&height=";
-  picUrl += height;
-  picUrl += "&access_token=";
-  picUrl += accessToken;
-  return picUrl;
-}
+// function generateLinkedInPhotoUrl(id, accessToken, height, width) {
+//   var picUrl = "https://media.licdn.com/";
+//   picUrl += id;
+//   picUrl += "/picture?width=";
+//   picUrl += width;
+//   picUrl += "&height=";
+//   picUrl += height;
+//   picUrl += "&access_token=";
+//   picUrl += accessToken;
+//   return picUrl;
+// }
 
 passport.use(new LinkedInStrategy({
   clientID: env.linkedin.CLIENTID || process.env['linkedin.CLIENTID'],
@@ -87,25 +87,23 @@ passport.use(new LinkedInStrategy({
     // represent the logged-in user. In a typical application, you would want
     // to associate the LinkedIn account with a user record in your database,
     // and return that user instead.
-    console.log('process nexttick ran')
     User.findOne({
       'linkedInId': profile.id
     }, function(err, user) {
         // console.log("DEBUG: Contents of profile:") ;
-        // console.log(profile) ;
         if (err) {
           console.log('DEBUG: Error connecting');
           return done(err);
         }
         if (user) {
           console.log('DEBUG: Current user');
-          console.log('user', req.body)
+          // console.log('user', req.body)
           req.tempUser  = user;
           return done(null, user);
         }
         // Else no user is found. We need to create a new user.
         else {
-          console.log(profile);
+
           var newUser = new User();
           newUser.linkedInId = profile.id;
           // According to the Google API, the name is in
@@ -115,7 +113,8 @@ passport.use(new LinkedInStrategy({
           newUser.email = profile.emails ? profile.emails[0].value : null;
 
           // Photo
-          newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);
+          // newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);;
+          newUser.image = profile.photos[0].value, 500;
 
           // Created stores date created in the database.
           newUser.createdDate = new Date();
