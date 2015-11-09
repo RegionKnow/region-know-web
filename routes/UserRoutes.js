@@ -152,8 +152,7 @@ router.post('/login', function(req, res, next) { //goes to passport module, in c
 
 //THIRD PARTY LOGIN OR REGISTRATION =============================================================
 router.get('/auth/linkedin', passport.authenticate('linkedin', {
-  // scope: ['profile']
-
+  scope: ['r_emailaddress', 'r_basicprofile']
 }));
 
 
@@ -162,15 +161,16 @@ router.get('/auth/linkedin/callback',
     failureRedirect: '/'
   }),
   function(req, res) {
+    console.log('in linkedin callback')
     // Successful authentication, redirect home.
-    if (req.user) {
-      console.log(req.user, "167 userroutes");
+    if (req.tempUser) {
+      console.log(req.tempUser, "167 userroutes");
       var token = {
-        token: req.user.generateJWT()
+        token: req.tempUser.generateJWT()
       }
-      res.redirect("/#/auth/token/" + token.token);
+      res.redirect("http://localhost:3000/#/auth/token/" + token.token);
     } else {
-      console.log(req.user, "173 userroutes");
+      console.log(req.tempUser, "173 userroutes");
       res.send("You are not authenticated");
     }
   });

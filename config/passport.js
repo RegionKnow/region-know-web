@@ -65,10 +65,11 @@ passport.use(new LocalStrategy(function(username, password, done) { //This passw
 passport.use(new LinkedInStrategy({
   clientID: env.linkedin.CLIENTID || process.env['linkedin.CLIENTID'],
   clientSecret: env.linkedin.SECRET || process.env['linkedin.SECRET'],
-  callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
+  callbackURL: "http://127.0.0.1:3000/api/user/auth/linkedin/callback", 
   scope: ['r_emailaddress', 'r_basicprofile'],
-  state: true
-}, function(accessToken, refreshToken, profile, done) {
+  state: true,
+  passReqToCallback: true
+}, function(req, accessToken, refreshToken, profile, done) {
   // asynchronous verification, for effect...
   process.nextTick(function () {
     // To keep the example simple, the user's LinkedIn profile is returned to
@@ -77,7 +78,7 @@ passport.use(new LinkedInStrategy({
     // and return that user instead.
     console.log('process nexttick ran')
     User.findOne({
-      'email': profile.emails[0].value
+      'linkedInId': profile.id
     }, function(err, user) {
         // console.log("DEBUG: Contents of profile:") ;
         // console.log(profile) ;
@@ -87,27 +88,23 @@ passport.use(new LinkedInStrategy({
         }
         if (user) {
           console.log('DEBUG: Current user');
+          console.log('user', req.body)
+          req.tempUser  = user;
           return done(null, user);
         }
         // Else no user is found. We need to create a new user.
         else {
-          console.log("DEBUG: New User.");
-          console.log(profile.id);
-
+          console.log(profile);
           var newUser = new User();
           newUser.linkedInId = profile.id;
           // According to the Google API, the name is in
           // displayName
           newUser.username = profile.displayName;
 
-          // According to Google API, emails come back as an array
-          // So, need the first element of the array.
           newUser.email = profile.emails ? profile.emails[0].value : null;
 
           // Photo
-          // Get bigger photo URL from Google. Sending size = 300
-          newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);
-
+          // newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);
 
           // Created stores date created in the database.
           newUser.createdDate = new Date();
@@ -117,6 +114,7 @@ passport.use(new LinkedInStrategy({
             if (err)
               throw err;
             // Otherwise return done, no error and newUser.
+            req.tempUser = newUser;
             return done(null, newUser);
           })
         }

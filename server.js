@@ -181,6 +181,7 @@ app.use('/api/rank', rankRoutes);
 
 
 app.use('/', function(req, res) {
+  console.log(req.body, "in serverjs 185")
   res.render('404');
 })
 
